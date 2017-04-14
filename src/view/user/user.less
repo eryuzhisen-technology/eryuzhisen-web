@@ -1,0 +1,161 @@
+/**
+ * user-公共样式
+ */
+@dialog: m-user-dialog;
+.m-user {
+	width: 100%;
+	height: 100%;
+	min-height: 720px;
+	position: relative;
+	.user_background_1;
+	& .m-user-wrap {
+		height: 100%;
+		position: relative;
+		margin: 0 auto;
+		.default_width_960;
+	}
+	
+}
+.@{dialog} {
+	position: absolute;
+	right: 0;
+	top: 50%;
+	width: 450px;
+	transform: translate(0, -50%);
+}
+.@{dialog}__tit {
+	width: 100%;
+	height: 60px;
+	padding-left: 30px;
+	line-height: 60px;
+	.default_border-b-5;
+	.default_color_3;
+	.default_font_size_3;
+	.default_backgroud_5;
+	.default_border-r-t-4;
+}
+.@{dialog}__con {
+	width: 450px;
+	padding: 50px 60px;
+	.default_center;
+	.default_backgroud_3;
+	.default_border-r-b-4;
+}
+.@{dialog}__item {
+	position: relative;
+	width: 100%;
+	min-height: 22px;
+	margin-bottom: 20px;
+	&:last-child {
+		margin-bottom: 0;
+	}
+	&.z-60 {
+		height: 60px;
+	}
+}
+.@{dialog}__tip {
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	transform: translate(-115%, 0);
+	& .tip-arrow {
+		position: absolute;
+        top: 50%;
+        right: -8px;
+        margin-top: -8px;
+        display: inline-block;
+        border: 9px solid;
+        border-color: transparent rgba(0,0,0,0.8) rgba(0,0,0,0.8) transparent;
+        transform: rotate(-45deg);
+	}
+	& .tip-text {
+		padding: 0 20px;
+		height: 60px;
+		line-height: 60px;
+		background-color: rgba(0,0,0,0.8);
+		.default_color_7;
+		.default_border-r-4;
+	} 
+}
+.@{dialog}__input {
+	position: relative;
+	padding: 20px 30px;
+	& img {
+		position: absolute;
+		top: 10px;
+		right: 5px;
+		width: 110px;
+		height: 40px;
+		.default_pointer;
+	}
+}
+.@{dialog}__select {
+	.default_float_l;
+	.default_color_3;
+	.default_font_size_1;
+	.default_pointer;
+	& .select-icon {
+		.default_disline;
+		width: 22px;
+		height: 22px;
+		margin-right: 10px;
+		overflow: hidden;
+		.default_select_bg_01;
+		.default_border-r-4;
+		.default_middle;
+		&.on{
+			.default_select_bg_01_on;
+		}
+	}
+}
+
+.@{dialog}__btn {
+	width: 100%;
+	height: 60px;
+	line-height: 60px;
+	&.z-bolder {
+		.default_font_family_bolder;
+	}
+}
+
+// 找回
+.@{dialog}__back {
+	height: 22px;
+	line-height: 22px;
+	.default_float_r;
+	.default_font_size_1;
+	.default_color_3;
+	clear: right;
+}
+
+// 声明
+.@{dialog}__agree {
+	.default_font_size_1;
+	.default_color_3;
+	& a {
+		.default_color_1;
+	}
+}
+
+// 注册
+.@{dialog}__register {
+	.default_font_size_3;
+	.default_color_1;
+	.default_font_family_bolder;
+}
+
+// 登录
+.@{dialog}__login {
+	.default_font_size_3;
+	.default_color_1;
+	.default_font_family_bolder;
+}
+
+// 验证码
+.@{dialog}__input-phone {
+	width: 160px;
+}
+.@{dialog}__btn-phone {
+	width: 160px;
+}
