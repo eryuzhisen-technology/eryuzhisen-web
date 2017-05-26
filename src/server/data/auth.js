@@ -1,45 +1,278 @@
-import axios from 'axios'
 import {baseUrl, _reject, _rejectObj} from '../config'
 import Cookies from 'js-cookie';
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
-console.log(axios.defaults.headers)
+// 设置基本的请求headers
+import axios from 'axios'
+axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.get['X-Requested-With'] = 'XMLHttpRequest';
+var token = Cookies.get('token');
+
 /**
- * 获取图形验证码
-URL:http://domain/eryuzhisen-server/auth/getPicVerifyCode
+ * 获取黑名单用户列表
+URL:http://domain/eryuzhisen-server/user/getBlackList
 Method:GET
+request:
+params:
+"page":"1",//页数,默认不传查询第一页
+"pageSize":"10",//每页数量 默认10
 response:
-body json:
 {
 	"ret":"1",//0 成功 1 失败
 	"errcode":"10001",//错误码 ret为1时出现
 	"errinfo":"xxxx",
-	"pic_vid":"xxxxx",//图形验证码id
-	"pic_vcode":"xxxx"//图形验证码图片 base64编码
+	"more":"0",//是否还有更多 0 没有 1 还有更多,供没有页码的客户端使用
+	"list":[
+		{
+			"uid":"xxxx",
+			"nick_name":"xxxxx",//昵称
+			"avatar_url":"xxxxx"//头像url
+
+		}
+	]
 }
  * @param  {[type]} option [description]
  * @return {[type]}        [description]
  */
-function getPicVerifyCode(option){
-	var url = baseUrl + 'auth/getPicVerifyCode';
+function getBlackList(option){
+	var url = baseUrl + 'user/getBlackList';
+
+	// 没有登录态
+	if (!token) {
+		return _rejectObj({
+			ret: -10,
+			msg: '未登录'
+		});
+	}
+
+	delete option._header;
+	return axios({
+		method: 'GET',
+		url: url,
+		params: option,
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+            return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+	    return _rejectObj(error);
+	});
+}
+
+/**
+ * 删除黑名单用户(header 中uid为操作用户)
+URL:http://domain/eryuzhisen-server/user/delBlack/{userId}
+Method:DELETE
+userId:"xxxx"//被拉进黑名单的用户
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx"
+}
+ * @param  {[type]} option [description]
+ * @return {[type]}        [description]
+ */
+function delBlack(option){
+	var url = baseUrl + 'user/delBlack/'+option.userId;
+
+	// 没有登录态
+	if (!token) {
+		return _rejectObj({
+			ret: -10,
+			msg: '未登录'
+		});
+	}
+
+	delete option._header;
+	return axios({
+		method: 'DELETE',
+		url: url,
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+            return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+	    return _rejectObj(error);
+	});
+}
+
+/**
+ * 添加黑名单用户(header 中uid为操作用户)
+URL:http://domain/eryuzhisen-server/user/addBlack/{userId}
+Method:PUT
+userId:"xxxx"//被拉进黑名单的用户
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx"
+}
+ * @param {[type]} option [description]
+ */
+function addBlack(option){
+	var url = baseUrl + 'user/addBlack/'+option.userId;
+
+	// 没有登录态
+	if (!token) {
+		return _rejectObj({
+			ret: -10,
+			msg: '未登录'
+		});
+	}
+
+	delete option._header;
+	return axios({
+		method: 'PUT',
+		url: url,
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+            return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+	    return _rejectObj(error);
+	});
+}
+
+/**
+ * 关注用户
+URL:http://domain/eryuzhisen-server/user/addFollow/{userId}
+Method:PUT
+userId:"xxxx"
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx"
+}
+ * @param {[type]} option [description]
+ */
+function addFollow(option){
+	var url = baseUrl + 'user/addFollow/'+option.userId;
+
+	// 没有登录态
+	if (!token) {
+		return _rejectObj({
+			ret: -10,
+			msg: '未登录'
+		});
+	}
+
+	delete option._header;
+	return axios({
+		method: 'PUT',
+		url: url,
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+            return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+	    return _rejectObj(error);
+	});
+}
+
+/**
+ * 取消关注
+URL:http://domain/eryuzhisen-server/user/delFollow/{userId}
+Method:DELETE
+userId:"xxxx"
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx"
+}
+ * @param  {[type]} option [description]
+ * @return {[type]}        [description]
+ */
+function delFollow(option){
+	var url = baseUrl + 'user/delFollow/'+option.userId;
+
+	// 没有登录态
+	if (!token) {
+		return _rejectObj({
+			ret: -10,
+			msg: '未登录'
+		});
+	}
+
+	delete option._header;
+	return axios({
+		method: 'DELETE',
+		url: url,
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+            return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+	    return _rejectObj(error);
+	});
+}
+
+/**
+ * 根据作者名称模糊查询用户列表
+URL:http://domain/eryuzhisen-server/user/getUserList
+Method:GET
+
+request:
+params:
+"query":"xxxx"//模糊查询文字
+"page":"1",//页数,默认不传查询第一页
+"pageSize":"10",//每页数量 默认10
+
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx",
+	"more":"0",//是否还有更多 0 没有 1 还有更多,供没有页码的客户端使用
+	"list":[
+		{
+			"uid":"xxxx",
+			"nick_name":"xxxxx",//昵称
+			"avatar_url":"xxxxx",//头像url
+			"signature":"xxxxx",//签名
+			"c_age":"xxx",//论坛年龄
+			"relation":"0"//关系 0 没有关注 1 关注 2 粉丝 3 相互关注
+
+		},
+	....
+	]
+}
+ * @param  {[type]} option [description]
+ * @return {[type]}        [description]
+ */
+function getUserList(option){
+	var url = baseUrl + 'user/getUserList'; 
+
 	var prosime = axios({
 		method: 'GET',
 		url: url,
+		params: option,
+		headers: {
+			token: token
+		}
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                case 10001:
-                    msg = '错误码';
-                    break;
-                default:
-                    msg = '错误码';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+            return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -50,301 +283,185 @@ function getPicVerifyCode(option){
 }
 
 /**
- * 获取手机号验证码
-URL:http://domain/eryuzhisen-server/auth/getPhoneVerifyCode
+ * 获取关注用户列表
+URL:http://domain/eryuzhisen-server/user/getFollowList
 Method:GET
 request:
 params:
-verifyType:"0"//0注册验证，1重置密码验证
-phoneNum:"177xxxxx"//手机号
-picVcode:"xxxx"//图形验证码
-picVid:"xxxx"图形验证码id
-
+"userId":"xxxx",//获取指定用户关注,header 中uid 等于此处时,允许取消关注
+"page":"1",//页数,默认不传查询第一页
+"pageSize":"10",//每页数量 默认10
+"pagination":1,//1表示返回页码相关信息 0 或者 不传 则不返回
 response:
 {
 	"ret":"1",//0 成功 1 失败
 	"errcode":"10001",//错误码 ret为1时出现
 	"errinfo":"xxxx",
-	"phone_num":"177xxxxx"
+	"more":"0",//是否还有更多 0 没有 1 还有更多,供没有页码的客户端使用
+	"page_info":{//pagination为1 才有
+			"total_count":"300",//总数量
+			"page_count":"30"//总页数	
+		},
+	"list":[
+		{
+			"uid":"xxxx",
+			"nick_name":"xxxxx",//昵称
+			"avatar_url":"xxxxx",//头像url
+			"signature":"xxxxx",//签名
+			"c_age":"xxx",//论坛年龄
+			"relation":"0"//关系 0 没有关注 1 关注 2 粉丝 3 相互关注
+
+		},
+		.....
+	]
 }
  * @param  {[type]} option [description]
  * @return {[type]}        [description]
  */
-function getPhoneVerifyCode(option){
-	var url = baseUrl + 'auth/getPhoneVerifyCode';
-	return axios({
+function getFollowList(option){
+	var url = baseUrl + 'user/getFollowList'; 
+
+	// 没有登录态
+	/*if (!token) {
+		return _rejectObj({
+			ret: -10,
+			msg: '未登录'
+		});
+	}*/
+
+	var prosime = axios({
 		method: 'GET',
 		url: url,
 		params: option,
-	}).then(function (response) {
-		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                case 10001:
-                    msg = '图形码有误！';
-                    break;
-                case 20002:
-                    msg = '该手机号已经被绑定，请换其他手机号再试';
-                    break;
-                default:
-                    msg = '图形码有误！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+		headers: {
+			token: token
 		}
-		return response.data;
-	}).catch(function (error) {
-	    return _rejectObj(error);
-	});
-}
-
-/**
- * http://domain/eryuzhisen-server/auth/sigin
-Method:POST
-request:
-body json:
-{
-	"phone_num":"xxxxx",//手机号
-	"password":"xxxx",//密码
-	"device_no":"xxx",//设备号,没有则新生成一个,统计用
-	"pic_vid":"xxxx",//密码错误次数超过5次时,需要单独调用图形验证码
-	"pic_vcode":"xxxx",//密码错误5超过5次,需要校验图形验证码
-}
-
-response:
-body json:
-{
-	"ret":"1",//0 成功 1 失败
-	"errcode":"10001",//错误码 ret为1时出现
-	"errinfo":"xxxx",
-	"uid":"xxxx"//用户id,已做加密处理
-	"token":"xxxx",//目前有效期7天 后期协议需要在header中带上校验
-	"device_no":"xxxx",//设备号,request传入原样返回,没有则新生成
-	"info_status":"1"//用户资料完整度状态 1:已完善 预留字段,目前没有强制用户输入某些信息
-	
-}
- * @param  {[type]} option [description]
- * @return {[type]}        [description]
- */
-function sigin(option){
-	var url = baseUrl + 'auth/sigin';
-	var _header = option._header || {};
-	delete option._header;
-	return axios({
-		method: 'POST',
-		url: url,
-		data: JSON.stringify(option),
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-			switch(Number(response.data.errcode)){
-	            case 20011:
-	                msg = '密码错误！';
-	                break;
-	            case 20001:
-	                msg = '该手机号未绑定！';
-	                break;
-	            case 20005:
-	            	if (response.data.pwd_err_times >= 5) {
-	            		msg = '图片验证码已过期!';
-	            	} else {
-	            		response.data.pwd_err_times = 5;
-	            		msg = '请输入图片验证码!';
-	            	}
-	            	break;
-	            case 20003:
-	            	response.data.pwd_err_times = 5;
-	            	msg = '图片验证错误!';
-	            	break;
-	            default:
-	                msg = '网络异常';
-	                break;
-	        }
-	        return _reject({
-            	ret: response.data.ret,
-            	pwd_err_times: response.data.pwd_err_times || 0,
-				msg: msg
-            })
+            return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
 		return _rejectObj(error);
 	});
+
+	return prosime;
 }
 
 /**
- * 注册
-URL:http://domain/eryuzhisen-server/auth/sigup
-Method:POST
+ * 获取粉丝用户列表
+URL:http://domain/eryuzhisen-server/user/getFansList
+Method:GET
 request:
-body json:
-{
-	"phone_num":"xxxxx",//手机号
-	"password":"xxxx",//密码,目前只有长度限制:6-12位
-	"device_no":"xxx",//设备号,没有则新生成一个,统计用
-	"pic_vid":"xxxx",//图形验证码id
-	"pic_vcode":"xxxx",//校验图形验证码
-	"phone_vcode":"xxxx",//手机号验证码
-}
-
+params:
+"userId":"xxxx",//获取指定用户粉丝
+"page":"1",//页数,默认不传查询第一页
+"pageSize":"10",//每页数量 默认10
+"pagination":1,//1表示返回页码相关信息 0 或者 不传 则不返回
 response:
 {
 	"ret":"1",//0 成功 1 失败
 	"errcode":"10001",//错误码 ret为1时出现
 	"errinfo":"xxxx",
-	"uid":"xxxx"//用户id,已做加密处理
-	"token":"xxxx",//目前有效期7天 后期协议需要在header中带上校验
-	"device_no":"xxxx",//设备号,request传入原样返回,没有则新生成
-	"user":{
-		"uid":"xxxx",
-		"nick_name":"xxxx",//昵称
-		"avatar_url":"xxxx",//头像url
-		"signature":"xxx",//签名,
-		"c_age":"1年5个月12天",//论坛年龄
-	}
+	"more":"0",//是否还有更多 0 没有 1 还有更多,供没有页码的客户端使用
+	"page_info":{//pagination为1 才有
+			"total_count":"300",//总数量
+			"page_count":"30"//总页数	
+		},
+	"list":[
+		{
+			"uid":"xxxx",
+			"nick_name":"xxxxx",//昵称
+			"avatar_url":"xxxxx",//头像url
+			"signature":"xxxxx",//签名
+			"c_age":"xxx",//论坛年龄
+			"relation":"0"//关系 0 没有关注 1 关注 2 粉丝 3 相互关注
+
+		},
+		.....
+	]
 }
  * @param  {[type]} option [description]
  * @return {[type]}        [description]
  */
-function sigup(option){
-	var url = baseUrl + 'auth/sigup';
-	var _header = option._header || {};
-	delete option._header;
-	return axios({
-		method: 'POST',
-		url: url,
-		data: JSON.stringify(option),
-		headers: _header
-	}).then(function (response) {
-		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(res.errcode)){
-				case 20007:
-                    msg = '手机验证码错误!';
-                    break;
-                case 20002:
-                	msg = '该手机号已经被绑定，请换其他手机号再试!'
-                	break;
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
-		}
-		return response.data;
-	}).catch(function (error) {
-	    return _rejectObj(error);
-	});
-}
-
-/**
- * http://domain/eryuzhisen-server/auth/resetPwd
-Method:POST
-request:
-{
-	"phone_num":"xxxx",
-	"phone_vcode":"xxx",//手机号验证码
-	"password":"xxxx",//新密码
-}
-response:
-{
-	"ret":"1",//0 成功 1 失败
-	"errcode":"10001",//错误码 ret为1时出现
-	"errinfo":"xxxx"
-}
- * @param  {[type]} option [description]
- * @return {[type]}        [description]
- */
-function resetPwd(option){
-	var url = baseUrl + 'auth/resetPwd';
-	var _header = option._header || {};
-	delete option._header;
-	return axios({
-		method: 'POST',
-		url: url,
-		data: JSON.stringify(option),
-		headers: _header
-	}).then(function (response) {
-		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                case 20007:
-                    msg = '手机验证码错误!';
-                    break;
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
-		}
-		return response.data;
-	}).catch(function (error) {
-	    return _rejectObj(error);
-	});
-}
-
-/**
- * 改用户信息
-URL:http://domain/eryuzhisen-server/user/updateUserInfo
-Method:POST
-request body
-{
-	"nick_name":"xxxx",
-	"avatar_url":"http://xxxxx.png",
-	"signature":"xxxxxxx"
-}
-
-response:
-{
-	"ret":"1",//0 成功 1 失败
-	"errcode":"10001",//错误码 ret为1时出现
-	"errinfo":"xxxx"
-}
- * @param  {[type]} option [description]
- * @return {[type]}        [description]
- */
-function updateUserInfo(option){
-	var url = baseUrl + 'user/updateUserInfo';
-	var _header = option._header || {};
-	var token = Cookies.get('token');
+function getFansList(option){
+	var url = baseUrl + 'user/getFansList'; 
 
 	// 没有登录态
-	if (!token) {
+	/*if (!token) {
 		return _rejectObj({
 			ret: -10,
 			msg: '未登录'
 		});
-	}
+	}*/
 
-	delete option._header;
-	return axios({
-		method: 'POST',
+	var prosime = axios({
+		method: 'GET',
 		url: url,
-		data: JSON.stringify(option),
+		params: option,
 		headers: {
 			token: token
 		}
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+            return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+		return _rejectObj(error);
+	});
+
+	return prosime;
+}
+
+/**
+ * 获取推荐用户列表（根据作品数，粉丝数排序 前pageSize条数据）
+URL:http://domain/eryuzhisen-server/user/getRecommendUserList
+Method:GET
+
+request:
+params:
+"pageSize":"10",//获取的推荐用户条数（目前分页以假分页处理，前端一次性获取）
+
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx",
+	"more":"0",
+	"list":[
+		{
+			"uid":"xxxx",
+			"nick_name":"xxxxx",//昵称
+			"avatar_url":"xxxxx",//头像url
+			"signature":"xxxxx",//签名
+			"c_age":"xxx",//论坛年龄
+			"relation":"0",//关系 0 没有关注 1 关注 2 粉丝 3 相互关注
+			"black":"0",//是否在黑名单 0 不在 1 在
+			"opus_count","20",//作品数量
+			"fans_count":"30"//粉丝数量
+
+		},
+	....
+	]
+}
+ * @param  {[type]} option [description]
+ * @return {[type]}        [description]
+ */
+function getRecommendUserList(option){
+	var url = baseUrl + 'user/getRecommendUserList';
+
+	delete option._header;
+	return axios({
+		method: 'GET',
+		url: url,
+		params: option,
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+            return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -353,35 +470,63 @@ function updateUserInfo(option){
 }
 
 /**
- * 获取用户信息
-URL:http://domain/eryuzhisen-server/user/getUserInfo
+ * 根据标签获取活跃用户列表
+URL:http://domain/eryuzhisen-server/user/getActiveUserList
 Method:GET
 
 request:
 params:
-userId:"xxxx"//需要获取指定用户id的信息,如果header中uid不同,则会返回用户间关系
-
+"pageSize":"10",//获取的推荐用户条数（目前分页以假分页处理，前端一次性获取）
+"label":"xxx",//必填 标签
 response:
 {
 	"ret":"1",//0 成功 1 失败
 	"errcode":"10001",//错误码 ret为1时出现
 	"errinfo":"xxxx",
-	"info":{
-		"uid":"xxxx",
-		"nick_name":"xxxx",//昵称
-		"avatar_url":"xxxxx",//头像url
-		"signature":"xxxx",//签名
-		"c_age":"xxxx",//论坛年龄
-		"relation":"0"//关系 0 没有关注 1 关注 2 粉丝 3 相互关注
-	}
+	"more":"0"，
+	"list":[
+		{
+			"uid":"xxxx",
+			"nick_name":"xxxxx",//昵称
+			"avatar_url":"xxxxx",//头像url
+			"signature":"xxxxx",//签名
+			"c_age":"xxx",//论坛年龄
+			"relation":"0",//关系 0 没有关注 1 关注 2 粉丝 3 相互关注
+			"black":"0",//是否在黑名单 0 不在 1 在
+			"opus_count","20",//作品数量
+			"fans_count":"30",//粉丝数量
+			"comment_count":"40"//针对当前标签的评论数量
+
+		},
+	....
+	]
 }
  * @param  {[type]} option [description]
  * @return {[type]}        [description]
  */
-function getUserInfo(option){
-	var url = baseUrl + 'user/getUserInfo';
-	var _header = option._header || {};
-	var token = Cookies.get('token');
+function getActiveUserList(option){
+	var url = baseUrl + 'user/getActiveUserList';
+
+	delete option._header;
+	return axios({
+		method: 'GET',
+		url: url,
+		params: option,
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+            return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+	    return _rejectObj(error);
+	});
+}
+
+function getInviteCode(option){
+	var url = baseUrl + 'user/getInviteCode';
 
 	// 没有登录态
 	if (!token) {
@@ -401,62 +546,7 @@ function getUserInfo(option){
 		}
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
-		}
-		return response.data;
-	}).catch(function (error) {
-	    return _rejectObj(error);
-	});
-}
-
-/**
- * 解除手机号绑定(此协议不做实际解除操作,只是记录标识,重新绑定手机号,必须先通过此协议)
-URL:http://domain/eryuzhisen-server/auth/unboundPhone
-Method:POST
-request:
-{
-	"phone_num":"12345678",//解除绑定的手机号
-	"phone_vcode":"1111",//手机号验证码
-}
-
-response:
-{
-	"ret":"1",//0 成功 1 失败
-	"errcode":"10001",//错误码 ret为1时出现
-	"errinfo":"xxxx"
-}
- * @param  {[type]} option [description]
- * @return {[type]}        [description]
- */
-function unboundPhone(option){
-	var url = baseUrl + 'auth/unboundPhone';
-
-	delete option._header;
-	return axios({
-		method: 'POST',
-		url: url,
-		data: JSON.stringify(option)
-	}).then(function (response) {
-		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+            return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -465,14 +555,17 @@ function unboundPhone(option){
 }
 
 export {
-	getPicVerifyCode,
-	getPhoneVerifyCode,
-	sigin,
-	sigup,
-	resetPwd,
-	updateUserInfo,
-	getUserInfo,
-	unboundPhone,
+	getFansList,
+	getFollowList,
+	getBlackList,
+	delBlack,
+	addBlack,
+	addFollow,
+	delFollow,
+	getUserList,
+	getRecommendUserList,
+	getActiveUserList,
+	getInviteCode,
 	_reject
 }
 

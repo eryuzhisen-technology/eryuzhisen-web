@@ -7,9 +7,10 @@
 var baseUrl; 
 var imgBaseUrl = '';
 var distUrl = '';
+var isdebug = window.location.href.indexOf('isdebug=1') > 0;
 
 if (process.env.NODE_ENV == 'development') {
-	baseUrl = '/java/eryuzhisen-server/';
+	baseUrl = 'https://api.eryuzhisen.com/java/eryuzhisen-server/';
 	distUrl = '/dist/html/';
 	imgBaseUrl = '';
 }else{
@@ -18,22 +19,27 @@ if (process.env.NODE_ENV == 'development') {
 	imgBaseUrl = '';
 }
 
-function _reject (option){
-	return Promise.reject(option);
+function _reject (response){
+	// 跳转登录
+	if (response.errcode == 30001) {
+		// window.location.href = './login.html';
+	}
+	return Promise.reject(response);
 }
 
 function _rejectObj(error){
-	if (!!error.ret && error.ret > 0) {
+	if (!!error && !!error.ret && error.ret > 0) {
 		return _reject(error);
 	}
     return _reject({
-    	ret: error.ret || -1,
-		msg: error.msg || '网络异常',
+    	ret: error && error.ret || -1,
+		msg: error && error.msg || '网络异常',
 		error: error
     })
 }
 
 export {
+	isdebug,
 	baseUrl,
 	imgBaseUrl,
 	distUrl,

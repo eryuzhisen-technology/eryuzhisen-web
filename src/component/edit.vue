@@ -1,172 +1,263 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (reference) '../common/css/common';
-    .c-edit {
+    // ---------- begin 全局颜色配置 ------------
+    /* 编辑器边框颜色 */
+    @border-color: #ccc;
+    /* 菜单颜色、上边框颜色 */
+    @fore-color: #666;
+    /* 菜单选中状态的颜色 */
+    @selected-color: #1e88e5;
+    /* input focus 时的颜色 */
+    @focus-input-color: #1e88e5;
+    /* 按钮颜色 */
+    @button-color: #1e88e5;
+    /* tab selected 状态下的颜色 */
+    @selected-tab-color: #1e88e5;
+    // ---------- end 全局颜色配置 ------------
+    
+    // ---------- begin 编辑器 ------------
+    .wangEditor-container {
+        position: relative;
+        z-index: 1;
         width: 100%;
-        .default_border-r-4;
-        .default_backgroud_4;
-        overflow: hidden;
-        & .edit-title {
-            width: 100%;
-            height: 80px;
-            padding-top: 30px;
-            padding-left: 40px;
-            & .edit-title-t {
-                float: left;
-                margin-right: 5px;
-                .default_color_3;
-                .default_font_size_4;
-                .default_bolder;
+        .default_backgroud_2;
+        .clearfix:after {
+            content: '';
+            display: table;
+            clear: both;
+        }
+        .clearfix {
+            *zoom: 1;
+        }
+        // 显示p head 高度的 tip
+        .height-tip {
+            position: absolute;
+            width: 3px;
+            background-color: #ccc;
+            left: 0;
+            transition: top .2s;
+        }
+        // 设置 img table 的 toolbar
+        .txt-toolbar {
+            position: absolute;
+            background-color: #fff;
+            padding: 3px 5px;
+            border-top: 2px solid @fore-color;
+            box-shadow: 1px 3px 3px #999;
+
+            // for IE8
+            border-left: 1px\9 solid\9 #ccc\9;
+            border-bottom: 1px\9 solid\9 #999\9;
+            border-right: 1px\9 solid\9 #999\9;
+
+            // 小三角
+            .tip-triangle {
+                display: block;
+                position: absolute;
+                width: 0;
+                height: 0;
+                border: 5px solid;
+                border-color: transparent transparent @fore-color transparent;
+                top: -12px;
+                left: 50%;
+                margin-left: -5px;
             }
-            & .edit-title-h {
-                float: left;
-                & input {
-                    .default_color_4;
-                    .default_font_size_4;
+
+            a {
+                color: @fore-color;
+                display: inline-block;
+                margin: 0 3px;
+                padding: 5px;
+                text-decoration: none;
+                border-radius: 3px;
+
+                &:hover {
+                    background-color: #f1f1f1;
                 }
             }
         }
-        & .edit-tool {
-            position: relative;
+
+        & .wangEditor-txt{
             width: 100%;
-            height: 60px;
-            .default_backgroud_2;
-            .default_border-t-5;
-            .default_border-b-5;
-            & .edit-tool-item {
-                position: relative;
-                float: left;
-                width: 50px;
-                height: 58px;
-                text-align: center;
-                .default_pointer;
-                & a {
-                    display: inline-block;
+            padding: 40px;
+            text-align: left;
+            & p {
+                line-height: 1.5em;
+                word-wrap: break-word;
+                word-break: break-all;
+                text-align: justify;
+                .default_color_2;
+                .default_font_size_3;
+            }
+            & blockquote {
+                display: block; 
+                border-left: 8px solid #d0e5f2;
+                padding: 5px 10px;
+                margin: 10px 0; 
+                line-height: 1.4; 
+                font-size: 100%;
+                background-color: #f1f1f1;
+            }
+            & img {
+                width: auto;
+                max-width: 100%;
+                margin-bottom: 10px;
+            }
+        }
+        & textarea {
+            width: 100%;
+            padding: 30px;
+            margin-top: 0!important;
+            height: auto!important;
+            line-height: 1.5em;
+            .default_color_2;
+            .default_font_size_3;
+        }
+    }
+    .wangEditor-menu-container {
+        width: 100%;
+        height: 50px;
+        .default_backgroud_7;
+        // 菜单组
+        .menu-group {
+            float: left;
+        }
+        // 单个菜单容器
+        .menu-item {
+            float: left;
+            position: relative;
+            text-align: center;
+            width: 40px;
+            height: 50px;
+            line-height: 50px;
+            &:hover {
+                .default_backgroud_6;
+            }
+            // 菜单
+            & a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                .default_font_size_2;
+                .default_color_2;
+                text-decoration: none;
+                &:hover {
+                    .default_color_1;
+                }
+                & i {
+                    display: block;
                     width: 100%;
                     height: 100%;
                 }
-                & em {
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                    vertical-align: middle;
+            }
+            // 菜单选中状态
+            &.selected {
+                color: @selected-color;
+            }
+            // 激活状态
+            &.active {
+                background-color: #f1f1f1;
+            }
+            // 禁用状态
+            &.disable {
+                opacity: 0.5;
+                filter: Alpha(opacity=50);
+            }
+            & .wangeditor-menu-img-indent-left {
+                .skin_icon_edit-3;
+                &:hover {
+                    .skin_icon_edit-3_on;
                 }
+            }
+            & .wangeditor-menu-img-bold {
+                .skin_icon_edit-2;
+                &:hover {
+                    .skin_icon_edit-2_on;
+                }
+            }
+            & .wangeditor-menu-img-italic {
+                .skin_icon_edit-4;
+                &:hover {
+                    .skin_icon_edit-4_on;
+                }
+            }
+            & .wangeditor-menu-img-strikethrough {
+                .skin_icon_edit-5;
+                &:hover {
+                    .skin_icon_edit-5_on;
+                }
+            }
+            & .wangeditor-menu-img-picture {
+                .skin_icon_edit-6;
+                &:hover {
+                    .skin_icon_edit-6_on;
+                }
+            }
+            &.menu-item-scan {
+                .skin_icon_edit-7;
+                &:hover {
+                    .skin_icon_edit-7_on;
+                }
+            }
+            &.j-save-btn-update {
+                width: 80px;
                 &:hover {
                     .default_backgroud_7;
-                    & .edit-tool-tip {
-                        display: block;
+                    & a {
+                        cursor: default;
+                        .default_color_2;
                     }
                 }
             }
-            & .edit-tool-suo {
-                .skin_icon_edit_suo;
-                &:hover em {
-                    .skin_icon_edit_suo_on;
-                }
-            }
-            & .edit-tool-bold {
-                .skin_icon_edit_bold;
-                &:hover em {
-                    .skin_icon_edit_bold_on;
-                }
-            }
-            & .edit-tool-xie {
-                .skin_icon_edit_xie;
-                &:hover em {
-                    .skin_icon_edit_xie_on;
-                }
-            }
-            & .edit-tool-delete {
-                .skin_icon_edit_delete;
-                &:hover em {
-                    .skin_icon_edit_delete_on;
-                }
-            }
-            & .edit-tool-img {
-                .skin_icon_edit_img;
-                &:hover em {
-                    .skin_icon_edit_img_on;
-                }
-            }
-            & .edit-tool-save {
-                .skin_icon_edit_save;
-                &:hover em {
-                    .skin_icon_edit_save_on;
-                }
-            }
-            & .edit-tool-scan {
-                .skin_icon_edit_scan;
-                &:hover em {
-                    .skin_icon_edit_scan_on;
-                }
-            }
-            & .edit-tool-save,
-            & .edit-tool-scan,
-            & .edit-tool-publish {
-                float: right;
-            }
-            & .edit-tool-publish {
-                width: 70px;
-                height: 58px;
-                line-height: 58px;
-                text-align: center;
-                .default_font_size_3;
-                .default_color_2;
-                .default_pointer;
-                & .edit-tool-tip p {
-                    width: 118px;
-                }
-            }
-            & .edit-tool-tip {
-                display: none;
+        }
+        // tip提示
+        .menu-tip {
+            display: none;
+            box-sizing: content-box;
+
+            position: absolute;
+            top: -36px;
+            left: 50%;
+            height: 36px;
+    
+            width: 48px;
+            height: 30px;
+            line-height: 30px;
+            padding: 0 10px;
+            margin-left: 0!important;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            .default_color_2;
+            .default_font_size_2;
+            transform: translate(-50%, 0);
+
+            & .tip-triangle {
                 position: absolute;
-                top: -36px;
+                top: 25px;
                 left: 50%;
-                height: 36px;
-                transform: translate(-50%, 0);
-                & p {
-                    width: 48px;
-                    height: 30px;
-                    line-height: 30px;
-                    text-align: center;
-                    .default_color_2;
-                    .default_font_size_2;
-                    background-color: rgba(0, 0, 0, 0.8);
-                }
-                & span {
-                    position: absolute;
-                    top: 25px;
-                    left: 50%;
-                    margin-left: -5px;
-                    display: inline-block;
-                    border: 4px solid;
-                    border-color: transparent rgba(0,0,0,0.8) rgba(0,0,0,0.8) transparent;
-                    transform: rotate(45deg);
-                }
+                display: inline-block;
+                border: 4px solid;
+                border-color: transparent rgba(0,0,0,0.8) rgba(0,0,0,0.8) transparent;
+                transform: translate(-50%, 0) rotate(45deg);
             }
         }
-        & .edit-content {
-            height: 460px;
+        & .menu-tip-40 {
+            width: 40px;
+            margin-left: -20px;
+        }
+        & .menu-tip-50 {
+            width: 50px;
+            margin-left: -25px;
+        }
+    }
+    // ---------- end 编辑器 ------------
+
+    .c-edit {
+        min-height: 700px;
+        & .c-edit-content {
+            min-height: 650px;
             overflow-y: auto;
-            padding: 40px 60px;
-            .default_font_size_3;
-            .default_color_2;
-            .default_backgroud_3;
-            & p,
-            & div,
-            & blockquote {
-                line-height: 1.75rem;
-                min-height: 16px;
-                margin-bottom: 10px;
-                .default_font_size_3;
-                .default_color_2;
-                text-align: left;
-            }
-            & img {
-                max-width: 100%;
-                margin-bottom: 10px;
-                .default_center;
-            }
         }
     }
 </style>
@@ -174,114 +265,36 @@
 <!-- html代码 -->
 <template>
 <div class="c-edit">
-    <div class="edit-tool">
-        <div @click="execCommand" class="edit-tool-item edit-tool-suo" data-role="indent">
-            <a href="#"><em></em></a>
-            <div class="edit-tool-tip">
-                <span></span>
-                <p>缩进</p>
-            </div>
-        </div>
-        <div @click="execCommand" class="edit-tool-item edit-tool-bold" data-role="Bold">
-            <a href="#"><em></em></a>
-            <div class="edit-tool-tip">
-                <span></span>
-                <p>粗体</p>
-            </div>
-        </div>
-        <div @click="execCommand" class="edit-tool-item edit-tool-xie" data-role="Italic">
-            <a href="#"><em></em></a>
-            <div class="edit-tool-tip">
-                <span></span>
-                <p>斜体</p>
-            </div>
-        </div>
-        <div @click="execCommand" class="edit-tool-item edit-tool-delete" data-role="strikeThrough">
-            <a href="#"><em></em></a>
-            <div class="edit-tool-tip">
-                <span></span>
-                <p>删除线</p>
-            </div>
-        </div>
-        <div @click="execCommand" class="edit-tool-item edit-tool-img" ref="container" data-role="insertImage">
-            <a id="edit_upload_image_select" href="#"><em></em></a>
-            <div class="edit-tool-tip">
-                <span></span>
-                <p>图片</p>
-            </div>
-            <UploadImg 
-                :type="type" 
-                :select="select"
-                :container="container"
-                @uploadImg_uploaded="uploaded" 
-                @uploadImg_error="error"
-            />
-        </div>
-        <div class="edit-tool-item edit-tool-publish" @click="save">
-            发布
-            <div class="edit-tool-tip">
-                <span></span>
-                <p>发布后不可更改</p>
-            </div>
-        </div>
-        <div class="edit-tool-item edit-tool-scan">
-            <a href="#"><em></em></a>
-            <div class="edit-tool-tip">
-                <span></span>
-                <p>预览</p>
-            </div>
-        </div>
-        <div class="edit-tool-item edit-tool-save">
-            <a href="#"><em></em></a>
-            <div class="edit-tool-tip">
-                <span></span>
-                <p>保存</p>
-            </div>
-        </div>
-    </div>
-    <div ref="edit" @keyup="upadte" class="edit-content" contenteditable v-html="value" data-placeholder="输入内容">
-    </div>
+    <div class="c-edit-content" id="edit" @click="click"></div>
+    <keep-alive v-if="edit_init">
+    <UploadImg 
+        type="2" 
+        select="edit_upload_image_select"
+        container="edit_container"
+        @uploadImg_uploaded="uploaded" 
+        @uploadImg_error="error"
+    />
+    </keep-alive>
 </div>
 </template>
 
 <script>
-import uploadImg from './uploadImg'
 export default {
-    components: {
-        UploadImg: uploadImg
-    },
-    computed: {
-        type (){
-            return 2
-        },
-        select (){
-            return 'edit_upload_image_select'
-        },
-        container (){
-            return 'edit_container'
+    name: 'edit',
+    data (){
+        return {
+            edit_init: false,
+            editor: null
         }
     },
-    name: 'edit',
-    props: ['value'],
+    props: ['content'],
     methods: {
-        upadte (){
-            this.$emit('input', this.$refs.edit.innerHTML);
-        },
-        command (commandName, commandValue){
-            document.execCommand(commandName, false, commandValue); 
-            this.upadte();
-        },
-        execCommand (event){
-            var type = event.currentTarget.dataset['role'];
-            if (type == 'insertImage') {
-                $(this.$refs.input).click();
-            } else {
-                this.command(type, null);
-            }
+        click (){
+            this.$emit('edit_click');
         },
         uploaded (filename){
-            var value = '<img style="max-width:100%;" src="' + filename + '"/>';
-            this.command('insertHtml', value);
+            var imgHtml = '<p><img style="max-width:100%;" src="' + filename + '"/></p>';
+            this.editor.command(null, 'insertHtml', imgHtml);
         },
         error (err){
             if (err.code == -600) {
@@ -322,21 +335,63 @@ export default {
                 })
             }
         },
-        save (){
-            this.$store.dispatch('article_setState', {
-                step: 3
-            });
+        // 保存内容
+        update (){
+            var value = this.editor.$txt.html();
+            this.$emit('update', value);
+        },
+        // 发布内容
+        publish (){
+            var value = this.editor.$txt.html();
+            this.$emit('publish', value);
+        },
+        // 预览内容
+        scan (){
+            var value = this.editor.$txt.html();
+            this.$emit('scan', value);
+        }
+    },
+    watch: {
+        content (){
+            this.editor.$txt.html(this.content);
         }
     },
     mounted (){
-        
-    },
-    watch: {
-        value (newVal, oldVal){
-            if (!newVal) {
-                this.$emit('input', '<p><br /></p>');
-            }
-        }
+        this.editor = new this.$edit('edit');
+        // 创建
+        this.editor.create();
+
+        // 初始化编辑器的内容
+        this.editor.$txt.html(this.content);
+
+        // 添加额外的菜单
+        var save = $('<div class="menu-item menu-item-save clearfix j-save-btn"><a href="javascript:void(0);">保存</a></div>');
+        var scan = $('<div class="menu-item menu-item-scan clearfix j-scan-btn"><a href="javascript:void(0);"></a></div>');
+        var publish = $('<div class="menu-item clearfix"><a href="javascript:void(0);">发布</a></div>');
+        var group = $('<div class="menu-group"></div>').css('float', 'right');
+        group.append(save).append(scan).append(publish);
+        $('.wangEditor-menu-container').append(group);
+
+        save.on('click', res => {
+            this.update();
+        })
+
+        publish.on('click', res => {
+            this.publish();
+        })
+
+        scan.on('click', res => {
+            this.scan();
+        })
+
+        // 初始化编辑器成功
+        this.edit_init = true;
+        this.$emit('edit_init', this.editor);
+
+        $('.c-edit-content').height($(window).height()  - 120);
+        $(window).on('resize', function(){
+            $('.c-edit-content').height($(window).height() - 120);
+        })
     }
 }
 </script>

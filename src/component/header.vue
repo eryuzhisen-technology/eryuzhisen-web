@@ -1,238 +1,391 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (reference) '../common/css/common';
-@module: c-header;
-.@{module} {
-	width: 100%;
-	height: 150px;
-	.default_backgroud_7;
-}
-.@{module}-content {
-	.default_width_960;
-	height: 100%;
-	margin: 0 auto;
-	& .logo {
-		float: left;
-		width: 140px;
-		height: 50px;
-		margin-top: 50px;
-		margin-right: 30px;
-		.skin_icon_logo_1;
-		.default_pointer;
-		& a {
-			display: inline-block;
-			width: 100%;
-			height: 100%;
-		}
+	@module: c-header;
+	.@{module} {
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 20;
+		width: 100%;
+		min-width: 960px;
+		height: 60px;
+		.default_backgroud_6;
 	}
-	& .menu {
-		float: left;
-		margin-top: 78px;
-		margin-right: 30px;
-		overflow-y: hidden;
-		& .item {
+	.@{module}-content {
+		.default_width_960;
+		height: 100%;
+		margin: 0 auto;
+		& .logo {
 			float: left;
+			width: 84px;
+			height: 50px;
+			margin-top: 5px;
 			margin-right: 20px;
-			.default_font_size_3;
-			.default_color_3;
-			text-decoration: none;
-			&:hover {
-				.default_color_1;
-			}
-			&.z-on {
-				.default_color_1;
-				.default_font_family_bolder;
-			}
-		}
-	}
-	& .search {
-		float: left;
-		width: 250px;
-		height: 40px;
-		overflow: hidden;
-		padding: 10px 20px;
-		margin-top: 68px;
-		.default_border-r-4;
-		.default_backgroud_4;
-		& input {
-			display: block;
-			float: left;
-			width: 170px;
-			margin-top: 3px;
-			margin-right: 15px;
-			.default_color_4;
-			.default_font_size_3;
-		}
-		& a {
-			display: block;
-			float: left;
-			width: 20px;
-			height: 20px;
-			.skin_icon_search_1;
+			.skin_icon_logo;
 			.default_pointer;
-		}
-	}
-	& .user {
-		float: right;
-		margin-right: 20px;
-		margin-top: 70px;
-		.default_center;
-		& .btn {
-			height: 40px;
-			line-height: 40px;
-			.default_font_size_3;
-			.default_color_1;
-			.default_font_family_bolder;
 			& a {
-				.default_color_1;
+				display: inline-block;
+				width: 100%;
+				height: 100%;
 			}
 		}
-		& .member {
-			display: none;
-			position: relative;
-			width: 100px;
-			& .member-show-item {
-				width: 40px;
+		& .menu {
+			float: left;
+			margin-top: 10px;
+			margin-right: 30px;
+			overflow-y: hidden;
+			& .item {
+				float: left;
 				height: 40px;
-				.default_float_l;
-				.default_pointer;
-				.default_border-r-50;
-				.default_backgroud_2;
-			}
-			& .member-show-notice {
-				position: relative;
+				line-height: 40px;
 				margin-right: 20px;
-				.skin_icon_notice_1;
-				& .member-show-notice_number {
-					position: absolute;
-					top: -4px;
-					right: -15px;
+				.default_font_size_2;
+				.default_color_2;
+				text-decoration: none;
+				&:hover {
+					.default_color_10;
+				}
+				&.z-on {
+					.default_color_10;
+				}
+				:last-child {
+					margin-right: 0;
 				}
 			}
-			& .member-show-center {
-				background-repeat: no-repeat;
-				background-position: center;
-				background-size: contain;
-			}
-			& .member-notice {
-				position: absolute;
-				top: 77px;
-				left: 0;
+		}
+		& .search {
+			float: left;
+			width: 270px;
+			height: 40px;
+			overflow: hidden;
+			padding-left: 20px;
+			margin-top: 10px;
+			.default_border-r-4;
+			.default_backgroud_3;
+			& input {
+				display: block;
+				float: left;
 				width: 200px;
-				z-index: 10;
-				overflow: hidden;
-				.default_backgroud_3;
-				.default_border-r-4;
-				& .member-notice-item {
-					width: 200px;
-					height: 60px;
-					line-height: 60px;
-					padding-left: 20px;
-					& a {
-						display: block;
-						width: 100%;
-						height: 100%;
-						.default_font_size_3;
-						.default_color_3;	
-					}
-					& .member-notice-item__list {
-						display: block;
-						float: left;
-					}
-					& .member-notice-item__icon { 
-						width: 20px;
-						height: 100%;
-						margin-right: 10px; 
-					}
-					& .member-notice-item__text { 
-						margin-top: 22px;
-					}
-					& .member-notice-item__number { 
-						float: left;
-						margin-top: 22px;
-						margin-right: 10px; 
-					}
-					&:nth-child(1) .member-notice-item__icon { .skin_icon_er; }
-					&:nth-child(2) .member-notice-item__icon { .skin_icon_cmt; }
-					&:nth-child(3) .member-notice-item__icon { .skin_icon_msg; }
+				height: 40px;
+				line-height: 40px;
+				.default_color_2;
+				.default_font_size_2;
+			}
+			& a {
+				display: block;
+				float: left;
+				width: 50px;
+				height: 40px;
+				padding-top: 10px;
+				.default_backgroud_5;
+				.default_center;
+				& span {
+					display: inline-block;
+					width: 20px;
+					height: 20px;
+					.skin_icon_search;
 					&:hover {
-						.default_backgroud_7;
-						& a {
-							.default_color_1;	
-						}
-						&:nth-child(1) .member-notice-item__icon { .skin_icon_er_on; }
-						&:nth-child(2) .member-notice-item__icon { .skin_icon_cmt_on; }
-						&:nth-child(3) .member-notice-item__icon { .skin_icon_msg_on; }
+						.skin_icon_search_on;
 					}
 				}
+				&:hover {
+					.default_backgroud_4;
+				}
 			}
-			& .member-center {
-				position: absolute;
-				top: 77px;
-				left: 60px;
-				width: 200px;
-				z-index: 10;
-				overflow: hidden;
-				.default_backgroud_3;
-				.default_border-r-4;
-				.default_pointer;
-				& .member-center-item {
-					width: 200px;
-					height: 60px;
-					line-height: 60px;
-					padding-left: 20px;
-					& {
-						.default_color_3;
+		}
+		& .user {
+			float: right;
+			height: 60px;
+			margin-right: 20px;
+			.default_center;
+			& .btn {
+				padding: 15px 0;
+				height: 30px;
+				line-height: 30px;
+				.default_font_size_3;
+				.default_color_2;
+				.default_font_family_bolder;
+				& a {
+					text-decoration: none;
+					.default_color_1;
+					&:hover {
+						.default_color_10;
 					}
-					& a {
-						display: block;
+				}
+				& span {
+					.default_color_2;
+					.default_font_size_2;
+					.default_font_bolder;
+				}
+			}
+			& .member {
+				position: relative;
+				height: 60px;
+				& .member-show-item {
+					width: 30px;
+					height: 60px;
+					padding: 15px 0;
+					.default_float_l;
+				}
+				& .member-show-notice {
+					position: relative;
+					margin-right: 20px;
+					& .member-show-notice_img {
 						width: 100%;
 						height: 100%;
-						.default_font_size_3;
-						.default_color_3;	
+						.skin_icon_notice;
+						.default_pointer;
+						.default_border-r-50;
+						.default_backgroud_2;
+						&:hover {
+							.skin_icon_notice_on;
+						}
 					}
-					& .member-center-item__list {
-						display: block;
-						float: left;
+					& .member-show-notice_number {
+						position: absolute;
+						top: 15px;
+						right: 0;
+						width: 8px;
+						height: 8px;
+						.default_border-r-50;
+						.default_backgroud_12;
 					}
-					& .member-center-item__icon { 
-						width: 20px;
-						height: 100%;
-						margin-right: 10px; 
+					& .member-notice {
+						display: none;
+						position: absolute;
+						top: 60px;
+						left: 0;
+						width: 180px;
+						z-index: 11;
+						overflow: hidden;
+						.default_backgroud_2;
+						.default_border-r-4;
+						.default_border_shadow_4;
+						& .member-notice-item {
+							width: 180px;
+							height: 50px;
+							line-height: 50px;
+							& a {
+								display: block;
+								width: 100%;
+								height: 100%;
+								padding-left: 20px;
+							}
+							& .member-notice-item__list {
+								display: block;
+								float: left;
+							}
+							& .member-notice-item__icon { 
+								width: 20px;
+								height: 100%;
+								margin-right: 10px; 
+							}
+							& .member-notice-item__text { 
+								height: 50px;
+								line-height: 50px;
+								.default_font_size_2;
+								.default_color_3;
+							}
+							& .member-notice-item__number { 
+								float: left;
+								height: 50px;
+								line-height: 50px;
+								margin-right: 10px; 
+							}
+							&:first-child { 
+								.default_border-r-t-4;
+							}
+							&:last-child { 
+								.default_border-r-b-4;
+							}
+							&:nth-child(1) .member-notice-item__icon { 
+								.skin_icon_er; 
+							}
+							&:nth-child(2) .member-notice-item__icon { 
+								.skin_icon_cmt; 
+							}
+							&:nth-child(3) .member-notice-item__icon { 
+								.skin_icon_msg; 
+							}
+							&:hover {
+								.default_backgroud_6;
+								.default_border_shadow_4;
+								& .member-notice-item__text {
+									.default_color_1;	
+								}
+								&:nth-child(1) .member-notice-item__icon { .skin_icon_er_on; }
+								&:nth-child(2) .member-notice-item__icon { .skin_icon_cmt_on; }
+								&:nth-child(3) .member-notice-item__icon { .skin_icon_msg_on; }
+							}
+						}
 					}
-					& .member-center-item__text { 
-						margin-top: 22px;
-					}
-					&:nth-child(1) .member-center-item__icon { .skin_icon_me; }
-					&:nth-child(2) .member-center-item__icon { .skin_icon_set; }
-					&:nth-child(3) .member-center-item__icon { .skin_icon_back; }
-					&:nth-child(4) .member-center-item__icon { .skin_icon_logout; }
 					&:hover {
-						.default_backgroud_7;
-						& {
-							.default_color_1;	
+						.skin_icon_notice_on;
+						& .member-notice {
+							display: block;
 						}
-						& a {
-							.default_color_1;	
+					}
+				}
+				& .member-show-center {
+					background-repeat: no-repeat;
+					background-position: center;
+					background-size: contain;
+					& .member-show-center_img {
+						width: 100%;
+						height: 100%;
+						background-size: cover;
+						.skin_icon;
+						.default_pointer;
+						.default_border-r-50;
+						.default_backgroud_2;
+					}
+					& .member-center {
+						display: none;
+						position: absolute;
+						top: 60px;
+						left: 50px;
+						width: 180px;
+						z-index: 11;
+						.default_backgroud_2;
+						.default_border-r-4;
+						.default_pointer;
+						.default_border_shadow_4;
+						& .member-center-item {
+							width: 180px;
+							height: 50px;
+							line-height: 50px;
+							& a {
+								display: block;
+								width: 100%;
+								height: 100%;
+								padding-left: 20px;
+							}
+							& .member-center-item__list {
+								display: block;
+								float: left;
+							}
+							& .member-center-item__icon { 
+								width: 20px;
+								height: 100%;
+								margin-right: 10px; 
+							}
+							& .member-center-item__text { 
+								height: 50px;
+								line-height: 50px;
+								.default_font_size_2;
+								.default_color_3;
+							}
+							&:first-child { 
+								.default_border-r-t-4;
+							}
+							&:last-child { 
+								.default_border-r-b-4;
+							}
+							&:nth-child(1) .member-center-item__icon { .skin_icon_me; }
+							&:nth-child(2) .member-center-item__icon { .skin_icon_set; }
+							&:nth-child(3) .member-center-item__icon { .skin_icon_back; }
+							&:nth-child(4) .member-center-item__icon { .skin_icon_logout; }
+							&:hover {
+								.default_backgroud_6;
+								.default_border_shadow_4;
+								& .member-center-item__text {
+									.default_color_1;	
+								}
+								&:nth-child(1) .member-center-item__icon { .skin_icon_me_on; }
+								&:nth-child(2) .member-center-item__icon { .skin_icon_set_on; }
+								&:nth-child(3) .member-center-item__icon { .skin_icon_back_on; }
+								&:nth-child(4) .member-center-item__icon { .skin_icon_logout_on; }
+							}
 						}
-						&:nth-child(1) .member-center-item__icon { .skin_icon_me_on; }
-						&:nth-child(2) .member-center-item__icon { .skin_icon_set_on; }
-						&:nth-child(3) .member-center-item__icon { .skin_icon_back_on; }
-						&:nth-child(4) .member-center-item__icon { .skin_icon_logout_on; }
+					}
+					&:hover {
+						& .member-center {
+							display: block;
+						}
 					}
 				}
 			}
 		}
-		&.z-active .btn { display: none; }
-		&.z-active .member { display: block; }
+		& .publish {
+			position: relative;
+			float: right;
+			height: 60px;
+			padding-top: 10px;
+			& .publish-btn {
+				display: block;
+				width: 70px;
+				text-decoration: none;
+			}
+			& .publish-show {
+				display: none;
+				position: absolute;
+				top: 60px;
+				left: 0;
+				width: 180px;
+				z-index: 11;
+				.default_backgroud_2;
+				.default_border-r-4;
+				.default_pointer;
+				.default_border_shadow_4;
+				& .publish-show-item {
+					width: 180px;
+					height: 50px;
+					line-height: 50px;
+					padding-left: 20px;
+					& a {
+						display: block;
+						width: 100%;
+						height: 100%;
+					}
+					& .publish-show-item__list {
+						display: block;
+						float: left;
+					}
+					& .publish-show-item__icon { 
+						width: 20px;
+						height: 100%;
+						margin-right: 10px; 
+					}
+					& .publish-show-item__text { 
+						height: 50px;
+						line-height: 50px;
+						.default_font_size_2;
+						.default_color_3;	
+					}
+					&:first-child { 
+						.default_border-r-t-4;
+					}
+					&:last-child { 
+						.default_border-r-b-4;
+					}
+					&:nth-child(2) .publish-show-item__icon { 
+						.skin_icon_charpt; 
+					}
+					&:nth-child(1) .publish-show-item__icon { 
+						.skin_icon_article; 
+					}
+					&:nth-child(2) .publish-show-item__icon { 
+						.skin_icon_charpt; 
+					}
+					&:hover {
+						.default_backgroud_6;
+						.default_border_shadow_4;
+						& .publish-show-item__text {
+							.default_color_1;	
+						}
+						&:nth-child(1) .publish-show-item__icon { .skin_icon_article_on; }
+						&:nth-child(2) .publish-show-item__icon { .skin_icon_charpt_on; }
+					}
+				}
+			}
+			&:hover {
+				& .publish-show {
+					display: block;
+				}	
+			}
+		}
 	}
-	& .publish {
-		float: right;
-		margin-top: 70px;
-		.default_backgroud_3;
-		.default_font_family_bolder;
-	}
-}
 </style>
 
 <!-- html代码 -->
@@ -241,166 +394,201 @@
 	<div class="c-header-content">
 		<div class="logo"><a :href='url.index'></a></div>
 		<div class="menu">
-			<a class="item" :class="{'z-on': data.page == 'index'}" :href='url.index'>发现</a>
-			<a class="item" :class="{'z-on': data.page == 'mark'}" :href='url.mark'>收藏</a>
+			<a class="item" :class="{'z-on': pageIndex == 'index'}" :href='url.index'>发现</a>
+			<a class="item" :class="{'z-on': pageIndex == 'mark'}" :href='url.mark'>收藏</a>
 		</div>
 		<div class="search">
-			<input type="text" placeholder="搜索">
-			<a :href="url.search"></a>
+			<input type="text" placeholder="搜索" @keyup.enter="seachGo" v-model="search_value">
+			<a href="javascript:void(0)" @click="seachGo"><span></span></a>
 		</div>
-		<div class="publish cpm_button cpm_button_warn" @click="publish">发布</div>
-		<div class="user" :class="{'z-active': user.isLogin}">
-			<div class="btn">
-				<a :href="url.register">注册</a>
-				·
-				<a :href="url.login">登录</a>
+		<div v-if="user.isLogin" class="publish">
+			<a class="publish-btn cpm_button_warn" :href="url.edit">创作</a>
+			<!-- <div class="publish-show">
+				<ul class="publish-show-lists">
+					<li class="publish-show-item"><a :href="url.edit">
+						<span class="publish-show-item__list publish-show-item__icon"></span>
+						<span class="publish-show-item__list publish-show-item__text">创建新作品</span>
+					</a></li>
+					<li class="publish-show-item"><a :href="user.isLogin ? 'author.work.html?user_id='+ user.uid : './login.html'">
+						<span class="publish-show-item__list publish-show-item__icon"></span>
+						<span class="publish-show-item__list publish-show-item__text">填坑新章节</span>
+					</a></li>
+				</ul>
+			</div> -->
+		</div>
+		<div class="user">
+			<div v-if="!user.isLogin" class="btn">
+				<a :href="url.register">注册</a><span>·</span><a :href="url.login">登录</a>
 			</div>
-			<div class="member">
-				<div class="member-show">
-					<div class="member-show-item member-show-notice j-close-1" @click="noticeSwitch">
-						<div class="member-show-notice_number cpm_tip_number">20</div>
-					</div>
-					<div class="member-show-item member-show-center j-close-1" @click="centerSwitch" :style="{'background-image': 'url('+ user.avatar_url + ')'} ">
+			<div v-else class="member">
+				<div class="member-show-item member-show-notice">
+					<div class="member-show-notice_img"></div>
+					<div v-if="hasMessage" class="member-show-notice_number"></div>
+					<div class="member-show member-notice">
+						<ul class="member-notice-lists">
+							<li class="member-notice-item"><a :href="url.better">
+								<span class="member-notice-item__list member-notice-item__icon"></span>
+								<span class="member-notice-item__list member-notice-item__text">精选</span>
+								<span v-if="!!unread.message1 && unread.message1 != 0" class="member-notice-item__list member-notice-item__number">·{{unread.message1}}</span>
+							</a></li>
+							<li class="member-notice-item"><a :href="url.comment">
+								<span class="member-notice-item__list member-notice-item__icon"></span>
+								<span class="member-notice-item__list member-notice-item__text">评论我</span>
+								<span v-if="!!unread.message2 && unread.message2 != 0" class="member-notice-item__list member-notice-item__number">·{{unread.message2}}</span>
+							</a></li>
+							<li class="member-notice-item"><a :href="url.infomation">
+								<span class="member-notice-item__list member-notice-item__icon"></span>
+								<span class="member-notice-item__list member-notice-item__text">其他消息</span>
+								<span v-if="!!unread.message0 && unread.message0 != 0" class="member-notice-item__list member-notice-item__number">·{{unread.message0}}</span>
+							</a></li>
+						</ul>
 					</div>
 				</div>
-				<div class="member-show member-notice j-close-1" :class="{'cpm_hide' : !noticeShow}">
-					<ul class="member-notice-lists">
-						<li class="member-notice-item"><a :href="url.better">
-							<span class="member-notice-item__list member-notice-item__icon"></span>
-							<span class="member-notice-item__list member-notice-item__text">精选</span>
-							<span class="member-notice-item__list member-notice-item__number">·2</span>
-						</a></li>
-						<li class="member-notice-item"><a :href="url.comment">
-							<span class="member-notice-item__list member-notice-item__icon"></span>
-							<span class="member-notice-item__list member-notice-item__text">评论我</span>
-							<span class="member-notice-item__list member-notice-item__number">·12</span>
-						</a></li>
-						<li class="member-notice-item"><a :href="url.infomation">
-							<span class="member-notice-item__list member-notice-item__icon"></span>
-							<span class="member-notice-item__list member-notice-item__text">其他消息</span>
-							<span class="member-notice-item__list member-notice-item__number">·10</span>
-						</a></li>
-					</ul>
-				</div>
-				<div class="member-show member-center j-close-1" :class="{'cpm_hide' : !centerShow}">
-					<ul class="member-center-lists">
-						<li class="member-center-item"><a :href="url.center">
-							<span class="member-center-item__list member-center-item__icon"></span>
-							<span class="member-center-item__list member-center-item__text">我的主页</span>
-						</a></li>
-						<li class="member-center-item"><a :href="url.setting">
-							<span class="member-center-item__list member-center-item__icon"></span>
-							<span class="member-center-item__list member-center-item__text">个人设置</span>
-						</a></li>
-						<li class="member-center-item" @click="feedbackOpen">
-							<span class="member-center-item__list member-center-item__icon"></span>
-							<span class="member-center-item__list member-center-item__text">意见反馈</span>
-						</li>
-						<li class="member-center-item" @click="ourlogin">
-							<span class="member-center-item__list member-center-item__icon"></span>
-							<span class="member-center-item__list member-center-item__text" >退出登录</span>
-						</li>
-					</ul>
+				<div class="member-show-item member-show-center">
+					<div class="member-show-center_img" :style="{'background-image': 'url('+ (!!user.avatar_url ? user.avatar_url : avatar) + ')'} "></div>
+					<div class="member-show member-center">
+						<ul class="member-center-lists">
+							<li class="member-center-item"><a :href="url.center">
+								<span class="member-center-item__list member-center-item__icon"></span>
+								<span class="member-center-item__list member-center-item__text">我的主页</span>
+							</a></li>
+							<li class="member-center-item"><a :href="url.setting">
+								<span class="member-center-item__list member-center-item__icon"></span>
+								<span class="member-center-item__list member-center-item__text">个人设置</span>
+							</a></li>
+							<li class="member-center-item" @click="feedbackOpen"><a href="javascript:void(0);">
+								<span class="member-center-item__list member-center-item__icon"></span>
+								<span class="member-center-item__list member-center-item__text">意见反馈</span>
+							</a></li>
+							<li class="member-center-item" @click="ourlogin"><a href="javascript:void(0);">
+								<span class="member-center-item__list member-center-item__icon"></span>
+								<span class="member-center-item__list member-center-item__text" >退出登录</span>
+							</a></li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<Feedback />
-	<Edit />
 </div>
 </template>
 
 <script>
 import {mapState} from 'vuex'
-import {distUrl} from '../server/config'
-import Feedback from './feedback.vue'
-import edit from './article.edit.vue'
+import avatar from '../common/images/img/avatar.png';
 export default {
-	components: {
-        Feedback: Feedback,
-        Edit: edit
-    },
 	name: 'header',
     data () {
     	return {
-    		noticeShow: false,
-    		centerShow: false,
-    		url: {
-    			index: distUrl + 'index.html',
-    			mark: distUrl + 'mark.html',
-    			app: distUrl + 'app.html',
-    			login: distUrl + 'login.html',
-    			register: distUrl + 'register.html',
-    			search: distUrl + 'search.article.html',
-    			center: distUrl + 'author.work.html',
-    			setting: distUrl + 'setting.userinfo.html',
-    			better: distUrl + 'message.better.html',
-    			comment: distUrl + 'message.comment.html',
-    			infomation: distUrl + 'message.infomation.html',
-    		}
+    		avatar: avatar,
+    		hasMessage: false,
+    		search_value: ''
     	}
     },
-    props: ['data'],
+    props: ['pageIndex', 'resType'],
     computed: mapState({
-        user: state => state.user.info
+        user: state => state.user.info,
+        search (){
+        	var path = location.pathname.indexOf('search.author.html') > -1 ? 'search.author.html' : 'search.article.html';
+        	return './' + path + '?query=' + this.search_value
+        },
+        url (){
+        	return {
+    			index: './index.html',
+    			mark: './mark.html',
+    			app: './app.html',
+    			login: './login.html',
+    			register: './register.html',
+    			center: './author.work.html?user_id=' + this.$store.state.user.info.uid,
+    			setting: './setting.userinfo.html',
+    			better: './message.better.html',
+    			comment: './message.comment.html',
+    			infomation: './message.infomation.html',
+    			edit: './article.edit.html?from=' + encodeURIComponent(window.location.href)
+    		}
+        },
+        unread (){
+        	var unread = {};
+        	var list = this.$store.state.message.unread.list;
+        	for (var i = 0, len = list.length; i < len; i++) {
+        		unread['message'+ list[i].message_type] = list[i].unread_count;
+        	}
+        	if (unread.message1 > 0 || unread.message2 > 0 || unread.message0 > 0) {
+        		this.hasMessage = true;
+        	}
+        	return unread;
+        }
     }),
     methods: {
-    	noticeSwitch (){
-    		this.noticeShow = !this.noticeShow;
-    		this.centerShow = false;
-    	},
-    	centerSwitch (){
-    		this.centerShow = !this.centerShow;
-    		this.noticeShow = false;
-    	},
-    	publish (){
-    		this.$store.dispatch('article_setState', {
-                show: true
-            });
+    	seachGo (){
+    		if (this.resType == 'search') {
+    			this.$eventHub.$emit('header_serach', {
+    				query: this.search_value
+    			});
+    		} else {
+    			location.href = this.search;	
+    		}
     	},
     	// 获取用户信息
         getUserInfo () {
-            this.$store.dispatch('user_getUserInfo').then( info => {
-                //todo
-            }).catch(res => {
-            	// 未登录
-            	if (res.ret == -10) {
-            		return false;
-            	}
-                this.$store.dispatch('bubble_showBubble', {
-                    show: true,
-                    type: 'top',
-                    top: {
-                        status: 'z-warn',
-                        msg: res.msg
-                    }
-                })
+			var cache_userInfo = this.$version.userInfo;
+        	var info = this.$cache.getStore(cache_userInfo.key, cache_userInfo.version);
+        	if (info) {
+        		this.$store.dispatch('user_setUserInfo', info).then( res => {
+        			this.url.center = './author.work.html?user_id=' + this.user.uid;
+        		})
+        		return false;
+        	}
+            this.$store.dispatch('user_getUserInfo', {
+            	
+            }).then( res => {
+                this.url.center = './author.work.html?user_id=' + this.user.uid;
+
+                // 缓存用户信息 - 1h
+                this.$cache.setStore(cache_userInfo.key, res, cache_userInfo.version, cache_userInfo.time);
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+            	this.$store.dispatch('bubble_fail', err);
             }); 
         },
         // 退出登录
         ourlogin (){
         	this.centerShow = false;
-        	this.$store.dispatch('user_ourlogin', {
-        		//todo
-        	});
+        	this.$cache.removeStore(this.$version.userInfo.key);
+        	this.$store.dispatch('user_ourlogin');
         },
         // 反馈打开
         feedbackOpen (){
         	this.centerShow = false;
-        	this.$store.dispatch('feedback_switch', true);
+        	this.$store.dispatch('common_switch', true);
+        },
+        // 获取未读消息
+        getUnreadMessage (){
+        	this.$store.dispatch('message_getUnreadMessage', {
+            	// todo
+            }).then( res => {
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+            	this.$store.dispatch('bubble_fail', err);
+            });
         }
     },
     mounted () {
-    	$('body').on('click', e => {
-    		var node = $(e.target);
-    		if (!node.hasClass('j-close-1') && node.parents('.j-close-1').length == 0) {
-    			this.noticeShow = false;
-    			this.centerShow = false;
-    		}
+    	this.$eventHub.$on('getUnreadMessage', option => {
+    		// 获取未读消息
+        	this.getUnreadMessage();
     	})
+
+    	// 获取url的参数
+        this.search_value = decodeURIComponent(this.$url.getUrlParam('query')) || '';
 
     	// 获取用户信息
         this.getUserInfo();
+
+        // 获取未读消息
+        this.getUnreadMessage();
     }
 }
 </script>

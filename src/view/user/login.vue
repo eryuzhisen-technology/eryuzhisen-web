@@ -8,35 +8,36 @@
 <template>
 <div class="m-user">
 <div class="m-user-wrap">
+    <div class="m-user-logo"></div>
     <div class="m-user-dialog">
     	<div class="m-user-dialog__tit">登录账号</div>
     	<div class="m-user-dialog__con">
     		<div class="m-user-dialog__item">
-    			<div v-if="!phone_reg" class="m-user-dialog__tip">
+    			<div v-if="!phone_reg" class="c-dialog__tip">
     				<div class="tip-arrow"></div>
     				<div class="tip-text">{{phone_reg_con}}</div>
     			</div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !phone_reg}">
-    				<input type="text" placeholder="手机号" v-model="phone" />
+    				<input name="phone" type="text" placeholder="手机号" @keyup.enter="login" v-model="phone" autocomplete="new-password" />
     			</div>
     		</div>
     		<div class="m-user-dialog__item">
-    			<div v-if="!password_reg" class="m-user-dialog__tip">
+    			<div v-if="!password_reg" class="c-dialog__tip">
     				<div class="tip-arrow"></div>
     				<div class="tip-text">{{password_reg_con}}</div>
     			</div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !password_reg}">
-    				<input type="password" placeholder="密码" v-model="password" />
+    				<input name="password" type="password" placeholder="密码" @keyup.enter="login" v-model="password" autocomplete="new-password" />
     			</div>
     		</div>
     		<div v-if="pwd_err_times >= 5" class="m-user-dialog__item">
-    			<div v-if="!pic_code_reg" class="m-user-dialog__tip">
+    			<div v-if="!pic_code_reg" class="c-dialog__tip">
     				<div class="tip-arrow"></div>
     				<div class="tip-text">{{pic_code_reg_con}}</div>
     			</div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !pic_code_reg}">
-    				<input type="text" placeholder="图形码" v-model="pic_code" />
-    				<img v-if="isCodeCan" @click="getCode" :src="'data:image/png;base64,' + pic_vcode" />
+    				<input name="pic_code" type="text" placeholder="图形码" v-model="pic_code" @keyup.enter="login" />
+    				<img v-if="isCodeCan" @click="getCode" :src="'data:image/png;base64,' + pic_vcode" autocomplete="off" />
     			</div>
     		</div>
     		<div class="m-user-dialog__item">
@@ -47,11 +48,12 @@
     		</div>
     		<div class="cpm_clear"></div>
     		<div class="m-user-dialog__item">
-    			<div class="m-user-dialog__btn cpm_button_default z-bolder" @click="login">登录</div>
+    			<div class="m-user-dialog__btn cpm_button_default" @click="login">登录</div>
     		</div>
-    		<div class="m-user-dialog__item">
+    		<div class="m-user-dialog__item m-user-dialog__text">
     			<a class="m-user-dialog__register" :href="url.register">没有账号 立即注册</a>
     		</div>
+            <input class="cmp_hide" type="password" />
     	</div>
     </div>
 </div>
@@ -61,19 +63,14 @@
 
 <script>
 import {mapState} from 'vuex'
-import {distUrl} from '../../server/config'
-import bubble from '../../component/bubble'
 export default {
-	components: {
-    	Bubble: bubble
-    },
     data () {
     	return {
     		isSelect: false,
     		url: {
-                register: distUrl + 'register.html',
-                index: distUrl + 'index.html',
-                back: distUrl + 'back.html'
+                register: './register.html',
+                index: './index.html',
+                back: './back.html'
             },
             phone: '',
             password: '',
@@ -87,6 +84,7 @@ export default {
     	}
     },
     computed: mapState({
+        isLogin: state => state.user.info.isLogin,
         pwd_err_times: state => state.user.pwd_err_times,
         isCodeCan: state => state.user.isCodeCan,
         pic_vid: state => state.user.code.pic_vid,
@@ -100,34 +98,40 @@ export default {
     	getCode (init){
             this.$store.dispatch('user_getPicVerifyCode', {
                 init: true
-            }).catch(res => {
-                this.$store.dispatch('bubble_showBubble', {
-                    show: true,
-                    type: 'top',
-                    top: {
-                        status: 'z-warn',
-                        msg: res.msg
-                    }
-                })
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
             });
     	},
     	login (){
-    		if (!/^1\d{10}$/i.test(this.phone)) {
-    			this.phone_reg = false;
-    			this.phone_reg_con = '输入的手机号码有误';
-    			return false;
-    		} else {
-    			this.phone_reg = true;
-    			this.phone_reg_con = '';
-    		}
-    		if ($.trim(this.password) == '') {
-    			this.password_reg = false;
-    			this.password_reg_con = '密码有误！';
-    			return false;
-    		} else {
-    			this.password_reg = true;
-    			this.password_reg_con = '';
-    		}
+    		// 校验手机
+            if ($.trim(this.phone) == '') {
+                this.phone_reg = false;
+                this.phone_reg_con = '请输入手机号';
+                return false;
+            } else if (!/^1\d{10}$/i.test(this.phone)) {
+                this.phone_reg = false;
+                this.phone_reg_con = '手机号格式不正确';
+                return false;
+            } else {
+                this.phone_reg = true;
+                this.phone_reg_con = '';
+            }
+
+            // 校验密码
+            if ($.trim(this.password) == '') {
+                this.password_reg = false;
+                this.password_reg_con = '请输入密码';
+                return false;
+            } else if ($.trim(this.password).length > 18 || $.trim(this.password).length < 6) {
+                this.password_reg = false;
+                this.password_reg_con = '密码应为6-18位数';
+                return false;
+            } else {
+                this.password_reg = true;
+                this.password_reg_con = '';
+            }
+
+            // 验证码
     		if ($.trim(this.pic_code) == '' && this.pwd_err_times >= 5) {
     			this.pic_code_reg = false;
     			this.pic_code_reg_con = '验证码有误';
@@ -143,26 +147,45 @@ export default {
                 code: {
                     pic_code: this.pic_code //密码错误5超过5次,需要校验图形验证码
                 }
-            }).then( (res) => {
+            }).then( res => {
                 this.$store.dispatch('user_sigin', {
                     "device_no": (new Date()).getTime(),//设备号,没有则新生成一个,统计用
                     _header: {
                         "Client_type": 3, // 设备号
-                    }
-                }).then( (res) => {
-                    window.location.href = this.url.index;
-                }).catch( (res) => {
-                    this.$store.dispatch('bubble_showBubble', {
-                        show: true,
-                        type: 'top',
-                        top: {
-                            status: 'z-warn',
-                            msg: res.msg
-                        }
-                    })
+                    },
+                    isSave: this.isSelect // 是否记住密码
+                }).then( res => {
+                    this.goNext();
+                    this.$store.dispatch('bubble_success', res);
+                }).catch( err => {
+                    this.$store.dispatch('bubble_fail', err);
                 });
             })
-    	}
+    	},
+        goNext (){
+            if (this.from) {
+                window.location.href = decodeURIComponent(this.from);
+            } else {
+                window.location.href = this.url.index;
+            }
+        }
+    },
+    watch: {
+        isLogin (newVal){
+            if (newVal) {
+                this.goNext();
+            }
+        }
+    },
+    mounted (){
+        var that = this;
+        this.from = this.$url.getUrlParam('from');
+
+        $(".cpm_form_input input").on('focus', function(){
+            var name = $(this).attr('name');
+            that[name + '_reg'] = true;
+        })
+        $(".m-user-logo").height($('.m-user-dialog').height());
     }
 }
 </script>

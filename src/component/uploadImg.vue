@@ -16,8 +16,6 @@
 </template>
 
 <script>
-import plupload from '../lib/upload/plupload.dev'
-import {getCatalogList, getPolicyAndAccess} from '../server/getDataCommon'
 export default {
     name: 'uploadImg',
     data () {
@@ -28,52 +26,27 @@ export default {
             signature: '',
             key: '',
             expire: 0,
-            uploadfilename: '',
-            now: Date.parse(new Date()) / 1000,
-            timestamp: Date.parse(new Date()) / 1000,
+            uploadfilename: {}
     	}
     },
     props: ['type', 'select', 'container'],
     methods: {
-        send_request (filename){
-            getPolicyAndAccess({
+        getParam (cb){
+            this.$store.dispatch('common_getPolicyAndAccess', {
                 type: this.type || 1
             }).then( (res) => {
                 //可以判断当前expire是否超过了当前时间,如果超过了当前时间,就重新取一下.3s 做为缓冲
-                this.now = this.timestamp = Date.parse(new Date()) / 1000; 
-                if (this.expire < this.now + 3) {
-                    this.host = res.host;
-                    this.policyBase64 = res.policy;
-                    this.accessid = res.accessid;
-                    this.signature = res.signature;
-                    this.expire = parseInt(res.expire);
-                    this.key = res.dir;
-                }
+                this.host = res.host;
+                this.policyBase64 = res.policy;
+                this.accessid = res.accessid;
+                this.signature = res.signature;
+                this.expire = parseInt(res.expire);
+                this.key = res.dir;
 
-                // 开始传输图片
-                var pos = filename.lastIndexOf('.')
-                var suffix = filename.substring(pos);
-                this.uploadfilename = this.key + this.random_string(10) + suffix;
-                this.uploader.setOption({
-                    'url': this.host,
-                    'multipart_params': {
-                        'key' : this.uploadfilename,
-                        'policy': this.policyBase64,
-                        'OSSAccessKeyId': this.accessid, 
-                        'signature': this.signature,
-                        'success_action_status' : '200', //让服务端返回200,不然，默认会返回204
-                    }
-                });
-                this.uploader.start();
-            }).catch( (res) => {
-                this.$store.dispatch('bubble_showBubble', {
-                    show: true,
-                    type: 'top',
-                    top: {
-                        status: 'z-warn',
-                        msg: res.msg
-                    }
-                })
+                cb && cb();
+                this.$store.dispatch('bubble_success', res);
+            }).catch( (err) => {
+                this.$store.dispatch('bubble_fail', err);
             })
         },
         random_string (len){
@@ -102,19 +75,43 @@ export default {
                 };  
                 reader.readAsDataURL(file);  
             }
-            this.$emit('uploadImg_addFile', imgURL);
+            return imgURL;
+        },
+        send_request (filename){
+            // 开始传输图片
+            var pos = filename.lastIndexOf('.')
+            var suffix = filename.substring(pos);
+            var uploadfilename = this.key + this.random_string(10) + suffix;
+            this.uploadfilename[filename] = {
+                src: this.host + '/' + uploadfilename,
+                load: 0
+            };
+
+            this.uploader.setOption({
+                'url': this.host,
+                'multipart_params': {
+                    'key' : uploadfilename,
+                    'policy': this.policyBase64,
+                    'OSSAccessKeyId': this.accessid, 
+                    'signature': this.signature,
+                    'success_action_status' : '200', //让服务端返回200,不然，默认会返回204
+                }
+            });
+            this.uploader.start();
         }
     },
     mounted (){
-        this.uploader = new plupload.Uploader({
-            runtimes : 'html5, flash, silverlight, html4',
-            browse_button : this.select, 
+        var that = this;
+        this.getParam();
+        this.uploader = new this.$plupload.Uploader({
+            runtimes: 'html5, flash, silverlight, html4',
+            browse_button: this.select, 
             container: document.getElementById(this.container),
             flash_swf_url: 'lib/plupload-2.1.2/js/Moxie.swf',
             silverlight_xap_url: 'lib/plupload-2.1.2/js/Moxie.xap',
-            url : 'http://oss.aliyuncs.com',
+            url: 'https://oss.aliyuncs.com',
             filters: {
-                mime_types : [ //只允许上传图片和zip,rar文件
+                mime_types: [ //只允许上传图片和zip,rar文件
                     { 
                         title: "Image files", 
                         extensions: "jpg,gif,png,bmp" 
@@ -130,13 +127,18 @@ export default {
                 },
                 // 添加图片成功
                 FilesAdded: (up, files) => {
-                    var file = files[0].getSource().getSource();
-                    this.upload(file);
-                    this.send_request(files[0].name);
+                    var now = Date.parse(new Date()) / 1000; 
+                    if (this.expire < now + 3) {
+                        this.getParam( res => {
+                            this.uploader.start();
+                        })
+                    } else {
+                        this.uploader.start();
+                    }
                 },
                 // 上传前
                 BeforeUpload: function(up, file) {
-                    // todo
+                    that.send_request(file.name);
                 },
                 // 上传过程中
                 UploadProgress: function(up, file) {
@@ -144,12 +146,18 @@ export default {
                 },
                 // 上传成功
                 FileUploaded: (up, file, info) => {
-                    var fileUrl = this.host + '/' + this.uploadfilename;
+                    var fileUrl = this.uploadfilename[file.name].src;
+                    this.uploadfilename[file.name].load = 1;
                     this.$emit('uploadImg_uploaded', fileUrl);
                 },
                 // 上传失败
                 Error: (up, err) => {
-                    this.$emit('uploadImg_error', err);
+                    if (err.code == -602) {
+                        var fileUrl = this.uploadfilename[err.file.name].src;
+                        this.$emit('uploadImg_uploaded', fileUrl);
+                    } else {
+                        this.$emit('uploadImg_error', err);    
+                    }
                 }
             }
         });

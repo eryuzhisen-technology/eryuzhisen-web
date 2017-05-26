@@ -2,6 +2,7 @@ import {baseUrl, _reject, _rejectObj} from '../config'
 import Cookies from 'js-cookie';
 // 设置基本的请求headers
 import axios from 'axios'
+var token = Cookies.get('token');
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.headers.get['X-Requested-With'] = 'XMLHttpRequest';
 
@@ -28,19 +29,7 @@ function getPicVerifyCode(option){
 		url: url,
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                case 10001:
-                    msg = '错误码';
-                    break;
-                default:
-                    msg = '错误码';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+			return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -79,22 +68,7 @@ function getPhoneVerifyCode(option){
 		params: option,
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                case 10001:
-                    msg = '图形码有误！';
-                    break;
-                case 20002:
-                    msg = '该手机号已经被绑定，请换其他手机号再试';
-                    break;
-                default:
-                    msg = '图形码有误！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+			return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -140,35 +114,7 @@ function sigin(option){
 		data: JSON.stringify(option),
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-			switch(Number(response.data.errcode)){
-	            case 20011:
-	                msg = '密码错误！';
-	                break;
-	            case 20001:
-	                msg = '该手机号未绑定！';
-	                break;
-	            case 20005:
-	            	if (response.data.pwd_err_times >= 5) {
-	            		msg = '图片验证码已过期!';
-	            	} else {
-	            		response.data.pwd_err_times = 5;
-	            		msg = '请输入图片验证码!';
-	            	}
-	            	break;
-	            case 20003:
-	            	response.data.pwd_err_times = 5;
-	            	msg = '图片验证错误!';
-	            	break;
-	            default:
-	                msg = '网络异常';
-	                break;
-	        }
-	        return _reject({
-            	ret: response.data.ret,
-            	pwd_err_times: response.data.pwd_err_times || 0,
-				msg: msg
-            })
+			return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -222,22 +168,7 @@ function sigup(option){
 		headers: _header
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(res.errcode)){
-				case 20007:
-                    msg = '手机验证码错误!';
-                    break;
-                case 20002:
-                	msg = '该手机号已经被绑定，请换其他手机号再试!'
-                	break;
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+			return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -274,19 +205,104 @@ function resetPwd(option){
 		headers: _header
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                case 20007:
-                    msg = '手机验证码错误!';
-                    break;
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+			return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+	    return _rejectObj(error);
+	});
+}
+
+/**
+ * 解除手机号绑定(此协议不做实际解除操作,只是记录标识,重新绑定手机号,必须先通过此协议)
+URL:http://domain/eryuzhisen-server/auth/unboundPhone
+Method:POST
+request:
+{
+	"phone_num":"12345678",//解除绑定的手机号
+	"phone_vcode":"1111",//手机号验证码
+}
+
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx"
+}
+ * @param  {[type]} option [description]
+ * @return {[type]}        [description]
+ */
+function unboundPhone(option){
+	var url = baseUrl + 'auth/unboundPhone';
+
+
+	// 没有登录态
+	if (!token) {
+		return _rejectObj({
+			ret: -10,
+			msg: '未登录'
+		});
+	}
+
+	delete option._header;
+	return axios({
+		method: 'POST',
+		url: url,
+		data: JSON.stringify(option),
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+			return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+	    return _rejectObj(error);
+	});
+}
+
+/**
+ * 重新绑定手机号
+URL:http://domain/eryuzhisen-server/auth/reBindPhone
+Method:POST
+request:
+{
+	"phone_num":"1234567",//新手机号
+	"phone_vcode":"1111",//手机号验证码
+}
+
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx"
+}
+ * @param  {[type]} option [description]
+ * @return {[type]}        [description]
+ */
+function reBindPhone(option){
+	var url = baseUrl + 'auth/reBindPhone';
+
+	// 没有登录态
+	if (!token) {
+		return _rejectObj({
+			ret: -10,
+			msg: '未登录'
+		});
+	}
+
+	delete option._header;
+	return axios({
+		method: 'POST',
+		url: url,
+		data: JSON.stringify(option),
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+			return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -317,7 +333,6 @@ response:
 function updateUserInfo(option){
 	var url = baseUrl + 'user/updateUserInfo';
 	var _header = option._header || {};
-	var token = Cookies.get('token');
 
 	// 没有登录态
 	if (!token) {
@@ -337,16 +352,7 @@ function updateUserInfo(option){
 		}
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+			return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -383,10 +389,9 @@ response:
 function getUserInfo(option){
 	var url = baseUrl + 'user/getUserInfo';
 	var _header = option._header || {};
-	var token = Cookies.get('token');
 
 	// 没有登录态
-	if (!token) {
+	if (!token && !option.userId) {
 		return _rejectObj({
 			ret: -10,
 			msg: '未登录'
@@ -403,249 +408,7 @@ function getUserInfo(option){
 		}
 	}).then(function (response) {
 		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
-		}
-		return response.data;
-	}).catch(function (error) {
-	    return _rejectObj(error);
-	});
-}
-
-/**
- * 解除手机号绑定(此协议不做实际解除操作,只是记录标识,重新绑定手机号,必须先通过此协议)
-URL:http://domain/eryuzhisen-server/auth/unboundPhone
-Method:POST
-request:
-{
-	"phone_num":"12345678",//解除绑定的手机号
-	"phone_vcode":"1111",//手机号验证码
-}
-
-response:
-{
-	"ret":"1",//0 成功 1 失败
-	"errcode":"10001",//错误码 ret为1时出现
-	"errinfo":"xxxx"
-}
- * @param  {[type]} option [description]
- * @return {[type]}        [description]
- */
-function unboundPhone(option){
-	var url = baseUrl + 'auth/unboundPhone';
-	var token = Cookies.get('token');
-
-	// 没有登录态
-	if (!token) {
-		return _rejectObj({
-			ret: -10,
-			msg: '未登录'
-		});
-	}
-
-	delete option._header;
-	return axios({
-		method: 'POST',
-		url: url,
-		data: JSON.stringify(option),
-		headers: {
-			token: token
-		}
-	}).then(function (response) {
-		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
-		}
-		return response.data;
-	}).catch(function (error) {
-	    return _rejectObj(error);
-	});
-}
-
-/**
- * 重新绑定手机号
-URL:http://domain/eryuzhisen-server/auth/reBindPhone
-Method:POST
-request:
-{
-	"phone_num":"1234567",//新手机号
-	"phone_vcode":"1111",//手机号验证码
-}
-
-response:
-{
-	"ret":"1",//0 成功 1 失败
-	"errcode":"10001",//错误码 ret为1时出现
-	"errinfo":"xxxx"
-}
- * @param  {[type]} option [description]
- * @return {[type]}        [description]
- */
-function reBindPhone(option){
-	var url = baseUrl + 'auth/reBindPhone';
-	var token = Cookies.get('token');
-
-	// 没有登录态
-	if (!token) {
-		return _rejectObj({
-			ret: -10,
-			msg: '未登录'
-		});
-	}
-
-	delete option._header;
-	return axios({
-		method: 'POST',
-		url: url,
-		data: JSON.stringify(option),
-		headers: {
-			token: token
-		}
-	}).then(function (response) {
-		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
-		}
-		return response.data;
-	}).catch(function (error) {
-	    return _rejectObj(error);
-	});
-}
-
-/**
- * 获取黑名单用户列表
-URL:http://domain/eryuzhisen-server/user/getBlackList
-Method:GET
-request:
-params:
-"page":"1",//页数,默认不传查询第一页
-"pageSize":"10",//每页数量 默认10
-response:
-{
-	"ret":"1",//0 成功 1 失败
-	"errcode":"10001",//错误码 ret为1时出现
-	"errinfo":"xxxx",
-	"more":"0",//是否还有更多 0 没有 1 还有更多,供没有页码的客户端使用
-	"list":[
-		{
-			"uid":"xxxx",
-			"nick_name":"xxxxx",//昵称
-			"avatar_url":"xxxxx"//头像url
-
-		}
-	]
-}
- * @param  {[type]} option [description]
- * @return {[type]}        [description]
- */
-function getBlackList(option){
-	var url = baseUrl + 'user/getBlackList';
-	var token = Cookies.get('token');
-
-	// 没有登录态
-	if (!token) {
-		return _rejectObj({
-			ret: -10,
-			msg: '未登录'
-		});
-	}
-
-	delete option._header;
-	return axios({
-		method: 'GET',
-		url: url,
-		params: option,
-		headers: {
-			token: token
-		}
-	}).then(function (response) {
-		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
-		}
-		return response.data;
-	}).catch(function (error) {
-	    return _rejectObj(error);
-	});
-}
-
-/**
- * 删除黑名单用户(header 中uid为操作用户)
-URL:http://domain/eryuzhisen-server/user/delBlack/{userId}
-Method:DELETE
-userId:"xxxx"//被拉进黑名单的用户
-response:
-{
-	"ret":"1",//0 成功 1 失败
-	"errcode":"10001",//错误码 ret为1时出现
-	"errinfo":"xxxx"
-}
- * @param  {[type]} option [description]
- * @return {[type]}        [description]
- */
-function delBlack(option){
-	var url = baseUrl + 'user/delBlack/'+option.userId;
-	var token = Cookies.get('token');
-
-	// 没有登录态
-	if (!token) {
-		return _rejectObj({
-			ret: -10,
-			msg: '未登录'
-		});
-	}
-
-	delete option._header;
-	return axios({
-		method: 'DELETE',
-		url: url,
-		headers: {
-			token: token
-		}
-	}).then(function (response) {
-		if (response.data.ret != 0) {
-			var msg;
-            switch(Number(response.data.errcode)){
-                default:
-                    msg = '网络异常！';
-                    break;
-            }
-            return _reject({
-            	ret: response.data.ret,
-				msg: msg
-            })
+			return _reject(response.data);
 		}
 		return response.data;
 	}).catch(function (error) {
@@ -659,12 +422,10 @@ export {
 	sigin,
 	sigup,
 	resetPwd,
-	updateUserInfo,
-	getUserInfo,
 	unboundPhone,
 	reBindPhone,
-	getBlackList,
-	delBlack,
+	updateUserInfo,
+	getUserInfo,
 	_reject
 }
 

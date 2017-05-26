@@ -1,95 +1,95 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (reference) '../common/css/common';
-@module: c-artice-menu;
+    @module: c-artice-menu;
 
-.@{module} {
-    position: relative;
-    height: 140px;
-    padding: 40px 60px 0;
-    .default_backgroud_4;
-    & &-wrap {
-        width: 100%;
-        height: 100%;
-        .default_border-b-6;
+    .@{module} {
+        position: relative;
+        height: 140px;
+        padding: 40px 60px 0;
+        .default_backgroud_4;
+        & &-wrap {
+            width: 100%;
+            height: 100%;
+            .default_border-b-6;
+        }
     }
-}
-.@{module}__top {
-    position: relative;
-    overflow: hidden;
-    margin-bottom: 20px;
-    & .top-number {
-        float: left;
-        margin-right: 20px;
-        .default_color_2;
+    .@{module}__top {
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 20px;
+        & .top-number {
+            float: left;
+            margin-right: 20px;
+            .default_color_2;
+            .default_font_size_2;
+        }
+        & .top-title {
+            float: left;
+            margin-right: 5px;
+            .default_color_7;
+            .default_font_size_4;
+        }
+        & .top-new {
+            float: left;
+            margin-top: 5px;
+            .default_color_5;
+            .default_font_size_3;
+        }
+        
+    }
+    .@{module}__bottom {
+        .default_color_3;
         .default_font_size_2;
-    }
-    & .top-title {
-        float: left;
-        margin-right: 5px;
-        .default_color_7;
-        .default_font_size_4;
-    }
-    & .top-new {
-        float: left;
-        margin-top: 5px;
-        .default_color_5;
-        .default_font_size_3;
-    }
-    
-}
-.@{module}__bottom {
-    .default_color_3;
-    .default_font_size_2;
-    & .bottom-time {
-        float: left;
-    }
-    & .bottom-follow {
-        float: right;
-        & em {
-            width: 20px;
-            height: 20px;
-            margin-right: 6px;
-            .skin_icon_liu;
-            .default_disline;
-            .default_middle;
+        & .bottom-time {
+            float: left;
         }
-        & span {
-            .default_disline;
-            .default_middle;
+        & .bottom-follow {
+            float: right;
+            & em {
+                width: 20px;
+                height: 20px;
+                margin-right: 6px;
+                .skin_icon_liu;
+                .default_disline;
+                .default_middle;
+            }
+            & span {
+                .default_disline;
+                .default_middle;
+            }
         }
-    }
-    & .bottom-comment {
-        float: right;
-        margin-right: 20px;
-        & em {
-            width: 20px;
-            height: 20px;
-            margin-right: 6px;
-            .skin_icon_zhan;
-            .default_disline;
-            .default_middle;
-        }
-        & span {
-            .default_disline;
-            .default_middle;
+        & .bottom-comment {
+            float: right;
+            margin-right: 20px;
+            & em {
+                width: 20px;
+                height: 20px;
+                margin-right: 6px;
+                .skin_icon_zhan;
+                .default_disline;
+                .default_middle;
+            }
+            & span {
+                .default_disline;
+                .default_middle;
+            }
         }
     }
-}
-.@{module}__history {
-    position: absolute;
-    top: 50px;
-    right: 0;
-    width: 30px;
-    height: 30px;
-    .default_backgroud_4;
-    .skin_icon_history;
-    & a {
-        display: block;
-        width: 100%;
-        height: 100%;
+    .@{module}__history {
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 30px;
+        height: 30px;
+        .default_backgroud_4;
+        .skin_icon_history;
+        & a {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
     }
-}
 </style>
 
 <!-- html代码 -->

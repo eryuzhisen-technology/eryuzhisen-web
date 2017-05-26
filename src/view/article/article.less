@@ -1,0 +1,95 @@
+@module: m-artice-index;
+.@{module} {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	.default_backgroud_5;
+    & &-wrap {
+        .default_width_960;
+        .default_mar_auto;
+    }
+}
+.@{module}__content {
+	position: relative;
+	min-height: 200px;
+
+	& .content-right {
+		width: 680px;
+		margin-left: 280px;
+    	& .title {
+    		width: 100%;
+    		height: 60px;
+    		padding-left: 20px;
+    		padding-top: 22px;
+    		.default_font_size_2;
+            .default_color_2;
+            .default_backgroud_7;
+            & .number {
+                .default_font_family_bolder;
+                .default_font_size_7;
+                .default_color_7;
+            }
+    	}
+        & .content {
+            & .content_form {
+                padding: 0 60px;
+                width: 100%;
+                height: 80px;
+                padding-top: 20px;
+                padding-left: 50px;
+                padding-right: 30px;
+                overflow: hidden;
+                .default_backgroud_3;
+                .default_border-b-4;
+            }
+            & .content_form-input {
+                float: left;
+                width: 500px;
+                height: 40px;
+                // padding: 12px 30px;
+                margin-right: 10px;
+                & input {
+                    height: 40px;
+                    line-height: 40px;
+                }
+            }
+            & .content_form-btn {
+                float: left;
+                width: 70px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                .default_color_2;
+                .default_font_size_2;
+                .default_backgroud_5;
+                .default_border-r-4;
+                .default_pointer;
+                &:hover {
+                    .default_color_1;
+                }
+            }
+            & .content_comment {
+                margin-bottom: 30px;
+                & .c-artice-comment:last-child {
+                    .default_border-n;
+                }
+            }
+        }
+    }
+}
+
+.c-menu-left .item:nth-child(1){
+    & .item__icon {
+        .skin_icon_article-1;
+    }
+    &:hover .item__icon {
+        .skin_icon_article-1_on;
+    }
+}
+.c-menu-left .item:nth-child(2){
+    & .item__icon {
+        .skin_icon_article-2;
+    }
+    &:hover .item__icon {
+        .skin_icon_article-2_on;
+    }
+}

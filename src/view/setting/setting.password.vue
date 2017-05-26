@@ -2,56 +2,23 @@
 <style lang="less">
 @import (less) '../../common/css/common.less';
 @import (less) '../user/user.less';
-    @module: m-setting-password;
-
-    .@{module} {
-    	padding-top: 20px;
-    	padding-bottom: 80px;
-        .default_backgroud_5;
-        & &-wrap {
-            .default_width_960;
-            .default_mar_auto;
-        }
-    }
-    .@{module}-content {
-    	position: relative;
-    	overflow: hidden;
-        .default_mar_auto;
-    	& .setting-right {
-    		width: 720px;
-    		margin-left: 240px;
-    		& .title {
-    			width: 100%;
-    			height: 60px;
-    			padding-left: 20px;
-    			padding-top: 22px;
-    			.default_font_size_3;
-    			.default_color_4;
-    			.default_backgroud_2;
-    		}
-            & .content {
-                padding: 40px 0 60px;
-                .default_backgroud_3;
-                & .content-wrap {
-                    width: 330px;
-                    .default_mar_auto;
-                }
-            }
-    	}
-    }
+@import (less) './setting.less';
+.app-body {
+    padding-top: 60px;
+}
 </style>
 
 <!-- html代码 -->
 <template>
 <div>
-	<HeaderDom :data="header" />
-    <div class="m-setting-password">
-	<div class="m-setting-password-wrap">
-		<div class="m-setting-password-content">
-			<MenuLeft :data="menuLeft" :type="menuLeftType" />
+	<HeaderDom />
+    <div class="m-setting">
+	<div class="m-setting-wrap">
+		<div class="m-setting-content">
+			<MenuLeft :data="menuLeft" />
 			<div class="setting-right">
 				<div class="title">
-					{{menuLeft[menuLeftType].subtitle}}
+					找回密码
 				</div>
                 <div class="content">
 				<div class="content-wrap">
@@ -120,45 +87,24 @@
 
 <script>
 import { mapState } from 'vuex'
-import HeaderDom from '../../component/header.vue';
-import FooterDom from '../../component/footer.vue';
-import MenuLeft from '../../component/menu.left.vue';
-import SideMenu from '../../component/sideMenu.vue';
-import bubble from '../../component/bubble'
-import {distUrl} from '../../server/config'
 export default {
-    components: {
-        HeaderDom: HeaderDom,
-        FooterDom: FooterDom,
-        MenuLeft: MenuLeft,
-        SideMenu: SideMenu,
-        Bubble: bubble,
-    },
     data () {
     	return {
-            header: {
-                page: ''
-            },
-    		menuLeftType: 'password',
     		menuLeft: {
     			userinfo: {
                     title: '基本资料',
-                    subtitle: '基本资料',
                     url: 'setting.userinfo.html'
                 },
     			password: {
                     title: '密码安全',
-                    subtitle: '找回密码',
-                    url: 'setting.password.html'
+                    isActive: true
                 },
     			phone: {
                     title: '手机号',
-                    subtitle: '手机号',
                     url: 'setting.phone.html'
                 },
     			backlist: {
                     title: '黑名单',
-                    subtitle: '黑名单',
                     url: 'setting.backlist.html'
                 }
     		},
@@ -191,15 +137,8 @@ export default {
         getCode (init){
             this.$store.dispatch('user_getPicVerifyCode', {
                 init: init
-            }).catch(res => {
-                this.$store.dispatch('bubble_showBubble', {
-                    show: true,
-                    type: 'top',
-                    top: {
-                        status: 'z-warn',
-                        msg: res.msg
-                    }
-                })
+            }).catch(err => {
+                this.$store.dispatch('bubble_fail', err);
             });
         },
         getPhoneVerifyCode(){
@@ -230,15 +169,8 @@ export default {
             }).then( () => {
                 this.$store.dispatch('user_getPhoneVerifyCode', {
                     verifyType: "1", //注册验证
-                }).catch(res => {
-                    this.$store.dispatch('bubble_showBubble', {
-                        show: true,
-                        type: 'top',
-                        top: {
-                            status: 'z-warn',
-                            msg: res.msg
-                        }
-                    })
+                }).catch( err => {
+                    this.$store.dispatch('bubble_fail', err);
                 });
             })
         },
@@ -303,23 +235,13 @@ export default {
             }).then( () => {
                 this.$store.dispatch('user_backPwd', {
                     
-                }).then(res => {
+                }).then( res => {
                     // 退出登录
-                    this.$store.dispatch('user_ourlogin', {
-                        //todo
-                    });
+                    this.$store.dispatch('user_ourlogin');
                     // 跳转到登录页面
-                    window.location.href = distUrl + 'login.html';
-                }).catch(res => {
-                    console.log(res)
-                    this.$store.dispatch('bubble_showBubble', {
-                        show: true,
-                        type: 'top',
-                        top: {
-                            status: 'z-warn',
-                            msg: res.msg
-                        }
-                    })
+                    window.location.href = './login.html';
+                }).catch( err => {
+                    this.$store.dispatch('bubble_fail', err);
                 });
             })
         },
@@ -327,15 +249,8 @@ export default {
     mounted (){
         this.$store.dispatch('user_getPicVerifyCode', {
             init: true
-        }).catch(res => {
-            this.$store.dispatch('bubble_showBubble', {
-                show: true,
-                type: 'top',
-                top: {
-                    status: 'z-warn',
-                    msg: res.msg
-                }
-            })
+        }).catch( err => {
+            this.$store.dispatch('bubble_fail', err);
         });
     }
 }

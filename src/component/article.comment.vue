@@ -1,214 +1,457 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (reference) '../common/css/common';
-@module: c-artice-comment;
-
-.@{module} {
-    padding: 40px 0;
-    .default_border-b-4;
-    & .comment__content {
-        & .content__top {
-            height: 30px;
-            margin-bottom: 10px;
-            & .top-img {
-                float: left;
-                width: 30px;
-                height: 30px;
-                margin-right: 10px;
-                .default_border-r-50;
-                .default_backgroud_5;
-            }
-            & .top-name {
-                float: left;
-                height: 30px;
-                line-height: 30px;
-                margin-right: 5px;
-                .default_color_3;
-                .default_font_size_3;
-            }
-            & .top-time {
-                float: left;
-                height: 30px;
-                line-height: 30px;
-                .default_color_3;
-                .default_font_size_1;
-            }
+    .c-artice-comment {
+        width: 100%;
+        height: 100%;
+        & &-wrap {
+            margin-bottom: 30px;
+            width: 100%;
+            height: 100%;
+            .default_backgroud_2;
+            .default_border-r-4;
         }
-        & .content__body {
-            padding-left: 40px;
-            line-height: 1.5rem;
-            margin-bottom: 40px;
-            .default_color_2;
-            .default_font_size_3;
-        }
-        & .content__bottom {
-            padding-left: 40px;
-            height: 20px;
-            overflow: hidden;
-            .default_color_3;
-            .default_font_size_3;
-            & .bottom-jubao {
-                float: left;
+    }
+    .c-artice-comment-list {
+        .default_border-b-14;
+        & .comment__content {
+            padding: 20px 30px 20px 20px;
+            & .content__top {
                 height: 20px;
-                line-height: 20px;
-                .default_pointer;
-            }
-            & .bottom-time {
-                float: right;
-                height: 20px;
-                line-height: 20px;
-                margin-right: 20px;
-            }
-            & .bottom-fabulous {
-                float: right;
-                height: 20px;
-                margin-right: 20px;
-                & span {
+                margin-bottom: 10px;
+                & .top-img {
+                    float: left;
                     width: 20px;
                     height: 20px;
+                    overflow: hidden;
                     margin-right: 10px;
-                    .default_disline;
-                    .default_middle;
-                    .skin_icon_fabulous;
-                    &.z-on {
-                        .skin_icon_fabulous_on;
-                    }
+                    .default_border-r-50;
+                    .default_backgroud_5;
                 }
-                & strong {
-                    .default_disline;
-                    .default_middle;
+                & .top-name {
+                    float: left;
+                    height: 20px;
+                    line-height: 20px;
+                    .default_color_3;
+                    .default_font_size_3;
                 }
-                .default_pointer;
             }
-            & .bottom-record {
-                float: right;
-                height: 20px;
-                line-height: 20px;
-                .default_color_7;
-                .default_center;
-                .default_pointer;
-            }
-        }
-    }
-    & .comment__record {
-        & .record__item {
-            padding: 40px 0 0 40px;
-            & .item-text {
+            & .content__body {
+                padding-left: 30px;
                 line-height: 1.5rem;
-                margin-bottom: 40px;
+                margin-bottom: 15px;
                 .default_color_2;
-                .default_font_size_3;
-                & span {
-                    .default_color_6;
-                }
-                & strong {
-                    .default_color_8;
-                }
+                .default_font_size_2;
             }
-            & .item-bottom {
+            & .content__bottom {
+                padding-left: 30px;
+                height: 12px;
                 overflow: hidden;
                 .default_color_3;
-                .default_font_size_3;
-            }
-            & .item-bottom-jubao {
-                float: left;
-                .default_pointer;
-            }
-            & .item-bottom-time {
-                float: right;
-                margin-right: 20px;
-            }
-            & .item-bottom-record {
-                float: right;
-                .default_pointer;
-                .default_color_7;
+                .default_font_size_1;
+                & .bottom-jubao {
+                    float: left;
+                    height: 12px;
+                    line-height: 12px;
+                    .default_pointer;
+                    &:hover {
+                        .default_color_1;
+                    }
+                }
+                & .bottom-time {
+                    float: right;
+                    height: 12px;
+                    line-height: 12px;
+                    margin-right: 15px;
+                }
+                & .bottom-fabulous {
+                    float: right;
+                    height: 12px;
+                    margin-right: 12px;
+                    & span {
+                        float: left;
+                        display: block;
+                        width: 12px;
+                        height: 12px;
+                        margin-right: 4px;
+                        .skin_icon_fabulous;
+                        &:hover {
+                            .skin_icon_fabulous_on;
+                        }
+                    }
+                    & strong {
+                        float: right;
+                        height: 12px;
+                    }
+                    .default_pointer;
+                }
+                & .bottom-record {
+                    float: right;
+                    height: 12px;
+                    line-height: 12px;
+                    .default_color_2;
+                    .default_center;
+                    .default_pointer;
+                    &:hover {
+                        .default_color_1;
+                    }
+                }
             }
         }
-        & .record__page {
-            height: 60px;
-            padding: 10px 0 10px 40px;
+        & .comment__record {
+            & .record__item {}
+            & .record__item-content {
+                padding: 10px 30px 10px 50px;
+                & .item-text {
+                    & p {
+                        line-height: 1.5rem;
+                        margin-bottom: 15px;
+                        .default_color_2;
+                        .default_font_size_2;    
+                    }
+                    & strong {
+                        .default_color_6;
+                        .default_font_size_1;
+                    }
+                    & em {
+                        font-style: normal;
+                    }
+                }
+                & .item-bottom {
+                    overflow: hidden;
+                    .default_color_3;
+                    .default_font_size_1;
+                }
+                & .item-bottom-jubao {
+                    float: left;
+                    .default_pointer;
+                    &:hover {
+                        .default_color_1;
+                    }
+                }
+                & .item-bottom-time {
+                    float: right;
+                    margin-right: 15px;
+                }
+                & .item-bottom-record {
+                    float: right;
+                    .default_pointer;
+                    .default_color_2;
+                    &:hover {
+                        .default_color_1;
+                    }
+                }
+            }
+            & .record__page {
+                height: 50px;
+                line-height: 50px;
+                .default_center;
+                .default_font_size_2;
+                .default_color_3;
+                .default_border-t-14;
+                & span {
+                    .default_color_2;
+                }
+                & strong {
+                    .default_color_5;
+                    .default_pointer;
+                }
+            }
         }
-        & .record__bottom {
-            padding: 20px 0 0 40px;
+        & .content__reply {
+            height: 80px;
+            padding: 20px 30px 20px 50px;
             overflow: hidden;
-        }
-        & .record__bottom-form {
-            float: left;
-            width: 460px;
-            height: 40px;
-            padding: 11px 30px;
-            margin-right: 20px;
-        }
-        & .record__bottom-btn {
-            float: left;
+            & .content__reply-form {
+                float: left;
+                height: 40px;
+                width: 520px;
+                margin-right: 10px;
+                padding: 0 20px;
+                .default_backgroud_4;
+                .default_border-r-4;
+                .default_color_3;
+                .default_font_size_2;
+                & input {
+                    width: 100%;
+                    height: 40px;
+                    line-height: 40px;
+                    .default_font_size_2;
+                    .default_color_3;
+                }
+            }
+            & .content__reply-btn {
+                float: left;
+                width: 70px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                .default_color_2;
+                .default_font_size_2;
+                .default_backgroud_5;
+                .default_border-r-4;
+                .default_pointer;
+                & {
+                    .default_color_1;
+                }
+            }
         }
     }
-}
 </style>
 
 <!-- html代码 -->
 <template>
 <div class="c-artice-comment">
-    <div class="comment__content">
-        <div class="content__top">
-            <div class="top-img"></div>
-            <div class="top-name">{{data.name}}</div>
-            <!-- <div class="top-time"> · {{data.time}}</div> -->
-        </div>
-        <div class="content__body">{{data.text}}</div>
-        <div class="content__bottom">
-            <div class="bottom-jubao">举报</div>
-            <div class="bottom-record">回复</div>
-            <div class="bottom-time">{{data.time}}</div>
-            <div class="bottom-fabulous"><span :class="data.hasFabulous ? 'z-on': ''"></span><strong>{{data.fabulous}}</strong></div>
-        </div>
-    </div>
-    <div class="comment__record">
-        <div class="record__item" v-for="item in data.record">
-            <div class="item-text" v-html="item.text"></div>
-            <div class="item-bottom">
-                <div class="item-bottom-jubao">举报</div>
-                <div class="item-bottom-record">回复</div>
-                <div class="item-bottom-time">50分钟前</div>
+<div class="c-artice-comment-wrap">
+    <div class="c-artice-comment-list" 
+        v-for="(data, _index) in comment.list"
+        :data-uid="data.user.uid"
+        :data-comment_id="data.comment_id"
+    >
+        <div class="comment__content">
+            <div class="content__top">
+                <div class="top-img">
+                    <img :src="data.user.avatar_url || avatar" />
+                </div>
+                <div class="top-name">{{data.user.nick_name}}</div>
+            </div>
+            <div class="content__body">{{data.comment}}</div>
+            <div class="content__bottom">
+                <div class="bottom-jubao" @click="addReport">举报</div>
+                <div class="bottom-record" @click="replayCommit(_index, -1)">回复</div>
+                <div class="bottom-time">{{data.publish_time}}</div>
+                <div class="bottom-fabulous" @click="addCommentPraise"><span :class="data.hasFabulous ? 'z-on': ''"></span><strong>{{data.praise_count}}</strong></div>
             </div>
         </div>
-        <Page 
-            class="record__page z-small" 
-            :count="data.recordNumber" 
-            :length="pageSize"
-            :index="pageIndex"
-            @page_switch="pageSwitch"
-        />
-        <div class="record__bottom">
-            <div class="record__bottom-form cpm_form_input">
-                <input type="text" placeholder="回复评论...">
+        <div class="content__reply z-top"
+            v-if="data.replayIndex == -1"
+        >
+            <div class="content__reply-form">
+                <input type="text" placeholder="回复评论..." v-model="comment_con" />
             </div>
-            <div class="record__bottom-btn cpm_button_default">提交</div>
+            <div class="content__reply-btn" @click="sendComment(data.comment_id)">提交</div>
+        </div>
+        <div class="comment__record">
+            <div class="record__item" 
+                v-for="(reply, index) in data.replys"
+                :data-uid="reply.user.uid"
+                :data-comment_id="reply.comment_id"
+                :data-index="index"
+            >
+                <div class="record__item-content">
+                    <div class="item-text">
+                        <p>
+                            <strong>{{reply.user.nick_name}}</strong> 
+                            <em v-if="reply.reply_to_user"> 回复 <strong>{{reply.reply_to_user.nick_name}}</strong></em>：
+                            {{reply.comment}}
+                        </p>
+                    </div>
+                    <div class="item-bottom">
+                        <div class="item-bottom-jubao" @click="addReport">举报</div>
+                        <div class="item-bottom-record" @click="replayCommit(_index, index)">回复</div>
+                        <div class="item-bottom-time">{{reply.publish_time}}</div>
+                    </div>
+                </div>
+                <div class="content__reply"
+                    v-if="index == data.replayIndex"
+                >
+                    <div class="content__reply-form">
+                        <input type="text" placeholder="回复评论..." v-model="comment_con" />
+                    </div>
+                    <div class="content__reply-btn" @click="sendReplyComment(data.comment_id, reply.comment_id)">提交</div>
+                </div>
+            </div>
+            <div class="record__page" v-if="data.replys && data.reply_page_info.total_count - data.replys.length > 0">
+                还有<span>{{data.reply_page_info.total_count - data.replys.length}}</span>条回复 <strong @click="getSubCommentMore(data)">点击加载更多</strong>
+            </div>
         </div>
     </div>
+    <Empty v-if="comment.count == 0" />
+</div>
+<Page
+    :count="comment.count" 
+    :length="pageSize"
+    :index="pageIndex"
+    @page_switch="pageSwitch"
+/>
+
 </div>
 </template>
 
 <script>
-import Page from './page.fenye.vue';
+import {mapState} from 'vuex'
+import avatar from '../common/images/img/avatar.png';
 export default {
     data () {
         return {
+            avatar: avatar,
+
+            pageIndex: 1,
             pageSize: 5,
-            pageIndex: 2,
+
+            commentIndex: 1,
+            commentSize: 5,
+
+            comment_con: ''
         }
     },
-    props: ['data'],
-    components: {
-        Page: Page
+    computed: mapState({
+        userInfo: state => state.user.info,
+        comment: state => state.opus.comment,
+        catalog: state => state.opus.catalog.info
+        // catalog_id: state => state.opus.catalog.catalog_id,
+        // chapter_id: state => state.opus.chapter.chapter_id
+    }),
+    props: ['type'],
+    methods: {
+        // 子评论回复
+        replayCommit (_index, replayIndex){
+            this.$store.dispatch('opus_setCommentList', {
+                index: _index,
+                replayIndex: replayIndex
+            })
+        },
+        // 分页查询
+        pageSwitch (pageIndex){
+            if (this.pageIndex == pageIndex) {
+                return false;
+            }
+            this.pageIndex = pageIndex;
+            this.getCommentList();
+        },
+
+        // 获取目录评论
+        getCommentList (){
+            this.$store.dispatch('opus_getCommentList', {
+                "page": this.pageIndex, //页数,默认不传查询第一页
+                "pageSize": this.pageSize, //每页数量 默认10
+                "pagination": 1, //1表示返回页码相关信息 0 或者 不传 则不返回
+                "catalogId": this.catalog_id, //目录id,必填项
+                "type": this.type || 2, // 排序类型  1 最热(按评论数,点赞数) 2 最新(时间) 不传表示默认(按照写入的先后顺序)
+                "chapterId":  this.chapter_id, //章节id,选填,如果有则获取章节下的评论,否则获取目录的所有评论
+                "subPageSize": this.commentSize // //子评论列表首次显示数量 默认为5
+            }).then( res => {
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        // 新增评论
+        addComment (payload){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
+            this.$store.dispatch('opus_addComment', {
+                "to_comment_id": payload.to_comment_id, //一级评论id,表示针对那条评论的评论(有点绕),类似所有二级评论的父级.没有则表示当前发表的就是一级评论
+                "to_reply_comment_id": payload.to_reply_comment_id, //一级评论下的二级回复性评论id,表示针对那条二级评论做的回复('xxx回复了xxx',在列表查询时需要使用),当前发表的是一级评论不需要带此参数.
+                "comment": payload.comment, //评论
+                "catalog_id": this.catalog_id, //目录id,必填
+                "chapter_id": payload.chapter_id //章节id,没有则表示针对目录的评论
+            }).then( res => {
+                this.$eventHub.$emit('article.comment.refresh');
+                this.comment_con = '';
+                this.replayIndex = -2;
+                this.getCommentList();
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        // 评论点赞
+        addCommentPraise (e){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
+            var comment_id = $(e.currentTarget).parents('.c-artice-comment-list').attr('data-comment_id');
+            this.$store.dispatch('opus_addCommentPraise', {
+                commentId: comment_id
+            }).then( res => {
+                this.$store.dispatch('bubble_success', res);
+            }).catch(err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        // 举报
+        addReport (e){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+            
+            var comment_id;
+            if ($(e.currentTarget).parents('.record__item').length > 0) {
+                comment_id = $(e.currentTarget).parents('.record__item').data('comment_id');
+            } else {
+                comment_id = $(e.currentTarget).parents('.c-artice-comment-list').data('comment_id');
+            }
+            this.$store.dispatch('bubble_showBubble', {
+                show: true,
+                type: 'report',
+                report: {
+                    content_id: comment_id,
+                    content_type: 2
+                }
+            })
+        },
+        // 一级评论添加评论
+        sendComment (id){
+            this.addComment({
+                comment: this.comment_con,
+                to_comment_id: id
+            })
+        },
+        // 子评论添加评论
+        sendReplyComment (comment_id, reply_comment_id){
+            this.addComment({
+                comment: this.comment_con,
+                to_comment_id: comment_id,
+                to_reply_comment_id: reply_comment_id
+            })
+        },
+        // 获取子评论
+        getSubCommentMore (data){
+            this.commentIndex++;
+            this.$store.dispatch('opus_getReplyCommentList', {
+                "page": this.commentIndex, //页数,默认不传查询第一页
+                "pageSize": this.commentSize, //每页数量 默认10
+                "pagination": 1, //1表示返回页码相关信息 0 或者 不传 则不返回
+                "commentId": data.comment_id //目录id,必填项
+            }).then( res => {
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        }
+    },
+    created () {
+        this.$eventHub.$on('article.comment.addComment', payload => {
+            this.addComment(payload);
+        });
     },
     mounted () {
-        this.$on('recordSwitch', function(index){
-            
-        })
-    },
-    methods: {
-        pageSwitch (){}
+        // 获取url的参数
+        this.catalog_id = this.$url.getUrlParam('catalog_id');
+        this.chapter_id = this.$url.getUrlParam('chapter_id');
+
+        // 获取评论
+        this.getCommentList();
     }
 }
 </script>

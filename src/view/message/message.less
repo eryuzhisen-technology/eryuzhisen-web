@@ -1,0 +1,68 @@
+@module: m-message;
+
+.@{module} {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	.default_backgroud_5;
+    & &-wrap {
+    	position: relative;
+        .default_width_960;
+        .default_mar_auto;
+    }
+	& .message-header {
+		& .cpm_sub_more {
+			width: 150px;
+		}
+	}
+	& .message-content {
+		position: relative;
+		overflow: hidden;
+		min-height: 400px;
+		& .message-right {
+			width: 680px;
+			margin-left: 280px;
+			& .title {
+				width: 100%;
+				height: 50px;
+				line-height: 50px;
+				padding-left: 20px;
+				.default_font_size_2;
+				.default_color_2;
+				.default_backgroud_7;
+				& .number {
+	                .default_font_size_7;
+	    			.default_color_7;
+				}
+			}
+			& .content {
+				width: 100%;
+				height: 100%;
+			}
+		}
+	}
+}
+
+.c-menu-left .item:nth-child(1){
+	& .item__icon {
+		.skin_icon_message-1;
+	}
+	&:hover .item__icon {
+		.skin_icon_message-1_on;
+	}
+}
+.c-menu-left .item:nth-child(2){
+	& .item__icon {
+		.skin_icon_message-2;
+	}
+	&:hover .item__icon {
+		.skin_icon_message-2_on;
+	}
+}
+.c-menu-left .item:nth-child(3){
+	& .item__icon {
+		.skin_icon_message-3;
+	}
+	&:hover .item__icon {
+		.skin_icon_message-3_on;
+	}
+}

@@ -2,182 +2,200 @@
 <style lang="less">
 @import (reference) '../common/css/common';
     @module: c-artice-list;
-
-    .@{module} {
-        width: 100%;
-        padding: 0 60px;
-        .default_backgroud_3;
+    .c-artice-list {
+        width: 680px;
+        height: 100%;
         & &-wrap {
-            display: table;
             width: 100%;
-            height: 220px;
-            .default_border-b-6;
+            height: 100%;
+            min-height: 350px;
+            .default_backgroud_2;
+            .default_border-r-4;
         }
-        & .list-left,
-        & .list-right {
-            display: table-cell;
-            vertical-align: middle;
-        }
-        & .list-left {  
-            width: 660px;
-            margin-right: 60px;
-            & .top {
-                position: relative;
-                margin-bottom: 16px;
-                height: 30px;
-                & .top-img {
-                    float: left;
-                    width: 30px;
-                    height: 30px;
-                    margin-right: 10px;
-                    background-size: contain;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    .default_border-r-50;
-                    .default_backgroud_5;
-                    overflow: hidden;
-                }
-                & .top-name{ 
-                    float: left;
-                    padding-top: 7px;
-                    .default_color_3;
-                    .default_font_size_3;
-                }
-                & .top-more {
-                    position: absolute;
-                    top: 5px;
-                    right: 0;
+        & .list-more {
+            width: 100%;
+            .default_center;
+            .default_backgroud_2;
+            .default_border-r-b-4;
+            & .btn-more-before {
+                height: 60px;
+                line-height: 60px;
+                .default_color_1;
+                .default_font_size_2;
+                .default_pointer;
+            } 
+            & .btn-more-loading {
+                height: 60px;
+                line-height: 60px;
+                & em {
+                    .default_disline;
                     width: 20px;
                     height: 20px;
-                    display: none;
-                    .skin_icon_more;
-                    .default_pointer;
-                    .default_font_size_3;
-                    .default_color_2;
+                    margin-right: 10px;
+                    .default_middle;
+                    .skin_icon_load;
+                    animation: loading 1.5s linear infinite;
+                }
+                & span {
+                    .default_disline;
+                    .default_color_1;
+                    .default_font_family_bolder;
+                    .default_font_size_2;
+                    .default_middle;
+                }
+            }
+            & .btn-more-end {
+                height: 60px;
+                line-height: 60px;
+                .default_color_2;
+                .default_font_size_2;
+            }
+        }
+        & .list-pages {
+            margin-top: 30px;
+        }
+    }
+    .c-artice-item {
+        width: 100%;
+        height: 180px;
+        padding: 10px 20px 10px 10px;
+        .default_backgroud_2;
+        .default_border-b-14;
+        transition: box-shadow @default_speed_1, transform @default_speed_1;
+        & &-wrap,
+        & &-wrap-link {
+            display: block;
+            width: 100%;
+            height: 160px;
+        }
+        & .item-left,
+        & .item-right {
+            float: left;
+            height: 160px;
+        }
+        & .item-left {
+            position: relative;
+            width: 120px;
+            height: 160px;
+            overflow: hidden;
+            margin-right: 20px;
+            & .item-left__img {
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                & img {
+                    max-width: 100%;
+                }
+            }
+            & .item-left__text {
+                position: absolute;
+                right: 8px;
+                bottom: 8px;
+                width: 40px;
+                height: 20px;
+                line-height: 18px;
+                text-align: center;
+                border: 1px solid @default_backgroud_13;
+                border-radius: 10px;
+                .default_color_1;
+                .default_font_size_1;
+                .default_backgroud_3;
+            }
+        }
+        & .item-right {
+            position: relative;
+            width: 510px;
+            padding-top: 10px;
+            & .item-right__titile {
+                margin-bottom: 12px;
+                .default_color_1;
+                .default_font_size_7;
+                .default_font_family_bolder;
+                &:hover {
+                    .default_color_10;
+                }
+            }
+            & .item-right__content {
+                line-height: 1.3rem;
+                margin-bottom: 8px;
+                .default_color_2;
+                .default_font_size_2;
+            }
+            & .item-right__tags {
+                width: 100%;
+                overflow: hidden;
+                & a {
+                    float: left;
+                    margin-right: 10px;
+                    margin-bottom: 10px;
+                    .default_font_size_1;
+                    .default_color_3;  
+                    &.z-active,
                     &:hover {
                         .default_color_1;
-                    }
+                    } 
                 }
             }
-            & .content {
-                width: 660px;
-                overflow: hidden;
-                margin-bottom: 20px;
-                & .content-title {
-                    height: 24px;
-                    margin-bottom: 14px;
-                    .default_color_5;
-                    .default_font_size_4;
-                    & .tag {
-                        float: left;
-                        margin-right: 10px;
-                        .default_middle;
-                    }
-                    & .tit {
-                        .default_font_size_4;
-                        .default_color_7;
-                        .default_font_family_bolder;
-                        .default_middle;
-                    }
-                    & .new {
-                        .default_font_size_2;
-                        .default_color_7;
-                        .default_middle;
-                    }
-                }
-                & .content-text {
-                    text-overflow: ellipsis;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    .default_color_2;
-                    .default_font_size_3;
-                }
+            & .item-right__bottom {
+                position: absolute;
+                left: 0;
+                bottom: 10px;
             }
-            & .bottom {
+            & .item-right__img {
+                float: left;
+                width: 20px;
                 height: 20px;
                 overflow: hidden;
-                .default_font_size_2;
-                & .bottom-fabulous {
-                    float: left;
-                    .default_color_3;
-                    & em {
-                        width: 20px;
-                        height: 20px;
-                        margin-right: 6px;
-                        .default_disline;
-                        .default_middle;
-                        .skin_icon_zhan;
-                    }
-                    & span {
-                        .default_color_3;
-                        .default_font_size_2;
-                        .default_middle;
-                    }
-                }
-                & .bottom-comment {
-                    float: left;
-                    margin-left: 20px;
-                    margin-right: 30px;
-                    .default_color_3;
-                    & em {
-                        width: 20px;
-                        height: 20px;
-                        margin-right: 6px;
-                        .default_disline;
-                        .default_middle;
-                        .skin_icon_liu;
-                    }
-                    & span {
-                        .default_color_3;
-                        .default_font_size_2;
-                        .default_middle;
-                    }
-                }
-                & .bottom-manger-add {
-                    float: left;
-                    height: 20px;
-                    line-height: 20px;
-                    margin-right: 20px;
-                    .default_color_3;
-                    .default_font_size_2;
-                    .default_pointer;
-                }
-                & .bottom-manger-edit {
-                    float: left;
-                    height: 20px;
-                    line-height: 20px;
-                    margin-right: 20px;
-                    .default_color_3;
-                    .default_font_size_2;
-                    .default_pointer;
-                }
-                & .bottom-manger-remove {
-                    float: left;
-                    height: 20px;
-                    line-height: 20px;
-                    margin-right: 20px;
-                    .default_color_3;
-                    .default_font_size_2;
-                    .default_pointer;
+                margin-right: 8px;
+                .default_border-r-50;
+            }
+            & .item-right__name {
+                float: left;
+                height: 20px;
+                line-height: 20px;
+                margin-right: 20px;
+                .default_color_3;
+                .default_font_size_1;
+                &:hover {
+                    .default_color_1;
                 }
             }
-        }
-        & .list-right {
-            width: 120px;
-        }
-        &.z-small .list-left {
-            width: 420px;
-            & .top-img {
-                .default_backgroud_4;
-            }
-            & .top,
-            & .content {
-                width: 420px;
+            & .item-right__btn {
+                display: inline-block;
+                height: 20px;
+                line-height: 20px;
+                margin-right: 10px;
+                .default_font_size_1;
+                .default_color_2;
+                .default_middle;
+                &:hover {
+                   .default_color_1; 
+                }
             }
         }
         & a {
             text-decoration: none;
         }
+        &:hover {
+            z-index: 2;
+            transform: translate(0, -2px) translateZ(1px);
+            .default_border_shadow_4;
+        }
+    }
+    .c-artice-list.z-small .item-left {
+        & .top-img {
+            .default_backgroud_4;
+        }
+        & .top,
+        & .content {
+            // width: 420px;
+        }
+    }
+
+    // 动画
+    @keyframes loading {
+        from { transform: rotate(0); }
+        to { transform: rotate(359deg); }
     }
 </style>
 
@@ -185,63 +203,280 @@
 <template>
 <div class="c-artice-list">
 <div class="c-artice-list-wrap">
-    <div class="list-left">
-        <div class="top">
-            <div class="top-img" :style="{backgroundImage: 'url(' + data.avatar_url + ')'}"></div>
-            <div class="top-name">{{data.user.nick_name}}</div>
-            <div class="top-more" @click="subMoreSwitch">
-                <div v-show="subMoreShow" class="m-sub-more cpm_sub_more">
-                    <div class="item">删除</div>
-                    <div class="item">删除</div>
+    <div class="c-artice-item" v-for="data in article.lists">
+        <div class="c-artice-item-wrap"
+            :data-catalog_id="data.catalog_id"
+        >
+            <a :href="'./article.html?catalog_id=' + data.catalog_id" class="c-artice-item-wrap-link">
+                <div class="item-left">
+                    <div class="item-left__img">
+                        <img :src="data.catalog_cover_url" />
+                    </div>
+                    <div class="item-left__text">{{data.category_title}}</div>
                 </div>
-            </div>
-        </div>
-        <div class="content">
-            <div class="content-title">
-                <div class="tag cpm_tag_man">{{data.category_title}}</div>
-                <span class="tit">{{data.catalog_title}}</span>
-                <span v-if="data.isNew" class="new"> · new</span>
-            </div>
-            <div class="content-text">{{data.catalog_desc}}</div>
-        </div>
-        <div class="bottom">
-            <div class="bottom-fabulous"><em></em><span>{{data.praise_count}}</span></div>
-            <div class="bottom-comment"><em></em><span>{{data.comment_count}}</span></div>
-            <div v-if="data.isManger" class="bottom-manger-add">添加章节</div>
-            <div v-if="data.isManger" class="bottom-manger-edit">修改信息</div>
-            <div v-if="data.isManger" class="bottom-manger-remove" @click="remove">删除作品</div>
+                <div class="item-right">
+                    <div class="item-right__titile">{{data.catalog_title}}</div>
+                    <div class="item-right__content">{{data.catalog_desc.length > 60 ? data.catalog_desc.substr(0, 60) + '...' : data.catalog_desc}}</div>
+                    <div class="item-right__tags">
+                        <a
+                            :href="'./page.html?labelTag='+ label" 
+                            v-for="label in data.labels"
+                            :class="{'z-active': labelTag == label}" 
+                        >{{label}}</a>
+                    </div>
+                    <div class="item-right__bottom">
+                        <a v-if="resType != 'author'" class="item-right__btn" :href="'author.work.html?user_id=' + data.user.uid">
+                            <div class="item-right__img">
+                                <img :src="data.user.avatar_url || avatar" />
+                            </div>
+                            <div class="item-right__name">{{data.user.nick_name}}</div>
+                        </a>
+
+                        <div v-if="resType == 'history'" class="item-right__btn item-right__unmark" @click.prevent="delHistory(data.catalog_id)">删除记录</div>
+                        <div v-if="resType == 'mark' && data.owner != 1 && data.is_collected == 1" class="item-right__btn item-right__unmark" @click.prevent="delFavorites">取消收藏</div>
+                        <div v-if="resType == 'search' && data.owner != 1 && data.is_collected != 1" class="item-right__btn item-right__mark">加入收藏</div>
+                        <a v-if="resType == 'author' && data.owner == 1" class="item-right__btn item-right__add" :href="'./article.edit.html?catalog_id='+ data.catalog_id + '&chapter_id=-1'">添加章节</a>
+                        <div v-if="resType == 'author' && data.owner == 1" class="item-right__btn item-right__del" @click.stop.prevent="remove(data.catalog_id)">删除作品</div>
+                    </div>
+                </div>
+            </a>
         </div>
     </div>
-    <div class="list-right">
-        <img :src="data.catalog_cover_url" />
-    </div>
+    <Empty v-if="article.count <= 0" />
 </div>
+
+<div v-if="loadType == 'more' && article.count != 0" class="list-more">
+    <div v-if="article.more == 1 && !article.load" class="btn-more-before">{{user.isLogin ? '加载更多' : '登录查看更多'}}</div>
+    <div v-else-if="article.more == 1" class="btn-more-loading"><em></em><span>加载中...</span></div>
+    <div v-else class="btn-more-end"><em></em><span>没有更多</span></div>
+</div>
+
+<Page v-if="loadType != 'more'"
+    class="list-pages"
+    :count="article.count" 
+    :length="pageSize"
+    :index="pageIndex"
+    @page_switch="pageSwitch"
+/>
+
 </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import avatar from '../common/images/img/avatar.png';
 export default {
-    props: ['data'],
     data () {
         return {
-            subMoreShow: false
+            avatar: avatar,
+            labelTag: '',
+            subMoreShow: false,
+            query: '', // 模糊查询文字
+            pageIndex: 1, //页数,默认不传查询第一页
+            pageSize: 5, //每页数量 默认10
         }
     },
+    props: ['resType', 'loadType', 'userType', 'catalog_type'],
+    computed: mapState({
+        article: state => state.opus.article,
+        tag: state => state.opus.category,
+        user: state => state.user.info
+    }),
     methods: {
+        pageSwitch (pageIndex) {
+            if (this.pageIndex == pageIndex) {
+                return false;
+            }
+            this.pageIndex = pageIndex;
+            this.getList();
+        },
         subMoreSwitch () {
             this.subMoreShow = !this.subMoreShow;
         },
-        remove (event){
-            event.stopPropagation();
+        remove (catalogId){
+            var that = this;
             this.$store.dispatch('bubble_showBubble', {
                 show: true,
                 type: 'warn',
                 warn: {
                     title: '确定要删除?',
-                    content: '删除后将无法恢复，请谨慎处理'
+                    content: '删除后将无法恢复，请谨慎处理',
+                    comfireFn: function(){
+                        that.delCatalog(catalogId);
+                    }
                 },
             })
+        },
+        getCatalogList (type){
+            // 未登录处理
+            /*if (!this.user.isLogin && this.resType != 'index') {
+                console.log('----error----on login, getCatalogList');
+                return false;
+            }*/
+            this.$store.dispatch('opus_getCatalogList', {
+                "type": type || this.loadType || '',
+                "params": {
+                    "pagination": "1",
+                    "page": this.pageIndex, //页数,默认不传查询第一页
+                    "pageSize": this.pageSize //每页数量 默认10
+                },
+                "body": {
+                    "label": this.resType == 'page' ? this.labelTag : '', //标签，
+                    "catalog_type": this.catalog_type, // 0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
+                    "user_id": this.userType == 'user_id' ? this.user_id : '',
+                    "fuzzy_query": this.query || '' // 模糊查询文字
+                }
+            }).then( res => {
+                this.$emit('article_count', this.article.count);
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        getMyCatalogList (){
+            // 未登录处理
+            if (!this.user.isLogin && this.resType != 'index') {
+                console.log('----error----on login, getCatalogList');
+                return false;
+            }
+            this.$store.dispatch('opus_getMyCatalogList', {
+                "pagination": "1",
+                "page": this.pageIndex, //页数,默认不传查询第一页
+                "pageSize": this.pageSize //每页数量 默认10
+            }).then( res => {
+                this.$emit('article_count', this.article.count);
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        getFavoritesList (){
+            this.$store.dispatch('opus_getFavoritesList', {
+                "pagination": "1",
+                "page": this.pageIndex, //页数,默认不传查询第一页
+                "pageSize": this.pageSize //每页数量 默认10
+            }).then( res => {
+                // todo
+                
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        getMore (){
+            this.pageIndex++;
+            this.getList();
+        },
+        getList (){
+            if (this.resType == 'mark') {
+                this.getFavoritesList();
+            } else if (this.resType == 'history') {
+                // 从缓存中获取
+                var cache_history = this.$version.history;
+                var history = this.$cache.getStore(cache_history.key, cache_history.version);
+                var lists = history.slice((this.pageIndex-1)*this.pageSize, this.pageSize*this.pageIndex);
+                this.$store.dispatch('opus_setArticle', {
+                    lists: lists,
+                    count: history.length
+                }).then( res => {
+                    this.$emit('article_count', this.article.count);
+                })
+            } else if (this.user.uid && this.user.uid == this.user_id) {
+                this.getMyCatalogList();
+            } else {
+                this.getCatalogList();
+            }
+        },
+        delFavorites (e){
+            var catalogId = $(e.currentTarget).parents('.c-artice-item-wrap').data('catalog_id');
+            this.$store.dispatch('opus_delFavorites', {
+                catalogId: catalogId
+            }).then( res => {
+                this.getList();
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        delCatalog (catalogId){
+            this.$store.dispatch('opus_delCatalog', {
+                "catalogId": catalogId
+            }).then( res => {
+               this.getCatalogList();
+
+               this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            });
+        },
+        delHistory (catalog_id){
+            var cache_history = this.$version.history;
+            var lists = this.$cache.getStore(cache_history.key, cache_history.version);
+            for(var i = 0, len = lists.length; i < len; i++) {
+                if (lists[i].catalog_id == catalog_id) {
+                    lists.splice(i, 1);
+                    break;
+                }
+            }
+            this.$cache.setStore(cache_history.key, lists, cache_history.version, cache_history.time);
+            this.getList();
         }
+    },
+    created (){
+        this.$eventHub.$on('header_serach', option => {
+            if (this.query == option.query) {
+                return false;
+            }
+            this.query = option.query;
+            this.getList();
+        });
+
+        this.$eventHub.$on('author_chapter_list_refresh', option => {
+            this.getList();
+        })
+    }, 
+    mounted (){
+        // 加载更多
+        $(window).on('scroll', e => {
+            if ($('.btn-more-before').length <= 0) {
+                return false;
+            }
+            var top = $(window).scrollTop();
+            var height = $(window).height();
+            var _top = $('.btn-more-before').offset().top;
+            if (_top + 20 <= top + height) {
+                this.getMore();    
+            }
+        })
+
+        // 获取url的参数
+        this.query = decodeURIComponent(this.$url.getUrlParam('query'));
+        this.user_id = this.$url.getUrlParam('user_id');
+        this.labelTag = this.$url.getUrlParam('labelTag');
+
+        // watch tags change
+        this.$watch('tag.index', function(newVal, oldVal){
+            this.pageIndex = 1;
+            this.getCatalogList('page');
+        })
+
+        // 获取文章列表
+        if (!this.labelTag && this.resType == 'page') {
+            this.$store.dispatch('bubble_showBubble', {
+                show: true,
+                type: 'top',
+                top: {
+                    status: 'z-warn',
+                    msg: '系统繁忙'
+                }
+            })
+            return false;
+        }
+
+        this.getList();    
     }
 }
 </script>

@@ -5,6 +5,11 @@ var utils = require('./utils')
 var config = require('../config')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
 var vueLoaderConfig = require('./vue-loader.conf')
+
+var os = require('os'); 
+var HappyPack = require('happypack');
+var happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
+
 var sourceObj = getSource();
 
 function resolve(dir) {
@@ -12,29 +17,23 @@ function resolve(dir) {
 }
 
 // 获取源文件
-function getSource(){
+function getSource() {
     var source = {
         htmlFiles: [],
         entry: {}
     };
 
-    var entry = {};
-    var pageSource = glob.sync(resolve('/src/view/**/*.html'));
+    var pageSource = glob.sync(resolve('/src/common/html/index.html'))[0];
     var jsSource = glob.sync(resolve('/src/view/**/*.js'));
 
     jsSource.forEach(function(item) {
-        entry[path.basename(item, '.js')] = item;
-    });
-
-    pageSource.forEach(function(page) {
-        var jsChunkName = path.basename(page, '.html');
+        var name = path.basename(item, '.js');
         source.htmlFiles.push({
-            filename: 'html/' + path.basename(page),
-            pageSource: page,
-            jsChunkName: jsChunkName
+            filename: 'html/' + name + '.html',
+            pageSource: pageSource,
+            jsChunkName: name
         });
-
-        source.entry[jsChunkName] = entry[jsChunkName];
+        source.entry[name] = item;
     });
     return source;
 }
@@ -58,8 +57,9 @@ module.exports = {
             }, 
             {
                 test: /\.js$/,
-                loader: 'babel-loader',
-                include: [resolve('src')]
+                // loader: 'babel-loader',
+                loader: 'happypack/loader?id=happybabel',
+                include: [resolve('src/component'), resolve('src/server'), resolve('src/view')]
             }, 
             {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
@@ -82,27 +82,15 @@ module.exports = {
     plugins: [
         // 提前加载模块并全局
         new webpack.ProvidePlugin({
-            $: 'webpack-zepto'
+            $: 'jquery'
         }),
-        // split vendor js into its own file
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            minChunks: function(module, count) {
-                // any required modules inside node_modules are extracted to vendor
-                return (
-                    module.resource &&
-                    /\.js$/.test(module.resource) &&
-                    module.resource.indexOf(
-                        path.join(__dirname, '../node_modules')
-                    ) === 0
-                )
-            }
-        }),
-        // extract webpack runtime and module manifest to its own file in order to
-        // prevent vendor hash from being updated whenever app bundle is updated
-        new webpack.optimize.CommonsChunkPlugin({
-            name: 'manifest',
-            chunks: ['vendor']
+
+        new HappyPack({
+            id: 'happybabel',
+            loaders: ['babel-loader?cacheDirectory=true'],
+            threadPool: happyThreadPool,
+            cache: true,
+            verbose: true
         })
     ]
 }

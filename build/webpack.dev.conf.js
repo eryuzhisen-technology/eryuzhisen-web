@@ -6,6 +6,10 @@ var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
 var HtmlWebpackPlugin = require('html-webpack-plugin')
+var BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+var ChunkManifestPlugin = require('webpack-manifest-plugin')
+var WebpackChunkHash = require("webpack-chunk-hash")
+var InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin")
 
 Object.keys(baseWebpackConfig.entry).forEach(function(name) {
     baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
@@ -21,7 +25,8 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat(function() {
                 filename: htmlFile.filename,
                 inject: 'body',
                 showErrors: true,
-                chunks: [htmlFile.jsChunkName, 'vendor', 'manifest']
+                chunks: [htmlFile.jsChunkName, 'vendor-modules', 'vendor-business'],
+                // chunks: [htmlFile.jsChunkName, 'vendor']
             })
         );
     });
@@ -40,6 +45,9 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
 ]);
 delete baseWebpackConfig.htmlFiles;
 
+// 分析依赖
+// baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([new BundleAnalyzerPlugin()]);
+
 module.exports = merge(baseWebpackConfig, {
     output: {
         path: path.join(__dirname, '../dist'),
@@ -50,7 +58,64 @@ module.exports = merge(baseWebpackConfig, {
         // css-loader
         rules: utils.styleLoaders({
             sourceMap: config.dev.cssSourceMap
-        })
+        }),
+        noParse: /jquery|lodash/
     },
-    devtool: '#cheap-module-eval-source-map'
+    devtool: '#cheap-source-map',
+    plugins: [
+        // split vendor js into its own file
+        /*new webpack.optimize.CommonsChunkPlugin({
+            name: ['vendor-business'],
+            minChunks: function(module, count) {
+                // any required modules inside node_modules are extracted to vendor
+                return (
+                    module.resource &&
+                    /\.js|\.vue$/.test(module.resource) &&
+                    (
+                        module.resource.indexOf(
+                            path.join(__dirname, '../node_modules')
+                        ) === 0 ||
+                        module.resource.indexOf(
+                            path.join(__dirname, '../src/component')
+                        ) === 0 || 
+                        module.resource.indexOf(
+                            path.join(__dirname, '../src/lib')
+                        ) === 0 ||
+                        module.resource.indexOf(
+                            path.join(__dirname, '../src/server')
+                        ) === 0
+                    )
+                )
+            }
+        }),
+        // split vendor js into its own file
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ['vendor-modules'],
+            minChunks: function(module, count) {
+                // any required modules inside node_modules are extracted to vendor
+                return (
+                    module.resource &&
+                    /\.js$/.test(module.resource) &&
+                    module.resource.indexOf(
+                        path.join(__dirname, '../node_modules')
+                    ) === 0
+                )
+            }
+        }),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: ["vendor", "manifest"], // vendor libs + extracted manifest
+            minChunks: Infinity,
+        }),
+        new webpack.HashedModuleIdsPlugin(),
+        new WebpackChunkHash(),
+        // extract webpack runtime and module manifest to its own file in order to
+        // prevent vendor hash from being updated whenever app bundle is updated
+        new ChunkManifestPlugin({
+            filename: "chunk-manifest.json",
+            manifestVariable: "webpackManifest"
+        }),
+        new InlineManifestWebpackPlugin({
+            name: 'webpackManifest'
+        })*/
+    ]
 })

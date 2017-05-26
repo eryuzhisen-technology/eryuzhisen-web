@@ -1,61 +1,75 @@
 <style lang="less">
 @import (reference) '../common/css/common';
-@module: c-menu-left;
-.@{module} {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 220px;
-    & .item {
-        position: relative;
-        width: 100%;
-        height: 60px;
-    }
-    & .item__title {
-        display: block;
-        width: 100%;
-        height: 60px;
-        line-height: 60px;
-        .default_center;
-        .default_font_size_3;
-        .default_color_3;
-        .default_pointer;
-        text-decoration: none;
-        &:hover {
-            .default_color_1;
+    @module: c-menu-left;
+    .@{module} {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 260px;
+        & .item {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            overflow: hidden;
+            & a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                padding-left: 20px;
+            }
+            & .item__icon {
+                float: left;
+                display: block;
+                width: 20px;
+                height: 50px;
+                margin-right: 12px;
+            }
+            & .item__title {
+                float: left;
+                display: block;
+                height: 50px;
+                line-height: 50px;
+                .default_font_size_2;
+                .default_color_1;
+                .default_pointer;
+                text-decoration: none;
+                &:hover {
+                    .default_color_1;
+                }
+            }
+            &.z-on {
+                .default_backgroud_6;
+            }
+            &:hover .item__title,
+            &.z-on .item__title {
+                .default_color_1;
+            }
+        }
+        &.z-left .item__title {
+            padding-left: 40px;
+            text-align: left;
+        }
+        &.z-tip .item__tip {
+            display: block;
         }
     }
-    & .item__title.z-on {
-        .default_backgroud_7;
-        .default_color_1;
-        .default_font_family_bolder;
-    }
-    &.z-left .item__title {
-        padding-left: 40px;
-        text-align: left;
-    }
-    &.z-tip .item__tip {
-        display: block;
-    }
-}
 </style>
 <template>
     <div class="c-menu-left">
-        <div class="item" v-for="(item, index) in data">
-            <a v-if="item.url" class="item__title" :class="{'z-on': index == type}" :data-type="index" :href="item.url">{{item.title}}{{item.number ? '·' + item.number : ''}}</a>
-            <span v-else class="item__title" :class="{'z-on': index == type}" :data-type="index" href="#none">{{item.title}}{{item.number ? '·' + item.number : ''}}</span>
-        </div>
+        <div 
+            class="item" 
+            v-for="item in data"
+            :class="{'z-on': item.isActive}"
+        ><a :href="item.url || 'javascript:void(0);'">
+            <span class="item__icon"></span>
+            <span class="item__title">{{item.title}}{{item.number ? '·' + item.number : ''}}</span>
+        </a></div>
     </div>
 </template>
 
 <script>
 export default {
-    data () {
-        return {
-            
-        }
-    },
-    props: ['data', 'type'],
+    props: ['data'],
 }
 </script>
 

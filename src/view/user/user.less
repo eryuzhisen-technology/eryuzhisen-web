@@ -1,161 +1,169 @@
 /**
  * user-公共样式
  */
-@dialog: m-user-dialog;
 .m-user {
 	width: 100%;
 	height: 100%;
 	min-height: 720px;
+	min-width: 960px;
 	position: relative;
-	.user_background_1;
-	& .m-user-wrap {
-		height: 100%;
-		position: relative;
-		margin: 0 auto;
-		.default_width_960;
-	}
-	
+	.user_background_3;
 }
-.@{dialog} {
+.m-user-logo {
 	position: absolute;
-	right: 0;
 	top: 50%;
-	width: 450px;
+	left: 80px;
+	width: 280px;
+	height: 250px;
 	transform: translate(0, -50%);
+
+	background-image: url('../../common/images/img/logo.png');
+	background-position: top left;
+	background-repeat: no-repeat;
 }
-.@{dialog}__tit {
+.m-user-dialog {
+	position: absolute;
+	right: 120px;
+	top: 50%;
+	width: 360px;
+	transform: translate(0, -50%);
+	.default_border_shadow_5;
+	.default_border-r-4;
+	& a {
+		text-decoration: none;
+	}
+}
+.m-user-dialog__tit {
 	width: 100%;
-	height: 60px;
+	height: 50px;
+	line-height: 50px;
 	padding-left: 30px;
-	line-height: 60px;
-	.default_border-b-5;
 	.default_color_3;
-	.default_font_size_3;
-	.default_backgroud_5;
-	.default_border-r-t-4;
+	.default_font_size_2;
+	.default_backgroud_4;
+	.default_border-r-t-4
 }
-.@{dialog}__con {
-	width: 450px;
-	padding: 50px 60px;
-	.default_center;
-	.default_backgroud_3;
-	.default_border-r-b-4;
+.m-user-dialog__con {
+	width: 360px;
+	padding: 25px 30px;
+	.default_backgroud_2;
+	.default_border-r-b-4
 }
-.@{dialog}__item {
+.m-user-dialog__item {
 	position: relative;
 	width: 100%;
-	min-height: 22px;
-	margin-bottom: 20px;
+	min-height: 20px;
+	margin-bottom: 15px;
 	&:last-child {
 		margin-bottom: 0;
 	}
 	&.z-60 {
-		height: 60px;
+		height: 50px;
 	}
 }
-.@{dialog}__tip {
-	position: absolute;
-	left: 0;
-	top: 0;
-	z-index: 2;
-	transform: translate(-115%, 0);
-	& .tip-arrow {
-		position: absolute;
-        top: 50%;
-        right: -8px;
-        margin-top: -8px;
-        display: inline-block;
-        border: 9px solid;
-        border-color: transparent rgba(0,0,0,0.8) rgba(0,0,0,0.8) transparent;
-        transform: rotate(-45deg);
-	}
-	& .tip-text {
-		padding: 0 20px;
-		height: 60px;
-		line-height: 60px;
-		background-color: rgba(0,0,0,0.8);
-		.default_color_7;
-		.default_border-r-4;
-	} 
-}
-.@{dialog}__input {
+.m-user-dialog__input {
 	position: relative;
-	padding: 20px 30px;
 	& img {
 		position: absolute;
-		top: 10px;
+		top: 5px;
 		right: 5px;
 		width: 110px;
 		height: 40px;
 		.default_pointer;
 	}
 }
-.@{dialog}__select {
+.m-user-dialog__select {
 	.default_float_l;
 	.default_color_3;
 	.default_font_size_1;
 	.default_pointer;
 	& .select-icon {
 		.default_disline;
-		width: 22px;
-		height: 22px;
+		width: 20px;
+		height: 20px;
 		margin-right: 10px;
 		overflow: hidden;
-		.default_select_bg_01;
+		.default_border-5;
+		.default_backgroud_4;
 		.default_border-r-4;
 		.default_middle;
 		&.on{
-			.default_select_bg_01_on;
+			.default_select_bg_01;
 		}
 	}
 }
 
-.@{dialog}__btn {
+.m-user-dialog__btn {
 	width: 100%;
-	height: 60px;
-	line-height: 60px;
-	&.z-bolder {
-		.default_font_family_bolder;
-	}
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+	.default_backgroud_6;
+	.default_pointer;
+}
+
+.m-user-dialog__text {
+	text-align: center;
 }
 
 // 找回
-.@{dialog}__back {
-	height: 22px;
-	line-height: 22px;
+.m-user-dialog__back {
+	height: 20px;
+	line-height: 20px;
 	.default_float_r;
 	.default_font_size_1;
 	.default_color_3;
 	clear: right;
+	&:hover {
+		.default_color_2;
+	}
 }
 
 // 声明
-.@{dialog}__agree {
+.m-user-dialog__agree {
+	margin-bottom: 20px;
 	.default_font_size_1;
 	.default_color_3;
 	& a {
-		.default_color_1;
+		.default_color_2;
+		&:hover {
+			.default_color_1;
+		}
 	}
 }
 
 // 注册
-.@{dialog}__register {
-	.default_font_size_3;
+.m-user-dialog__register {
+	.default_font_size_2;
+	.default_color_2;
+	&:hover {
+		.default_color_1;
+	}
+}
+.m-user-dialog__btn-register {
 	.default_color_1;
-	.default_font_family_bolder;
 }
 
 // 登录
-.@{dialog}__login {
-	.default_font_size_3;
-	.default_color_1;
-	.default_font_family_bolder;
+.m-user-dialog__login {
+	.default_font_size_2;
+	.default_color_2;
+	&:hover {
+		.default_color_1;
+	}
 }
 
 // 验证码
-.@{dialog}__input-phone {
-	width: 160px;
+.m-user-dialog__input-phone {
+	width: 145px;
 }
-.@{dialog}__btn-phone {
-	width: 160px;
+.m-user-dialog__btn-phone {
+	width: 145px;
+	.default_color_7;
+	.default_font_size_2;
+	.default_border-r-4;
+}
+
+.app-body {
+	padding-top: 0;
 }

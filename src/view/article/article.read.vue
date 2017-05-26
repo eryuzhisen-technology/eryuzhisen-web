@@ -1,387 +1,477 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (less) '../../common/css/common.less';
-@module: m-artice-read;
-
-.@{module} {
-    position: relative;
-    padding-top: 20px;
-    padding-bottom: 40px;
-    .default_backgroud_5;
-    & &-wrap {
-        .default_width_960;
-        .default_mar_auto;    
-    }
-}
-.@{module}__content {
-    width: 720px;
-    min-height: 500px;
-    margin-bottom: 30px;
-    & .content__header {
-        width: 100%;
-        height: 60px;
-        line-height: 60px;
-        padding-left: 40px;
-        .default_border-b-5;
-        .default_backgroud_2;
-        & h1,
-        & p {
-            float: left;
-            height: 60px;
-            line-height: 60px;
-        }
-        & h1 {
-            .default_font_size_4;
-            .default_color_7;
-            .default_font_family_bolder;
-        }
-        & p {
-            margin-top: 2px;
-            .default_font_size_3;
-            .default_color_7;
-        }
-    }
-    & .content__read{
+    @module: m-artice-read;
+    .@{module} {
+        position: relative;
         padding-top: 40px;
-        .default_backgroud_3;
-    }
-    & .content__read-text {
-        padding: 0 60px;
-        & p {
-            width: 100%;
-            line-height: 1.75rem;
-            text-indent: 2rem;
-            margin-bottom: 30px;
-            .default_font_size_3;
-            .default_color_2;
+        padding-bottom: 60px;
+        .default_backgroud_5;
+        & &-wrap {
+            position: relative;
+            padding-left: 280px;
+            .default_width_960;
+            .default_mar_auto;    
         }
-        & img {
-            width: 100%;
-            margin-bottom: 30px;
+        &.z-scan &-wrap {
+            padding-left: 0;
+        }
+        &.z-scan .m-artice-read__content {
+            .default_mar_auto;
         }
     }
-    & .content__read-over {
-        margin-right: 50px;
-        margin-top: 40px;
-        margin-bottom: 60px;
-        text-align: right;
-        .default_font_size_3;
-        .default_color_3;
-    }
-    & .content__read-switch {
-        overflow: hidden;
-        height: 80px;
-        padding: 20px 0;
-        .default_border-t-4;
-        .default_border-b-4;
-        & .switch-item {
-            width: 50%;
-            float: left;
-            height: 40px;
-            line-height: 40px;
-            .default_color_2;
-            .default_font_size_4;
-            .default_center;
-            & a {
-                display: block;
-                width: 100%;
-                height: 100%;
+    .@{module}__intro {
+        position: absolute;
+        top: 0; 
+        left: 0;
+        width: 260px;
+        & .intro__text {
+            width: 260px;
+            height: 140px;
+            padding: 10px;
+            margin-bottom: 20px;
+            .default_backgroud_2;
+            .default_border-r-4;
+            & .intro__text-left {
+                float: left;
+                width: 90px;
+                height: 120px;
+                overflow: hidden;
+                margin-right: 10px;
+                & img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            & .intro__text-right {
+                position: relative;
+                float: left;
+                width: 140px;
+                height: 120px;
+                padding-top: 5px;
+            }
+            & .intro__text-title {
+                line-height: 1.5rem;
+                margin-bottom: 10px;
+                .default_color_1;
+                .default_font_size_7;
+                .default_font_bolder;
+            }
+            & .intro__text-number {
+                height: 12px;
+                overflow: hidden;
+                & .text-number-item {
+                    float: left;
+                    height: 12px;
+                    & span {
+                        float: left;
+                        display: block;
+                        width: 12px;
+                        height: 12px;
+                        margin-right: 4px;
+                    }
+                    & strong {
+                        float: left;
+                        display: block;
+                        height: 12px;
+                        line-height: 12px;
+                        .default_color_1;
+                        .default_font_size_1;
+                    }
+                }
+                & .text-number-zan {
+                    margin-right: 10px;
+                    & span {
+                        .skin_icon_article-5;
+                    }
+                }
+                & .text-number-comment {
+                    & span {
+                        .skin_icon_article-6;   
+                    }
+                }
+            }
+            & .intro__text-btn {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 70px;
+                height: 30px;
+                line-height: 30px;
+                text-align: center;
                 .default_color_2;
-                .default_font_size_4;
-                .default_center;
-                text-decoration: none;
+                .default_font_size_1;
+                .default_border-r-4;
+                .default_backgroud_3;
+                .default_pointer;
+                &:hover {
+                    .default_color_1;
+                }
             }
         }
-        & .switch-left {
-            .default_border-r-4;
+        & .intro__menu {
+            width: 260px;
+            height: 400px;
+            overflow-y: auto;
+            & .menu-item {
+                position: relative;
+                width: 100%;
+                height: 50px;
+                .default_backgroud_4;
+                & a {
+                    display: block;
+                    width: 100%;
+                    height: 50px;
+                    line-height: 50px;
+                    padding: 0 20px;
+                    text-decoration: none;
+                    text-overflow: ellipsis; 
+                    overflow: hidden; 
+                    white-space: nowrap; 
+                    .default_font_size_1;
+                    .default_color_3;
+                    &:hover {
+                        .default_color_1;
+                    }
+                }
+                &.z-on {
+                    .default_backgroud_6;
+                    .default_color_1;
+                    .default_font_size_2;
+                }
+            }
         }
     }
-    & .content__read-author {
-        height: 80px;
-        padding-top: 25px;
-        .default_center;
-        & .author-img {
-            width: 30px;
-            height: 30px;
-            margin-right: 10px;
-            vertical-align: middle;
-            .default_disline;
-            .default_border-r-50;
-            .default_backgroud_5;
-        }
-        & .author-name {
-            height: 30px;
-            line-height: 30px;
-            vertical-align: middle;
-            .default_disline;
-            .default_color_3;
-            .default_font_size_2;
-        }
-    }
-}
-.@{module}__menu {
-    position: fixed;
-    top: 170px; 
-    left: 0;
-    width: 220px;
-    height: 540px;
-    .default_backgroud_4;
-    & .menu__header {
-        width: 220px;
-        height: 60px;
-        line-height: 60px;
-        padding-left: 20px;
-        .default_font_size_3;
-        .default_color_3;
-        .default_border-b-5;
-        .default_backgroud_2;
-    }
-    & .menu__content {
-        height: 480px;
-        overflow-y: auto;
-    }
-    & .menu__content-item {
-        position: relative;
-        width: 100%;
-        height: 60px;
-        .default_backgroud_4;
-        & a {
-            display: block;
+    .@{module}__content {
+        width: 680px;
+        margin-bottom: 40px;
+        .default_border-r-4;
+        & .content__header {
             width: 100%;
-            height: 60px;
-            line-height: 60px;
-            .default_center;
-            .default_font_size_3;
-            .default_color_2;
-            text-decoration: none;
-            &:hover {
+            height: 50px;
+            line-height: 50px;
+            padding-left: 30px;
+            .default_backgroud_7;
+            & h1,
+            & p {
+                float: left;
+                height: 50px;
+                line-height: 50px;
+                .default_font_size_2;
+                .default_color_2;
+            }
+            & h1 {
+                margin-left: 5px;
                 .default_color_1;
             }
         }
-        &.z-on {
-            .default_backgroud_8;
-            .default_color_1;
-            .default_border_shadow_1;
+        & .content__read{
+            .default_backgroud_2;
+            & .content__read-text {
+                padding: 40px 30px;
+                & p {
+                    width: 100%;
+                    line-height: 1.75rem;
+                    margin-bottom: 20px;
+                    .default_font_size_3;
+                    .default_color_2;
+                }
+                & img {
+                    max-width: 100%;
+                    width: auto;
+                    margin-bottom: 10px;
+                }
+            }
+            & .content__read-switch {
+                overflow: hidden;
+                height: 70px;
+                padding: 20px 0;
+                .default_border-t-14;
+                .default_border-b-14;
+                .default_center;
+                & .switch-item {
+                    .default_disline;
+                    width: 49%;
+                    & a {
+                        display: block;
+                        width: 100%;
+                        height: 30px;
+                        line-height: 30px;
+                        text-decoration: none;
+                        .default_color_2;
+                        .default_font_size_7;
+                        .default_center;
+                        &:hover {
+                            .default_color_1;
+                        }
+                    }
+                    & .switch-item {
+                        .default_border-rr-4;
+                    }
+                }
+            }
+            & .content__read-author {
+                height: 70px;
+                padding-top: 20px;
+                .default_center;
+                & .author-img {
+                    width: 30px;
+                    height: 30px;
+                    overflow: hidden;
+                    margin-right: 10px;
+                    vertical-align: middle;
+                    .default_disline;
+                    .default_border-r-50;
+                    .default_backgroud_5;
+                }
+                & .author-name {
+                    height: 30px;
+                    line-height: 30px;
+                    vertical-align: middle;
+                    .default_disline;
+                    .default_color_2;
+                    .default_font_size_2;
+                }
+            }
         }
     }
-}
-.@{module}__comment {
-    width: 720px;
-    margin-bottom: 30px;
-    .default_backgroud_3;
-    & .comment-header {
+    .@{module}__comment {
         width: 100%;
-        height: 60px;
-        line-height: 60px;
-        padding-left: 30px;
-        .default_border-b-5;
-        .default_backgroud_2;
-        .default_font_size_3;
-        .default_color_3;
-        & span {
-            margin-top: 2px;
-            .default_font_size_3;
-            .default_color_7;
+        margin-bottom: 30px;
+        & .comment-header {
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            padding-left: 20px;
+            .default_font_size_2;
+            .default_color_2;
+            .default_backgroud_7;
+            & span {
+                .default_font_family_bolder;
+                .default_font_size_7;
+                .default_color_7;
+            }
         }
     }
-    & .comment-content {
-        padding: 0 60px;
-    }
-}
-.@{module}__speak {
-    width: 720px;
-    margin-top: 60px;
-    & .speak-header {
-        width: 100%;
-        height: 60px;
-        line-height: 60px;
-        padding-left: 30px;
-        .default_border-b-5;
-        .default_backgroud_2;
-        .default_font_size_3; 
-        .default_color_3;
-        & span {
-            margin-top: 2px;
-            .default_font_size_1;
-        }
-    }
-    & .speak-form {
-        height: 220px;
-        width: 100&;
-        padding: 30px 50px;
-        .default_backgroud_4;
-    }
-    & .speak-form-top {
-        overflow: hidden;
-        margin-bottom: 20px;
-    }
-    & .speak-form-item {
-        float: left;
-    }
-    & .speak-form-input {
-        display: none;
-        padding: 11px 20px;
-        width: 300px;
-        height: 40px;
-        margin-right: 20px;
-    }
-    & .speak-form-textarea {
-        padding: 12px 20px;
-        width: 300px;
-        height: 100px;
-        margin-right: 24px;
-    }
-    & .speak-form-icon {
-        padding-top: 10px;
-        height: 40px;
-        margin-right: 12px;
-        .default_font_size_2;
-        & span,
-        & em {
-            .default_disline;
-            vertical-align: middle;
-        }
-        & em {
-            width: 20px;
-            height: 20px;
-        }
-    }
-    & .speak-form-fabulous {
-        & em {
-            .skin_icon_fabulous;
-        }
-        & span {
-            .default_color_7;
-        }
-    }
-    & .speak-form-mark {
-        & em {
-            .skin_icon_mark;
-        }
-        & span {
-            .default_color_9;
-        }
-    }
-    & .speak-form-comment {
-        & em {
-            .skin_icon_comment;
-        }
-        & span {
-            .default_color_3;
-        }
-    }
-    & .speak-form-share {
-        float: right;
-    }
-    &.z-small {
-        position: fixed;
-        bottom: 0;
-        left: 0;
+    .@{module}__speak {
+        width: 680px;
         & .speak-header {
-            display: none;
-        }
-    }
-    &.z-hide{
-        & .speak-header {
-            display: none;
+            width: 100%;
+            height: 50px;
+            line-height: 50px;
+            padding-left: 20px;
+            .default_backgroud_7;
+            .default_font_size_2; 
+            .default_color_2;
         }
         & .speak-form {
-            padding: 10px 50px;
-            height: 60px;
-            overflow: hidden;
-            .default_border-t-5;
+            padding: 30px;
+            height: 160px;
+            width: 100&;
+            .default_backgroud_6;
+            & .speak-form-left,
+            & .speak-form-right {
+                position: relative;
+                float: left;
+            }
+            & .speak-form-left {
+                width: 450px;
+                margin-right: 20px;
+                .default_backgroud_4;
+                & input, 
+                & textarea {
+                    .default_color_4;
+                    .default_font_size_2;
+                }
+            }
+            & .speak-form-right {
+                width: 150px;
+                height: 100px;
+            }
+            & .speak-form-input {
+                display: none;
+                padding: 11px 20px;
+                height: 40px;
+            }
+            & .speak-form-textarea {
+                padding: 20px;
+                height: 100px;
+            }
+            & .speak-form-icon {
+                float: left;
+                height: 40px;
+                .default_font_size_1;
+                .default_color_3;
+                .default_pointer;
+                & span,
+                & em {
+                    .default_disline;
+                    vertical-align: middle;
+                }
+                & em {
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+            & .speak-form-fabulous {
+                margin-right: 15px;
+                & em {
+                    .skin_icon_read-3;
+                    &:hover {
+                        .skin_icon_read-3_on;
+                    }
+                }
+            }
+            & .speak-form-comment {
+                & em {
+                    .skin_icon_read-2;
+                    &:hover {
+                        .skin_icon_read-2_on;
+                    }
+                }
+            }
+            & .speak-form-share {
+                float: right;
+                width: 16px;
+                height: 16px;
+                .skin_icon_read-1;
+                &:hover {
+                    .skin_icon_read-1_on;
+                }
+            }
+            & .speak-form-btn {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 70px;
+                height: 40px;
+                line-height: 40px;
+                text-align: center;
+                .default_color_2;
+                .default_font_size_2;
+                .default_border-r-4;
+                .default_backgroud_2;
+                .default_pointer;
+                &:hover {
+                    .default_color_1;
+                }
+            }
         }
-        & .speak-form-textarea {
-            display: none;
+        
+        &.z-small {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            & .speak-header {
+                display: none;
+            }
         }
-        & .speak-form-input {
-            display: block;
+        &.z-hide{
+            & .speak-header {
+                display: none;
+            }
+            & .speak-form {
+                height: 60px;
+                overflow: hidden;
+                padding: 10px 30px;
+            }
+            & .speak-form-textarea {
+                display: none;
+            }
+            & .speak-form-input {
+                display: block;
+            }
+            & .speak-form-icon {
+                margin-top: 14px;
+            }
+            & .speak-form-share {
+                margin-top: 12px;
+            }
         }
     }
-}
 </style>
 
 <!-- html代码 -->
 <template>
 <div>
-    <HeaderDom :data="header" />
-    <div class="m-artice-read">
+    <HeaderDom />
+    <div class="m-artice-read" :class="{'z-scan': isScan}">
     <div class="m-artice-read-wrap">
+        <div v-if="!isScan" class="m-artice-read__intro">
+            <div class="intro__text">
+                <div class="intro__text-left">
+                    <img :src="catalog.info.catalog_cover_url" />
+                </div>
+                <div class="intro__text-right">
+                    <div class='intro__text-title'>{{catalog.info.catalog_title}}</div>
+                    <div class='intro__text-number'>
+                        <div class="text-number-item text-number-zan">
+                            <span></span>
+                            <strong>{{catalog.info.praise_count}}</strong>
+                        </div>
+                        <div class="text-number-item text-number-comment">
+                            <span></span>
+                            <strong>{{catalog.info.comment_count}}</strong>
+                        </div>
+                        <div class="cpm_clear"></div>
+                    </div>
+                    <div class="cpm_clear"></div>
+                    <div v-if="catalog.info.owner != 1 && catalog.info.is_collected != 1" class='intro__text-btn' @click="mark(catalog.info.catalog_id)">加入收藏</div>
+                    <div v-if="catalog.info.owner != 1 && catalog.info.is_collected == 1" class='intro__text-btn' @click="mark(catalog.info.catalog_id)">取消收藏</div>
+                </div>
+            </div>
+            <div class='intro__menu'>
+                <div v-for="(item, index) in chapter.lists" class="menu-item" :class="{'z-on': chapter_id == item.chapter_id}"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.lists[index].chapter_id">{{item.chapter_title}}</a></div>
+            </div>
+        </div>
         <div class="m-artice-read__content">
             <div class="content__header">
-                <h1>黑暗小巷的尽头</h1>
-                <!-- <p>·杀戮的漩涡</p> -->
+                <h1>{{ isScan ?　chapter_bat.chapter_title : chapter.info.chapter_title}}</h1>
             </div>
             <div class="content__read">
-                <div class="content__read-text">
-                    <p>传说中，天狗长着红色的脸和长长的鼻子，身材高大、穿着修验僧服和高齿木屐，手持团扇、宝槌，身后长着翅膀能够在天上飞翔。通常隐居深山，是力量型的妖怪。</p>
-                    <p>有关天狗最早的文献记录见于《日本书纪》，舒明天皇九年2月（公元637年）有火流星挟怪声破空而来，自唐朝留学而归的僧人旻见状说道：“非流星，是天狗也，其吠声，似雷也”。</p>
-                    <img src="../../common/images/user/user-bg-01.jpg" />
-                    <p>传说中，天狗长着红色的脸和长长的鼻子，身材高大、穿着修验僧服和高齿木屐，手持团扇、宝槌，身后长着翅膀能够在天上飞翔。通常隐居深山，是力量型的妖怪。</p>
-                    <p>有关天狗最早的文献记录见于《日本书纪》，舒明天皇九年2月（公元637年）有火流星挟怪声破空而来，自唐朝留学而归的僧人旻见状说道：“非流星，是天狗也，其吠声，似雷也”。</p>
-                    <img src="../../common/images/user/user-bg-01.jpg" />
+                <div class="content__read-text" v-html=" isScan ?　chapter_bat.chapter_content : chapter.info.chapter_content">
                 </div>
-                <!-- <div class="content__read-over">
-                    本章完 2016.10.23
-                </div> -->
-                <div class="content__read-switch">
-                    <div class="switch-item switch-left"><a href="#none">上一篇</a></div>
-                    <div class="switch-item switch-right"><a href="#none">下一篇</a></div>
+                <div v-if="pre || next" class="content__read-switch">
+                    <div v-if="pre" class="switch-item switch-left"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.lists[index-1].chapter_id">上一篇</a></div>
+                    <div v-if="next" class="switch-item switch-right"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.lists[index+1].chapter_id">下一篇</a></div>
                 </div>
                 <div class="content__read-author">
-                    <div class="author-img"></div>
-                    <div class="author-name">奇昊大本营</div>
+                    <div class="author-img">
+                        <img :src="catalog.info.user && catalog.info.user.avatar_url" />
+                    </div>
+                    <div class="author-name">{{catalog.info.user && catalog.info.user.nick_name}}</div>
                 </div>
             </div>
         </div>
-        <div class="m-artice-read__comment">
+        <div v-if="!isScan" class="m-artice-read__comment">
             <div class="comment-header">
-                共 <span>98</span> 条评论
+                <span>{{comment.count}}</span> 条评论
             </div>
             <div class="comment-content">
-                <ArticleCommentDom v-for="(item, index) in articleComment" :data="item" :key="index" />
+                <ArticleCommentDom />
             </div>
         </div>
-        <Page 
-            class="z-width"
-            :count="count" 
-            :length="pageSize"
-            :index="pageIndex"
-            @page_switch="pageSwitch"
-        />
-        <div class="m-artice-read__speak">
+        <div v-if="!isScan" class="m-artice-read__speak">
             <div class="speak-header">参与评论</div>
             <div class="speak-form">
-                <div class="speak-form-top">
-                    <div class="speak-form-item speak-form-input cpm_form_input">
-                        <input @focus="inputFocus" type="text" placeholder="发表评论..." />
-                    </div>
-                    <div class="speak-form-item speak-form-textarea cpm_form_textarea">
-                        <textarea @blur="textareaBlur"  placeholder="发表评论..."></textarea>
-                    </div>
-                    <div class="speak-form-item  speak-form-icon speak-form-fabulous">
-                        <em></em>
-                        <span>98</span>
-                    </div>
-                    <div class="speak-form-item speak-form-icon speak-form-mark">
-                        <em></em>
-                        <span>142</span>
-                    </div>
-                    <div class="speak-form-item speak-form-icon speak-form-comment">
-                        <em></em>
-                        <span>142</span>
-                    </div>
-                    <div class="speak-form-item speak-form-share cpm_button_default">分享</div>
+                <div class="speak-form-left speak-form-input">
+                    <input @focus="inputFocus" type="text" placeholder="好作品全取决于你的鞭策..." />
                 </div>
-                <div class="speak-form-bottom">
-                    <div class="cpm_button_default">提交</div>
+                <div class="speak-form-left speak-form-textarea">
+                    <textarea @blur="textareaBlur"  placeholder="发表评论..." v-model="comment_con"></textarea>
                 </div>
-            </div>
-        </div>
-        <div class="m-artice-read__menu">
-            <div class="menu__header">作品目录</div>
-            <div class="menu__content">
-                <div v-for="(item, index) in menu" class="menu__content-item" :class="{'z-on': menuIndex == index}"><a href="#none">{{(index + 1) + '. ' + item}}</a></div>
+                <div class="speak-form-right">
+                    <div class="speak-form-icon speak-form-fabulous" @click="addPraise">
+                        <em></em>
+                        <span>{{chapter.info.praise_count}}</span>
+                    </div>
+                    <div class="speak-form-icon speak-form-comment">
+                        <em></em>
+                        <span>{{chapter.info.comment_count}}</span>
+                    </div>
+                    <div class="speak-form-icon speak-form-share"></div>
+                    <div class="speak-form-btn" @click="addComment">发送</div>
+                </div>
             </div>
         </div>
     </div>
@@ -393,119 +483,61 @@
 </template>
 
 <script>
-import HeaderDom from '../../component/header.vue';
-import FooterDom from '../../component/footer.vue';
-import ArticleCommentDom from '../../component/article.comment.vue';
-import Page from '../../component/page.fenye.vue';
-import Empty from '../../component/content.empty.vue';
-import MenuLeft from '../../component/menu.left.vue';
-import SideMenu from '../../component/sideMenu.vue';
-import bubble from '../../component/bubble';
+import {mapState} from 'vuex'
 export default {
-    components: {
-        HeaderDom: HeaderDom,
-        ArticleCommentDom: ArticleCommentDom,
-        FooterDom: FooterDom,
-        Page: Page,
-        Bubble: bubble,
-        MenuLeft: MenuLeft,
-        SideMenu: SideMenu,
-        Empty: Empty
-    },
     data () {
         return {
-            header: {
+            comment_con: '',
 
-            },
-            menuIndex: 4,
-            menu: [
-                '走过来走过去',
-                '走过来走过去',
-                '走过来走过去',
-                '走过来走过去',
-                '走过来走过去',
-                '走过来走过去',
-                '走过来走过去',
-                '走过来走过去',
-                '走过来走过去',
-                '走过来走过去'
-            ],
-            pageSize: 5,
-            pageIndex: 2,
-            count: 100,
-            articleComment: [
-                {
-                    name: '奇昊大本营',
-                    time: '2小时前',
-                    avartar: '',
-                    text: '我哈哈大笑，准备继续调戏一番却发现这小妞的一对漂亮的眸子里似乎闪烁着泪光。糟糕！玩过火了......我吓了一跳。',
-                    fabulous: 23,
-                    hasFabulous: false,
-                    record: [
-                        {
-                            text: '<strong>【作者】</strong><span>爱吃冰棒的鱼</span>：认真点看，挺恐怖的，我看了10多秒就不敢看了,不敢看了,不敢看了,不敢看了,不敢看了,不敢看了。',
-                            time: '50分钟前'
-                        },
-                        {
-                            text: '<span>奇昊大本营</span> 回复 <strong>【作者】</strong><span>爱吃冰棒的鱼</span>：认真点看，挺恐怖的，我看了10多秒就不敢看了,不敢看了,不敢看了,不敢看了,不敢看了,不敢看了。',
-                            time: '1小时前'
-                        }
-                    ],
-                    recordNumber: 100
-                },
-                {
-                    name: '奇昊大本营',
-                    time: '2小时前',
-                    avartar: '',
-                    text: '我哈哈大笑，准备继续调戏一番却发现这小妞的一对漂亮的眸子里似乎闪烁着泪光。糟糕！玩过火了......我吓了一跳。',
-                    fabulous: 23,
-                    hasFabulous: false,
-                    record: [
-                        {
-                            text: '<strong>【作者】</strong><span>爱吃冰棒的鱼</span>：认真点看，挺恐怖的，我看了10多秒就不敢看了,不敢看了,不敢看了,不敢看了,不敢看了,不敢看了。',
-                            time: '50分钟前'
-                        },
-                        {
-                            text: '<span>奇昊大本营</span> 回复 <strong>【作者】</strong><span>爱吃冰棒的鱼</span>：认真点看，挺恐怖的，我看了10多秒就不敢看了,不敢看了,不敢看了,不敢看了,不敢看了,不敢看了。',
-                            time: '1小时前'
-                        }
-                    ],
-                    recordNumber: 100
-                },
-                {
-                    name: '奇昊大本营',
-                    time: '2小时前',
-                    avartar: '',
-                    text: '我哈哈大笑，准备继续调戏一番却发现这小妞的一对漂亮的眸子里似乎闪烁着泪光。糟糕！玩过火了......我吓了一跳。',
-                    fabulous: 23,
-                    hasFabulous: false,
-                    record: [
-                        {
-                            text: '<strong>【作者】</strong><span>爱吃冰棒的鱼</span>：认真点看，挺恐怖的，我看了10多秒就不敢看了,不敢看了,不敢看了,不敢看了,不敢看了,不敢看了。',
-                            time: '50分钟前'
-                        },
-                        {
-                            text: '<span>奇昊大本营</span> 回复 <strong>【作者】</strong><span>爱吃冰棒的鱼</span>：认真点看，挺恐怖的，我看了10多秒就不敢看了,不敢看了,不敢看了,不敢看了,不敢看了,不敢看了。',
-                            time: '1小时前'
-                        }
-                    ],
-                    recordNumber: 100
-                }
-            ]
+            isScan: false,
+            chapter_bat: {}
         }
     },
-    methods: {
-        changeType (type){
-            this.menuLeftType = type;
+    computed: mapState({
+        userInfo: state => state.user.info,
+        catalog: state => state.opus.catalog,
+        chapter: state => state.opus.chapter,
+        comment: state => state.opus.comment,
+        index (){
+            var index;
+            for (var i = 0, len = this.$store.state.opus.chapter.lists.length; i < len; i++) {
+                if (this.$store.state.opus.chapter.lists[i].chapter_id == this.chapter_id) {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
         },
+        next () {
+            if (this.$store.state.opus.chapter.lists.length == 1) {
+                return false;
+            }
+            var vai = false;
+            for (var i = 0, len = this.$store.state.opus.chapter.lists.length; i < len; i++) {
+                if (this.$store.state.opus.chapter.lists[i].chapter_id == this.chapter_id && i != len - 1) {
+                    vai = true;
+                }
+            }
+            return vai;
+        },
+        pre () {
+            if (this.$store.state.opus.chapter.lists.length == 1) {
+                return false;
+            }
+            var vai = false;
+            for (var i = 0, len = this.$store.state.opus.chapter.lists.length; i < len; i++) {
+                if (this.$store.state.opus.chapter.lists[i].chapter_id == this.chapter_id && i != 0) {
+                    vai = true;
+                }
+            }
+            return vai;
+        }
+    }),
+    methods: {
         resize () {
             var left = $('.m-artice-read-wrap').offset().left;
             $('.m-artice-read__speak').css({
-                left: left
-            })
-
-            $('.m-artice-read__menu').css({
-                left: left + 720 + 30
+                left: left + 280
             })
         },
         speak (init){
@@ -525,16 +557,162 @@ export default {
         textareaBlur (){
             this.speak();
         },
-        pageSwitch (){}
+
+        // 获取文章列表
+        getChapterList (){
+            this.$store.dispatch('opus_getChapterList', {
+                "catalogId": this.catalog_id, // 目录id
+                "pagination": "1", // 获取总数
+                "page": 1, //页数,默认不传查询第一页
+                "pageSize": 100 //每页数量 默认10
+            }).then( res => {
+                //todo
+                
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            });
+        },
+
+        // 获取文章详情
+        getChapterDetail (){
+            this.$store.dispatch('opus_getChapterDetail', {
+                chapterId: this.chapter_id
+            }).then( res => {
+                // todo
+                
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+
+        // 获取文章目录详情
+        getCatalogDetail (){
+            this.$store.dispatch('opus_getCatalogDetail', {
+                catalogId: this.catalog_id
+            }).then( res => {
+                // todo
+                
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+
+        // 新增评论
+        addComment (){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
+            this.$eventHub.$emit('article.comment.addComment', {
+                comment: this.comment_con,
+                chapter_id: this.chapter_id
+            });
+            this.$eventHub.$on('article.comment.refresh', res => {
+                this.comment_con = '';
+                this.getChapterDetail();
+            })
+        },
+
+        // 文章点赞
+        addPraise (){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
+            this.$store.dispatch('opus_addPraise', {
+                "catalogId": this.catalog_id,
+                "chapterId": this.chapter_id
+            }).then( res => {
+                this.getChapterDetail();
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },  
+
+        // 取消收藏
+        delFavorites (catalogId){
+            this.$store.dispatch('opus_delFavorites', {
+                catalogId: catalogId
+            }).then( res => {
+                this.getCatalogDetail();
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+
+        // 收藏
+        addFavorites (catalogId){
+            this.$store.dispatch('opus_addFavorites', {
+                catalogId: catalogId
+            }).then( res => {
+                this.getCatalogDetail();
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+
+        // 收藏目录
+        mark (catalogId){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
+            if (this.catalog.info.is_collected == 1) {
+                this.delFavorites(catalogId);
+            } else {
+                this.addFavorites(catalogId);
+            }
+        },
     },
     mounted (){
+        // 获取url的参数
+        this.catalog_id = this.$url.getUrlParam('catalog_id');
+        this.chapter_id = this.$url.getUrlParam('chapter_id');
+        this.isScan = this.$url.getUrlParam('isScan') == 1;
+
+        if (this.isScan) {
+            var chapaterEdit_edit = this.$version.chapaterEdit_edit;
+            var key = chapaterEdit_edit.key + '_' + this.catalog_id + '_' + this.chapter_id;
+            this.chapter_bat = this.$cache.getStore(key, chapaterEdit_edit.version);
+        }
+
         this.resize();
         this.speak(true);
         $(window).on('resize', () => (this.resize() && this.speak()));
         $(window).on('scroll', () => this.speak());
-    },
 
-    
+        // 获取文章目录详情
+        this.getCatalogDetail();
+
+        // 获取文章列表
+        this.getChapterList();
+
+        // 获取文章详情
+        this.getChapterDetail();  
+    }
 }
 </script>
 

@@ -15,6 +15,7 @@ var webpackConfig = require('./webpack.dev.conf')
 
 // default port where dev server listens for incoming traffic
 var port = process.env.PORT || config.dev.port
+var port = 8888
 // automatically open browser, if not set will be false
 var autoOpenBrowser = !!config.dev.autoOpenBrowser
 // Define HTTP proxies to your custom API backend
@@ -66,7 +67,7 @@ app.use(hotMiddleware)
 // serve pure static assets
 var staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsSubDirectory)
 app.use(express.static(staticPath))
-
+console.log(staticPath)
 var uri = 'http://localhost:' + port + '/dist/html/index.html'
 
 devMiddleware.waitUntilValid(function() {

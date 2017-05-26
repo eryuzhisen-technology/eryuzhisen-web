@@ -3,24 +3,209 @@
  */
 @import (reference) './default';
 
+* {
+	transition: color @default_speed_1;
+}
+
 // 背景
 .user_background_1 { 
-	background-image: url('../images/user/user-bg-01.jpg');
+	background-image: url('../images/img/banner-1.png');
 	background-size: cover;
 }
 .user_background_2 { 
-	background-image: url('../images/user/user-bg-01.jpg');
+	background-image: url('../images/img/banner-1.png');
 	background-position: top center;
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+.user_background_3 { 
+	background-image: url('../images/img/bg.png');
+	background-size: cover;
+}
 
-// 背景-icon
-.skin_icon { background-position: center; background-repeat: no-repeat; }
-.skin_icon_logo_1 { .skin_icon; background-image: url('../images/icon/logo.png'); }
-.skin_icon_notice_1 { .skin_icon; background-image: url('../images/icon/notice.png'); }
-.skin_icon_search_1 { .skin_icon; background-image: url('../images/icon/search.png'); }
-.skin_icon_side_top_1 { .skin_icon; background-image: url('../images/icon/side-top.png'); }
+// head
+.skin_icon { background-position: center center; background-repeat: no-repeat; }
+.skin_icon_logo { .skin_icon; background-image: url('../images/icon/logo.png'); }
+.skin_icon_notice { .skin_icon; background-image: url('../images/icon/notice.png'); }
+.skin_icon_notice_on { .skin_icon; background-image: url('../images/icon/notice_on.png'); }
+.skin_icon_search { .skin_icon; background-image: url('../images/icon/search.png'); }
+.skin_icon_search_on { .skin_icon; background-image: url('../images/icon/search_on.png'); }
+
+// index
+.skin_icon_er { .skin_icon; background-image: url('../images/icon/er.png'); }
+.skin_icon_er_on { .skin_icon; background-image: url('../images/icon/er_on.png'); }
+.skin_icon_cmt { .skin_icon; background-image: url('../images/icon/cmt.png'); }
+.skin_icon_cmt_on { .skin_icon; background-image: url('../images/icon/cmt_on.png'); }
+.skin_icon_msg { .skin_icon; background-image: url('../images/icon/msg.png'); }
+.skin_icon_msg_on { .skin_icon; background-image: url('../images/icon/msg_on.png'); }
+.skin_icon_me { .skin_icon; background-image: url('../images/icon/me.png'); }
+.skin_icon_me_on { .skin_icon; background-image: url('../images/icon/me_on.png'); }
+.skin_icon_set { .skin_icon; background-image: url('../images/icon/set.png'); }
+.skin_icon_set_on { .skin_icon; background-image: url('../images/icon/set_on.png'); }
+.skin_icon_back { .skin_icon; background-image: url('../images/icon/back.png'); }
+.skin_icon_back_on { .skin_icon; background-image: url('../images/icon/back_on.png'); }
+.skin_icon_logout { .skin_icon; background-image: url('../images/icon/logout.png'); }
+.skin_icon_logout_on { .skin_icon; background-image: url('../images/icon/logout_on.png'); }
+.skin_icon_left-1 { .skin_icon; background-image: url('../images/icon/left-1.png'); }
+.skin_icon_left-1_on { .skin_icon; background-image: url('../images/icon/left-1_on.png'); }
+.skin_icon_right-1 { .skin_icon; background-image: url('../images/icon/right-1.png'); }
+.skin_icon_right-1_on { .skin_icon; background-image: url('../images/icon/right-1_on.png'); }
+.skin_icon_left-2 { .skin_icon; background-image: url('../images/icon/left-2.png'); }
+.skin_icon_left-2_on { .skin_icon; background-image: url('../images/icon/left-2_on.png'); }
+.skin_icon_right-2 { .skin_icon; background-image: url('../images/icon/right-2.png'); }
+.skin_icon_right-2_on { .skin_icon; background-image: url('../images/icon/right-2_on.png'); }
+.skin_icon_zhan { .skin_icon; background-image: url('../images/icon/zhan.png'); }
+.skin_icon_liu { .skin_icon; background-image: url('../images/icon/liu.png'); }
+.skin_icon_load { .skin_icon; background-image: url('../images/icon/load.png'); }
+.skin_icon_article { .skin_icon; background-image: url('../images/icon/article.png'); }
+.skin_icon_article_on { .skin_icon; background-image: url('../images/icon/article_on.png'); }
+.skin_icon_charpt { .skin_icon; background-image: url('../images/icon/charpt.png'); }
+.skin_icon_charpt_on { .skin_icon; background-image: url('../images/icon/charpt_on.png'); }
+.skin_icon_kuai { .skin_icon; background-image: url('../images/icon/kuai.png'); }
+.skin_icon_kuai_on { .skin_icon; background-image: url('../images/icon/kuai_on.png'); }
+.skin_icon_tiao { .skin_icon; background-image: url('../images/icon/tiao.png'); }
+.skin_icon_tiao_on { .skin_icon; background-image: url('../images/icon/tiao_on.png'); }
+
+// search
+.skin_icon_search-1 { .skin_icon; background-image: url('../images/icon/search-1.png'); }
+.skin_icon_search-1_on { .skin_icon; background-image: url('../images/icon/search-1_on.png'); }
+.skin_icon_search-2 { .skin_icon; background-image: url('../images/icon/search-2.png'); }
+.skin_icon_search-2_on { .skin_icon; background-image: url('../images/icon/search-2_on.png'); }
+.skin_icon_search-3 { .skin_icon; background-image: url('../images/icon/search-3.png'); }
+.skin_icon_search-3_on { .skin_icon; background-image: url('../images/icon/search-3_on.png'); }
+
+// author
+.skin_icon_author-1 { .skin_icon; background-image: url('../images/icon/author-1.png'); }
+.skin_icon_author-1_on { .skin_icon; background-image: url('../images/icon/author-1_on.png'); }
+.skin_icon_author-2 { .skin_icon; background-image: url('../images/icon/author-2.png'); }
+.skin_icon_author-2_on { .skin_icon; background-image: url('../images/icon/author-2_on.png'); }
+.skin_icon_author-3 { .skin_icon; background-image: url('../images/icon/author-3.png'); }
+.skin_icon_author-3_on { .skin_icon; background-image: url('../images/icon/author-3_on.png'); }
+.skin_icon_author-4 { .skin_icon; background-image: url('../images/icon/author-4.png'); }
+.skin_icon_author-4_on { .skin_icon; background-image: url('../images/icon/author-4_on.png'); }
+.skin_icon_author-5 { .skin_icon; background-image: url('../images/icon/author-5.png'); }
+.skin_icon_author-5_on { .skin_icon; background-image: url('../images/icon/author-5_on.png'); }
+.skin_icon_author-6 { .skin_icon; background-image: url('../images/icon/author-6.png'); }
+.skin_icon_author-6_on { .skin_icon; background-image: url('../images/icon/author-6_on.png'); }
+
+// share
+.skin_icon_share-1 { .skin_icon; background-image: url('../images/icon/share-1.png'); }
+.skin_icon_share-1_on { .skin_icon; background-image: url('../images/icon/share-1_on.png'); }
+.skin_icon_share-2 { .skin_icon; background-image: url('../images/icon/share-2.png'); }
+.skin_icon_share-2_on { .skin_icon; background-image: url('../images/icon/share-2_on.png'); }
+.skin_icon_share-3 { .skin_icon; background-image: url('../images/icon/share-3.png'); }
+.skin_icon_share-3_on { .skin_icon; background-image: url('../images/icon/share-3_on.png'); }
+.skin_icon_share-4 { .skin_icon; background-image: url('../images/icon/share-4.png'); }
+.skin_icon_share-4_on { .skin_icon; background-image: url('../images/icon/share-4_on.png'); }
+.skin_icon_share-5 { .skin_icon; background-image: url('../images/icon/share-5.png'); }
+.skin_icon_share-5_on { .skin_icon; background-image: url('../images/icon/share-5_on.png'); }
+.skin_icon_share-6 { .skin_icon; background-image: url('../images/icon/share-6.png'); }
+.skin_icon_share-6_on { .skin_icon; background-image: url('../images/icon/share-6_on.png'); }
+
+// more_btn
+.skin_icon_more_btn-1 { .skin_icon; background-image: url('../images/icon/more_btn-1.png'); }
+.skin_icon_more_btn-1_on { .skin_icon; background-image: url('../images/icon/more_btn-1_on.png'); }
+.skin_icon_more_btn-2 { .skin_icon; background-image: url('../images/icon/more_btn-2.png'); }
+.skin_icon_more_btn-2_on { .skin_icon; background-image: url('../images/icon/more_btn-2_on.png'); }
+
+
+// article
+.skin_icon_article-1 { .skin_icon; background-image: url('../images/icon/article-1.png'); }
+.skin_icon_article-1_on { .skin_icon; background-image: url('../images/icon/article-1_on.png'); }
+.skin_icon_article-2 { .skin_icon; background-image: url('../images/icon/article-2.png'); }
+.skin_icon_article-2_on { .skin_icon; background-image: url('../images/icon/article-2_on.png'); }
+.skin_icon_article-3 { .skin_icon; background-image: url('../images/icon/article-3.png'); }
+.skin_icon_article-4 { .skin_icon; background-image: url('../images/icon/article-4.png'); }
+.skin_icon_article-5 { .skin_icon; background-image: url('../images/icon/article-5.png'); }
+.skin_icon_article-6 { .skin_icon; background-image: url('../images/icon/article-6.png'); }
+
+// read
+.skin_icon_read-1 { .skin_icon; background-image: url('../images/icon/read-1.png'); }
+.skin_icon_read-1_on { .skin_icon; background-image: url('../images/icon/read-1_on.png'); }
+.skin_icon_read-2 { .skin_icon; background-image: url('../images/icon/read-2.png'); }
+.skin_icon_read-2_on { .skin_icon; background-image: url('../images/icon/read-2_on.png'); }
+.skin_icon_read-3 { .skin_icon; background-image: url('../images/icon/read-3.png'); }
+.skin_icon_read-3_on { .skin_icon; background-image: url('../images/icon/read-3_on.png'); }
+.skin_icon_read-3_active { .skin_icon; background-image: url('../images/icon/read-3_active.png'); }
+
+
+// setting
+.skin_icon_setting-1 { .skin_icon; background-image: url('../images/icon/setting-1.png'); }
+.skin_icon_setting-1_on { .skin_icon; background-image: url('../images/icon/setting-1_on.png'); }
+.skin_icon_setting-2 { .skin_icon; background-image: url('../images/icon/setting-2.png'); }
+.skin_icon_setting-2_on { .skin_icon; background-image: url('../images/icon/setting-2_on.png'); }
+.skin_icon_setting-3 { .skin_icon; background-image: url('../images/icon/setting-3.png'); }
+.skin_icon_setting-3_on { .skin_icon; background-image: url('../images/icon/setting-3_on.png'); }
+.skin_icon_setting-4 { .skin_icon; background-image: url('../images/icon/setting-4.png'); }
+.skin_icon_setting-4_on { .skin_icon; background-image: url('../images/icon/setting-4_on.png'); }
+
+
+// message
+.skin_icon_message-1 { .skin_icon; background-image: url('../images/icon/message-1.png'); }
+.skin_icon_message-1_on { .skin_icon; background-image: url('../images/icon/message-1_on.png'); }
+.skin_icon_message-2 { .skin_icon; background-image: url('../images/icon/message-2.png'); }
+.skin_icon_message-2_on { .skin_icon; background-image: url('../images/icon/message-2_on.png'); }
+.skin_icon_message-3 { .skin_icon; background-image: url('../images/icon/message-3.png'); }
+.skin_icon_message-3_on { .skin_icon; background-image: url('../images/icon/message-3_on.png'); }
+
+
+// mark
+.skin_icon_mark-1 { .skin_icon; background-image: url('../images/icon/mark-1.png'); }
+.skin_icon_mark-1_on { .skin_icon; background-image: url('../images/icon/mark-1_on.png'); }
+.skin_icon_mark-2 { .skin_icon; background-image: url('../images/icon/mark-2.png'); }
+.skin_icon_mark-2_on { .skin_icon; background-image: url('../images/icon/mark-2_on.png'); }
+
+// edit
+.skin_icon_edit-1 { .skin_icon; background-image: url('../images/icon/edit-1.png'); }
+.skin_icon_edit-1_on { .skin_icon; background-image: url('../images/icon/edit-1_on.png'); }
+.skin_icon_edit-2 { .skin_icon; background-image: url('../images/icon/edit-2.png'); }
+.skin_icon_edit-2_on { .skin_icon; background-image: url('../images/icon/edit-2_on.png'); }
+.skin_icon_edit-3 { .skin_icon; background-image: url('../images/icon/edit-3.png'); }
+.skin_icon_edit-3_on { .skin_icon; background-image: url('../images/icon/edit-3_on.png'); }
+.skin_icon_edit-4 { .skin_icon; background-image: url('../images/icon/edit-4.png'); }
+.skin_icon_edit-4_on { .skin_icon; background-image: url('../images/icon/edit-4_on.png'); }
+.skin_icon_edit-5 { .skin_icon; background-image: url('../images/icon/edit-5.png'); }
+.skin_icon_edit-5_on { .skin_icon; background-image: url('../images/icon/edit-5_on.png'); }
+.skin_icon_edit-6 { .skin_icon; background-image: url('../images/icon/edit-6.png'); }
+.skin_icon_edit-6_on { .skin_icon; background-image: url('../images/icon/edit-6_on.png'); }
+.skin_icon_edit-7 { .skin_icon; background-image: url('../images/icon/edit-7.png'); }
+.skin_icon_edit-7_on { .skin_icon; background-image: url('../images/icon/edit-7_on.png'); }
+.skin_icon_edit-8 { .skin_icon; background-image: url('../images/icon/edit-8.png'); }
+.skin_icon_edit-8_on { .skin_icon; background-image: url('../images/icon/edit-8_on.png'); }
+.skin_icon_edit-9 { .skin_icon; background-image: url('../images/icon/edit-9.png'); }
+.skin_icon_edit-9_on { .skin_icon; background-image: url('../images/icon/edit-9_on.png'); }
+.skin_icon_edit-10 { .skin_icon; background-image: url('../images/icon/edit-10.png'); }
+.skin_icon_edit-10_on { .skin_icon; background-image: url('../images/icon/edit-10_on.png'); }
+.skin_icon_edit-11 { .skin_icon; background-image: url('../images/icon/edit-11.png'); }
+.skin_icon_edit-11_on { .skin_icon; background-image: url('../images/icon/edit-11_on.png'); }
+.skin_icon_edit-12 { .skin_icon; background-image: url('../images/icon/edit-12.png'); }
+.skin_icon_edit-12_on { .skin_icon; background-image: url('../images/icon/edit-12_on.png'); }
+.skin_icon_edit-13 { .skin_icon; background-image: url('../images/icon/edit-13_on.png'); }
+.skin_icon_edit-13_on { .skin_icon; background-image: url('../images/icon/edit-13.png'); }
+.skin_icon_edit-14 { .skin_icon; background-image: url('../images/icon/edit-14.png'); }
+.skin_icon_edit-14_on { .skin_icon; background-image: url('../images/icon/edit-14_on.png'); }
+.skin_icon_edit-15 { .skin_icon; background-image: url('../images/icon/edit-15.png'); }
+
+
+// complete
+.skin_icon_complete-1 { .skin_icon; background-image: url('../images/icon/complete-1.png'); }
+.skin_icon_complete-1_on { .skin_icon; background-image: url('../images/icon/complete-1_on.png'); }
+.skin_icon_complete-2 { .skin_icon; background-image: url('../images/icon/complete-2.png'); }
+.skin_icon_complete-2_on { .skin_icon; background-image: url('../images/icon/complete-2_on.png'); }
+.skin_icon_complete-3 { .skin_icon; background-image: url('../images/icon/complete-3.png'); }
+.skin_icon_complete-3_on { .skin_icon; background-image: url('../images/icon/complete-3_on.png'); }
+.skin_icon_complete-4 { .skin_icon; background-image: url('../images/icon/complete-4.png'); }
+.skin_icon_complete-4_on { .skin_icon; background-image: url('../images/icon/complete-4_on.png'); }
+.skin_icon_complete-5 { .skin_icon; background-image: url('../images/icon/complete-5.png'); }
+.skin_icon_complete-5_on { .skin_icon; background-image: url('../images/icon/complete-5_on.png'); }
+.skin_icon_complete-6 { .skin_icon; background-image: url('../images/icon/complete-6.png'); }
+.skin_icon_complete-6_on { .skin_icon; background-image: url('../images/icon/complete-6_on.png'); }
+
+// tip
+.skin_icon_tip-arrow { .skin_icon; background-image: url('../images/icon/tip-arrow.png'); }
+
+.skin_icon_top_1 { .skin_icon; background-image: url('../images/icon/top-1.png'); }
+.skin_icon_top_1_on { .skin_icon; background-image: url('../images/icon/top-1_on.png'); }
 .skin_icon_ios_1 { .skin_icon; background-image: url('../images/icon/ios02.png'); }
 .skin_icon_ios_2 { .skin_icon; background-image: url('../images/icon/ios01.png'); }
 .skin_icon_android_1 { .skin_icon; background-image: url('../images/icon/android02.png'); }
@@ -29,6 +214,10 @@
 .skin_icon_weibo_2 { .skin_icon; background-image: url('../images/icon/wb01.png'); }
 .skin_icon_weixin_1 { .skin_icon; background-image: url('../images/icon/wx02.png'); }
 .skin_icon_weixin_2 { .skin_icon; background-image: url('../images/icon/wx01.png'); }
+.skin_icon_left-1 { .skin_icon; background-image: url('../images/icon/left-1.png'); }
+.skin_icon_left-1_on { .skin_icon; background-image: url('../images/icon/left-1_on.png'); }
+.skin_icon_right-1 { .skin_icon; background-image: url('../images/icon/right-1.png'); }
+.skin_icon_right-1_on { .skin_icon; background-image: url('../images/icon/right-1_on.png'); }
 
 .skin_icon_more { .skin_icon; background-image: url('../images/icon/more.png'); }
 .skin_icon_radio { .skin_icon; background-image: url('../images/icon/radio.png'); }
@@ -46,26 +235,6 @@
 .skin_icon_prev_on { .skin_icon; background-image: url('../images/icon/prev_on.png'); }
 .skin_icon_next_on { .skin_icon; background-image: url('../images/icon/next_on.png'); }
 
-// index
-.skin_icon_er { .skin_icon; background-image: url('../images/icon/er.png'); }
-.skin_icon_er_on { .skin_icon; background-image: url('../images/icon/er_on.png'); }
-.skin_icon_cmt { .skin_icon; background-image: url('../images/icon/cmt.png'); }
-.skin_icon_cmt_on { .skin_icon; background-image: url('../images/icon/cmt_on.png'); }
-.skin_icon_msg { .skin_icon; background-image: url('../images/icon/msg.png'); }
-.skin_icon_msg_on { .skin_icon; background-image: url('../images/icon/msg_on.png'); }
-.skin_icon_me { .skin_icon; background-image: url('../images/icon/me.png'); }
-.skin_icon_me_on { .skin_icon; background-image: url('../images/icon/me_on.png'); }
-.skin_icon_set { .skin_icon; background-image: url('../images/icon/set.png'); }
-.skin_icon_set_on { .skin_icon; background-image: url('../images/icon/set_on.png'); }
-.skin_icon_back { .skin_icon; background-image: url('../images/icon/back.png'); }
-.skin_icon_back_on { .skin_icon; background-image: url('../images/icon/back_on.png'); }
-.skin_icon_logout { .skin_icon; background-image: url('../images/icon/logout.png'); }
-.skin_icon_logout_on { .skin_icon; background-image: url('../images/icon/logout_on.png'); }
-.skin_icon_left { .skin_icon; background-image: url('../images/icon/left.png'); }
-.skin_icon_right { .skin_icon; background-image: url('../images/icon/right.png'); }
-.skin_icon_zhan { .skin_icon; background-image: url('../images/icon/zhan.png'); }
-.skin_icon_liu { .skin_icon; background-image: url('../images/icon/liu.png'); }
-.skin_icon_load { .skin_icon; background-image: url('../images/icon/load.png'); }
 
 // article-edit 
 .skin_icon_upload_img { .skin_icon; background-image: url('../images/icon/upload_img.png'); }
@@ -96,7 +265,6 @@
 .skin_icon_edit_share_wx { .skin_icon; background-image: url('../images/icon/share_wx.png'); }
 
 
-
 // 文字布局
 .default_disline { display: inline-block; }
 .default_center { text-align: center; }
@@ -120,18 +288,27 @@
 // 边框
 .default_border-5 { border: 1px solid @default_backgroud_5; }
 .default_border-12 { border: 1px solid @default_backgroud_12; }
+.default_border-13 { border: 1px solid @default_backgroud_13; }
+.default_border-15 { border: 1px solid @default_backgroud_15; }
 .default_border-t-5 { border-top: 1px solid @default_backgroud_5; }
 .default_border-t-4 { border-top: 1px solid @default_backgroud_4; }
-.default_border-l-4 { border-left: 1px solid @default_backgroud_4; }
-.default_border-rr-4 { border-right: 1px solid @default_backgroud_4; }
+.default_border-b-2 { border-bottom: 1px solid @default_backgroud_2; }
 .default_border-b-4 { border-bottom: 1px solid @default_backgroud_4; }
 .default_border-b-5 { border-bottom: 1px solid @default_backgroud_5; }
 .default_border-b-6 { border-bottom: 1px solid @default_backgroud_6; }
+.default_border-b-14 { border-bottom: 1px solid @default_backgroud_14; }
+.default_border-l-4 { border-left: 1px solid @default_backgroud_4; }
+.default_border-rr-2 { border-right: 1px solid @default_backgroud_2; }
+.default_border-rr-4 { border-right: 1px solid @default_backgroud_4; }
+.default_border-rr-5 { border-right: 1px solid @default_backgroud_5; }
+.default_border-rr-14 { border-right: 1px solid @default_backgroud_14; }
+.default_border-t-14 { border-top: 1px solid @default_backgroud_14; }
+.default_border-3 { border: 1px solid @default_backgroud_3; }
 .default_border-6 { border: 1px solid @default_backgroud_6; }
 .default_border-8 { border: 1px solid @default_backgroud_8; }
 .default_border-9 { border: 1px solid @default_backgroud_9; }
 .default_border-11 { border: 1px solid @default_backgroud_11; }
-.default_border-a-7-f { border: 1px solid @default_color_7; }
+.default_border-a-7 { border: 1px solid @default_backgroud_7; }
 .default_border-a-9 { border: 1px solid @default_backgroud_9; }
 .default_border-n { border: none; }
 .default_border-r-n { border-radius: initial; }
@@ -142,9 +319,11 @@
 .default_border-r-b-4 { border-radius: 0 0 4px 4px; }
 .default_border-r-10 { border-radius: 10px; }
 .default_border-r-50 { border-radius: 50%; }
-.default_border_shadow_1 { box-shadow: 0 0 1px rgb(0, 0, 0, 30) inset; }
-.default_border_shadow_2 { box-shadow: 0 0 5px rgb(0, 0, 0, 30) inset; }
-.default_border_shadow_3 { box-shadow: 0 0 1px rgb(0, 0, 0, 30); }
+.default_border_shadow_1 { box-shadow: 0 0 1px @default_backgroud_6 inset; }
+.default_border_shadow_2 { box-shadow: 0 0 5px @default_backgroud_6 inset; }
+.default_border_shadow_3 { box-shadow: 0 0 1px @default_backgroud_6; }
+.default_border_shadow_4 { box-shadow: 0 0 30px @default_backgroud_6; }
+.default_border_shadow_5 { box-shadow: 0 0 20px @default_backgroud_6; }
 
 // 文字颜色
 .default_color_1 { color: @default_color_1; }
@@ -156,6 +335,7 @@
 .default_color_7 { color: @default_color_7; }
 .default_color_8 { color: @default_color_8; }
 .default_color_9 { color: @default_color_9; }
+.default_color_10 { color: @default_color_10; }
 .default_color_fff { color: #fff; }
 
 // 背景颜色
@@ -183,14 +363,13 @@
 .default_font_size_4 { font-size: @default_font_size_4; }
 .default_font_size_5 { font-size: @default_font_size_5; }
 .default_font_size_6 { font-size: @default_font_size_6; }
+.default_font_size_7 { font-size: @default_font_size_7; }
 .default_font_family_bolder { font-weight: bolder; }
+.default_font_bolder { font-weight: bolder; }
 
 // select
 .default_select_bg_01 { 
-	background-image: url('../images/user/select-img-01.png'); 
+	background-image: url('../images/icon/select-1.png'); 
+	.skin_icon;
 	.default_pointer;
-}
-.default_select_bg_01_on { 
-	background-image: url('../images/user/select-img-01_on.png'); 
-	.default_pointer
 }

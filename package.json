@@ -16,6 +16,8 @@
     "glob": "^7.1.1",
     "happypack": "^3.0.3",
     "html-loader": "^0.4.5",
+    "inline-manifest-webpack-plugin": "^3.0.1",
+    "jquery": "^3.2.1",
     "js-cookie": "^2.1.4",
     "less": "^2.7.2",
     "less-loader": "^2.2.3",
@@ -23,6 +25,8 @@
     "vue-quill-editor": "^2.0.4",
     "vue-resource": "^1.2.1",
     "vuex": "^2.2.1",
+    "webpack-chunk-hash": "^0.4.0",
+    "webpack-manifest-plugin": "^1.1.0",
     "webpack-zepto": "0.0.1",
     "zepto": "^1.2.0"
   },

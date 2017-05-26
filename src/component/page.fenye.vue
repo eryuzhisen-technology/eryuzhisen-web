@@ -6,26 +6,25 @@
 .@{module} {
     user-select: none;
     width: 100%;
-    height: 40px;
+    height: 30px;
     overflow: hidden;
     .default_center;
     & .item {
-        width: 40px;
-        height: 40px;
-        line-height: 40px;
+        width: 30px;
+        height: 30px;
+        line-height: 30px;
         margin-right: 10px;
         vertical-align: middle;
         .default_border-r-4;
         .default_disline;
         .default_backgroud_2;
-        .default_font_size_3;
-        .default_color_3;
+        .default_font_size_2;
+        .default_color_2;
         .default_pointer;
         .default_center;
         &.z-on {
-            .default_backgroud_7;
+            .default_backgroud_6;
             .default_color_1;
-            .default_font_family_bolder;
         }
         &:hover {
             .default_color_1;   
@@ -105,7 +104,7 @@
 
 <script>
 export default {
-    props: ['count', 'length', 'index'],
+    props: ['count', 'length', 'index', 'ext'],
     computed: {
         pages () {
             return Math.ceil(this.count/this.length);
@@ -123,7 +122,7 @@ export default {
             } else {
                 dist = parseInt(index);
             }
-            this.$emit('page_switch', dist);
+            this.$emit('page_switch', dist, this.ext);
         }
     },
     render (h) {

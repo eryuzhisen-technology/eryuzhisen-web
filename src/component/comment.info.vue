@@ -4,49 +4,50 @@
     @module: c-comment-info;
 
     .@{module} {
-        padding: 0 60px;
         & &-wrap {
-            padding: 30px 0;
-            .default_border-b-6;
+            margin-bottom: 30px;
+            .default_backgroud_2;
         }
     }
+    .@{module}-list {
+        padding: 20px;
+        .default_border-b-14;
+    }
     .@{module}__top {
-        height: 30px;
+        height: 20px;
         overflow: hidden;
         margin-bottom: 10px;
         & .top__img {
             float: left;
-            width: 30px;
-            height: 30px;
+            width: 20px;
+            height: 20px;
             margin-right: 10px;
+            overflow: hidden;
             .default_border-r-50;
-            .default_backgroud_3;
+            .default_backgroud_5;
         }
         & .top__name {
             float: left;
-            height: 30px;
-            line-height: 30px;
-            margin-right: 5px;
-            .default_font_size_3;
-            .default_color_2;
+            height: 20px;
+            line-height: 20px;
+            .default_font_size_1;
+            .default_color_3;
+        }
+        & .top__time {
+            float: right;
+            height: 20px;
+            line-height: 20px;
+            .default_font_size_1;
+            .default_color_3;
         }
     }
     .@{module}__content {
-        padding-left: 40px;
+        padding-left: 30px;
         line-height: 1.5rem;
-        margin-bottom: 20px;
-        .default_font_size_3;
-        .default_color_3;
+        .default_font_size_2;
+        .default_color_2;
         & strong {
             .default_color_5;
-            .default_font_family_bolder;
-        }
-    }
-    .@{module}__bottom {
-        .default_color_3;
-        .default_font_size_2;
-        & .bottom__time {
-            .default_right;
         }
     }
 </style>
@@ -55,32 +56,72 @@
 <template>
 <div class="c-comment-info">
 <div class="c-comment-info-wrap">
-    <div class="c-comment-info__top">
-        <div class="top__img"></div>
-        <div class="top__name">{{data.name}}</div>
+    <div class="c-comment-info-list" v-for="data in message.list">
+        <div class="c-comment-info__top">
+            <div class="top__img">
+                <img :src="data.message.sender.avatar_url || avatar" />
+            </div>
+            <div class="top__name">{{data.message.sender.nick_name}}</div>
+            <div class="top__time">{{data.create_time}}</div>
+        </div>
+        <div class="c-comment-info__content">
+            {{data.message.content.content}}
+        </div>
     </div>
-    <div v-if="data.type == 'push'" class="c-comment-info__content">
-        将你的作品 <strong>《{{data.article}}》</strong>推荐到了首页
-    </div>
-    <div v-else-if="data.type == 'mark'" class="c-comment-info__content">
-        关注了你
-    </div>
-    <div v-else-if="data.type == 'collect'" class="c-comment-info__content">
-        收藏了你的 <strong>《{{data.article}}》</strong>！
-    </div>
-    <div v-else-if="data.type == 'fabulous'" class="c-comment-info__content">
-        赞了你的 <strong>《{{data.article}}》</strong>！
-    </div>
-    <div class="c-comment-info__bottom">
-        <div class="bottom__time">{{data.time}}</div>
-    </div>
+    <Empty 
+        class="content-empty" 
+        v-if="message.count <= 0"
+    />
 </div>
+<Page 
+    :count="message.count" 
+    :length="pageSize"
+    :index="pageIndex"
+    @page_switch="pageSwitch"
+/>
 </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import avatar from '../common/images/img/avatar.png';
 export default {
-    props: ['data']
+    data (){
+        return {
+            avatar: avatar,
+            pageIndex: 1,
+            pageSize: 5,
+            messageType: 0
+        }
+    },
+    computed: mapState({
+        message: state => state.message.message
+    }),
+    methods: {
+        getMessageList (){
+            this.$store.dispatch('message_getMessageList', {
+                "page": this.pageIndex,
+                "pageSize": this.pageSize,
+                "pagination": 1,
+                "messageType": this.messageType
+            }).then( res => {
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            });
+        },
+        pageSwitch (pageIndex){
+            if (this.pageIndex == pageIndex) {
+                return false;
+            }
+            this.pageIndex = pageIndex;
+            this.getMessageList();
+        }
+    },
+    mounted (){
+        // 获取精选列表
+        this.getMessageList();
+    }
 }
 </script>
 

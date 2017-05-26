@@ -1,0 +1,70 @@
+@module: m-setting;
+
+.@{module} {
+	padding-top: 40px;
+	padding-bottom: 40px;
+	.default_backgroud_5;
+    & &-wrap {
+        .default_width_960;
+        .default_mar_auto;
+    }
+}
+.@{module}-content {
+	position: relative;
+	overflow: hidden;
+	min-height: 400px;
+	& .setting-right {
+		width: 680px;
+		margin-left: 280px;
+		& .title {
+			width: 100%;
+			height: 50px;
+			line-height: 50px;
+			padding-left: 30px;
+			.default_font_size_2;
+			.default_color_2;
+			.default_backgroud_7;
+		}
+        & .content {
+            padding: 30px 0 40px;
+            .default_backgroud_3;
+            & .content-wrap {
+                width: 300px;
+                .default_mar_auto;
+            }
+        }
+	}
+}
+
+.c-menu-left .item:nth-child(1){
+	& .item__icon {
+		.skin_icon_setting-2;
+	}
+	&:hover .item__icon {
+		.skin_icon_setting-2_on;
+	}
+}
+.c-menu-left .item:nth-child(2){
+	& .item__icon {
+		.skin_icon_setting-3;
+	}
+	&:hover .item__icon {
+		.skin_icon_setting-3_on;
+	}
+}
+.c-menu-left .item:nth-child(3){
+	& .item__icon {
+		.skin_icon_setting-4;
+	}
+	&:hover .item__icon {
+		.skin_icon_setting-4_on;
+	}
+}
+.c-menu-left .item:nth-child(4){
+	& .item__icon {
+		.skin_icon_setting-1;
+	}
+	&:hover .item__icon {
+		.skin_icon_setting-1_on;
+	}
+}

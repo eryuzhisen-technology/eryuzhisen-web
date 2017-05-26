@@ -2,102 +2,70 @@
 <style lang="less">
 @import (less) '../../common/css/common.less';
 @import (less) '../user/user.less';
-    @module: m-setting-phone;
-
-    .@{module} {
-    	padding-top: 20px;
-    	padding-bottom: 80px;
-        .default_backgroud_5;
-        & &-wrap {
-            .default_width_960;
-            .default_mar_auto;
-        }
+@import (less) './setting.less';
+    .app-body {
+        padding-top: 60px;
     }
-    .@{module}-content {
-    	position: relative;
-    	overflow: hidden;
-        .default_mar_auto;
-    	& .setting-right {
-    		width: 720px;
-    		margin-left: 240px;
-    		& .title {
-    			width: 100%;
-    			height: 60px;
-    			padding-left: 20px;
-    			padding-top: 22px;
-    			.default_font_size_3;
-    			.default_color_4;
-    			.default_backgroud_2;
-    		}
-            & .content {
-                padding: 40px 0 60px;
-                .default_backgroud_3;
-                & .content-wrap {
-                    width: 330px;
-                    .default_mar_auto;
-                }
-                & .content-step {
-                    width: 100%;
-                    height: 30px;
-                    margin-bottom: 30px;
-                    & span, 
-                    & strong {
-                        display: block;
-                        float: left;
-                        .default_middle;
-                        .default_backgroud_5;
-                    }
-                    & span {
-                        height: 4px;
-                        margin-top: 13px;
-                    }
-                    & strong {
-                        width: 30px;
-                        height: 30px;
-                        .default_border-r-50;
-                    }
-                    & .content-step-1 {
-                        width: 65px;
-                        .default_border-r-l-4;
-                    }
-                    & .content-step-3 {
-                        width: 140px;
-                    }
-                    & .content-step-5 {
-                        width: 65px;
-                        .default_border-r-r-4;
-                    }
-                }
-                & .content-step.z-step-1 {
-                    & .content-step-1,
-                    & .content-step-2 {
-                        .default_backgroud_7;
-                    }
-                }
-                & .content-step.z-step-2 {
-                    & .content-step-1,
-                    & .content-step-2,
-                    & .content-step-3,
-                    & .content-step-4 {
-                        .default_backgroud_7;
-                    }
-                }
+    .m-setting-content .content {
+        & .content-step {
+            width: 100%;
+            height: 20px;
+            margin-bottom: 20px;
+            & span, 
+            & strong {
+                display: block;
+                float: left;
+                .default_backgroud_4;
             }
-    	}
+            & span {
+                height: 4px;
+                margin-top: 8px;
+            }
+            & strong {
+                width: 20px;
+                height: 20px;
+                .default_border-r-50;
+            }
+            & .content-step-1 {
+                width: 55px;
+                .default_border-r-l-4;
+            }
+            & .content-step-3 {
+                width: 150px;
+            }
+            & .content-step-5 {
+                width: 55px;
+                .default_border-r-r-4;
+            }
+        }
+        & .content-step.z-step-1 {
+            & .content-step-1,
+            & .content-step-2 {
+                .default_backgroud_6;
+            }
+        }
+        & .content-step.z-step-2 {
+            & .content-step-1,
+            & .content-step-2,
+            & .content-step-3,
+            & .content-step-4 {
+                .default_backgroud_6;
+            }
+        }
     }
 </style>
 
 <!-- html代码 -->
 <template>
 <div>
-	<HeaderDom :data="header" />
-    <div class="m-setting-phone">
-	<div class="m-setting-phone-wrap">
-		<div class="m-setting-phone-content">
-			<MenuLeft :data="menuLeft" :type="menuLeftType" />
+	<HeaderDom />
+    <div class="m-setting">
+	<div class="m-setting-wrap">
+		<div class="m-setting-content">
+			<MenuLeft :data="menuLeft" />
 			<div class="setting-right">
 				<div class="title">
-					{{menuLeft[menuLeftType].subtitle}}
+					解除手机号绑定
 				</div>
                 <div class="content">
 				<div class="content-wrap">
@@ -155,44 +123,24 @@
 
 <script>
 import { mapState } from 'vuex'
-import HeaderDom from '../../component/header.vue';
-import FooterDom from '../../component/footer.vue';
-import MenuLeft from '../../component/menu.left.vue';
-import SideMenu from '../../component/sideMenu.vue';
-import bubble from '../../component/bubble'
 export default {
-    components: {
-        HeaderDom: HeaderDom,
-        FooterDom: FooterDom,
-        MenuLeft: MenuLeft,
-        SideMenu: SideMenu,
-        Bubble: bubble,
-    },
     data () {
     	return {
-            header: {
-                page: ''
-            },
-    		menuLeftType: 'phone',
     		menuLeft: {
     			userinfo: {
                     title: '基本资料',
-                    subtitle: '基本资料',
                     url: 'setting.userinfo.html'
                 },
     			password: {
                     title: '密码安全',
-                    subtitle: '找回密码',
                     url: 'setting.password.html'
                 },
     			phone: {
                     title: '手机号',
-                    subtitle: '解除手机号绑定',
-                    url: 'setting.phone.html'
+                    isActive: true
                 },
     			backlist: {
                     title: '黑名单',
-                    subtitle: '黑名单',
                     url: 'setting.backlist.html'
                 }
     		},
@@ -221,15 +169,8 @@ export default {
         getCode (init){
             this.$store.dispatch('user_getPicVerifyCode', {
                 init: init
-            }).catch(res => {
-                this.$store.dispatch('bubble_showBubble', {
-                    show: true,
-                    type: 'top',
-                    top: {
-                        status: 'z-warn',
-                        msg: res.msg
-                    }
-                })
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
             });
         },
         getPhoneVerifyCode(){
@@ -260,15 +201,8 @@ export default {
             }).then( () => {
                 this.$store.dispatch('user_getPhoneVerifyCode', {
                     verifyType: "1", //注册验证
-                }).catch(res => {
-                    this.$store.dispatch('bubble_showBubble', {
-                        show: true,
-                        type: 'top',
-                        top: {
-                            status: 'z-warn',
-                            msg: res.msg
-                        }
-                    })
+                }).catch( err => {
+                    this.$store.dispatch('bubble_fail', err);
                 });
             })
         },
@@ -310,9 +244,7 @@ export default {
                 }
             }).then( filename => {
                 if (this.step == 1) {
-                    this.$store.dispatch('user_unboundPhone', {
-                        //todo
-                    }).then(() => {
+                    this.$store.dispatch('user_unboundPhone').then( (res) => {
                         this.step = 2;
                         this.phone = '';
                         this.pic_code = '';
@@ -330,20 +262,13 @@ export default {
                             time: 0
                         })
                         this.getCode();
-                    }).catch(res => {
-                        this.$store.dispatch('bubble_showBubble', {
-                            show: true,
-                            type: 'top',
-                            top: {
-                                status: 'z-warn',
-                                msg: res.msg
-                            }
-                        })
+
+                        this.$store.dispatch('bubble_success', res);
+                    }).catch( err => {
+                        this.$store.dispatch('bubble_fail', err);
                     }); 
                 } else {
-                    this.$store.dispatch('user_reBindPhone', {
-                        //todo
-                    }).then(() => {
+                    this.$store.dispatch('user_reBindPhone').then( (res) => {
                         this.step = 1;
                         this.phone = '';
                         this.pic_code = '';
@@ -362,23 +287,13 @@ export default {
                         })
                         this.getCode();
 
-                        this.$store.dispatch('bubble_showBubble', {
-                            show: true,
+                        this.$store.dispatch('bubble_success', {
+                            ret: 0,
                             type: 'top',
-                            top: {
-                                status: 'z-default',
-                                msg: '绑定成功'
-                            }
-                        })
-                    }).catch(res => {
-                        this.$store.dispatch('bubble_showBubble', {
-                            show: true,
-                            type: 'top',
-                            top: {
-                                status: 'z-warn',
-                                msg: res.msg
-                            }
-                        })
+                            msg: '绑定成功'
+                        });
+                    }).catch( err => {
+                        this.$store.dispatch('bubble_fail', err);
                     }); 
                 }
                 

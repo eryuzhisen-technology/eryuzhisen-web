@@ -7,8 +7,9 @@
 <!-- html代码 -->
 <template>
 <div>
-	<HeaderDom :data="header" />
+	<HeaderDom />
 	<div class="m-company">
+    <div class="m-company-wrap">
 		<div class="m-company-content">
 			<MenuLeft :data="menuLeft" :type="menuLeftType" />
 			<div class="company-right">
@@ -22,6 +23,7 @@
 				</div>
 			</div>
 		</div>
+    </div>
 	</div>
 	<FooterDom />
 	<SideMenu />
@@ -29,24 +31,9 @@
 </template>
 
 <script>
-import HeaderDom from '../../component/header.vue';
-import FooterDom from '../../component/footer.vue';
-import ListDom from '../../component/article.list.vue';
-import MenuLeft from '../../component/menu.left.vue';
-import SideMenu from '../../component/sideMenu.vue';
 export default {
-    components: {
-        HeaderDom: HeaderDom,
-        FooterDom: FooterDom,
-        ListDom: ListDom,
-        MenuLeft: MenuLeft,
-        SideMenu: SideMenu
-    },
     data () {
     	return {
-            header: {
-                
-            },
     		menuLeftType: 'about',
             menuLeft: {
                 about: {

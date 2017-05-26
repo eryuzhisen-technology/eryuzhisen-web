@@ -2315,4 +2315,19 @@ window.plupload = plupload;
 }(window, mOxie));
 
 
-export default plupload;
+var Vue;
+function install(_Vue) {
+    if (Vue) {
+        console.error(
+            '[plupload] already installed. Vue.use(plupload) should be called only once.'
+        );
+        return
+    }
+    Vue = _Vue;
+    Vue.prototype.$plupload = plupload;
+}
+
+export default {
+    install: install,
+    version: '1.0.0'
+};

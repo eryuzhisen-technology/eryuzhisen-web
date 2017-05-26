@@ -1,156 +1,297 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (reference) '../common/css/common';
-@module: c-comment-info;
+    @module: c-comment-info;
 
-.@{module} {
-    padding: 0 60px;
-    & &-wrap {
-        padding: 30px 0;
-        .default_border-b-6;    
+    .@{module} {
+        & &-wrap {
+            margin-bottom: 30px;
+        }
     }
-}
-.@{module}__top {
-    height: 30px;
-    overflow: hidden;
-    margin-bottom: 10px;
-    & .top__img {
-        float: left;
-        width: 30px;
-        height: 30px;
-        margin-right: 10px;
-        .default_border-r-50;
-        .default_backgroud_3;
+    .@{module}-list {
+        padding: 20px 30px 20px 20px;
+        .default_border-b-14;
+        .default_backgroud_2;
+        &.z-unread {
+            .default_backgroud_3;
+        }
     }
-    & .top__name {
-        float: left;
-        height: 30px;
-        line-height: 30px;
-        margin-right: 5px;
-        .default_font_size_3;
-        .default_color_3;
-    }
-    & .top__detail {
-        float: right;
-        height: 30px;
-        line-height: 30px;
-        & a {
-            .default_font_size_2;
+    .@{module}__top {
+        height: 20px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        & .top__img {
+            float: left;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+            .default_border-r-50;
+            .default_backgroud_5;
+        }
+        & .top__name {
+            float: left;
+            height: 20px;
+            line-height: 20px;
+            .default_font_size_1;
             .default_color_3;
         }
-    }
-}
-.@{module}__comment {
-    padding-left: 40px;
-    margin-bottom: 20px;
-    .default_color_2;
-    .default_font_size_3;
-    & .comment__top {
-        margin-bottom: 20px;
-        .default_color_3;
-        & strong {
-            .default_color_6;
-            .default_font_family_bolder;
-        }
-        & span {
-            .default_color_5;
+        & .top__detail {
+            float: right;
+            height: 20px;
+            line-height: 20px;
+            & a {
+                .default_font_size_1;
+                .default_color_3;
+            }
         }
     }
-    & .comment__body {
-        line-height: 1.5rem;
-        margin-bottom: 20px;
-    }
-    & .comment__bottom {
-        line-height: 1.5rem;
-        padding: 20px 30px;
-        .default_border-r-4;
-        .default_border-5;
-        .default_color_3;
-        .default_font_size_3;
-        .default_backgroud_3;
-    }
-}
-.@{module}__form {
-    padding-left: 40px;
-    overflow: hidden;
-    & .form__top {
-        height: 14px;
-        margin-bottom: 30px;
+    .@{module}__comment {
+        padding-left: 30px;
+        margin-bottom: 15px;
+        .default_color_2;
         .default_font_size_2;
-        .default_color_3;
+        & .comment__top {
+            margin-bottom: 15px;
+            .default_color_3;
+            & strong {
+                .default_color_6;
+            }
+            & span {
+                .default_color_5;
+            }
+        }
+        & .comment__body {
+            line-height: 1.5rem;
+            margin-bottom: 15px;
+        }
+        & .comment__bottom {
+            line-height: 1.5rem;
+            padding: 20px;
+            .default_border-r-4;
+            .default_color_3;
+            .default_font_size_2;
+            .default_backgroud_7;
+        }
     }
-    & .form__top__jubao {
-        float: left;
-        .default_pointer;
-    }
-    & .form__top__record {
-        float: right;
-        .default_pointer;
-        .default_color_7;
-    }
-    & .form__body {
-        width: 100%;
+    .@{module}__form {
+        padding-left: 30px;
         overflow: hidden;
+        & .form__top {
+            height: 12px;
+            margin-bottom: 15px;
+            .default_font_size_1;
+            .default_color_3;
+        }
+        & .form__top__jubao {
+            float: left;
+            .default_pointer;
+            .default_font_size_1;
+            .default_color_3;
+            &:hover {
+                .default_color_1;
+            }
+        }
+        & .form__top__record {
+            float: right;
+            .default_pointer;
+            .default_font_size_1;
+            .default_color_2;
+            &:hover {
+                .default_color_1;
+            }
+        }
+        & .form__body {
+            width: 100%;
+            overflow: hidden;
+        }
+        & .form__body__write {
+            float: left;
+            width: 520px;
+            height: 40px;
+            .default_backgroud_4;
+            & input {
+                width: 520px;
+                height: 40px;
+                line-height: 40px;
+                padding: 0 20px;
+                .default_color_4;
+                .default_font_size_2;    
+            }
+        }
+        & .form_body__commit {
+            float: right;
+            width: 70px;
+            height: 40px;
+            line-height: 40px;
+            text-align: center;
+            .default_border-r-4;
+            .default_color_2;
+            .default_font_size_2;
+            .default_backgroud_5;
+            .default_pointer;
+            &:hover {
+                .default_color_1;
+            }
+        }
     }
-    & .form__body__write {
-        width: 560px;
-        height: 80px;
-        padding: 20px 30px;
-        margin-bottom: 20px;
-        .default_color_4;
-        .default_font_size_3;        
-    }
-    & .form_body__commit {
-        float: right;
-        width: 80px;
-        height: 40px;
-        line-height: 40px;
-    }
-}
 </style>
 
 <!-- html代码 -->
 <template>
 <div class="c-comment-info">
 <div class="c-comment-info-wrap">
-    <div class="c-comment-info__top">
-        <div class="top__img"></div>
-        <div class="top__name">{{data.name}}</div>
-        <div class="top__detail"><a href="#none">查看详情</a></div>
-    </div>
-    <div class="c-comment-info__comment">
-        <div class="comment__top" v-html="data.title"></div>
-        <div class="comment__body">{{data.comment}}</div>
-        <div v-if="data.record" class="comment__bottom">{{data.record}}</div>
-    </div>
-    <div class="c-comment-info__form">
-        <div class="form__top">
-            <div class="form__top__jubao">举报</div>
-            <div @click="recordSwitch" class="form__top__record" :class="{'z-warn' : !write}">{{write ? '收起回复' : '回复'}}</div>
-        </div>
-        <div v-if="write" class="form__body">
-            <div class="form__body__write cpm_form_textarea">
-                <textarea placeholder="回复TA..."></textarea>
+    <div class="c-comment-info-list" v-for="(data, index) in message.list" :class="{'z-unread': data.read == 0}">
+        <div class="c-comment-info__top">
+            <div class="top__img">
+                {{data.message.sender.avatar_utl}}
             </div>
-            <div class="form_body__commit cpm_button_default">提交</div>
+            <div class="top__name">{{data.message.sender.nick_name}}</div>
+        </div>
+        <div class="c-comment-info__comment">
+            <div class="comment__top" v-html="data.message.content.title"></div>
+            <div class="comment__body">{{data.message.content.content}}</div>
+            <div v-if="data.message.content.cite" class="comment__bottom">{{data.message.content.cite}}</div>
+        </div>
+        <div class="c-comment-info__form">
+            <div class="form__top">
+                <div class="form__top__jubao" @click="addReport(data.message.sender.user_id)">举报</div>
+                <div @click="recordSwitch(index, data.msg_id, data.read)" class="form__top__record">{{recordIndex == index ? '收起回复' : '回复'}}</div>
+            </div>
+            <div v-if="recordIndex == index" class="form__body">
+                <div class="form__body__write">
+                    <input type="text" placeholder="回复TA..." v-model="comment" />
+                </div>
+                <div class="form_body__commit" @click="emitComment(data.message.arguments)">提交</div>
+            </div>
         </div>
     </div>
+    <Empty 
+        class="content-empty" 
+        v-if="message.count <= 0"
+    />
 </div>
+<Page 
+    :count="message.count" 
+    :length="pageSize"
+    :index="pageIndex"
+    @page_switch="pageSwitch"
+/>
 </div>
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
-    props: ['data'],
     data (){
         return {
-            write: false
+            recordIndex: -1,
+            pageIndex: 1,
+            pageSize: 5,
+
+            comment: '',
+            messageType: 2
         }
     },
+    computed: mapState({
+        message: state => state.message.message
+    }),
     methods: {
-        recordSwitch (){
-            this.write = !this.write;
+        recordSwitch (index, msg_id, read){
+            if (index == this.recordIndex) {
+                this.recordIndex = -1;
+            } else {
+                this.recordIndex = index;    
+            }
+
+            // 标记已读
+            if (read == 0) {
+                this.$store.dispatch('message_markMessage', {
+                    msgType: this.messageType,
+                    msgId: msg_id
+                }).then( res => {
+                    this.$eventHub.$emit('getUnreadMessage');
+                    this.getMessageList();
+
+                    this.$store.dispatch('bubble_success', res);
+                }).catch ( err => {
+                    this.$store.dispatch('bubble_fail', err);
+                })
+            }
+        },
+        getMessageList (){
+            this.$store.dispatch('message_getMessageList', {
+                "page": this.pageIndex,
+                "pageSize": this.pageSize,
+                "pagination": 1,
+                "messageType": this.messageType
+            }).then( res => {
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            });
+        },
+        pageSwitch (pageIndex){
+            if (this.pageIndex == pageIndex) {
+                return false;
+            }
+            this.pageIndex = pageIndex;
+            this.getMessageList();
+        },
+        // 举报
+        addReport (content_id){
+            this.$store.dispatch('bubble_showBubble', {
+                show: true,
+                type: 'report',
+                report: {
+                    content_id: content_id,
+                    content_type: 3
+                }
+            })
+        },
+        // 获取详情
+        getMessageDetail (msgId){
+            this.$store.dispatch('message_getMessageDetail', {
+                "msgId": msgId
+            }).then( res => {
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            });
+        },
+        // 新增评论
+        addComment (payload){
+            this.$store.dispatch('opus_addComment', {
+                "to_comment_id": payload.to_comment_id, //一级评论id,表示针对那条评论的评论(有点绕),类似所有二级评论的父级.没有则表示当前发表的就是一级评论
+                "to_reply_comment_id": payload.to_reply_comment_id, //一级评论下的二级回复性评论id,表示针对那条二级评论做的回复('xxx回复了xxx',在列表查询时需要使用),当前发表的是一级评论不需要带此参数.
+                "comment": this.comment, //评论
+                "catalog_id": payload.catalog_id, //目录id,必填
+                "chapter_id": payload.chapter_id //章节id,没有则表示针对目录的评论
+            }).then( res => {
+                this.comment = '';
+                this.recordIndex = -2;
+                this.getMessageList();
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        // 评论
+        emitComment (option){
+            if (!option) {
+                return false;
+            }
+            this.addComment({
+                "to_reply_comment_id": option.to_comment_id, //一级评论下的二级回复性评论id,表示针对那条二级评论做的回复('xxx回复了xxx',在列表查询时需要使用),当前发表的是一级评论不需要带此参数.
+                "comment": this.comment, //评论
+                "catalog_id": option.catalog_id, //目录id,必填
+                "chapter_id": option.chapter_id //
+            })
         }
+    },
+    mounted (){
+        // 获取精选列表
+        this.getMessageList();
     }
 }
 </script>

@@ -7,18 +7,61 @@
     position: fixed;
     bottom: 160px;
     right: 60px;
+    z-index: 100;
 	width: 60px;
     height: 60px;
+    transition: all @default_speed_1;
     .default_border-r-50;
-    .default_backgroud_7;
-    .skin_icon_side_top_1;
+    .default_backgroud_6;
     .default_pointer;
+    & span {
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: block;
+        width: 100%;
+        height: 100%;
+        transition: opacity @default_speed_1;
+        &:nth-child(1) {
+            opacity: 1;
+            .skin_icon_top_1;
+        }
+        &:nth-child(2) {
+            opacity: 0;
+            .skin_icon_top_1_on;
+        }
+        
+    }
+    & .c-dialog__tip {
+        top: 50%;
+        display: none;
+        transform: translate(-120%, -50%);
+    }
+    &:hover {
+        .default_border_shadow_4;
+    }
+    &:hover span:nth-child(1) {
+        opacity: 0;
+    }
+    &:hover span:nth-child(2) {
+        opacity: 1;
+    }
+    &:hover .c-dialog__tip {
+        display: block;
+    }
 }
 </style>
 
 <!-- html代码 -->
 <template>
-	<div v-show="hasScroll" class="c-side-menu" @click="top"></div>
+	<div v-show="hasScroll" class="c-side-menu" @click="top">
+        <span></span>   
+        <span></span>
+        <div class="c-dialog__tip">
+            <div class="tip-arrow"></div>
+            <div class="tip-text">置顶</div>
+        </div>
+    </div>
 </template>
 
 <script>
