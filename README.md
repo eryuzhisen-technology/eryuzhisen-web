@@ -2,6 +2,10 @@
 > * Web前端代码结构
 > * 项目框架实现：webpack + vue + vuex + less
 > * JS文件规范：babel + ES6
+> * vue文件规范：vue文件包括了 js 、 html、 css
+> 	* js 用vue框架写，处理业务逻辑、渲染逻辑，数据结构
+>   * html 用template模块结合vue指令来写，尽量不写复杂的条件或者执行代码
+>   * css 样式用less语言来写，css有default.less设计规范，common.less通用基类样式，component.less通用组件样式
 
 ## 项目结构
 ```
