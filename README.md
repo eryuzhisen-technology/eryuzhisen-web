@@ -17,7 +17,8 @@
     |----images ## 图片资源
     |----js ## js模块
     |----manifest.json ## 项目模块依赖结构
-----p   ## php代码文件
+----n  ## node代码文件 -- 后续会抽离出去 
+----p  ## php代码文件 -- 后续会抽离出去
     |----application  ## 应用模块
     |----system       ## 系统核心模块
     |----index.php    ## php入口文件

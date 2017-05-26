@@ -2,7 +2,7 @@
 # 文档文件
 doc
 # node_modules模块
-node_modules
+node_modules/
 
 # webpack - 编译文件
 .happypack
