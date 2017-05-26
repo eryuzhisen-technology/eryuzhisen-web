@@ -1,2 +1,11 @@
 
-doc/API协议/耳语之森协议.bin
+# 文档文件
+doc
+# node_modules模块
+node_modules
+
+
+# 系统其他文件
+.svn
+.DS_Store
+.git
