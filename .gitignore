@@ -4,6 +4,8 @@ doc
 # node_modules模块
 node_modules
 
+# webpack - 编译文件
+.happypack
 
 # 系统其他文件
 .svn
