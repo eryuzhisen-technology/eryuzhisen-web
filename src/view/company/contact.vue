@@ -11,10 +11,10 @@
     <div class="m-company">
 	<div class="m-company-wrap">
 		<div class="m-company-content">
-			<MenuLeft :data="menuLeft" :type="menuLeftType" @typeswitch="changeType" />
-			<div class="company-right">
+			<MenuTop :data="menuTop" :type="menuTopType" />
+			<div class="company-bottom">
 				<div class="title">
-					{{menuLeft[menuLeftType].title}}
+					{{menuTop[menuTopType].title}}
 				</div>
 				<div class="content m-contact">
                     <div class="item">
@@ -39,37 +39,34 @@
 export default {
     data () {
     	return {
-    		menuLeftType: 'contact',
-            menuLeft: {
-                about: {
-                    title: '关于我们',
-                    url: 'about.html'
-                },
-                xieyi: {
-                    title: '用户协议',
-                    url: 'about.html'
-                },
-                yinsi: {
-                    title: '隐私政策',
-                    url: 'about.html'
-                },
-                chanquan: {
-                    title: '知识全产',
-                    url: 'about.html'
-                },
-                jubao: {
-                    title: '侵权举报',
-                    url: 'about.html'
-                },
-                shengming: {
-                    title: '免责声明',
-                    url: 'about.html'
-                },
-                contact: {
-                    title: '联系我们',
-                    url: 'contact.html'
-                }
-            }
+			menuTopType: 'contact',
+			menuTop: {
+				about: {
+					title: '关于我们',
+					url: 'about.html'
+				},
+				agreement: {
+					title: '用户协议',
+					url: 'agreement.html'
+				},
+				privacy: {
+					title: '隐私政策',
+					url: 'privacy.html'
+				},
+				statement: {
+					title: '原创声明',
+					url: 'statement.html'
+				},
+				standard: {
+					title: '社区规范',
+					url: 'standard.html'
+				},
+				contact: {
+					title: '联系我们',
+					url: 'contact.html',
+					isActive:true
+				}
+			}
     	}
     },
     methods: {

@@ -22,7 +22,7 @@ Vue.component('Empty', Empty)
 Vue.component('Edit', Edit)
 Vue.component('UploadImg', UploadImg)
 
-import Back from './Back.vue'
+import Back from './back.vue'
 new Vue({
 	el: '#app',
 	store,

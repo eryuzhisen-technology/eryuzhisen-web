@@ -22,11 +22,11 @@ Vue.component('Empty', Empty)
 Vue.component('Edit', Edit)
 Vue.component('UploadImg', UploadImg)
 
-import contact from './contact.vue'
+import agreement from './agreement.vue'
 new Vue({
 	el: '#app',
 	store,
 	render (h) {
-		return h(contact);
+		return h(agreement);
 	}
 })

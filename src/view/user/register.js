@@ -22,7 +22,7 @@ Vue.component('Empty', Empty)
 Vue.component('Edit', Edit)
 Vue.component('UploadImg', UploadImg)
 
-import Register from './Register.vue'
+import Register from './register.vue'
 new Vue({
 	el: '#app',
 	store,

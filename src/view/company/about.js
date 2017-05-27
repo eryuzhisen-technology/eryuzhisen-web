@@ -2,7 +2,7 @@ import {Vue, store} from '../../common/js/main'
 
 import HeaderDom from '../../component/header.vue';
 import FooterDom from '../../component/footer.vue';
-import MenuLeft from '../../component/menu.left.vue';
+import MenuTop from '../../component/menu.top.vue';
 import SideMenu from '../../component/sideMenu.vue';
 import Bubble from '../../component/bubble.vue';
 import Feedback from '../../component/feedback.vue'
@@ -13,7 +13,7 @@ import UploadImg from '../../component/uploadImg.vue'
 
 Vue.component('HeaderDom', HeaderDom)
 Vue.component('FooterDom', FooterDom)
-Vue.component('MenuLeft', MenuLeft)
+Vue.component('MenuTop', MenuTop)
 Vue.component('SideMenu', SideMenu)
 Vue.component('Bubble', Bubble)
 Vue.component('Feedback', Feedback)

@@ -22,7 +22,7 @@ Vue.component('Empty', Empty)
 Vue.component('Edit', Edit)
 Vue.component('UploadImg', UploadImg)
 
-import Login from './Login.vue'
+import Login from './login.vue'
 new Vue({
 	el: '#app',
 	store,
