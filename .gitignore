@@ -3,7 +3,7 @@
 doc
 
 # 生产文件
-
+dist
 
 # node_modules模块
 node_modules/
