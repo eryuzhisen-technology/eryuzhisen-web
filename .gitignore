@@ -2,6 +2,9 @@
 # 文档文件
 doc
 
+# 生产文件
+
+
 # node_modules模块
 node_modules/
 
