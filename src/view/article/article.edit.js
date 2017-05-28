@@ -1,4 +1,3 @@
-import '../../common/js/unit'
 import {Vue, store} from '../../common/js/main'
 
 import HeaderDom from '../../component/header.vue';

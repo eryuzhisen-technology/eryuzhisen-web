@@ -21,7 +21,7 @@
         position: relative;
         z-index: 1;
         width: 100%;
-        .default_backgroud_2;
+        .default_backgroud_3;
         .clearfix:after {
             content: '';
             display: table;
@@ -118,7 +118,7 @@
     .wangEditor-menu-container {
         width: 100%;
         height: 50px;
-        .default_backgroud_7;
+        .default_backgroud_2;
         // 菜单组
         .menu-group {
             float: left;
@@ -255,9 +255,9 @@
 
     .c-edit {
         min-height: 700px;
-        & .c-edit-content {
+        & .c-edit-content-wrap {
             min-height: 650px;
-            overflow-y: auto;
+            overflow: hidden;
         }
     }
 </style>
@@ -372,14 +372,13 @@ export default {
         group.append(save).append(scan).append(publish);
         $('.wangEditor-menu-container').append(group);
 
+        // 菜单事件
         save.on('click', res => {
             this.update();
         })
-
         publish.on('click', res => {
             this.publish();
         })
-
         scan.on('click', res => {
             this.scan();
         })
@@ -388,9 +387,27 @@ export default {
         this.edit_init = true;
         this.$emit('edit_init', this.editor);
 
-        $('.c-edit-content').height($(window).height()  - 120);
+        // 设置iscroll
+        $('.c-edit-content').wrap($('<div id="c-edit-content-wrap" class="c-edit-content-wrap"></div>'))
+
+        // 设置高度
+        $('.c-edit-content').css('height', 'auto');
+        $('.c-edit-content-wrap').height($(window).height()  - 120);
         $(window).on('resize', function(){
-            $('.c-edit-content').height($(window).height() - 120);
+            $('.c-edit-content-wrap').height($(window).height() - 120);
+        })
+
+        // 创建iscroll
+        this.chapterMenu = new this.$iScroll('#c-edit-content-wrap', {
+            bounce: false,
+            scrollbars: true,
+            mouseWheel: true,
+            interactiveScrollbars: true,
+            shrinkScrollbars: 'scale',
+            // fadeScrollbars: true
+        });
+        $(".c-edit-content").on('keyup', res => {
+            this.chapterMenu.refresh();
         })
     }
 }

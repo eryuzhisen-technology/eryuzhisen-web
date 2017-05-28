@@ -30,10 +30,7 @@
             .default_backgroud_4;
             .default_border-rr-5;
             & .catalog-hd {
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 2;
+                position: relative;
                 width: 100%;
                 height: 60px;
                 padding: 15px 0;
@@ -81,7 +78,17 @@
             & .catalog-menu {
                 width: 100%;
                 height: 100%;
-                padding-top: 60px;
+                & .catalog-menu-warp {
+                    width: 100%;
+                }
+                & .iScrollVerticalScrollbar {
+                    display: none!important;
+                }
+                &:hover {
+                    & .iScrollVerticalScrollbar {
+                        display: block!important;
+                    }
+                }
                 & .catalog-menu_item {
                     position: relative;
                     height: 50px;
@@ -153,10 +160,7 @@
             .default_border-rr-5;
             .default_backgroud_3;
             & .chapter-hd {
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 2;
+                position: relative;
                 width: 100%;
                 height: 60px;
                 line-height: 60px;
@@ -195,10 +199,19 @@
             & .chapter-menu {
                 width: 100%;
                 height: 100%;
-                padding-top: 60px;
-                overflow-y: auto;
+                & .chapter-menu-warp {
+                    width: 100%;
+                }
+                & .iScrollVerticalScrollbar {
+                    display: none!important;
+                }
+                &:hover {
+                    & .iScrollVerticalScrollbar {
+                        display: block!important;
+                    }
+                }
                 & .chapter-menu_item {
-                     position: relative;
+                    position: relative;
                     height: 50px;
                     line-height: 50px;
                     padding: 0 20px;
@@ -238,6 +251,11 @@
                         .default_font_size_2;
                         .default_color_2;
                     }
+                    & .c-dialog__tip {
+                        width: 70px;
+                        top: -50px;
+                        display: none;
+                    }
                     &.z-active {
                         border-left: 5px solid @default_backgroud_13;
                         .default_backgroud_5;
@@ -253,6 +271,9 @@
                             .default_color_1;
                         }
                         & .chapter-menu_item-delete {
+                            display: block;
+                        }
+                        & .c-dialog__tip {
                             display: block;
                         }
                     }
@@ -338,7 +359,8 @@
                     <div class="catalog-hd_back" @click="formback">返</div>
                     <div class="catalog-hd_add" @click="addCatalog">创建新故事</div>
                 </div>
-                <div class="catalog-menu">
+                <div class="catalog-menu" ref="catalogMenu">
+                <div class="catalog-menu-wrap">
                     <div 
                         class="catalog-menu_item" v-for="item in article.lists" 
                         @click="getChapterList(item.catalog_id, true)" 
@@ -358,23 +380,61 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </div>
             <div class="edit-chapter">
                 <div v-if="catalog_id" class="chapter-hd" @click="addEnpry">
                     <div class="chapter-hd_icon"></div>
                     <div class="chapter-hd_text">增加新章节</div>
                 </div>
-                <div v-if="lists && lists.length" class="chapter-menu">
+                <div v-if="lists && lists.length" class="chapter-menu" ref="chapterMenu">
+                <div class="chapter-menu-wrap">
                     <div 
                         class="chapter-menu_item"
                         v-for="item in lists" 
                         :class="{'z-active': chapter_id == item.chapter_id, 'z-finish': item.chapter_status == 0}"
                         @click="getChapterDetail(item.chapter_id)" 
                     >
-                        <div class="chapter-menu_item-icon"></div>
+                        <div class="chapter-menu_item-icon">
+                            <div class="c-dialog__tip z-top">
+                                <div class="tip-arrow"></div>
+                                <div class="tip-text">{{item.chapter_status == 0 ? '已发布' : '未发布'}}</div>
+                            </div>
+                        </div>
                         <div class="chapter-menu_item-text">{{ chapter_id != item.chapter_id ? item.chapter_title : title}}</div>
-                        <div class="chapter-menu_item-delete" @click.stop="remove(item.chapter_id)"></div>
+                        <div class="chapter-menu_item-delete" @click.stop="remove(item.chapter_id, item.chapter_status == 0)"></div>
                     </div>
+                    <div 
+                        class="chapter-menu_item"
+                        v-for="item in lists" 
+                        :class="{'z-active': chapter_id == item.chapter_id, 'z-finish': item.chapter_status == 0}"
+                        @click="getChapterDetail(item.chapter_id)" 
+                    >
+                        <div class="chapter-menu_item-icon">
+                            <div class="c-dialog__tip z-top">
+                                <div class="tip-arrow"></div>
+                                <div class="tip-text">{{item.chapter_status == 0 ? '已发布' : '未发布'}}</div>
+                            </div>
+                        </div>
+                        <div class="chapter-menu_item-text">{{ chapter_id != item.chapter_id ? item.chapter_title : title}}</div>
+                        <div class="chapter-menu_item-delete" @click.stop="remove(item.chapter_id, item.chapter_status == 0)"></div>
+                    </div>
+                    <div 
+                        class="chapter-menu_item"
+                        v-for="item in lists" 
+                        :class="{'z-active': chapter_id == item.chapter_id, 'z-finish': item.chapter_status == 0}"
+                        @click="getChapterDetail(item.chapter_id)" 
+                    >
+                        <div class="chapter-menu_item-icon">
+                            <div class="c-dialog__tip z-top">
+                                <div class="tip-arrow"></div>
+                                <div class="tip-text">{{item.chapter_status == 0 ? '已发布' : '未发布'}}</div>
+                            </div>
+                        </div>
+                        <div class="chapter-menu_item-text">{{ chapter_id != item.chapter_id ? item.chapter_title : title}}</div>
+                        <div class="chapter-menu_item-delete" @click.stop="remove(item.chapter_id, item.chapter_status == 0)"></div>
+                    </div>
+                </div>
                 </div>
             </div>
             <div v-if="chapter && chapter_id != -1" class="edit-content">
@@ -503,14 +563,18 @@ export default {
         },
 
         // 删除草稿
-        remove (chapterId){
+        remove (chapterId, isPublish){
             var that = this;
+            if (!isPublish) {
+                that.deleteChapter(chapterId);
+                return;
+            }
             this.$store.dispatch('bubble_showBubble', {
                 show: true,
                 type: 'warn',
                 warn: {
-                    title: '确定要删除',
-                    content: '删除后将无法恢复，请谨慎处理',
+                    title: '确定要删除已发布的章节？',
+                    content: '若删除已发布的章节，读者也将永远无法看见，请谨慎操作',
                     comfireFn: function(){
                         that.deleteChapter(chapterId)
                     }
@@ -591,11 +655,23 @@ export default {
 
         // 发布内容
         publish (value){
+            var that = this;
+
             this.content = value;
             if (!this.check(true)) {
                 return
             }
-            this.updateChapter(0);
+            this.$store.dispatch('bubble_showBubble', {
+                show: true,
+                type: 'warn',
+                warn: {
+                    title: '确定发布吗？',
+                    content: '章节发布后不可修改编辑，只能删除重新发布，请谨慎检查',
+                    comfireFn: function(){
+                        that.updateChapter(0);
+                    }
+                }
+            })
         },
 
         // 预览内容
@@ -604,13 +680,14 @@ export default {
 
             var chapaterEdit_edit = this.$version.chapaterEdit_edit;
             var key = chapaterEdit_edit.key + '_' + this.catalog_id + '_' + this.chapter_id;
-            var chapter = this.$cache.getStore(chapaterEdit_edit.key, chapaterEdit_edit.version);
+            var chapter = this.$cache.getStore(chapaterEdit_edit.key , chapaterEdit_edit.version) || {};
                 chapter.chapter_title = this.title;
                 chapter.chapter_desc = this.desc;
                 chapter.chapter_content = this.content;
             this.$cache.setStore(key, chapter, chapaterEdit_edit.version, chapaterEdit_edit.time);
 
-            window.location.href = './article.read.html?isScan=1&chapter_id='+this.chapter_id+'&catalog_id='+this.catalog_id;
+            var href = './article.read.html?isScan=1&chapter_id='+this.chapter_id+'&catalog_id='+this.catalog_id;
+            window.open(href);  
         },
 
         // 更新内容
@@ -637,6 +714,7 @@ export default {
                         chapter.chapter_content = this.content;
                     this.$cache.setStore(key, chapter, chapaterEdit_edit.version, chapaterEdit_edit.time);
                 } else {
+                    that.getChapterList(that.catalog_id, true);
                     this.$store.dispatch('bubble_showBubble', {
                         show: true,
                         type: 'complete',
@@ -647,10 +725,10 @@ export default {
                             cancel (){
                                 that.isCreate = true;
                                 // that.addEnpry();
-                                that.getChapterList(that.catalog_id, false);
                             },
                             comfire (){
-                                window.location.href = './article.read.html?catalog_id='+ that.catalog_id +'&chapter_id='+ that.chapter_id;
+                                var href = './article.read.html?catalog_id='+ that.catalog_id +'&chapter_id='+ that.chapter_id;
+                                window.open(href);
                             }
                         }
                     })
@@ -782,6 +860,39 @@ export default {
         this.$eventHub.$on('updateCatalog_success', option => {
             this.getMyCatalogList();
         });
+    },
+    updated (){
+        if (this.$refs.catalogMenu) {
+            if (!this.catalogMenu) {
+                // 创建iscroll
+                this.catalogMenu = new this.$iScroll(this.$refs.catalogMenu, {
+                    bounce: false,
+                    scrollbars: true,
+                    mouseWheel: true,
+                    interactiveScrollbars: true,
+                    shrinkScrollbars: 'scale',
+                    // fadeScrollbars: true
+                });
+            } else {
+                this.catalogMenu.refresh();
+            }
+        }
+
+        if (this.$refs.chapterMenu) {
+            if (!this.chapterMenu) {
+                // 创建iscroll
+                this.chapterMenu = new this.$iScroll(this.$refs.chapterMenu, {
+                    bounce: false,
+                    scrollbars: true,
+                    mouseWheel: true,
+                    interactiveScrollbars: true,
+                    shrinkScrollbars: 'scale',
+                    // fadeScrollbars: true
+                });
+            } else {
+                this.chapterMenu.refresh();
+            }
+        }
     },
     mounted (){
         // 获取url的参数

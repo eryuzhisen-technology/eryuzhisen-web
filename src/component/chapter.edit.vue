@@ -459,7 +459,7 @@
                         <div class="tip-text">{{reg_old_img_con}}</div>
                     </div>
                     <span id="old_upload_image_select"></span>
-                    <input type="text" disabled placeholder="上传翻译授权截图证明" v-model="oldimg" />
+                    <input type="text" disabled placeholder="上传翻译授权截图证明" v-model="oldimgname" />
                     <UploadImg 
                         type="2"
                         select="old_upload_image_select"
@@ -537,9 +537,9 @@
                 </div>
             </div>
             <div class="cpm_clear"></div>
-            <div class="create-top-agree" :class="{'z-on': agree}" @click="agreeSwitch">
-                <em></em>
-                <p>我已阅读并同意遵守 <a href='./about.html'>《耳语之森原创声明及相关功能使用协议》 </a>
+            <div class="create-top-agree" :class="{'z-on': agree}">
+                <em @click="agreeSwitch"></em>
+                <p @click="agreeSwitch">我已阅读并同意遵守 <a href='./about.html'>《耳语之森原创声明及相关功能使用协议》 </a>
                 </p>
             </div>
         </div>
@@ -574,6 +574,7 @@ export default {
             control_id: -1,
             oldname: '',
             oldimg: '',
+            oldimgname: '',
             oldurl: '',
             oldauthor: '',
             share: '允许转载',
@@ -731,8 +732,9 @@ export default {
             // 设置上传的图片
             this.image = fileUrl;
         },
-        old_uploaded (fileUrl){
+        old_uploaded (fileUrl, name){
             // 设置上传的图片
+            this.oldimgname = name;
             this.oldimg = fileUrl;
         },
         save (){

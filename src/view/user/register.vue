@@ -12,6 +12,7 @@
     <div class="m-user-dialog">
     	<div class="m-user-dialog__tit">注册账号</div>
     	<div class="m-user-dialog__con">
+            <!-- 邀请码 -->
             <div class="m-user-dialog__item">
                 <div v-if="!yao_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -21,6 +22,8 @@
                     <input name="yao" type="text" placeholder="邀请码" @keyup.enter="register" v-model="yao" autocomplete="new-password" />
                 </div>
             </div>
+
+            <!-- 手机号 -->
     		<div class="m-user-dialog__item">
                 <div v-if="!phone_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -30,6 +33,8 @@
     				<input name="phone" type="text" placeholder="手机号" @keyup.enter="register" v-model="phone" autocomplete="new-password" />
     			</div>
     		</div>
+
+            <!-- 密码 -->
     		<div class="m-user-dialog__item">
                 <div v-if="!password_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -39,6 +44,8 @@
     				<input name="password" type="password" placeholder="密码" @keyup.enter="register" v-model="password" autocomplete="new-password" />
     			</div>
     		</div>
+
+            <!-- 图形码 -->
     		<div class="m-user-dialog__item">
                 <div v-if="!pic_code_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -49,6 +56,8 @@
     				<img v-if="isCodeCan" @click="getCode" :src="'data:image/png;base64,' + pic_vcode" />
     			</div>
     		</div>
+
+            <!-- 验证码 -->
     		<div class="m-user-dialog__item z-60">
                 <div v-if="!phone_vcode_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -57,18 +66,24 @@
     			<div class="m-user-dialog__input cpm_form_input m-user-dialog__input-phone cpm_left" :class="{'z-error': !phone_vcode_reg}">
     				<input name="phone_vcode" type="text" placeholder="验证码" @keyup.enter="register" v-model="phone_vcode" autocomplete="new-password" />
     			</div>
-    			<div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_right" @click="getPhoneVerifyCode">{{timeText}}</div>
+    			<div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_right cpm_button_weak" @click="getPhoneVerifyCode">{{timeText}}</div>
     		</div>
             <div class="cpm_clear"></div>
+
+            <!-- 注册按钮 -->
     		<div class="m-user-dialog__item">
     			<div class="m-user-dialog__btn m-user-dialog__btn-register cpm_button_default" @click="register">注册</div>
     		</div>
+
+            <!-- 协议 -->
             <div class="m-user-dialog__text m-user-dialog__agree">
                 注册即同意并愿意遵守耳语之森
                 <a href="#none">用户协议</a> 
                 和 
                 <a href="#none">隐私政策</a>
             </div>
+
+            <!-- 登陆跳转 -->
             <div class="m-user-dialog__item m-user-dialog__text">
                 <a class="m-user-dialog__login" href="./login.html">已有账号 立即登录</a>
             </div>
@@ -241,7 +256,8 @@ export default {
     	this.getCode(true);
 
         $(".cpm_form_input input").on('focus', function(){
-            var name = $(this).attr('name');
+            var _this = $(this);
+            var name = _this.attr('name');
             that[name + '_reg'] = true;
         })
         $(".m-user-logo").height($('.m-user-dialog').height());

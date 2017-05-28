@@ -12,6 +12,7 @@
     <div class="m-user-dialog">
     	<div class="m-user-dialog__tit">登录账号</div>
     	<div class="m-user-dialog__con">
+            <!-- 手机号 -->
     		<div class="m-user-dialog__item">
     			<div v-if="!phone_reg" class="c-dialog__tip">
     				<div class="tip-arrow"></div>
@@ -21,6 +22,8 @@
     				<input name="phone" type="text" placeholder="手机号" @keyup.enter="login" v-model="phone" autocomplete="new-password" />
     			</div>
     		</div>
+
+            <!-- 密码 -->
     		<div class="m-user-dialog__item">
     			<div v-if="!password_reg" class="c-dialog__tip">
     				<div class="tip-arrow"></div>
@@ -40,6 +43,8 @@
     				<img v-if="isCodeCan" @click="getCode" :src="'data:image/png;base64,' + pic_vcode" autocomplete="off" />
     			</div>
     		</div>
+
+            <!-- 记住密码 | 忘记密码 -->
     		<div class="m-user-dialog__item">
     			<div class="m-user-dialog__select" @click="select">
     				<span class="select-icon" :class="{on: isSelect}" ></span>记住密码
@@ -47,13 +52,17 @@
     			<a class="m-user-dialog__back" :href="url.back">忘记密码</a>
     		</div>
     		<div class="cpm_clear"></div>
+
+            <!-- 登陆 -->
     		<div class="m-user-dialog__item">
     			<div class="m-user-dialog__btn cpm_button_default" @click="login">登录</div>
     		</div>
+
+            <!-- 注册 -->
     		<div class="m-user-dialog__item m-user-dialog__text">
     			<a class="m-user-dialog__register" :href="url.register">没有账号 立即注册</a>
     		</div>
-            <input class="cmp_hide" type="password" />
+            <input class="cpm_hide" type="password" name="password" />
     	</div>
     </div>
 </div>
@@ -182,7 +191,8 @@ export default {
         this.from = this.$url.getUrlParam('from');
 
         $(".cpm_form_input input").on('focus', function(){
-            var name = $(this).attr('name');
+            var _this = $(this);
+            var name = _this.attr('name');
             that[name + '_reg'] = true;
         })
         $(".m-user-logo").height($('.m-user-dialog').height());

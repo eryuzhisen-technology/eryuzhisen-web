@@ -12,6 +12,7 @@
     <div class="m-user-dialog">
     	<div class="m-user-dialog__tit">找回密码</div>
     	<div class="m-user-dialog__con">
+            <!-- 手机号 -->
     		<div class="m-user-dialog__item">
                 <div v-if="!phone_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -21,6 +22,8 @@
     				<input name="phone" type="text" placeholder="手机号" @keyup.enter="resetPwd" v-model="phone" autocomplete="new-password" />
     			</div>
     		</div>
+
+            <!-- 图形码 -->
     		<div class="m-user-dialog__item">
                 <div v-if="!pic_code_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -31,6 +34,8 @@
     				<img v-if="isCodeCan" @click="getCode" :src="'data:image/png;base64,' + pic_vcode" />
     			</div>
     		</div>
+
+            <!-- 验证码 -->
     		<div class="m-user-dialog__item z-60">
                 <div v-if="!phone_vcode_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -42,6 +47,8 @@
     			<div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_button_warn cpm_right" @click="getPhoneVerifyCode">{{timeText}}</div>
     		</div>
             <div class="cpm_clear"></div>
+
+            <!-- 新密码 -->
             <div class="m-user-dialog__item">
                 <div v-if="!password_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -51,6 +58,8 @@
                     <input name="password" type="password" placeholder="新密码" @keyup.enter="resetPwd" v-model="password" autocomplete="new-password" />
                 </div>
             </div>
+
+            <!-- 确认新密码 -->
             <div class="m-user-dialog__item">
                 <div v-if="!repassword_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
@@ -61,9 +70,12 @@
                 </div>
             </div>
             
+            <!-- 保存并登陆 -->
     		<div class="m-user-dialog__item">
     			<div class="m-user-dialog__btn cpm_button_default" @click="resetPwd">保存并登录</div>
     		</div>
+
+            <!-- 登陆 -->
             <div class="m-user-dialog__item m-user-dialog__text">
     		  <a class="m-user-dialog__register" :href="url.login">想起来了 立即登录</a>
     		</div>

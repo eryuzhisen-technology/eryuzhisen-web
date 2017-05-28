@@ -84,7 +84,8 @@ export default {
             var uploadfilename = this.key + this.random_string(10) + suffix;
             this.uploadfilename[filename] = {
                 src: this.host + '/' + uploadfilename,
-                load: 0
+                load: 0,
+                name: this.random_string(10) + suffix
             };
 
             this.uploader.setOption({
@@ -147,14 +148,16 @@ export default {
                 // 上传成功
                 FileUploaded: (up, file, info) => {
                     var fileUrl = this.uploadfilename[file.name].src;
+                    var name = this.uploadfilename[file.name].name;
                     this.uploadfilename[file.name].load = 1;
-                    this.$emit('uploadImg_uploaded', fileUrl);
+                    this.$emit('uploadImg_uploaded', fileUrl, name);
                 },
                 // 上传失败
                 Error: (up, err) => {
                     if (err.code == -602) {
                         var fileUrl = this.uploadfilename[err.file.name].src;
-                        this.$emit('uploadImg_uploaded', fileUrl);
+                        var name = this.uploadfilename[err.file.name].name;
+                        this.$emit('uploadImg_uploaded', fileUrl, name);
                     } else {
                         this.$emit('uploadImg_error', err);    
                     }
