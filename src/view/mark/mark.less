@@ -2,58 +2,41 @@
 .@{module} {
 	padding-top: 20px;
 	padding-bottom: 80px;
-	.default_backgroud_5;
+	.default_backgroud_7;
 	& &-wrap {
-		.default_width_960;
+		.default_width_1200;
 		.default_mar_auto;
 	}
 }
 .@{module}-content {
 	position: relative;
-	min-height: 400px;
-	& .mark-left {}
-	& .mark-right {
-		width: 680px;
-		margin-left: 280px;
-		& .title {
-			width: 100%;
-			height: 50px;
-			line-height: 50px;
-			padding-left: 20px;
-			.default_font_size_2;
-			.default_color_2;
-			.default_backgroud_7;
-			& .number {
-				margin-right: 5px;
-				.default_font_family_bolder;
-                .default_font_size_7;
-    			.default_color_7;
-			}
+	& .title {
+		width: 100%;
+		.default_font_size_5;
+		.default_color_1;
+		.default_mar_auto;
+		margin-top: 30px;
+		margin-bottom: 20px;
+		& .number {
+			.default_font_family_bolder;
+            .default_font_size_6;
 		}
-		& .result {
+		& .clear {
+			margin-left: 15px;
+			.default_font_size_1;
+			.default_color_3;
+			.default_pointer;
+		}
+	}
+	& .result {
+		width: 100%;
+		height: 100%;
+		& .result-content {
 			width: 100%;
 			height: 100%;
-			& .result-content {
-				width: 100%;
-				height: 100%;
-			}
 		}
-	}
-}
-
-.c-menu-left .item:nth-child(1){
-	& .item__icon {
-		.skin_icon_mark-1;
-	}
-	&:hover .item__icon {
-		.skin_icon_mark-1_on;
-	}
-}
-.c-menu-left .item:nth-child(2){
-	& .item__icon {
-		.skin_icon_mark-2;
-	}
-	&:hover .item__icon {
-		.skin_icon_mark-2_on;
+		&.z-empty .c-artice-list {
+			margin-top: 80px;
+		}
 	}
 }

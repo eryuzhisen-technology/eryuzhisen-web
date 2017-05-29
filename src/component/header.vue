@@ -10,10 +10,10 @@
 		width: 100%;
 		min-width: 960px;
 		height: 60px;
-		.default_backgroud_6;
+		.default_backgroud_13;
 	}
 	.@{module}-content {
-		.default_width_960;
+		.default_width_1200;
 		height: 100%;
 		margin: 0 auto;
 		& .logo {
@@ -21,7 +21,7 @@
 			width: 84px;
 			height: 50px;
 			margin-top: 5px;
-			margin-right: 20px;
+			margin-right: 30px;
 			.skin_icon_logo;
 			.default_pointer;
 			& a {
@@ -44,10 +44,10 @@
 				.default_color_2;
 				text-decoration: none;
 				&:hover {
-					.default_color_10;
+					.default_color_1;
 				}
 				&.z-on {
-					.default_color_10;
+					.default_color_1;
 				}
 				:last-child {
 					margin-right: 0;
@@ -62,14 +62,15 @@
 			padding-left: 20px;
 			margin-top: 10px;
 			.default_border-r-4;
-			.default_backgroud_3;
+			.default_backgroud_6;
 			& input {
 				display: block;
 				float: left;
 				width: 200px;
 				height: 40px;
-				line-height: 40px;
-				.default_color_2;
+				// line-height: 40px;
+				padding: 13px 0;
+				.default_color_10;
 				.default_font_size_2;
 			}
 			& a {
@@ -78,7 +79,7 @@
 				width: 50px;
 				height: 40px;
 				padding-top: 10px;
-				.default_backgroud_5;
+				.default_backgroud_14;
 				.default_center;
 				& span {
 					display: inline-block;
@@ -90,7 +91,7 @@
 					}
 				}
 				&:hover {
-					.default_backgroud_4;
+					// .default_backgroud_4;
 				}
 			}
 		}
@@ -123,21 +124,23 @@
 				position: relative;
 				height: 60px;
 				& .member-show-item {
-					width: 30px;
+					width: 50px;
 					height: 60px;
-					padding: 15px 0;
+					padding: 15px 10px;
 					.default_float_l;
+					&:hover {
+						.default_backgroud_14;
+					}
 				}
 				& .member-show-notice {
 					position: relative;
-					margin-right: 20px;
 					& .member-show-notice_img {
 						width: 100%;
 						height: 100%;
 						.skin_icon_notice;
 						.default_pointer;
 						.default_border-r-50;
-						.default_backgroud_2;
+						.default_backgroud_6;
 						&:hover {
 							.skin_icon_notice_on;
 						}
@@ -149,7 +152,7 @@
 						width: 8px;
 						height: 8px;
 						.default_border-r-50;
-						.default_backgroud_12;
+						.default_backgroud_10;
 					}
 					& .member-notice {
 						display: none;
@@ -159,9 +162,9 @@
 						width: 180px;
 						z-index: 11;
 						overflow: hidden;
-						.default_backgroud_2;
+						.default_backgroud_6;
 						.default_border-r-4;
-						.default_border_shadow_4;
+						.default_border_shadow_5;
 						& .member-notice-item {
 							width: 180px;
 							height: 50px;
@@ -177,7 +180,7 @@
 								float: left;
 							}
 							& .member-notice-item__icon { 
-								width: 20px;
+								width: 16px;
 								height: 100%;
 								margin-right: 10px; 
 							}
@@ -185,7 +188,7 @@
 								height: 50px;
 								line-height: 50px;
 								.default_font_size_2;
-								.default_color_3;
+								.default_color_2;
 							}
 							& .member-notice-item__number { 
 								float: left;
@@ -209,7 +212,7 @@
 								.skin_icon_msg; 
 							}
 							&:hover {
-								.default_backgroud_6;
+								.default_backgroud_14;
 								.default_border_shadow_4;
 								& .member-notice-item__text {
 									.default_color_1;	
@@ -266,7 +269,7 @@
 								float: left;
 							}
 							& .member-center-item__icon { 
-								width: 20px;
+								width: 16px;
 								height: 100%;
 								margin-right: 10px; 
 							}
@@ -274,7 +277,7 @@
 								height: 50px;
 								line-height: 50px;
 								.default_font_size_2;
-								.default_color_3;
+								.default_color_2;
 							}
 							&:first-child { 
 								.default_border-r-t-4;
@@ -282,20 +285,22 @@
 							&:last-child { 
 								.default_border-r-b-4;
 							}
-							&:nth-child(1) .member-center-item__icon { .skin_icon_me; }
-							&:nth-child(2) .member-center-item__icon { .skin_icon_set; }
-							&:nth-child(3) .member-center-item__icon { .skin_icon_back; }
-							&:nth-child(4) .member-center-item__icon { .skin_icon_logout; }
+							&:nth-child(1) .member-center-item__icon { .skin_icon_invite; }
+							&:nth-child(2) .member-center-item__icon { .skin_icon_me; }
+							&:nth-child(3) .member-center-item__icon { .skin_icon_set; }
+							&:nth-child(4) .member-center-item__icon { .skin_icon_back; }
+							&:nth-child(5) .member-center-item__icon { .skin_icon_logout; }
 							&:hover {
-								.default_backgroud_6;
+								.default_backgroud_14;
 								.default_border_shadow_4;
 								& .member-center-item__text {
 									.default_color_1;	
 								}
-								&:nth-child(1) .member-center-item__icon { .skin_icon_me_on; }
-								&:nth-child(2) .member-center-item__icon { .skin_icon_set_on; }
-								&:nth-child(3) .member-center-item__icon { .skin_icon_back_on; }
-								&:nth-child(4) .member-center-item__icon { .skin_icon_logout_on; }
+								&:nth-child(1) .member-center-item__icon { .skin_icon_invite_on; }
+								&:nth-child(2) .member-center-item__icon { .skin_icon_me_on; }
+								&:nth-child(3) .member-center-item__icon { .skin_icon_set_on; }
+								&:nth-child(4) .member-center-item__icon { .skin_icon_back_on; }
+								&:nth-child(5) .member-center-item__icon { .skin_icon_logout_on; }
 							}
 						}
 					}
@@ -343,7 +348,7 @@
 						float: left;
 					}
 					& .publish-show-item__icon { 
-						width: 20px;
+						width: 16px;
 						height: 100%;
 						margin-right: 10px; 
 					}
@@ -351,7 +356,7 @@
 						height: 50px;
 						line-height: 50px;
 						.default_font_size_2;
-						.default_color_3;	
+						.default_color_2;	
 					}
 					&:first-child { 
 						.default_border-r-t-4;
@@ -369,7 +374,7 @@
 						.skin_icon_charpt; 
 					}
 					&:hover {
-						.default_backgroud_6;
+						.default_backgroud_14;
 						.default_border_shadow_4;
 						& .publish-show-item__text {
 							.default_color_1;	
@@ -402,7 +407,7 @@
 			<a href="javascript:void(0)" @click="seachGo"><span></span></a>
 		</div>
 		<div v-if="user.isLogin" class="publish">
-			<a class="publish-btn cpm_button_warn" :href="url.edit">创作</a>
+			<a class="publish-btn cpm_button_weaks" :href="url.edit">创作</a>
 			<!-- <div class="publish-show">
 				<ul class="publish-show-lists">
 					<li class="publish-show-item"><a :href="url.edit">
@@ -448,6 +453,10 @@
 					<div class="member-show-center_img" :style="{'background-image': 'url('+ (!!user.avatar_url ? user.avatar_url : avatar) + ')'} "></div>
 					<div class="member-show member-center">
 						<ul class="member-center-lists">
+							<li class="member-center-item"><a :href="url.invite">
+								<span class="member-center-item__list member-center-item__icon"></span>
+								<span class="member-center-item__list member-center-item__text">专属邀请码</span>
+							</a></li>
 							<li class="member-center-item"><a :href="url.center">
 								<span class="member-center-item__list member-center-item__icon"></span>
 								<span class="member-center-item__list member-center-item__text">我的主页</span>
@@ -495,6 +504,7 @@ export default {
         },
         url (){
         	return {
+        		invite: './invite.html?user_id=' + this.$store.state.user.info.uid,
     			index: './index.html',
     			mark: './mark.html',
     			app: './app.html',

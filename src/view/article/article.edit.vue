@@ -29,6 +29,9 @@
             height: 100%;
             .default_backgroud_4;
             .default_border-rr-5;
+            &:hover {
+                z-index: 2;
+            }
             & .catalog-hd {
                 position: relative;
                 width: 100%;
@@ -82,11 +85,11 @@
                     width: 100%;
                 }
                 & .iScrollVerticalScrollbar {
-                    display: none!important;
+                    opacity: 0;
                 }
                 &:hover {
                     & .iScrollVerticalScrollbar {
-                        display: block!important;
+                        opacity: 1;
                     }
                 }
                 & .catalog-menu_item {
@@ -159,6 +162,9 @@
             height: 100%;
             .default_border-rr-5;
             .default_backgroud_3;
+            &:hover {
+                z-index: 2;
+            }
             & .chapter-hd {
                 position: relative;
                 width: 100%;
@@ -203,11 +209,11 @@
                     width: 100%;
                 }
                 & .iScrollVerticalScrollbar {
-                    display: none!important;
+                    opacity: 0;
                 }
                 &:hover {
                     & .iScrollVerticalScrollbar {
-                        display: block!important;
+                        opacity: 1;
                     }
                 }
                 & .chapter-menu_item {
@@ -301,12 +307,24 @@
                     .default_font_size_6;
                     .default_font_bolder;
                 }
+                & .edit-content_read-content-wrap {
+                    width: 100%;
+                    overflow: hidden;
+                }
                 & .edit-content_read-content {
                     & p {
                         line-height: 1.75rem;
                         margin-bottom: 30px;
                         .default_color_10;
                         .default_font_size_3;
+                    }
+                }
+                & .iScrollVerticalScrollbar {
+                    opacity: 0;
+                }
+                &:hover {
+                    & .iScrollVerticalScrollbar {
+                        opacity: 1;
                     }
                 }
             }
@@ -316,9 +334,10 @@
                     width: 100%;
                     height: 60px;
                     line-height: 60px;
-                    padding-left: 40px;
+                    padding: 0 40px;
                     & .edit-content_edit-title-input {
                         display: inline-block;
+                        width: 100%;
                         .default_middle;
                         .default_color_1;
                         .default_font_size_5;
@@ -344,6 +363,14 @@
                         top: 90px;
                     }
                 }
+                & .iScrollVerticalScrollbar {
+                    opacity: 0;
+                }
+                &:hover {
+                    & .iScrollVerticalScrollbar {
+                        opacity: 1;
+                    }
+                }
             }
         }
     }
@@ -354,6 +381,8 @@
 <div class="m-artice-edit">
     <div class="m-artice-edit-wrap">
         <div class="m-artice-edit__edit">
+
+            <!-- 目录-列表 -->
             <div class="edit-catalog">
                 <div class="catalog-hd">
                     <div class="catalog-hd_back" @click="formback">返</div>
@@ -382,6 +411,8 @@
                 </div>
                 </div>
             </div>
+
+            <!-- 章节列表 -->
             <div class="edit-chapter">
                 <div v-if="catalog_id" class="chapter-hd" @click="addEnpry">
                     <div class="chapter-hd_icon"></div>
@@ -404,45 +435,21 @@
                         <div class="chapter-menu_item-text">{{ chapter_id != item.chapter_id ? item.chapter_title : title}}</div>
                         <div class="chapter-menu_item-delete" @click.stop="remove(item.chapter_id, item.chapter_status == 0)"></div>
                     </div>
-                    <div 
-                        class="chapter-menu_item"
-                        v-for="item in lists" 
-                        :class="{'z-active': chapter_id == item.chapter_id, 'z-finish': item.chapter_status == 0}"
-                        @click="getChapterDetail(item.chapter_id)" 
-                    >
-                        <div class="chapter-menu_item-icon">
-                            <div class="c-dialog__tip z-top">
-                                <div class="tip-arrow"></div>
-                                <div class="tip-text">{{item.chapter_status == 0 ? '已发布' : '未发布'}}</div>
-                            </div>
-                        </div>
-                        <div class="chapter-menu_item-text">{{ chapter_id != item.chapter_id ? item.chapter_title : title}}</div>
-                        <div class="chapter-menu_item-delete" @click.stop="remove(item.chapter_id, item.chapter_status == 0)"></div>
-                    </div>
-                    <div 
-                        class="chapter-menu_item"
-                        v-for="item in lists" 
-                        :class="{'z-active': chapter_id == item.chapter_id, 'z-finish': item.chapter_status == 0}"
-                        @click="getChapterDetail(item.chapter_id)" 
-                    >
-                        <div class="chapter-menu_item-icon">
-                            <div class="c-dialog__tip z-top">
-                                <div class="tip-arrow"></div>
-                                <div class="tip-text">{{item.chapter_status == 0 ? '已发布' : '未发布'}}</div>
-                            </div>
-                        </div>
-                        <div class="chapter-menu_item-text">{{ chapter_id != item.chapter_id ? item.chapter_title : title}}</div>
-                        <div class="chapter-menu_item-delete" @click.stop="remove(item.chapter_id, item.chapter_status == 0)"></div>
-                    </div>
                 </div>
                 </div>
             </div>
+
+            <!-- 文章展示 -->
             <div v-if="chapter && chapter_id != -1" class="edit-content">
                 <div v-if="chapter.chapter_status == 0" class="edit-content_read">
-                    <div class="edit-content_read-title">
-                        {{chapter.chapter_title}}
+                    <div class="edit-content_read-content-wrap" ref="chapterContent">
+                    <div>
+                        <div class="edit-content_read-title">
+                            {{chapter.chapter_title}}
+                        </div>
+                        <div class="edit-content_read-content" v-html="chapter.chapter_content"></div>
                     </div>
-                    <div class="edit-content_read-content" v-html="chapter.chapter_content"></div>
+                    </div>
                 </div>
                 <div v-else class="edit-content_edit">
                     <div class="edit-content_edit-title">
@@ -459,6 +466,7 @@
                             @update='update'
                             @publish='publish'
                             @scan="scan"
+                            @edit="edit"
                             @edit_init="edit_init"
                             @edit_click="hideTip"
                         />
@@ -609,35 +617,33 @@ export default {
         
         // 校验内容
         check (checkContent){
-            var vaid = true;
-
             // 名字
             if (!$.trim(this.title)) {
                 this.reg_title = false;
                 this.reg_title_con = '填写章节标题';
-                vaid = false;
-            } else if ($.trim(this.title).length > 30) {
+                return false;
+            } else if ($.trim(this.title).gblen() > 60) {
                 this.reg_title = false;
-                this.reg_title_con = '章节标题超出最大字数';
-                vaid = false;
+                this.reg_title_con = '超出30中文字数';
+                return false;
             } else {
                 this.reg_title = true;
                 this.reg_title_con = '';
-                vaid = true
             }
 
             // 内容
-            if ($.trim(this.content) == '<p><br></p>' && checkContent) {
-                this.reg_content = false;
-                this.reg_content_con = '填写章节内容';
-                vaid = false;
-            } else {
-                this.reg_content = true;
-                this.reg_content_con = '';
-                vaid = true
+            if (checkContent) {
+                if ($.trim(this.content) == '<p><br></p>') {
+                    this.reg_content = false;
+                    this.reg_content_con = '填写章节内容';
+                    return false;
+                } else {
+                    this.reg_content = true;
+                    this.reg_content_con = '';
+                }
             }
 
-            return vaid;
+            return true;
         },
 
         // 保存内容
@@ -688,6 +694,17 @@ export default {
 
             var href = './article.read.html?isScan=1&chapter_id='+this.chapter_id+'&catalog_id='+this.catalog_id;
             window.open(href);  
+        },
+
+        // 编辑更新
+        edit (value){
+            clearTimeout(this.timer);
+
+            // 2s自动保存
+            var chapaterEdit = this.$version.chapaterEdit;
+            this.timer = setTimeout( () => {
+                this.update(value);
+            }, chapaterEdit.time)
         },
 
         // 更新内容
@@ -893,6 +910,23 @@ export default {
                 this.chapterMenu.refresh();
             }
         }
+
+        if (this.chapter.chapter_status == 0) {
+            $('.edit-content_read-content-wrap').height($(window).height()  - 120);
+            $(window).on('resize', function(){
+                $('.edit-content_read-content-wrap').height($(window).height() - 120);
+            })
+
+            // 设置高度
+            this.chapterContent = new this.$iScroll(this.$refs.chapterContent, {
+                bounce: false,
+                scrollbars: true,
+                mouseWheel: true,
+                interactiveScrollbars: true,
+                shrinkScrollbars: 'scale',
+                // fadeScrollbars: true
+            });
+        }
     },
     mounted (){
         // 获取url的参数
@@ -900,17 +934,6 @@ export default {
 
         // 获取目录
         this.getMyCatalogList();
-
-        // 每个1分钟保存一次
-        if (this.chapter && this.chapter_id) {
-            var chapaterEdit = this.$version.chapaterEdit;
-            this.timer = setInterval( () => {
-                var value = this.editor.$txt.html();
-                this.update(value);
-            }, chapaterEdit.time)
-        } else {
-            clearInterval(this.timer);
-        }
     }
 }
 </script>

@@ -5,14 +5,14 @@
 
 .@{module} {
     position: fixed;
-    bottom: 160px;
-    right: 60px;
+    bottom: 180px;
+    right: 10px;
     z-index: 100;
-	width: 60px;
-    height: 60px;
+	width: 50px;
+    height: 50px;
     transition: all @default_speed_1;
     .default_border-r-50;
-    .default_backgroud_6;
+    .default_backgroud_13;
     .default_pointer;
     & span {
         position: absolute;

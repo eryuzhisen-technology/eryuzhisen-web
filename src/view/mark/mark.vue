@@ -12,16 +12,14 @@
 	<div class="m-mark-wrap">
 		<div class="m-mark-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="mark-right">
-				<div class="title">
-					<span class="number">{{article.count}}</span>部作品
-				</div>
-				<div class="result">
-					<ListDom 
-                        resType='mark'
-						class="result-content z-small z-mark" 
-					/>
-				</div>
+			<div v-if="article.lists.length" class="title" :style="{'width': (article.lists.length <= 5 ? article.lists.length*240 : 1200) + 'px'}">
+                <span class="number">{{article.count}}</span>个故事
+            </div>
+			<div class="result">
+				<ListDom 
+                    resType='mark'
+					class="result-content z-small z-mark" 
+				/>
 			</div>
 		</div>
 	</div>
@@ -40,11 +38,11 @@ export default {
 			pageIndex: 'mark',
     		menuLeft: {
     			mark: {
-    				title: '收藏的作品',
+    				title: '收藏',
     				isActive: true
     			},
     			history: {
-    				title: '历史记录',
+    				title: '历史',
     				url: 'history.html'
     			}
     		}

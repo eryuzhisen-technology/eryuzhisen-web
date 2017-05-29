@@ -39,7 +39,7 @@ var version = {
 	chapaterEdit: {
 		key: 'eryuzhisen_chapaterEdit',
 		version: '1.0',
-		time: 1*60*1000
+		time: 1*1000
 	},
 
 	chapaterEdit_edit: {

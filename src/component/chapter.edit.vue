@@ -49,13 +49,19 @@
                         height: 100%;
                         overflow: hidden;
                         & img {
-                            width: 100%;
+                            position: absolute;
+                            top: 0;
+                            left: 50%;
+                            height: 100%;
+                            width: auto;
+                            transform: translate(-50%, 0);
                         }
                     }
                     & .mask {
                         position: absolute;
                         top: 0;
                         right: 0;
+                        z-index: 2;
                         width: 220px;
                         height: 330px;
                         line-height: 330px;

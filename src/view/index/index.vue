@@ -4,66 +4,26 @@
     @module: m-index;
     .@{module} {
         position: relative;
-        .default_backgroud_6;
-    }
-    .@{module}-tag {
-        position: relative;
-        width: 100%;
-        height: 50px;
-        .default_backgroud_5;
-        & .tags {
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 20px;
-            .default_width_960;
-            .default_mar_auto;
-            & .tags-item {
-                float: left;
-                width: 50px;
-                height: 50px;
-                line-height: 50px;
-                padding-right: 20px;
-                .default_font_size_2;
-                .default_color_2;
-                .default_border-r-n;
-                .default_pointer;
-                &:hover,
-                &.z-active {
-                    .default_color_10;
-                }
-            }
-            & .tags-item:last-child { 
-                margin-right: 0; 
-                .default_border-r-r-4; 
-            }
-            & .arrow {
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                width: 30px;
-                height: 2px;
-                transition: left @default_speed_1;
-                .default_backgroud_13;
-            }
-        }
+        padding-bottom: 80px;
+        .default_backgroud_7;
     }
     .@{module}-banner {
         width: 100%;
-        height: 340px;
+        height: 350px;
+        padding-bottom: 30px;
         overflow: hidden;
-        .user_background_2;
-        .default_backgroud_5;
+        .default_backgroud_6;
         .@{module}-banner-wrap {
             position: relative;
-            height: 300px;
+            height: 320px;
             overflow: hidden;
-            .default_width_960;
+            .default_width_1200;
             .default_mar_auto;
             // .default_backgroud_5;
             overflow: hidden;
             & .banner-lists {
                 float: left;
-                width: 750px;
+                width: 800px;
                 height: 100%;
                 overflow: hidden;
                 position: relative;
@@ -88,16 +48,16 @@
             }
             & .banner-index {
                 float: left;
-                width: 210px;
+                width: 400px;
                 height: 100%;
                 overflow: hidden;
                 border-radius: 0 0 4px 0;
                 & .banner-item {
                     width: 100%;
-                    height: 100px;
+                    height: 160px;
                     & img {
                         width: 100%;
-                        height: 100px;
+                        height: 160px;
                     }
                 }
             }
@@ -168,121 +128,57 @@
             }
         }
     }
+    .@{module}-enter {
+        width: 100%;
+        height: 240px;
+        margin-bottom: 40px;
+        .default_backgroud_6;
+        & .m-index-enter-wrap {
+            height: 200px;
+            .default_width_1200;
+            .default_mar_auto;
+            & .enter-item {
+                float: left;
+                display: block;
+                width: 380px;
+                height: 200px;
+                margin-right: 30px;
+                overflow-y: hidden;
+                & img {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+            & .enter-item:last-child {
+                margin-right: 0;
+            }
+        }
+    }
+    .@{module}-tag {
+        position: relative;
+        width: 100%;
+        margin-bottom: 40px
+    }
     .@{module}-list {
         position: relative;
         width: 100%;
         height: 100%;
-        .default_backgroud_3;
         .@{module}-list-wrap {
             position: relative;
-            min-height: 1020px;
-            // overflow: hidden;
-            padding-bottom: 60px;
-            .default_width_960;
+            overflow: hidden;
+            .default_width_1200;
             .default_mar_auto;
         }
-        & .list-left {
-            float: left;
-            width: 680px;
-            margin-right: 20px;
-            .default_border-r-4;
-            .default_backgroud_3;
-    		& .c-artice-item {
-                &:nth-child(1) {
-                    .default_border-r-t-4;
-                }
-    		}
-            & .list-left__head {
-                width: 100%;
-                height: 60px;
-                overflow: hidden;
-                padding-top: 40px;
-                margin-bottom: 20px;
-                // background-image: url('../../common/images/img/bg-2.png');
-                // background-position: top center;
-                // background-repeat: no-repeat;
-                // background-size: cover;
-                & span {
-                    .default_font_size_4;
-                    .default_color_2;
-                    .default_font_bolder;
-                }
-                & .list-left__head-text {
-                    float: right;
-                    .default_font_size_2;
-                    .default_color_2;
-                    .default_pointer;
-                }
-            }
-    	}
-        & .list-right {
-            float: left;
-            width: 260px;
-            & .list-tags {
-                margin-bottom: 40px;
-                & .list-tags__title {
-                    width: 100%;
-                    height: 50px;
-                    overflow: hidden;
-                    margin-bottom: 20px;
-                    // background-image: url('../../common/images/img/bg-3.png');
-                    // background-position: top center;
-                    // background-repeat: no-repeat;
-                    // background-size: cover;
-                }
-                & .list-tags__text {
-                    float: right;
-                    .default_color_2;
-                    .default_font_size_2;
-                    .default_pointer;
-                }
-                & .list-tags__body {
-                    width: 260px;
-                    height: 230px;
-                    padding: 20px;
-                    overflow: hidden;
-                    .default_backgroud_2;
-                    .default_border-r-4;
-                }
-                & .list-tags__body-wrap {
-                    width: 100%;
-                    height: 100%;
-                    overflow: hidden;
-                }
-                & .list-tags__tag {
-                    float: left;
-                    height: 30px;
-                    line-height: 30px;
-                    padding: 0 12px;
-                    margin-bottom: 10px;
-                    margin-right: 10px;
-                    border-radius: 15px;
-                    text-decoration: none;
-                    transition: all @default_speed_1;
-                    .default_color_2;
-                    .default_font_size_2;
-                    .default_backgroud_3;
-                    .default_pointer;
-                    &:hover {
-                        .default_color_1;
-                        .default_backgroud_2;
-                        .default_border_shadow_5;
-                    }
-                }
-            }
-            & .list-author {
-                margin-bottom: 40px;
-            }
-            & .list-advs {
-                width: 100%;
-                height: 330px;
-                overflow: hidden;
-                .default_border-r-4;
-                & img {
-                    max-width: 100%;
-                }
-            }
+        & .c-artice-item:nth-child(1),
+        & .c-artice-item:nth-child(2),
+        & .c-artice-item:nth-child(3),
+        & .c-artice-item:nth-child(4),
+        & .c-artice-item:nth-child(5) {
+            .default_border-t-n;
         }
+		& .c-artice-item:nth-child(5n) {
+            .default_border-t-n;
+		}
     }
 </style>
 
@@ -291,21 +187,6 @@
 <div>
 	<HeaderDom pageIndex="index" />
 	<div class="m-index">
-        <div class="m-index-tag">
-            <div class="tags">
-                <div 
-                    v-for="(item, index) in category.label" 
-                    @click="setTagIndex(item.category_id, index)" 
-                    @mouseenter="tagEnter(index)"
-                    @mouseout="tagOut"
-                    class="tags-item" 
-                    :class="{'z-active': category.index == item.category_id}"
-                >
-                    {{item.category_title}}
-                </div>
-                <div class="arrow"></div>
-            </div>
-        </div>
         <div class="m-index-banner">
             <div class="m-index-banner-wrap z-active">
                 <div class="banner-lists">
@@ -314,7 +195,7 @@
                     </div>
                 </div>
                 <div class="banner-index">
-                <div class="banner-index-wrap" :style="{transform: 'translate(0,-'+ small_index*100 +'px)'}">
+                <div class="banner-index-wrap" :style="{transform: 'translate(0,-'+ small_index*160 +'px)'}">
                     <div class="banner-item" v-for="(item, index) in banner_images">
                         <img :src="item.image_url" />
                     </div>
@@ -330,38 +211,33 @@
                 </div>
             </div>
         </div>
-        <!-- <HotDom class="m-index-hot" /> -->
-        <div></div>
+        <div class="m-index-enter">
+            <div class="m-index-enter-wrap">
+                <a href="javascript:void(0)" class="enter-item"><img src="../../common/images/index/enter-1.png" /></a>
+                <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-2.png" /></a>
+                <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
+            </div>
+        </div>
+        <div class="m-index-tag">
+            <div class="cpm-top-menu" :style="{'width': category.label.length*90 + 'px'}">
+                <div 
+                    v-for="(item, index) in category.label" 
+                    @click="setTagIndex(item.category_id, index)" 
+                    class="menu-item" 
+                    :class="{'z-active': category.index == item.category_id}"
+                >
+                    {{item.category_title}}
+                </div>
+            </div>
+        </div>
         <div class="m-index-list">
             <div class="m-index-list-wrap">
-                <div class="list-left">
-                    <div class='list-left__head'>
-                        <span>优秀连载</span>
-                    </div>
-                    <ListDom 
-                        class="list-left__body"
-                        resType='index'
-                        loadType="more"
-                        catalog_type="2"
-                    />
-                </div>
-                <div class="list-right">
-                    <!-- <div class="list-tags">
-                        <div class="list-tags__title">
-                            <div class="list-tags__text" @click="getLabelList">随机换一批</div>
-                        </div>
-                        <div class="list-tags__body">
-                        <div class="list-tags__body-wrap">
-                            <a :href="'./page.html?labelTag='+ item" class="list-tags__tag" v-for="item in category.tags">{{item}}</a>
-                        </div>
-                        </div>
-                    </div> -->
-                    <HotAuthor class="list-author" resType="mark" />
-                    <div class="list-advs">
-                        <img src="../../common/images/img/adv-1.png" />
-                    </div>
-                </div>
-                <div class="cpm_clear"></div>
+                <ListDom 
+                    class="list-left__body"
+                    resType='index'
+                    loadType="more"
+                    catalog_type="2"
+                />
             </div>
             <div class="cpm_clear"></div>
         </div>
@@ -469,16 +345,9 @@ export default {
                 this.hot_isCan = true;
             }, 500)
         },
-        tagEnter (index){
-            $('.m-index-tag .arrow').css('left', (30 + 20)*index);
-        },
-        tagOut (){
-            $('.m-index-tag .arrow').css('left', (30 + 20)*this.tagIndex);
-        },
         // 获取文章
         setTagIndex (category_id, index){
             this.tagIndex = index;          
-            $('.m-index-tag .arrow').css('left', (30 + 20)*index);
             this.$store.dispatch('opus_setTagIndex', category_id).then( res => {
                 // todo
                 

@@ -616,9 +616,11 @@ export default {
 		// 获取作品目录列表
 		opus_getMyCatalogList (context, payload){
 			var promise = opus.getMyCatalogList(payload).then( res => {
+				var lists = res.list;
+					lists = lists.reverse();
 				context.commit('opus_setArticle', {
 					count: res.page_info.total_count,
-					lists: res.list,
+					lists: lists,
 					more: res.more
 				})
 				return Promise.resolve(res);

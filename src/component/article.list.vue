@@ -3,83 +3,40 @@
 @import (reference) '../common/css/common';
     @module: c-artice-list;
     .c-artice-list {
-        width: 680px;
+        width: 100%;
         height: 100%;
         & &-wrap {
             width: 100%;
             height: 100%;
-            min-height: 350px;
-            .default_backgroud_2;
-            .default_border-r-4;
-        }
-        & .list-more {
-            width: 100%;
-            .default_center;
-            .default_backgroud_2;
-            .default_border-r-b-4;
-            & .btn-more-before {
-                height: 60px;
-                line-height: 60px;
-                .default_color_1;
-                .default_font_size_2;
-                .default_pointer;
-            } 
-            & .btn-more-loading {
-                height: 60px;
-                line-height: 60px;
-                & em {
-                    .default_disline;
-                    width: 20px;
-                    height: 20px;
-                    margin-right: 10px;
-                    .default_middle;
-                    .skin_icon_load;
-                    animation: loading 1.5s linear infinite;
-                }
-                & span {
-                    .default_disline;
-                    .default_color_1;
-                    .default_font_family_bolder;
-                    .default_font_size_2;
-                    .default_middle;
-                }
-            }
-            & .btn-more-end {
-                height: 60px;
-                line-height: 60px;
-                .default_color_2;
-                .default_font_size_2;
-            }
-        }
-        & .list-pages {
-            margin-top: 30px;
+            min-height: 300px;
+            min-width: 240px;
+            .default_backgroud_3;
+            .default_mar_auto;
+            margin-bottom: 30px;
         }
     }
     .c-artice-item {
-        width: 100%;
-        height: 180px;
-        padding: 10px 20px 10px 10px;
-        .default_backgroud_2;
-        .default_border-b-14;
-        transition: box-shadow @default_speed_1, transform @default_speed_1;
+        position: relative;
+        float: left;
+        width: 240px;
+        height: 480px;
+        padding: 10px;
+        .default_backgroud_3;
+        .default_border-t-5;
+        .default_border-rr-5;
         & &-wrap,
         & &-wrap-link {
             display: block;
             width: 100%;
-            height: 160px;
+            height: 480px;
         }
-        & .item-left,
-        & .item-right {
-            float: left;
-            height: 160px;
-        }
-        & .item-left {
+        & .item-hd {
             position: relative;
-            width: 120px;
-            height: 160px;
+            width: 220px;
+            height: 330px;
             overflow: hidden;
-            margin-right: 20px;
-            & .item-left__img {
+            margin-bottom: 12px;
+            & .item-hd-img {
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
@@ -87,80 +44,56 @@
                     max-width: 100%;
                 }
             }
-            & .item-left__text {
+            & .item-hd-tag {
                 position: absolute;
-                right: 8px;
-                bottom: 8px;
-                width: 40px;
-                height: 20px;
-                line-height: 18px;
-                text-align: center;
-                border: 1px solid @default_backgroud_13;
-                border-radius: 10px;
-                .default_color_1;
-                .default_font_size_1;
-                .default_backgroud_3;
-            }
-        }
-        & .item-right {
-            position: relative;
-            width: 510px;
-            padding-top: 10px;
-            & .item-right__titile {
-                margin-bottom: 12px;
-                .default_color_1;
-                .default_font_size_7;
-                .default_font_family_bolder;
-                &:hover {
-                    .default_color_10;
+                right: 0;
+                bottom: 0;
+                width: 50px;
+                height: 50px;
+                line-height: 50px;
+                .skin_icon_article-7;
+                & .item-hd-tag_text {
+                    position: absolute;
+                    bottom: 10px;
+                    right: 2px;
+                    .default_color_2;
+                    .default_font_size_1;
                 }
             }
-            & .item-right__content {
-                line-height: 1.3rem;
+        }
+        & .item-bd {
+            width: 100%;
+            & .item-bd-title {
+                line-height: 1.5em;
                 margin-bottom: 8px;
-                .default_color_2;
-                .default_font_size_2;
+                .default_font_size_7;
+                .default_color_1;
+                &:hover {
+                    .default_color_fff;
+                }
             }
-            & .item-right__tags {
+            & .item-bd-tags {
                 width: 100%;
                 overflow: hidden;
                 & a {
                     float: left;
-                    margin-right: 10px;
-                    margin-bottom: 10px;
+                    display: block;
+                    margin-right: 8px;
+                    margin-bottom: 8px;
                     .default_font_size_1;
-                    .default_color_3;  
+                    .default_color_2;  
                     &.z-active,
                     &:hover {
                         .default_color_1;
                     } 
                 }
             }
-            & .item-right__bottom {
-                position: absolute;
-                left: 0;
-                bottom: 10px;
-            }
-            & .item-right__img {
-                float: left;
-                width: 20px;
-                height: 20px;
-                overflow: hidden;
-                margin-right: 8px;
-                .default_border-r-50;
-            }
-            & .item-right__name {
-                float: left;
-                height: 20px;
-                line-height: 20px;
-                margin-right: 20px;
-                .default_color_3;
-                .default_font_size_1;
-                &:hover {
-                    .default_color_1;
-                }
-            }
-            & .item-right__btn {
+        }
+        & .item-ft {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            & .item-ft-btn {
                 display: inline-block;
                 height: 20px;
                 line-height: 20px;
@@ -172,72 +105,85 @@
                    .default_color_1; 
                 }
             }
+            & .item-ft-img {
+                float: left;
+                width: 20px;
+                height: 20px;
+                overflow: hidden;
+                margin-right: 8px;
+                .default_border-r-50;
+            }
+            & .item-ft-name {
+                float: left;
+                height: 20px;
+                line-height: 20px;
+                margin-right: 20px;
+                .default_color_3;
+                .default_font_size_1;
+                &:hover {
+                    .default_color_1;
+                }
+            }
         }
         & a {
             text-decoration: none;
         }
         &:hover {
-            z-index: 2;
-            transform: translate(0, -2px) translateZ(1px);
-            .default_border_shadow_4;
+            .default_backgroud_2;
         }
-    }
-    .c-artice-list.z-small .item-left {
-        & .top-img {
-            .default_backgroud_4;
-        }
-        & .top,
-        & .content {
-            // width: 420px;
-        }
-    }
-
-    // 动画
-    @keyframes loading {
-        from { transform: rotate(0); }
-        to { transform: rotate(359deg); }
     }
 </style>
 
 <!-- html代码 -->
 <template>
 <div class="c-artice-list">
-<div class="c-artice-list-wrap">
+<div class="c-artice-list-wrap" :style="{'height': Math.ceil(article.lists.length/5)*480 + 'px', 'width': (article.lists.length <= 5 ? article.lists.length*240 : 1200) + 'px'}">
     <div class="c-artice-item" v-for="data in article.lists">
         <div class="c-artice-item-wrap"
             :data-catalog_id="data.catalog_id"
         >
             <a :href="'./article.html?catalog_id=' + data.catalog_id" class="c-artice-item-wrap-link">
-                <div class="item-left">
-                    <div class="item-left__img">
+                <!-- 头部 -->
+                <div class="item-hd">
+                    <div class="item-hd-img">
                         <img :src="data.catalog_cover_url" />
                     </div>
-                    <div class="item-left__text">{{data.category_title}}</div>
+                    <div class="item-hd-tag">
+                        <div class="item-hd-tag_text">{{data.category_title}}</div>
+                    </div>
                 </div>
-                <div class="item-right">
-                    <div class="item-right__titile">{{data.catalog_title}}</div>
-                    <div class="item-right__content">{{data.catalog_desc.length > 60 ? data.catalog_desc.substr(0, 60) + '...' : data.catalog_desc}}</div>
-                    <div class="item-right__tags">
+
+                <!-- 内容 -->
+                <div class="item-bd">
+                    <div class="item-bd-title">{{data.catalog_title}}</div>
+                    <div class="item-bd-tags">
                         <a
                             :href="'./page.html?labelTag='+ label" 
                             v-for="label in data.labels"
                             :class="{'z-active': labelTag == label}" 
                         >{{label}}</a>
                     </div>
-                    <div class="item-right__bottom">
-                        <a v-if="resType != 'author'" class="item-right__btn" :href="'author.work.html?user_id=' + data.user.uid">
-                            <div class="item-right__img">
-                                <img :src="data.user.avatar_url || avatar" />
-                            </div>
-                            <div class="item-right__name">{{data.user.nick_name}}</div>
-                        </a>
+                    <!-- <div class="item-ft-content">{{data.catalog_desc.length > 60 ? data.catalog_desc.substr(0, 60) + '...' : data.catalog_desc}}</div> -->
+                </div>
 
-                        <div v-if="resType == 'history'" class="item-right__btn item-right__unmark" @click.prevent="delHistory(data.catalog_id)">删除记录</div>
-                        <div v-if="resType == 'mark' && data.owner != 1 && data.is_collected == 1" class="item-right__btn item-right__unmark" @click.prevent="delFavorites">取消收藏</div>
-                        <div v-if="resType == 'search' && data.owner != 1 && data.is_collected != 1" class="item-right__btn item-right__mark">加入收藏</div>
-                        <a v-if="resType == 'author' && data.owner == 1" class="item-right__btn item-right__add" :href="'./article.edit.html?catalog_id='+ data.catalog_id + '&chapter_id=-1'">添加章节</a>
-                        <div v-if="resType == 'author' && data.owner == 1" class="item-right__btn item-right__del" @click.stop.prevent="remove(data.catalog_id)">删除作品</div>
-                    </div>
+                <!-- 作者 -->
+                <div class="item-ft">
+                    <a v-if="resType != 'author'" class="item-ft-btn" :href="'author.work.html?user_id=' + data.user.uid">
+                        <div class="item-ft-img">
+                            <img :src="data.user.avatar_url || avatar" />
+                        </div>
+                        <div class="item-ft-name">{{data.user.nick_name}}</div>
+                    </a>
+
+                    <div v-if="resType == 'history'" class="item-ft-btn item-ft-unmark" @click.prevent="delHistory(data.catalog_id)">删除记录</div>
+
+                    <div v-if="resType == 'mark' && data.owner != 1 && data.is_collected == 1" class="item-ft-btn item-ft-unmark" @click.prevent="delFavorites">取消收藏</div>
+                    
+                    <div v-if="resType == 'search' && data.owner != 1 && data.is_collected != 1" class="item-ft-btn item-ft-mark">加入收藏</div>
+                    
+                    <a v-if="resType == 'author' && data.owner == 1" class="item-ft-btn item-ft-add" :href="'./article.edit.html?catalog_id='+ data.catalog_id + '&chapter_id=-1'">添加章节</a>
+                    
+                    <div v-if="resType == 'author' && data.owner == 1" class="item-ft-btn item-ft-del" @click.stop.prevent="remove(data.catalog_id)">删除作品</div>
                 </div>
             </a>
         </div>
@@ -245,7 +191,7 @@
     <Empty v-if="article.count <= 0" />
 </div>
 
-<div v-if="loadType == 'more' && article.count != 0" class="list-more">
+<div v-if="loadType == 'more' && article.count != 0" v-show="false" class="list-more">
     <div v-if="article.more == 1 && !article.load" class="btn-more-before">{{user.isLogin ? '加载更多' : '登录查看更多'}}</div>
     <div v-else-if="article.more == 1" class="btn-more-loading"><em></em><span>加载中...</span></div>
     <div v-else class="btn-more-end"><em></em><span>没有更多</span></div>

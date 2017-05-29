@@ -83,11 +83,12 @@
             padding: 40px;
             text-align: left;
             & p {
+                margin-bottom: 30px;
                 line-height: 1.5em;
                 word-wrap: break-word;
                 word-break: break-all;
                 text-align: justify;
-                .default_color_2;
+                .default_color_10;
                 .default_font_size_3;
             }
             & blockquote {
@@ -349,15 +350,34 @@ export default {
         scan (){
             var value = this.editor.$txt.html();
             this.$emit('scan', value);
+        },
+        change (){
+            this.chapterContent.refresh();
+            var value = this.editor.$txt.html();
+            this.$emit('edit', value);
+        },
+        autoHeight (){
+            var _height = $(window).height() - 120;
+            $('.c-edit-content').css('min-height', _height);
+            $('.c-edit-content-wrap').height(_height);
         }
     },
     watch: {
         content (){
+            if (this.editor.$txt.html()) {
+                // return false;
+            }
             this.editor.$txt.html(this.content);
+            if (this.chapterContent) {
+                this.chapterContent.refresh();
+            }
         }
     },
     mounted (){
         this.editor = new this.$edit('edit');
+        // 监听内容变化
+        this.editor.onchange = this.change;
+
         // 创建
         this.editor.create();
 
@@ -388,17 +408,17 @@ export default {
         this.$emit('edit_init', this.editor);
 
         // 设置iscroll
-        $('.c-edit-content').wrap($('<div id="c-edit-content-wrap" class="c-edit-content-wrap"></div>'))
+        $('.c-edit-content').wrap($('<div id="c-edit-content-wrap" class="c-edit-content-wrap"></div>'));
 
         // 设置高度
         $('.c-edit-content').css('height', 'auto');
-        $('.c-edit-content-wrap').height($(window).height()  - 120);
-        $(window).on('resize', function(){
-            $('.c-edit-content-wrap').height($(window).height() - 120);
+        this.autoHeight();
+        $(window).on('resize', res => {
+            this.autoHeight();
         })
 
         // 创建iscroll
-        this.chapterMenu = new this.$iScroll('#c-edit-content-wrap', {
+        this.chapterContent = new this.$iScroll('#c-edit-content-wrap', {
             bounce: false,
             scrollbars: true,
             mouseWheel: true,
@@ -406,9 +426,6 @@ export default {
             shrinkScrollbars: 'scale',
             // fadeScrollbars: true
         });
-        $(".c-edit-content").on('keyup', res => {
-            this.chapterMenu.refresh();
-        })
     }
 }
 </script>
