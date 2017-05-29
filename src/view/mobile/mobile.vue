@@ -27,7 +27,7 @@
 					<p class="text">这或许是你从未见过的视觉盛宴</p>
 					<p class="text">跃于指尖的怪诞</p>
 					<p class="text">即将无处不在</p>
-					<p class="bottom-text">IOS优于Android推出</p>
+					<p class="bottom-text">「IOS优于Android推出」</p>
 				</div>
 			</div>
 		</div>
