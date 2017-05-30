@@ -4,80 +4,16 @@
     @module: m-page;
     .@{module} {
         position: relative;
-        padding-top: 50px;
-        .default_backgroud_6;
-    }
-    .@{module}-tag {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        z-index: 10;
-        width: 100%;
-        height: 50px;
-        .default_backgroud_5;
-        & &-wrap {
-            position: relative;
-            .default_width_960;
-            .default_mar_auto;
-        }
-        & .tags {
-            width: 100%;
-            overflow: hidden;
-            & .tags-item {
-                float: left;
-                height: 50px;
-                line-height: 50px;
-                margin-right: 20px;
-                .default_color_4;
-                .default_border-r-n;
-                .default_pointer;
-                &:hover,
-                &.z-active {
-                    border-bottom: 2px solid @default_backgroud_13;
-                    .default_color_1;
-                }
-            }
-            & .tags-item:last-child { margin-right: 0; .default_border-r-r-4; }
-        }
-        & .switch {
-            position: absolute;
-            top: 15px;
-            right: 0;
-            height: 20px;
-            overflow: hidden;
-            & span {
-                display: inline-block;
-                width: 20px;
-                height: 20px;
-                .default_pointer;
-                &:nth-child(1) {
-                    .skin_icon_kuai;
-                    &:hover,
-                    &.z-active {
-                        .skin_icon_kuai_on;
-                    }
-                }
-                &:nth-child(2) {
-                    .skin_icon_tiao;
-                    &:hover,
-                    &.z-active {
-                        .skin_icon_tiao_on;
-                    }
-                }
-            }
-        }
+        .default_backgroud_7;
     }
     .@{module}-label {
-        position: fixed;
-        top: 110px;
-        left: 0;
-        z-index: 10;
         width: 100%;
         height: 100px;
-        .default_backgroud_4;
+        .default_backgroud_6;
+        .default_center;
         & &-wrap {
             height: 100px;
-            .default_width_960;
+            .default_width_1200;
             .default_mar_auto;
             .default_middle;
         }
@@ -100,60 +36,49 @@
             .default_middle;
         }
     }
-    .@{module}-list {
-        width: 100%;
-        height: 100%;
-        padding-top: 140px;
-        .default_backgroud_3;
-    }
-    .@{module}-list-wrap {
+    .@{module}-tag {
         position: relative;
-        // min-height: 1020px;
-        // overflow: hidden;
-        padding-bottom: 50px;
-        .default_width_960;
-        .default_mar_auto;
+        width: 100%;
+        margin-top: 60px;
+        margin-bottom: 40px
     }
     .@{module}-list {
         position: relative;
         width: 100%;
         height: 100%;
-        & .list-left {
-            float: left;
-            width: 260px;
-            margin-right: 20px;
-            & .list-author {
-                margin-bottom: 40px;
+        & .m-page-list-wrap {
+            position: relative;
+            // min-height: 1020px;
+            // overflow: hidden;
+            padding-bottom: 50px;
+            .default_width_960;
+            .default_mar_auto;
+        }
+        & .title {
+            width: 100%;
+            .default_font_size_5;
+            .default_color_1;
+            .default_mar_auto;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            & .number {
+                .default_font_family_bolder;
+                .default_font_size_6;
+            }
+            & .clear {
+                margin-left: 15px;
+                .default_font_size_1;
+                .default_color_3;
+                .default_pointer;
             }
         }
-        & .list-right {
-            float: left;
-            width: 680px;
-            .default_border-r-4;
-            .default_backgroud_3;
-    		& .c-artice-item {
-                &:nth-child(1) {
-                    .default_border-r-t-4;
-                }
-    		}
-            & .list-right__head {
-                width: 100%;
-                height: 50px;
-                overflow: hidden;
-                padding-top: 30px;
-                margin-bottom: 20px;
-                background-image: url('../../common/images/img/bg-5.png');
-                background-position: top center;
-                background-repeat: no-repeat;
-                background-size: cover;
-                & .list-right__head-text {
-                    float: right;
-                    .default_font_size_2;
-                    .default_color_2;
-                    .default_pointer;
-                }
+        & .list {
+            width: 100%;
+            height: 100%;
+            &.z-empty .c-artice-list {
+                margin-top: 80px;
             }
-    	}
+        }
     }
 </style>
 
@@ -162,40 +87,34 @@
 <div>
 	<HeaderDom pageIndex="page" />
 	<div class="m-page">
-        <div class="m-page-tag">
-            <div class="m-page-tag-wrap">
-                <div class="tags">
-                    <div v-for="item in category.label" @click="setTagIndex" :data-id="item.category_id" class="tags-item" :class="{'z-active': category.index == item.category_id}">{{item.category_title}}</div>
-                </div>
-                <!-- <div class="switch">
-                    <span @click="setType(1)"></span>
-                    <span @click="setType(2)"></span>
-                </div> -->
-            </div>
-        </div>
         <div class="m-page-label">
             <div class="m-page-label-wrap">
                 <div class="label-title">标签专栏：</div>
                 <div class="label-content">{{labelTag}}</div>
             </div>
         </div>
+        <div class="m-page-tag">
+            <div class="cpm-top-menu" :style="{'width': category.label.length*90 + 'px'}">
+                <div 
+                    v-for="(item, index) in category.label" 
+                    @click="setTagIndex(item.category_id, index)" 
+                    class="menu-item" 
+                    :class="{'z-active': category.index == item.category_id}"
+                >
+                    {{item.category_title}}
+                </div>
+            </div>
+        </div>
         <div class="m-page-list">
             <div class="m-page-list-wrap">
-                <div class="list-left">
-                    <HotAuthor 
-                        class="list-author z-active" 
-                        resType="active"
-                    />
+                    <div v-if="article.lists.length" class="title" :style="{'width': (article.lists.length <= 5 ? article.lists.length*240 : 1200) + 'px'}">
+                    <span class="number">{{article.count}}</span>个故事
                 </div>
-                <div class="list-right">
-                    <div class='list-right__head'></div>
-                    <ListDom 
-                        class="list-right__body"
-                        resType='page'
-                        loadType="more"
-                    />
-                </div>
-                <div class="cpm_clear"></div>
+                <ListDom 
+                    class="list"
+                    resType='page'
+                    loadType="page"
+                />
             </div>
             <div class="cpm_clear"></div>
         </div>
@@ -251,7 +170,7 @@ export default {
     },
     mounted (){
         var that = this;
-        this.labelTag = this.$url.getUrlParam('labelTag');
+        this.labelTag = decodeURIComponent(this.$url.getUrlParam('labelTag'));
     }
 }
 </script>

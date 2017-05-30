@@ -202,7 +202,7 @@
                 }
             }
             &.j-save-btn-update {
-                width: 80px;
+                width: 100px;
                 &:hover {
                     .default_backgroud_7;
                     & a {

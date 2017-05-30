@@ -39,7 +39,7 @@
 <div class="c-footer">
 <div class="c-footer-content">
 	<div class="menu">
-		<a :href="url.about">关于我们</a>·<a :href="url.about">用户协议</a>·<a :href="url.about">隐私政策</a>·<a :href="url.about">原创声明</a>·<a :href="url.contact">联系我们</a>
+		<a :href="url.about">关于我们</a>·<a :href="url.about">用户协议</a>·<a :href="url.about">隐私政策</a>·<a :href="url.about">原创声明</a>·<a :href="url.contact">联系我们</a>·<a :href="url.contact">社区规范</a>
 	</div>
 	<div class="text">© 2017 耳语之森 BETA1.0版 沪ICP备17018710号</div>
 </div>

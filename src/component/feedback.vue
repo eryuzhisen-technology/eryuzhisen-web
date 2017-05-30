@@ -19,36 +19,22 @@
         }
         & .content-form {
             width: 360px;
-            padding: 30px;
-            .default_backgroud_2;
+            padding: 20px;
+            .default_backgroud_3;
             & .content-textarea {
                 position: relative;
-                width: 300px;
+                width: 320px;
                 height: 200px;
-                padding: 20px;
-                margin-bottom: 15px;
-                .default_backgroud_4;
-                & textarea {
-                    width: 100%;
-                    .default_color_4;
-                    .default_font_size_2;
-                }
+                margin-bottom: 10px;
                 & .c-dialog__tip {
                     transform: translate(-114%, 0);
                 }
             }
             & .content-input {
                 position: relative;
-                width: 300px;
+                width: 320px;
                 height: 50px;
                 line-height: 50px;
-                padding-left: 20px;
-                .default_backgroud_4;
-                & input {
-                    width: 100%;
-                    .default_color_4;
-                    .default_font_size_2;
-                }
                 & .c-dialog__tip {
                     transform: translate(-110%, 0);
                 }
@@ -85,14 +71,14 @@
     <div v-if="data.show" class="c-feedback">
 	<div class="c-feedback-wrap">
         <div class="content-form">
-            <div class="content-textarea" :class="{'z-error': !content_reg}">
+            <div class="content-textarea cpm_form_textarea" :class="{'z-error': !content_reg}">
                 <div v-if="!content_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
                     <div class="tip-text">{{content_reg_con}}</div>
                 </div>
                 <textarea placeholder="写下你的宝贵建议..." v-model="content"></textarea>
             </div>
-            <div class="content-input" :class="{'z-error': !contact_reg}">
+            <div class="content-input cpm_form_input" :class="{'z-error': !contact_reg}">
                 <div v-if="!contact_reg" class="c-dialog__tip">
                     <div class="tip-arrow"></div>
                     <div class="tip-text">{{contact_reg_con}}</div>

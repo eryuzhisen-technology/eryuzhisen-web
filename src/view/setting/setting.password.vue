@@ -3,6 +3,14 @@
 @import (less) '../../common/css/common.less';
 @import (less) '../user/user.less';
 @import (less) './setting.less';
+.m-setting {
+    & .m-user-dialog__input-phone {
+        width: 185px;
+    }
+    & .m-user-dialog__btn-phone {
+        width: 185px;
+    }
+}
 .app-body {
     padding-top: 60px;
 }
@@ -23,7 +31,7 @@
                 <div class="content">
 				<div class="content-wrap">
 					<div class="m-user-dialog__item">
-                        <div v-if="!phone_reg" class="m-user-dialog__tip">
+                        <div v-if="!phone_reg" class="c-dialog__tip">
                             <div class="tip-arrow"></div>
                             <div class="tip-text">{{phone_reg_con}}</div>
                         </div>
@@ -32,7 +40,7 @@
                         </div>
                     </div>
                     <div class="m-user-dialog__item">
-                        <div v-if="!pic_code_reg" class="m-user-dialog__tip">
+                        <div v-if="!pic_code_reg" class="c-dialog__tip">
                             <div class="tip-arrow"></div>
                             <div class="tip-text">{{pic_code_reg_con}}</div>
                         </div>
@@ -42,18 +50,18 @@
                         </div>
                     </div>
                     <div class="m-user-dialog__item z-60">
-                        <div v-if="!phone_vcode_reg" class="m-user-dialog__tip">
+                        <div v-if="!phone_vcode_reg" class="c-dialog__tip">
                             <div class="tip-arrow"></div>
                             <div class="tip-text">{{phone_vcode_reg_con}}</div>
                         </div>
                         <div class="m-user-dialog__input m-user-dialog__input-phone cpm_form_input cpm_left" :class="{'z-error': !phone_vcode_reg}">
                             <input type="text" placeholder="验证码" v-model="phone_vcode" />
                         </div>
-                        <div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_button_warn cpm_right" @click="getPhoneVerifyCode">{{timeText}}</div>
+                        <div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_button_default cpm_right" @click="getPhoneVerifyCode">{{timeText}}</div>
                     </div>
                     <div class="cpm_clear"></div>
                     <div class="m-user-dialog__item">
-                        <div v-if="!password_reg" class="m-user-dialog__tip">
+                        <div v-if="!password_reg" class="c-dialog__tip">
                             <div class="tip-arrow"></div>
                             <div class="tip-text">{{password_reg_con}}</div>
                         </div>
@@ -62,7 +70,7 @@
                         </div>
                     </div>
                     <div class="m-user-dialog__item">
-                        <div v-if="!repassword_reg" class="m-user-dialog__tip">
+                        <div v-if="!repassword_reg" class="c-dialog__tip">
                             <div class="tip-arrow"></div>
                             <div class="tip-text">{{repassword_reg_con}}</div>
                         </div>

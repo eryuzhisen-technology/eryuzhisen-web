@@ -1,14 +1,47 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (less) '../../common/css/common.less';
-@import (less) './setting.less';
-.m-setting-content .setting-right .content {
-    padding: 0;
-    background: none;
-    & .content-wrap {
-        width: 100%;
+@module: m-setting;
+
+.@{module} {
+    padding-bottom: 40px;
+    .default_backgroud_5;
+    & &-wrap {
+        .default_width_1200;
+        .default_mar_auto;
     }
 }
+.@{module}-content {
+    position: relative;
+    overflow: hidden;
+    min-height: 400px;
+    & .setting-content {
+
+    }
+    & .title {
+        width: 100%;
+        min-width: 240px;
+        .default_font_size_5;
+        .default_color_1;
+        .default_mar_auto;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        & .number {
+            .default_font_family_bolder;
+            .default_font_size_6;
+        }
+        & .clear {
+            margin-left: 15px;
+            .default_font_size_1;
+            .default_color_3;
+            .default_pointer;
+        }
+    }
+    & .content {
+        
+    }
+}
+
 </style>
 
 <!-- html代码 -->
@@ -19,8 +52,9 @@
 	<div class="m-setting-wrap">
 		<div class="m-setting-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="setting-right">
-				<div class="title">
+			<div class="setting-content">
+				<div class="title" :style="{'width': (count <= 5 ? count*240 : 1200) + 'px'}"
+                >
 					黑名单
 				</div>
                 <div class="content">
@@ -43,6 +77,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
     data () {
     	return {
@@ -67,6 +102,10 @@ export default {
             count: 0
     	}
     },
+    computed: mapState({
+        count: state => state.auth.count,
+        lists: state => state.auth.lists
+    }),
     methods: {
         author_count (count){
             this.count = count;            

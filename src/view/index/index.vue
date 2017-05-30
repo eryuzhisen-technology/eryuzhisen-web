@@ -169,16 +169,6 @@
             .default_width_1200;
             .default_mar_auto;
         }
-        & .c-artice-item:nth-child(1),
-        & .c-artice-item:nth-child(2),
-        & .c-artice-item:nth-child(3),
-        & .c-artice-item:nth-child(4),
-        & .c-artice-item:nth-child(5) {
-            .default_border-t-n;
-        }
-		& .c-artice-item:nth-child(5n) {
-            .default_border-t-n;
-		}
     }
 </style>
 
@@ -213,7 +203,7 @@
         </div>
         <div class="m-index-enter">
             <div class="m-index-enter-wrap">
-                <a href="javascript:void(0)" class="enter-item"><img src="../../common/images/index/enter-1.png" /></a>
+                <a href="./about.html" class="enter-item"><img src="../../common/images/index/enter-1.png" /></a>
                 <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-2.png" /></a>
                 <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
             </div>

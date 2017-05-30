@@ -14,6 +14,18 @@
             .default_mar_auto;
             margin-bottom: 30px;
         }
+        & .c-artice-item:first-child,
+        & .c-artice-item:nth-child(1),
+        & .c-artice-item:nth-child(2),
+        & .c-artice-item:nth-child(3),
+        & .c-artice-item:nth-child(4),
+        & .c-artice-item:nth-child(5) {
+            .default_border-t-n;
+        }
+        & .c-artice-item:last-child,
+        & .c-artice-item:nth-child(5n) {
+            .default_border-r-n;
+        }
     }
     .c-artice-item {
         position: relative;
@@ -401,7 +413,7 @@ export default {
         // 获取url的参数
         this.query = decodeURIComponent(this.$url.getUrlParam('query'));
         this.user_id = this.$url.getUrlParam('user_id');
-        this.labelTag = this.$url.getUrlParam('labelTag');
+        this.labelTag = decodeURIComponent(this.$url.getUrlParam('labelTag'));
 
         // watch tags change
         this.$watch('tag.index', function(newVal, oldVal){

@@ -5,119 +5,104 @@
         width: 100%;
         height: 100%;
         & &-wrap {
+            min-width: 240px;
+            min-height: 360px;
+            .default_backgroud_3;
+            .default_mar_auto;
             margin-bottom: 30px;
-            .default_backgroud_2;    
         }
         & a {
             text-decoration: none;
         }
         & .list-author__item {
             position: relative;
-            display: table;
-            width: 100%;
-            height: 70px;
-            padding: 0 20px;
-            .default_border-b-14;
-            &:hover {
-                .default_border_shadow_4;
-            }
+            float: left;
+            width: 240px;
+            height: 360px;
+            padding: 40px 30px 50px;
+            .default_backgroud_3;
+            .default_border-t-5;
+            .default_border-rr-5;
             & a {
                 text-decoration: none;
             }
-        }
-        & .list-author__img {
-            display: table-cell;
-            vertical-align: middle;
-            width: 30px;
+            &:first-child,
+            &:nth-child(1),
+            &:nth-child(2),
+            &:nth-child(3),
+            &:nth-child(4),
+            &:nth-child(5) {
+                .default_border-t-n;
+            }
+            &:last-child,
+            &:nth-child(5n) {
+                .default_border-r-n;
+            }
         }
         & .list-author__avatar {
-            width: 30px;
-            height: 30px;
+            width: 100px;
+            height: 100px;
             overflow: hidden;
             .default_border-r-50;
-            .default_backgroud_5;
-        }
-        & .list-author__content {
-            display: table-cell;
-            vertical-align: middle;
-            width: 610px;
-            padding-left: 10px;
+            .default_backgroud_7;
+            .default_mar_auto;
+            margin-bottom: 20px;
+            & img {
+                max-width: 100%;
+            }
         }
         & .list-author__name {
-            display: block;
-            margin-bottom: 6px;
+            margin-bottom: 15px;
+            .default_font_bolder;
+            .default_color_1;
+            .default_font_size_7;
+            .default_center;
+        }
+        & .list-author__desc {
+            line-height: 1rem;
+            .default_font_size_1;
             .default_color_2;
-            .default_font_size_1;
-        }
-        & .list-author__text {
-            overflow: hidden;
-            .default_font_size_1;
-            .default_color_3;
-        }
-        & .list-author__work {
-            float: left;
-            margin-right: 10px;
-        }
-        & .list-author__fans {
-            float: left;
         }
         & .list-author__btn {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            height: 30px;
-            line-height: 30px;
-            .default_border-r-4;
-            .default_backgroud_3;
-            .default_font_size_2;
-            .default_color_3;
-            .default_pointer;
+            bottom: 50px;
+            left: 50%;
+            width: 100px;
+            height: 50px;
+            line-height: 50px;
+            transform: translate(-50%, 0);
             .default_center;
-            &.z-active,
+            .default_font_size_2;
+            .default_color_2;
+            .default_border-r-4;
+            .default_pointer;
+            .default_backgroud_4;
+            &.z-active {
+                .default_backgroud_13;
+            }
             &:hover {
-                .default_color_2;
-                .default_backgroud_5;
+                .default_color_1;
             }
         }
-        & .list-author__btn-1 {
-            width: 50px;
-        }
-        & .list-author__btn-2 {
-            width: 60px;
-        }
-        & .list-author__btn-3 {
-            width: 80px;
-        }
-        &.z-active .list-author__btn {
-            float: right;
-        }
-    }
-    .c-author-item:last-child .c-author-item-wrap {
-        .default_border-n;
     }
 </style>
 
 <!-- html代码 -->
 <template>
 <div class="c-author-list" :class="'z-' + resType">
-<div class="c-author-list-wrap">
+<div class="c-author-list-wrap" :style="{'height': Math.ceil(count/5)*360 + 'px', 'width': (count <= 5 ? count*240 : 1200) + 'px'}">
     <a class="list-author__item" v-for="data in lists" :href="'author.work.html?user_id=' + data.uid">
-        <div class="list-author__img">
-            <div class="list-author__avatar">
-                <img :src="data.avatar_url || avatar"  />
-            </div>
+        <div class="list-author__avatar">
+            <img :src="data.avatar_url || avatar"  />
         </div>
-        <div class="list-author__content">
-            <div class="list-author__name">{{data.nick_name}}</div>
-            <div class="list-author__text">
-                <div class="list-author__work">作品：{{data.opus_count}}</div>
-                <div class="list-author__fans">粉丝：{{data.fans_count}}</div>
-                <div v-if="data.relation == 0" class="list-author__btn list-author__btn-1" @click.stop.prevent="addFollow(data.uid)">关注</div>
-                <div v-if="data.relation == 1 || data.relation == 3" class="list-author__btn list-author__btn-2" @click.stop.prevent="delFollow(data.uid)">已关注</div>
-                <div v-if="data.relation == 2" class="list-author__btn list-author__btn-3" @click.stop.prevent="addFollow(data.uid)">相互关注</div>
-                <div v-if="data.black == 1" class="list-author__btn list-author__btn-3" @click.stop.prevent="delBlack(data.uid)">取消拉黑</div>
-            </div>
-        </div>
+        <div class="list-author__name">{{data.nick_name}}</div>
+        <div class="list-author__desc">{{data.signature}}</div>
+        <!-- <div class="list-author__work">作品：{{data.opus_count}}</div> -->
+        <!-- <div class="list-author__fans">粉丝：{{data.fans_count}}</div> -->
+        <div v-if="data.relation == 0" class="list-author__btn list-author__btn-1" @click.stop.prevent="addFollow(data.uid)">关注</div>
+        <div v-if="data.relation == 1 || data.relation == 3" class="list-author__btn list-author__btn-2" @click.stop.prevent="delFollow(data.uid)">已关注</div>
+        <div v-if="data.relation == 2" class="list-author__btn list-author__btn-3" @click.stop.prevent="addFollow(data.uid)">相互关注</div>
+        <div v-if="data.black == 1" class="list-author__btn list-author__btn-3" @click.stop.prevent="delBlack(data.uid)">取消拉黑</div>
     </a>
     <Empty v-if="count <= 0" />
 </div>

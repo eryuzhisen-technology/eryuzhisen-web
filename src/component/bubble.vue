@@ -14,20 +14,18 @@
 	}
 	.@{bubble}-top {
 		position: fixed;
-		top: 20px;
-		left: 50%;
+		top: 0;
+		left: 0;
 		z-index: 30;
-		width: 600px;
-		height: 50px;
-		line-height: 50px;
-		margin-left: -300px;
-		.default_border-r-4;
-		.default_font_size_2;
-		.default_color_10;
+		width: 100%;
+		height: 60px;
+		line-height: 60px;
+		.default_font_size_3;
+		.default_color_1;
 		.default_center;
 		.default_border_shadow_5;
 		&.z-default {
-			.default_backgroud_8;
+			.default_backgroud_3;
 		}
 		&.z-warn {
 			.default_backgroud_1;

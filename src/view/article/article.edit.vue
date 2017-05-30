@@ -300,9 +300,9 @@
             // overflow: hidden;
             .default_backgroud_3;
             & .edit-content_read {
-                padding: 40px;
+                padding: 0 40px;
                 & .edit-content_read-title {
-                    margin-bottom: 40px;
+                    padding: 40px 0;
                     .default_color_1;
                     .default_font_size_6;
                     .default_font_bolder;
@@ -647,15 +647,15 @@ export default {
         },
 
         // 保存内容
-        update (value){
+        update (value, auto){
             this.content = value;
             if (!this.check()) {
                 return
             }
             if (this.chapter_id && this.chapter_id != -1) {
-                this.updateChapter(1);
+                this.updateChapter(1, auto);
             } else {
-                this.addChapter(1);
+                this.addChapter(1, auto);
             }
         },
 
@@ -703,15 +703,21 @@ export default {
             // 2s自动保存
             var chapaterEdit = this.$version.chapaterEdit;
             this.timer = setTimeout( () => {
-                this.update(value);
+                this.update(value, true);
             }, chapaterEdit.time)
         },
 
         // 更新内容
-        updateChapter (status){
+        updateChapter (status, auto){
             var that = this;
 
-            status == 1 && (this.isUpdata = 1);
+            if (status == 1) {
+                if (auto) {
+                    this.isUpdata = 4;
+                } else {
+                    this.isUpdata = 1;
+                }
+            }
             this.$store.dispatch('opus_updateChapter', {
                 "chapter_id": this.chapter_id, //文章id
                 "chapter_title": this.title, //章节标题
@@ -841,6 +847,8 @@ export default {
         isUpdata (isUpdata){
             if (isUpdata == 1) {
                 $('.j-save-btn').addClass('j-save-btn-update').find('a').text('保存中...');    
+            } else if (isUpdata == 4) {
+                $('.j-save-btn').addClass('j-save-btn-update').find('a').text('自动保存中...');    
             } else if (isUpdata == 2) {
                 $('.j-save-btn').addClass('j-save-btn-update').find('a').text('已保存');
                 this.timeSave = setTimeout( res => {
@@ -912,9 +920,9 @@ export default {
         }
 
         if (this.chapter.chapter_status == 0) {
-            $('.edit-content_read-content-wrap').height($(window).height()  - 120);
+            $('.edit-content_read-content-wrap').height($(window).height());
             $(window).on('resize', function(){
-                $('.edit-content_read-content-wrap').height($(window).height() - 120);
+                $('.edit-content_read-content-wrap').height($(window).height());
             })
 
             // 设置高度
@@ -926,6 +934,10 @@ export default {
                 shrinkScrollbars: 'scale',
                 // fadeScrollbars: true
             });
+        } else {
+            this.chapterContent && this.chapterContent.destroy();
+            $(window).off('resize');
+            $('.edit-content_edit-title').height(60);
         }
     },
     mounted (){
