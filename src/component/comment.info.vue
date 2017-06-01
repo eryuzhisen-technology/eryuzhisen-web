@@ -10,7 +10,15 @@
     }
     .@{module}-list {
         padding: 20px;
-        .default_border-b-14;
+        .default_border-b-13;
+        .default_backgroud_3;
+        .default_border-b-5;
+        &.z-unread {
+            .default_backgroud_4;
+        }
+        &:last-child {
+            .default_border-n;
+        }
     }
     .@{module}__top {
         height: 20px;
@@ -44,7 +52,7 @@
         padding-left: 30px;
         line-height: 1.5rem;
         .default_font_size_2;
-        .default_color_2;
+        .default_color_10;
         & strong {
             .default_color_5;
         }

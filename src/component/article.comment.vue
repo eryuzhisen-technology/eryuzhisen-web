@@ -5,17 +5,17 @@
         width: 100%;
         height: 100%;
         & &-wrap {
-            margin-bottom: 30px;
             width: 100%;
             height: 100%;
-            .default_backgroud_2;
+            margin-bottom: 30px;
+            .default_backgroud_3;
             .default_border-r-4;
         }
     }
     .c-artice-comment-list {
-        .default_border-b-14;
+        padding-bottom: 20px;
         & .comment__content {
-            padding: 20px 30px 20px 20px;
+            padding: 20px;
             & .content__top {
                 height: 20px;
                 margin-bottom: 10px;
@@ -33,14 +33,14 @@
                     height: 20px;
                     line-height: 20px;
                     .default_color_3;
-                    .default_font_size_3;
+                    .default_font_size_1;
                 }
             }
             & .content__body {
                 padding-left: 30px;
                 line-height: 1.5rem;
-                margin-bottom: 15px;
-                .default_color_2;
+                margin-bottom: 20px;
+                .default_color_10;
                 .default_font_size_2;
             }
             & .content__bottom {
@@ -99,14 +99,18 @@
             }
         }
         & .comment__record {
-            & .record__item {}
+            margin: 0 20px 0 40px;
+            padding: 0 20px;
+            .default_backgroud_2;
+            & .record__item {
+                padding: 10px 0;
+            }
             & .record__item-content {
-                padding: 10px 30px 10px 50px;
                 & .item-text {
                     & p {
                         line-height: 1.5rem;
-                        margin-bottom: 15px;
-                        .default_color_2;
+                        margin-bottom: 10px;
+                        .default_color_10;
                         .default_font_size_2;    
                     }
                     & strong {
@@ -118,6 +122,8 @@
                     }
                 }
                 & .item-bottom {
+                    height: 12px;
+                    line-height: 12px;
                     overflow: hidden;
                     .default_color_3;
                     .default_font_size_1;
@@ -143,41 +149,35 @@
                 }
             }
             & .record__page {
-                height: 50px;
-                line-height: 50px;
+                height: 40px;
+                line-height: 40px;
                 .default_center;
                 .default_font_size_2;
-                .default_color_3;
-                .default_border-t-14;
+                .default_color_2;
                 & span {
-                    .default_color_2;
+                    .default_color_1;
                 }
                 & strong {
-                    .default_color_5;
+                    .default_color_1;
                     .default_pointer;
+                    &:hover {
+                        .default_color_fff;
+                    }
                 }
             }
         }
         & .content__reply {
-            height: 80px;
-            padding: 20px 30px 20px 50px;
+            padding: 10px 0;
             overflow: hidden;
             & .content__reply-form {
                 float: left;
                 height: 40px;
-                width: 520px;
+                width: 540px;
                 margin-right: 10px;
-                padding: 0 20px;
-                .default_backgroud_4;
-                .default_border-r-4;
-                .default_color_3;
-                .default_font_size_2;
                 & input {
                     width: 100%;
                     height: 40px;
                     line-height: 40px;
-                    .default_font_size_2;
-                    .default_color_3;
                 }
             }
             & .content__reply-btn {
@@ -188,11 +188,17 @@
                 text-align: center;
                 .default_color_2;
                 .default_font_size_2;
-                .default_backgroud_5;
+                .default_backgroud_13;
                 .default_border-r-4;
                 .default_pointer;
-                & {
+                &:hover {
                     .default_color_1;
+                }
+            }
+            &.z-top {
+                padding-left: 40px;
+                & .content__reply-form {
+                    width: 580px;
                 }
             }
         }
@@ -218,18 +224,10 @@
             <div class="content__body">{{data.comment}}</div>
             <div class="content__bottom">
                 <div class="bottom-jubao" @click="addReport">举报</div>
-                <div class="bottom-record" @click="replayCommit(_index, -1)">回复</div>
+                <div class="bottom-record" @click="replayCommit(_index, data.replayIndex == -1 ? -2 : -1)">{{data.replayIndex == -1 ? '收起回复' : '回复'}}</div>
                 <div class="bottom-time">{{data.publish_time}}</div>
                 <div class="bottom-fabulous" @click="addCommentPraise"><span :class="data.hasFabulous ? 'z-on': ''"></span><strong>{{data.praise_count}}</strong></div>
             </div>
-        </div>
-        <div class="content__reply z-top"
-            v-if="data.replayIndex == -1"
-        >
-            <div class="content__reply-form">
-                <input type="text" placeholder="回复评论..." v-model="comment_con" />
-            </div>
-            <div class="content__reply-btn" @click="sendComment(data.comment_id)">提交</div>
         </div>
         <div class="comment__record">
             <div class="record__item" 
@@ -248,14 +246,14 @@
                     </div>
                     <div class="item-bottom">
                         <div class="item-bottom-jubao" @click="addReport">举报</div>
-                        <div class="item-bottom-record" @click="replayCommit(_index, index)">回复</div>
+                        <div class="item-bottom-record" @click="replayCommit(_index, index == data.replayIndex ? -2 : index)">{{ index == data.replayIndex ? '收起回复' : '回复'}}</div>
                         <div class="item-bottom-time">{{reply.publish_time}}</div>
                     </div>
                 </div>
                 <div class="content__reply"
                     v-if="index == data.replayIndex"
                 >
-                    <div class="content__reply-form">
+                    <div class="content__reply-form cpm_form_input">
                         <input type="text" placeholder="回复评论..." v-model="comment_con" />
                     </div>
                     <div class="content__reply-btn" @click="sendReplyComment(data.comment_id, reply.comment_id)">提交</div>
@@ -264,6 +262,14 @@
             <div class="record__page" v-if="data.replys && data.reply_page_info.total_count - data.replys.length > 0">
                 还有<span>{{data.reply_page_info.total_count - data.replys.length}}</span>条回复 <strong @click="getSubCommentMore(data)">点击加载更多</strong>
             </div>
+        </div>
+        <div class="content__reply z-top"
+            v-if="data.replayIndex == -1"
+        >
+            <div class="content__reply-form cpm_form_input">
+                <input type="text" placeholder="回复评论..." v-model="comment_con" />
+            </div>
+            <div class="content__reply-btn" @click="sendComment(data.comment_id)">提交</div>
         </div>
     </div>
     <Empty v-if="comment.count == 0" />

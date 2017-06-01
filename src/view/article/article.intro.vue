@@ -2,6 +2,14 @@
 <style lang="less">
 @import (less) '../../common/css/common.less';
 @import (less) './article.less';
+.content-right .content {
+    padding: 30px;
+    line-height: 1.75em;
+    .default_border-r-4;
+    .default_backgroud_3;
+    .default_color_10;
+    .default_font_size_3;
+}
 </style>
 
 <!-- html代码 -->
@@ -21,17 +29,15 @@
                 </div>
             </div>
             <div class="content-right">
-                <div class="title">
-                    热门评论
-                </div>
+    			<div class="title">
+    				简介
+    			</div>
     			<div class="content">
-                    <ArticleCommentDom
-                        class="content_comment"
-                    />
+    				{{catalog.catalog_desc}}
     			</div>
             </div>
-        </div>
 		</div>
+    </div>
 	</div>
 	<FooterDom />
 	<SideMenu />
@@ -44,11 +50,11 @@ import {mapState} from 'vuex'
 export default {
     data () {
     	return {
-            menuIndex: 2,
+    		menuIndex: 0,
             menu: [
                 {
                     title: '简介',
-                    url: 'article.intro.html'
+                    isActive: true
                 },
                 {
                     title: '章节',
@@ -56,10 +62,10 @@ export default {
                 },
                 {
                     title: '评论',
-                    isActive: true
+                    url: 'article.comment.html'
                 }
             ],
-            comment: ''
+            catalog_id: ''
     	}
     },
     computed: mapState({
@@ -67,20 +73,9 @@ export default {
         catalog: state => state.opus.catalog.info
     }),
     methods: {
-    	commentCommit (){
-            if (!$.trim(this.comment)) {
-                return false;
-            }
-            this.$eventHub.$emit('article.comment.addComment', {
-                comment: this.comment
-            });
-        }
+    	
     },
     mounted (){
-        this.$eventHub.$on('article.comment.refresh', res => {
-            this.comment = '';
-        });
-
         // 获取url的参数
         var catalog_id = this.$url.getUrlParam('catalog_id');
         this.menu.map( (item, index) => {

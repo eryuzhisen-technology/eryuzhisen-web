@@ -22,14 +22,16 @@ Vue.component('Empty', Empty)
 Vue.component('Edit', Edit)
 Vue.component('UploadImg', UploadImg)
 
-import BetterDom from '../../component/article.better.vue';
-Vue.component('BetterDom', BetterDom)
+import ArticleHeaderDom from '../../component/article.header.vue';
+import Chapter from '../../component/chapter.list.vue';
+Vue.component('ArticleHeaderDom', ArticleHeaderDom)
+Vue.component('Chapter', Chapter)
 
-import better from './message.better.vue'
+import article from './article.intro.vue'
 new Vue({
 	el: '#app',
 	store,
 	render (h) {
-		return h(better);
+		return h(article);
 	}
 })

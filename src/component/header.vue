@@ -8,7 +8,6 @@
 		left: 0;
 		z-index: 20;
 		width: 100%;
-		min-width: 960px;
 		height: 60px;
 		.default_backgroud_13;
 	}

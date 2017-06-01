@@ -188,7 +188,7 @@
 <!-- html代码 -->
 <template>
 <div class="c-artice-list">
-<div class="c-artice-list-wrap" :style="{'height': Math.ceil(article.count/3)*(showType == 'left_right' ? 350 : 480) + 'px', 'width': (article.count && article.count <= 3 ? article.count*(showType == 'left_right' ? 400 : 240) : 1200) + 'px'}">
+<div class="c-artice-list-wrap" :style="{'height': Math.ceil(article.count/(showType == 'left_right' ? 3 : 5))*(showType == 'left_right' ? 350 : 480) + 'px', 'width': (article.count && article.count <= 3 ? article.count*(showType == 'left_right' ? 400 : 240) : 1200) + 'px'}">
     <div class="c-artice-item" v-for="data in article.lists" :class="{'z-left_right': showType == 'left_right'}">
         <div class="c-artice-item-wrap"
             :data-catalog_id="data.catalog_id"

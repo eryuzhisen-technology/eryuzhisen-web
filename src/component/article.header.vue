@@ -7,176 +7,69 @@
         position: relative;
         z-index: 2;
         width: 100%;
-        height: 320px;
-        padding-top: 40px; 
-        .user_background_1;
-        & &-wrap{
-            .default_width_960;
+        min-width: 1200px;
+        padding-top: 80px;
+        padding-bottom: 80px;
+        .default_backgroud_6;
+        & &-wrap {
+            width: 600px;
             .default_mar_auto;
         }
-    }
-    .@{module}_left {
-        position: relative;
-        float: left;
-        width: 150px;
-        height: 240px;
-        margin-right: 20px;
-        .default_backgroud_5;
-        & .left-img {
-            width: 100%;
-            height: 240px;
-            overflow: hidden;
-            & img {
-                width: 100%;
-                height: 100%;
-            }
-        }
-        & .left-tag {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 50px;
-            height: 50px;
-            &.z-man {
-                .skin_icon_article-4;
-            }
-            &.z-wen {
-                .skin_icon_article-3;
-            }
-        }
-    }
-    .@{module}_right {
-        position: relative;
-        float: left;
-        width: 790px;
-        height: 240px;
         & .name {
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            .default_center;
             & .name-text {
-                float: left;
+                display: inline-block;
+                margin-right: 10px;
                 .default_color_1;
                 .default_font_size_6;
                 .default_font_bolder;
-                margin-right: 10px;
+                .default_middle;
             }
             & .name-tag {
-                float: left;
-                width: 52px;
+                display: inline-block;
                 height: 30px;
                 line-height: 30px;
+                padding: 0 12px;
                 border-radius: 15px;
                 .default_font_size_2;
                 .default_color_6;
-                .default_backgroud_5;
+                .default_backgroud_13;
                 .default_center;
-            }
-        }
-        & .btn {
-            height: 40px;
-            margin-bottom: 15px;
-            & .btn-item {
-                float: left;
-                height: 40px;
-                line-height: 40px;
-                margin-right: 10px;
-                .default_backgroud_5;
-                .default_border-r-4;
-                .default_center;
-                .default_color_1;
-                .default_font_size_2;
-                .default_pointer;
-                & a {
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                    text-decoration: none;
-                    .default_color_1;
-                    .default_font_size_2;
-                }
-                & .cpm_sub_more {
-                    width: 150px;
-                }
-                &:hover {
-                    & .cpm_sub_more {
-                        display: block;
-                    }
-                }
-            }
-            & .btn-item:last-child {
-                margin-right: 0;
-            }
-            & .btn-mark {
-                width: 600px;
-                & span {
-                    display: block;
-                    width: 100%;
-                    height: 40px;
-                    line-height: 40px;
-                }
-            }
-            & .btn-share {
-                width: 100px;
-                position: relative;
-                .default_pointer;
-                .skin_icon_author-5;
-                &:hover {
-                    .skin_icon_author-5_on;
-                }
-            }
-            & .btn-more {
-                width: 40px;
-                position: relative;
-                .default_pointer;
-                .skin_icon_author-4;
-                &:hover {
-                    .skin_icon_author-4_on;
-                }
+                .default_middle;
             }
         }
         & .text {
-            & .text-intro {
-                margin-bottom: 10px;
-                line-height: 1.5rem;
-                .default_color_1;
-                .default_font_size_2;
-            }
-            & .text-tag p {
-                display: inline-block;
-                margin-right: 10px;
-                margin-bottom: 10px;
-                .default_color_1;
-                .default_font_size_2;
+            overflow: hidden;
+            margin-bottom: 30px;
+            & .text-tag {
+                overflow: hidden;
+                margin-bottom: 20px;
+                .default_center;
+                & p {
+                    display: inline-block;
+                    height: 30px;
+                    line-height: 30px;
+                    padding: 0 12px;
+                    margin-right: 10px;
+                    border-radius: 15px;
+                    .default_color_2;
+                    .default_font_size_2;
+                    .default_backgroud_3;
+                    .default_center;
+                }
             }
             & .text-number {
                 overflow: hidden;
+                .default_center;
                 & .text-number-item {
                     display: inline-block;
-                    height: 12px;
-                    & span {
-                        display: inline-block;
-                        width: 12px;
-                        height: 12px;
-                        margin-right: 4px;
-                        vertical-align: middle;
-                    }
-                    & strong {
-                        display: inline-block;
-                        .default_color_1;
-                        .default_font_size_1;
-                        vertical-align: middle;
-                    }
+                    .default_color_2;
+                    .default_font_size_2;
                 }
                 & .text-zan {
-                    margin-right: 15px;
-                    & span {
-                        .skin_icon_article-5;
-                    }
-                }
-                & .text-comment {
-                    & span {
-                        .skin_icon_article-6;   
-                    }
+                    margin-right: 20px;
                 }
             }
             & .text-author {
@@ -203,6 +96,114 @@
                 .default_font_size_1;
             }
         }
+        & .btn {
+            height: 50px;
+            .default_center;
+            & .btn-item {
+                display: inline-block;
+                height: 50px;
+                line-height: 50px;
+                margin-right: 10px;
+                .default_backgroud_13;
+                .default_border-r-4;
+                .default_center;
+                .default_color_2;
+                .default_font_size_2;
+                .default_pointer;
+                .default_middle;
+                & a {
+                    display: inline-block;
+                    width: 100%;
+                    height: 100%;
+                    text-decoration: none;
+                    .default_color_2;
+                    .default_font_size_2;
+                }
+                & .cpm_sub_more {
+                    width: 150px;
+                }
+                &:hover {
+                    & .cpm_sub_more {
+                        display: block;
+                    }
+                }
+                &.z-unactive {
+                    .default_backgroud_4;
+                }
+            }
+            & .btn-item:last-child {
+                margin-right: 0;
+            }
+            & .btn-mark {
+                width: 150px;
+                & span {
+                    display: block;
+                    width: 100%;
+                    height: 50px;
+                    line-height: 50px;
+                }
+                &:hover span {
+                    .default_color_1;
+                }
+            }
+            & .btn-share {
+                width: 50px;
+                position: relative;
+                .default_pointer;
+                .skin_icon_author-5;
+                &:hover {
+                    .skin_icon_author-5_on;
+                }
+            }
+            & .btn-more {
+                width: 50px;
+                position: relative;
+                .default_pointer;
+                .skin_icon_author-4;
+                &:hover {
+                    .skin_icon_author-4_on;
+                }
+            }
+        }
+        & .menu {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translate(-50%, 0);
+            & .menu-item {
+                float: left;
+                width: 40px;
+                margin-right: 60px;
+                .default_center;
+                .default_pointer;
+                & a,
+                & span {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                    padding-bottom: 16px;
+                    text-decoration: none;
+                    .default_color_1;
+                    .default_font_size_2; 
+                }
+                &:hover a,
+                &:hover span {
+                    .default_color_fff;
+                }
+                &:nth-child(3) {
+                    margin-right: 0;
+                }
+            }
+            & .menu-arrow {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 40px;
+                height: 2px;
+                background-color: #fff;
+                transition: left @default_speed_1;
+            }
+        }
     }
 </style>
 
@@ -210,86 +211,86 @@
 <template>
 <div class="c-article-header">
 <div class="c-article-header-wrap">
-    <div class="c-article-header_left">
-        <div class="left-img">
-            <img :src="catalog.catalog_cover_url" />
-        </div>
-        <div 
-            class="left-tag"
-            :class="{'z-man': catalog.category_title == '漫画', 'z-wen': catalog.category_title == '文字'}"
-        ></div>
+    <div class="name">
+        <div class="name-text">{{catalog.catalog_title}}</div>
+        <div class="name-tag">{{level['level'+catalog.level]}}</div>
     </div>
-    <div class="c-article-header_right">
-        <div class="name">
-            <div class="name-text">{{catalog.catalog_title}}</div>
-            <div class="name-tag">{{level['level'+catalog.level]}}</div>
+    <div class="text">
+        <div class="text-tag">
+            <p v-for="item in catalog.labels">{{item}}</p>
         </div>
-        <div class="btn">
-            <div class="btn-item btn-mark" 
-                :data-catalog_id="catalog.catalog_id"
-            >
-                <span v-if="catalog.owner != 1" @click="mark(catalog.catalog_id)">{{ catalog.is_collected == 1 ? '取消收藏' : '加入收藏' }}</span>
-                <span v-else @click="updateCatalog">修改目录信息</span>
+        <div class="text-number">
+            <div class="text-number-item text-zan">
+                点赞·{{catalog.praise_count}}
             </div>
-            <div class="btn-item btn-share">
-                <div class="cpm_sub_more z-left">
-                    <div class="item">
-                        <div class="item-icon z-wx"></div>
-                        <div class="item-text">微信</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-peng"></div>
-                        <div class="item-text">朋友圈</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-wb"></div>
-                        <div class="item-text">微博</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-qq"></div>
-                        <div class="item-text">QQ 好友</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-kong"></div>
-                        <div class="item-text">QQ 空间</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-more"></div>
-                        <div class="item-text">更多</div>
-                    </div>
-                </div>
-            </div>
-            <div class="btn-item btn-more">
-                <div class="cpm_sub_more z-left">
-                    <div class="item" @click="addReport">
-                        <div class="item-icon z-report"></div>
-                        <div class="item-text">举报</div>
-                    </div>
-                </div>
+            <div class="text-number-item text-comment">
+                评论·{{catalog.comment_count}}
             </div>
         </div>
-        <div class="text">
-            <div class="text-intro">{{catalog.catalog_desc}}</div>
-            <div class="text-tag">
-                <p v-for="item in catalog.labels">{{item}}</p>
-            </div>
-            <div class="text-number">
-                <div class="text-number-item text-zan">
-                    <span></span>
-                    <strong>{{catalog.praise_count}}</strong>
+    </div>
+    <div class="btn">
+        <div class="btn-item btn-mark" 
+            :data-catalog_id="catalog.catalog_id"
+            :class="{'z-unactive': catalog.is_collected == 1}"
+        >
+            <span 
+                v-if="catalog.owner != 1" 
+                @click="mark(catalog.catalog_id)"
+            >{{ catalog.is_collected == 1 ? '取消收藏' : '加入收藏' }}</span>
+            <span v-else @click="updateCatalog">修改目录信息</span>
+        </div>
+        <div class="btn-item btn-share">
+            <div class="cpm_sub_more z-left">
+                <div class="item">
+                    <div class="item-icon z-wx"></div>
+                    <div class="item-text">微信</div>
                 </div>
-                <div class="text-number-item text-comment">
-                    <span></span>
-                    <strong>{{catalog.comment_count}}</strong>
+                <div class="item">
+                    <div class="item-icon z-peng"></div>
+                    <div class="item-text">朋友圈</div>
                 </div>
-            </div>
-            <div class="text-author">
-                <div class="text-author__img">
-                    <img :src="catalog.user && catalog.user.avatar_url || avatar" />
+                <div class="item">
+                    <div class="item-icon z-wb"></div>
+                    <div class="item-text">微博</div>
                 </div>
-                <div class="text-author__name">{{catalog.user && catalog.user.nick_name}}</div>
+                <div class="item">
+                    <div class="item-icon z-qq"></div>
+                    <div class="item-text">QQ 好友</div>
+                </div>
+                <div class="item">
+                    <div class="item-icon z-kong"></div>
+                    <div class="item-text">QQ 空间</div>
+                </div>
+                <div class="item">
+                    <div class="item-icon z-more"></div>
+                    <div class="item-text">更多</div>
+                </div>
             </div>
         </div>
+        <div class="btn-item btn-more">
+            <div class="cpm_sub_more z-left">
+                <div v-if="catalog.owner != 1" class="item" @click="addReport">
+                    <div class="item-icon z-report"></div>
+                    <div class="item-text">举报</div>
+                </div>
+                <div v-if="catalog.owner == 1" class="item" @click="removeCatalog(catalog.catalog_id)">
+                    <div class="item-icon z-del"></div>
+                    <div class="item-text">删除作品</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="menu">
+        <div 
+            class="menu-item" 
+            v-for="(item, index) in menu"
+            @mouseover="enter(index)"
+            @mouseout="out(index)"
+        >
+            <a v-if="!item.isActive" :href="item.url">{{item.title}}</a>
+            <span v-else>{{item.title}}</span>
+        </div>
+        <div class="menu-arrow" :style="{'left': (index == -1 ? menuIndex : index)*100 + 'px'}"></div>
     </div>
 </div>
 </div>
@@ -307,14 +308,49 @@ export default {
                 level1: '首发',
                 level2: '独家'
             },
-            catalog_id: ''
+            catalog_id: '',
+            index: -1,
         }
     },
+    props: ['menu', 'menuIndex'],
     computed: mapState({
         userInfo: state => state.user.info,
         catalog: state => state.opus.catalog.info
     }),
     methods: {
+        enter (index){
+            this.index = index;
+        },
+        out (){
+            this.index = -1;
+        },
+        removeCatalog (catalogId){
+            var that = this;
+            this.$store.dispatch('bubble_showBubble', {
+                show: true,
+                type: 'warn',
+                warn: {
+                    title: '确定要删除你的故事?',
+                    content: '删除后无法恢复，读者也将无法看见，请谨慎操作',
+                    comfireFn: function(){
+                        that.delCatalog(catalogId);
+                    }
+                },
+            })
+        },
+
+        delCatalog (catalogId){
+            this.$store.dispatch('opus_delCatalog', {
+                "catalogId": catalogId
+            }).then( res => {
+               this.getMyCatalogList();
+
+               this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            });
+        },
+
         updateCatalog (){
             this.$eventHub.$emit('header_article_setShow', {
                 show: true,

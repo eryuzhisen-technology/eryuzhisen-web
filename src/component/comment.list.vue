@@ -9,11 +9,15 @@
         }
     }
     .@{module}-list {
-        padding: 20px 30px 20px 20px;
-        .default_border-b-14;
-        .default_backgroud_2;
+        padding: 20px;
+        .default_border-b-13;
+        .default_backgroud_3;
+        .default_border-b-5;
         &.z-unread {
-            .default_backgroud_3;
+            .default_backgroud_4;
+        }
+        &:last-child {
+            .default_border-n;
         }
     }
     .@{module}__top {
@@ -32,45 +36,39 @@
             float: left;
             height: 20px;
             line-height: 20px;
+            margin-right: 5px;
             .default_font_size_1;
-            .default_color_3;
+            .default_color_6;
+        }
+        & .top__text {
+            float: left;
+            height: 20px;
+            line-height: 20px;
+            .default_font_size_2;
+            .default_color_2;
         }
         & .top__detail {
             float: right;
             height: 20px;
             line-height: 20px;
             & a {
+                text-decoration: none;
                 .default_font_size_1;
                 .default_color_3;
+                &:hover {
+                    .default_color_2;
+                }
             }
         }
     }
     .@{module}__comment {
         padding-left: 30px;
-        margin-bottom: 15px;
-        .default_color_2;
+        margin-bottom: 20px;
+        .default_color_10;
         .default_font_size_2;
-        & .comment__top {
-            margin-bottom: 15px;
-            .default_color_3;
-            & strong {
-                .default_color_6;
-            }
-            & span {
-                .default_color_5;
-            }
-        }
         & .comment__body {
             line-height: 1.5rem;
             margin-bottom: 15px;
-        }
-        & .comment__bottom {
-            line-height: 1.5rem;
-            padding: 20px;
-            .default_border-r-4;
-            .default_color_3;
-            .default_font_size_2;
-            .default_backgroud_7;
         }
     }
     .@{module}__form {
@@ -91,6 +89,12 @@
                 .default_color_1;
             }
         }
+        & .form__top__time {
+            float: right;
+            margin-right: 15px;
+            .default_font_size_1;
+            .default_color_3;
+        }
         & .form__top__record {
             float: right;
             .default_pointer;
@@ -106,16 +110,12 @@
         }
         & .form__body__write {
             float: left;
-            width: 520px;
+            width: 570px;
             height: 40px;
-            .default_backgroud_4;
+            margin-right: 10px;
             & input {
-                width: 520px;
                 height: 40px;
-                line-height: 40px;
-                padding: 0 20px;
-                .default_color_4;
-                .default_font_size_2;    
+                padding: 13px 20px;
             }
         }
         & .form_body__commit {
@@ -123,12 +123,13 @@
             width: 70px;
             height: 40px;
             line-height: 40px;
-            text-align: center;
-            .default_border-r-4;
-            .default_color_2;
+
+            .default_center;
             .default_font_size_2;
-            .default_backgroud_5;
+            .default_color_2;
+            .default_border-r-4;
             .default_pointer;
+            .default_backgroud_13;
             &:hover {
                 .default_color_1;
             }
@@ -146,9 +147,12 @@
                 {{data.message.sender.avatar_utl}}
             </div>
             <div class="top__name">{{data.message.sender.nick_name}}</div>
+            <div class="top__text" v-html="data.message.content.title"></div>
+            <div class="top__detail">
+                <a href="javascript:void(0);">查看详细</a>
+            </div>
         </div>
         <div class="c-comment-info__comment">
-            <div class="comment__top" v-html="data.message.content.title"></div>
             <div class="comment__body">{{data.message.content.content}}</div>
             <div v-if="data.message.content.cite" class="comment__bottom">{{data.message.content.cite}}</div>
         </div>
@@ -156,9 +160,10 @@
             <div class="form__top">
                 <div class="form__top__jubao" @click="addReport(data.message.sender.user_id)">举报</div>
                 <div @click="recordSwitch(index, data.msg_id, data.read)" class="form__top__record">{{recordIndex == index ? '收起回复' : '回复'}}</div>
+                <div class="form__top__time">{{data.create_time}}</div>
             </div>
             <div v-if="recordIndex == index" class="form__body">
-                <div class="form__body__write">
+                <div class="form__body__write cpm_form_input">
                     <input type="text" placeholder="回复TA..." v-model="comment" />
                 </div>
                 <div class="form_body__commit" @click="emitComment(data.message.arguments)">提交</div>

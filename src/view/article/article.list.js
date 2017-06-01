@@ -27,7 +27,7 @@ import Chapter from '../../component/chapter.list.vue';
 Vue.component('ArticleHeaderDom', ArticleHeaderDom)
 Vue.component('Chapter', Chapter)
 
-import article from './article.vue'
+import article from './article.list.vue'
 new Vue({
 	el: '#app',
 	store,

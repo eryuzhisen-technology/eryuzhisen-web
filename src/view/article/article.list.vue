@@ -21,17 +21,15 @@
                 </div>
             </div>
             <div class="content-right">
-                <div class="title">
-                    热门评论
-                </div>
+    			<div class="title">
+    				章节
+    			</div>
     			<div class="content">
-                    <ArticleCommentDom
-                        class="content_comment"
-                    />
+    				<Chapter />
     			</div>
             </div>
-        </div>
 		</div>
+    </div>
 	</div>
 	<FooterDom />
 	<SideMenu />
@@ -44,7 +42,7 @@ import {mapState} from 'vuex'
 export default {
     data () {
     	return {
-            menuIndex: 2,
+    		menuIndex: 1,
             menu: [
                 {
                     title: '简介',
@@ -52,14 +50,14 @@ export default {
                 },
                 {
                     title: '章节',
-                    url: 'article.list.html'
+                    isActive: true
                 },
                 {
                     title: '评论',
-                    isActive: true
+                    url: 'article.comment.html'
                 }
             ],
-            comment: ''
+            catalog_id: ''
     	}
     },
     computed: mapState({
@@ -67,20 +65,9 @@ export default {
         catalog: state => state.opus.catalog.info
     }),
     methods: {
-    	commentCommit (){
-            if (!$.trim(this.comment)) {
-                return false;
-            }
-            this.$eventHub.$emit('article.comment.addComment', {
-                comment: this.comment
-            });
-        }
+    	
     },
     mounted (){
-        this.$eventHub.$on('article.comment.refresh', res => {
-            this.comment = '';
-        });
-
         // 获取url的参数
         var catalog_id = this.$url.getUrlParam('catalog_id');
         this.menu.map( (item, index) => {

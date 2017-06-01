@@ -2,150 +2,35 @@
 <style lang="less">
 @import (less) '../../common/css/common.less';
     @module: m-artice-read;
+    .app-body {
+        padding-top: 0;
+    }
     .@{module} {
         position: relative;
-        padding-top: 40px;
-        padding-bottom: 60px;
+        padding-top: 60px;
         .default_backgroud_5;
         & &-wrap {
             position: relative;
-            padding-left: 280px;
-            .default_width_960;
-            .default_mar_auto;    
+            width: 100%;
         }
-        &.z-scan &-wrap {
-            padding-left: 0;
-        }
-        &.z-scan .m-artice-read__content {
+    }
+    .@{module}__head {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 60px;
+        .default_backgroud_13;
+        & .head-wrap {
+            .default_width_720;
             .default_mar_auto;
         }
     }
-    .@{module}__intro {
-        position: absolute;
-        top: 0; 
-        left: 0;
-        width: 260px;
-        & .intro__text {
-            width: 260px;
-            height: 140px;
-            padding: 10px;
-            margin-bottom: 20px;
-            .default_backgroud_2;
-            .default_border-r-4;
-            & .intro__text-left {
-                float: left;
-                width: 90px;
-                height: 120px;
-                overflow: hidden;
-                margin-right: 10px;
-                & img {
-                    width: 100%;
-                    height: 100%;
-                }
-            }
-            & .intro__text-right {
-                position: relative;
-                float: left;
-                width: 140px;
-                height: 120px;
-                padding-top: 5px;
-            }
-            & .intro__text-title {
-                line-height: 1.5rem;
-                margin-bottom: 10px;
-                .default_color_1;
-                .default_font_size_7;
-                .default_font_bolder;
-            }
-            & .intro__text-number {
-                height: 12px;
-                overflow: hidden;
-                & .text-number-item {
-                    float: left;
-                    height: 12px;
-                    & span {
-                        float: left;
-                        display: block;
-                        width: 12px;
-                        height: 12px;
-                        margin-right: 4px;
-                    }
-                    & strong {
-                        float: left;
-                        display: block;
-                        height: 12px;
-                        line-height: 12px;
-                        .default_color_1;
-                        .default_font_size_1;
-                    }
-                }
-                & .text-number-zan {
-                    margin-right: 10px;
-                    & span {
-                        .skin_icon_article-5;
-                    }
-                }
-                & .text-number-comment {
-                    & span {
-                        .skin_icon_article-6;   
-                    }
-                }
-            }
-            & .intro__text-btn {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                width: 70px;
-                height: 30px;
-                line-height: 30px;
-                text-align: center;
-                .default_color_2;
-                .default_font_size_1;
-                .default_border-r-4;
-                .default_backgroud_3;
-                .default_pointer;
-                &:hover {
-                    .default_color_1;
-                }
-            }
-        }
-        & .intro__menu {
-            width: 260px;
-            height: 400px;
-            overflow-y: auto;
-            & .menu-item {
-                position: relative;
-                width: 100%;
-                height: 50px;
-                .default_backgroud_4;
-                & a {
-                    display: block;
-                    width: 100%;
-                    height: 50px;
-                    line-height: 50px;
-                    padding: 0 20px;
-                    text-decoration: none;
-                    text-overflow: ellipsis; 
-                    overflow: hidden; 
-                    white-space: nowrap; 
-                    .default_font_size_1;
-                    .default_color_3;
-                    &:hover {
-                        .default_color_1;
-                    }
-                }
-                &.z-on {
-                    .default_backgroud_6;
-                    .default_color_1;
-                    .default_font_size_2;
-                }
-            }
-        }
-    }
     .@{module}__content {
-        width: 680px;
-        margin-bottom: 40px;
+        .default_width_720;
+        .default_mar_auto;
         .default_border-r-4;
+        margin-bottom: 40px;
         & .content__header {
             width: 100%;
             height: 50px;
@@ -236,7 +121,8 @@
         }
     }
     .@{module}__comment {
-        width: 100%;
+        .default_width_720;
+        .default_mar_auto;
         margin-bottom: 30px;
         & .comment-header {
             width: 100%;
@@ -254,7 +140,8 @@
         }
     }
     .@{module}__speak {
-        width: 680px;
+        .default_width_720;
+        .default_mar_auto;
         & .speak-header {
             width: 100%;
             height: 50px;
@@ -394,40 +281,16 @@
 <!-- html代码 -->
 <template>
 <div>
-    <HeaderDom />
     <div class="m-artice-read" :class="{'z-scan': isScan}">
     <div class="m-artice-read-wrap">
-        <div v-if="!isScan" class="m-artice-read__intro">
-            <div class="intro__text">
-                <div class="intro__text-left">
-                    <img :src="catalog.info.catalog_cover_url" />
-                </div>
-                <div class="intro__text-right">
-                    <div class='intro__text-title'>{{catalog.info.catalog_title}}</div>
-                    <div class='intro__text-number'>
-                        <div class="text-number-item text-number-zan">
-                            <span></span>
-                            <strong>{{catalog.info.praise_count}}</strong>
-                        </div>
-                        <div class="text-number-item text-number-comment">
-                            <span></span>
-                            <strong>{{catalog.info.comment_count}}</strong>
-                        </div>
-                        <div class="cpm_clear"></div>
-                    </div>
-                    <div class="cpm_clear"></div>
-                    <div v-if="catalog.info.owner != 1 && catalog.info.is_collected != 1" class='intro__text-btn' @click="mark(catalog.info.catalog_id)">加入收藏</div>
-                    <div v-if="catalog.info.owner != 1 && catalog.info.is_collected == 1" class='intro__text-btn' @click="mark(catalog.info.catalog_id)">取消收藏</div>
-                </div>
-            </div>
-            <div class='intro__menu'>
-                <div v-for="(item, index) in chapter.lists" class="menu-item" :class="{'z-on': chapter_id == item.chapter_id}"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.lists[index].chapter_id">{{item.chapter_title}}</a></div>
+        <div class="m-artice-read__head">
+            <div class="head-wrap">
+                <div class="head-title">
+                    <h1>{{ isScan ?　chapter_bat.chapter_title : chapter.info.chapter_title}}</h1>
+                </div>    
             </div>
         </div>
         <div class="m-artice-read__content">
-            <div class="content__header">
-                <h1>{{ isScan ?　chapter_bat.chapter_title : chapter.info.chapter_title}}</h1>
-            </div>
             <div class="content__read">
                 <div class="content__read-text" v-html=" isScan ?　chapter_bat.chapter_content : chapter.info.chapter_content">
                 </div>
@@ -476,9 +339,6 @@
         </div>
     </div>
     </div>
-    <FooterDom />
-    <SideMenu />
-    <Bubble />
 </div>
 </template>
 

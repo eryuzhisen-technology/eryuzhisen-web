@@ -6,16 +6,16 @@
 .@{module} {
 	width: 100%;
 	height: 100px;
-	.default_backgroud_13;
 }
 .@{module}-content {
 	height: 100%;
 	margin: 0 auto;
 	padding-top: 30px;
-	.default_width_960;
+	.default_width_1200;
 	.default_center;
 	.default_color_4;
 	.default_font_size_2;
+	.default_backgroud_13;
 	& .menu {
 		margin-bottom: 8px;
 		& a {
