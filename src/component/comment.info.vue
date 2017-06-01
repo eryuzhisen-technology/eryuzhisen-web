@@ -6,7 +6,6 @@
     .@{module} {
         & &-wrap {
             margin-bottom: 30px;
-            .default_backgroud_2;
         }
     }
     .@{module}-list {

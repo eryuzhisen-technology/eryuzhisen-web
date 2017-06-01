@@ -13,18 +13,17 @@
 	<div class="m-search">
 		<div class="m-search-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="search-right">
-				<div class="title">
-					<span class="number">{{count}}</span> 条结果
-				</div>
-				<div class="result">
-					<ListDom 
-                        resType="search"
-                        loadType='page'
-                        class="result-content z-small"
-                        @article_count="article_count"
-                    />
-				</div>
+			<div class="title" :style="{'width': (article.count <= 5 ? article.count*240 : 1200) + 'px'}">
+                <p v-if="article.count">
+                    <span class="number">{{article.count}}</span>个故事
+                </p>
+            </div>
+			<div class="result">
+				<ListDom 
+                    resType="search"
+                    loadType='page'
+                    class="result-content z-small"
+                />
 			</div>
 		</div>
 	</div>
@@ -35,6 +34,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
     data () {
     	return {
@@ -51,11 +51,9 @@ export default {
             count: 0
     	}
     },
-    methods: {
-        article_count (count){
-            this.count = count;            
-        }
-    },
+    computed: mapState({
+        article: state => state.opus.article,
+    }),
     mounted (){
         // 获取url的参数
         var query = this.$url.getUrlParam('query');

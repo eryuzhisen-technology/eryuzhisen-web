@@ -10,7 +10,6 @@
             height: 100%;
             min-height: 300px;
             min-width: 240px;
-            .default_backgroud_3;
             .default_mar_auto;
             margin-bottom: 30px;
         }
@@ -40,7 +39,13 @@
         & &-wrap-link {
             display: block;
             width: 100%;
-            height: 480px;
+            height: 100%;
+        }
+        & a {
+            text-decoration: none;
+        }
+        &:hover {
+            .default_backgroud_2;
         }
         & .item-hd {
             position: relative;
@@ -74,7 +79,9 @@
             }
         }
         & .item-bd {
+            position: relative;
             width: 100%;
+            height: 100%;
             & .item-bd-title {
                 line-height: 1.5em;
                 margin-bottom: 8px;
@@ -83,6 +90,14 @@
                 &:hover {
                     .default_color_fff;
                 }
+            }
+            & .item-bd-content {
+                height: 11.25rem;
+                line-height: 1.25rem;
+                overflow: hidden;
+                text-align: justify;
+                .default_color_2;
+                .default_font_size_2;
             }
             & .item-bd-tags {
                 width: 100%;
@@ -137,11 +152,35 @@
                 }
             }
         }
-        & a {
-            text-decoration: none;
+        &.z-left_right {
+            width: 400px;
+            height: 350px;
+            overflow: hidden;
         }
-        &:hover {
-            .default_backgroud_2;
+        &.z-left_right .item-hd {
+            float: left;
+            width: 220px;
+            margin-right: 10px;
+        }
+        &.z-left_right .item-bd {
+            float: right;
+            width: 150px;
+            padding: 10px;
+            & .item-bd-tags {
+                position: absolute;
+                bottom: 10px;
+                left: 10px;
+                & a {
+                    margin-top: 8px;
+                    margin-bottom: 0;
+                }
+            }
+        }
+        &.z-left_right .item-ft {
+            position: absolute;
+            bottom: 10px;
+            right: 0;
+            width: 150px;
         }
     }
 </style>
@@ -149,8 +188,8 @@
 <!-- html代码 -->
 <template>
 <div class="c-artice-list">
-<div class="c-artice-list-wrap" :style="{'height': Math.ceil(article.lists.length/5)*480 + 'px', 'width': (article.lists.length <= 5 ? article.lists.length*240 : 1200) + 'px'}">
-    <div class="c-artice-item" v-for="data in article.lists">
+<div class="c-artice-list-wrap" :style="{'height': Math.ceil(article.count/3)*(showType == 'left_right' ? 350 : 480) + 'px', 'width': (article.count && article.count <= 3 ? article.count*(showType == 'left_right' ? 400 : 240) : 1200) + 'px'}">
+    <div class="c-artice-item" v-for="data in article.lists" :class="{'z-left_right': showType == 'left_right'}">
         <div class="c-artice-item-wrap"
             :data-catalog_id="data.catalog_id"
         >
@@ -168,6 +207,7 @@
                 <!-- 内容 -->
                 <div class="item-bd">
                     <div class="item-bd-title">{{data.catalog_title}}</div>
+                    <div v-if="showType == 'left_right'" class="item-bd-content">{{data.catalog_desc}}</div>
                     <div class="item-bd-tags">
                         <a
                             :href="'./page.html?labelTag='+ label" 
@@ -175,7 +215,6 @@
                             :class="{'z-active': labelTag == label}" 
                         >{{label}}</a>
                     </div>
-                    <!-- <div class="item-ft-content">{{data.catalog_desc.length > 60 ? data.catalog_desc.substr(0, 60) + '...' : data.catalog_desc}}</div> -->
                 </div>
 
                 <!-- 作者 -->
@@ -234,7 +273,7 @@ export default {
             pageSize: 5, //每页数量 默认10
         }
     },
-    props: ['resType', 'loadType', 'userType', 'catalog_type'],
+    props: ['resType', 'loadType', 'userType', 'catalog_type', 'showType'],
     computed: mapState({
         article: state => state.opus.article,
         tag: state => state.opus.category,

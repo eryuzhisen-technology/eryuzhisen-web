@@ -462,7 +462,7 @@
                     </div>
                     <div class="edit-content_edit-body">
                         <Create 
-                            :content="content"
+                            :content="contentEdit"
                             @update='update'
                             @publish='publish'
                             @scan="scan"
@@ -506,7 +506,8 @@ export default {
             list: [],
             title: '',
             desc: '',
-            content: ''
+            content: '',
+            contentEdit: ''
         }
     },
     computed: mapState({
@@ -648,7 +649,11 @@ export default {
 
         // 保存内容
         update (value, auto){
+            if (this.content == value && auto) {
+                return false;
+            }
             this.content = value;
+            
             if (!this.check()) {
                 return
             }
@@ -662,8 +667,6 @@ export default {
         // 发布内容
         publish (value){
             var that = this;
-
-            this.content = value;
             if (!this.check(true)) {
                 return
             }
@@ -682,8 +685,6 @@ export default {
 
         // 预览内容
         scan (value){
-            this.content = value;
-
             var chapaterEdit_edit = this.$version.chapaterEdit_edit;
             var key = chapaterEdit_edit.key + '_' + this.catalog_id + '_' + this.chapter_id;
             var chapter = this.$cache.getStore(chapaterEdit_edit.key , chapaterEdit_edit.version) || {};
@@ -866,6 +867,7 @@ export default {
         },
 
         chapter (chapter){
+            this.contentEdit = chapter.chapter_content;
             this.content = chapter.chapter_content;
             this.title = chapter.chapter_title;
             this.desc = chapter.chapter_desc;

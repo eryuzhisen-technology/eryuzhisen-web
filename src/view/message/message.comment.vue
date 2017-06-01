@@ -12,13 +12,13 @@
 	<div class="m-message-wrap">
 		<div class="message-content">
 			<MenuLeft class="message-left c-menu-left" :data="menuLeft" />
-			<div class="message-right">
-				<div class="title">
-					<span class="number">{{message.count}}</span> 条新评论
-				</div>
-				<div class="content">
-					<CommentList />
-				</div>
+            <div class="title">
+                <p v-if="message.count != 0">
+                    <span class="number">{{message.count}}</span> 条新评论
+                </p>
+            </div>
+			<div class="content">
+				<CommentList />
 			</div>
 		</div>
     </div>
@@ -35,18 +35,13 @@ export default {
     data () {
     	return {
     		menuLeft: {
-    			better: {
-                    title: '精选',
-                    url: 'message.better.html',
-                    number: 0
-                },
                 comment: {
                     title: '评论',
                     isActive: true,
                     number: 0
                 },
                 infomation: {
-                    title: '其他消息',
+                    title: '通知',
                     url: 'message.infomation.html',
                     number: 0
                 }
@@ -67,7 +62,6 @@ export default {
     mounted (){
         this.$watch('unread', val => {
             this.menuLeft.infomation.number = Number(this.unread.message0);
-            this.menuLeft.better.number = Number(this.unread.message1);
             this.menuLeft.comment.number = Number(this.unread.message2);
         })
     }

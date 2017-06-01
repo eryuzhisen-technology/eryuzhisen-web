@@ -15,13 +15,11 @@
 	<div class="m-message-wrap">
 		<div class="message-content">
 			<MenuLeft class="message-left c-menu-left" :data="menuLeft" />
-			<div class="message-right">
-				<div class="title">
-					共 <span>{{message.count}}</span> 条新精选
-				</div>
-				<div class="content">
-					<BetterDom  />
-				</div>
+			<div class="title">
+				共 <span>{{message.count}}</span> 条新精选
+			</div>
+			<div class="content">
+				<BetterDom  />
 			</div>
 		</div>
     </div>
@@ -38,11 +36,6 @@ export default {
     data () {
     	return {
     		menuLeft: {
-    			better: {
-    				title: '精选',
-                    isActive: true,
-    				number: 0
-    			},
     			comment: {
     				title: '评论',
                     url: './message.comment.html',

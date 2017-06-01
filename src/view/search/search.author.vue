@@ -13,17 +13,16 @@
 	<div class="m-search">
 		<div class="m-search-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="search-right">
-				<div class="title">
-					<span class="number">{{count}}</span> 条结果
-				</div>
-				<div class="result">
-					<AuthorDom 
-                        resType="search"
-                        @author_count="author_count"
-                        class="result-content" 
-                    />
-				</div>
+			<div class="title" :style="{'width': (count <= 5 ? count*240 : 1200) + 'px'}">
+                <p v-if="count">
+    				<span class="number">{{count}}</span>个用户
+                </p>
+			</div>
+			<div class="result">
+				<AuthorDom 
+                    resType="search"
+                    class="result-content" 
+                />
 			</div>
 		</div>
 	</div>
@@ -34,6 +33,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
     data () {
     	return {
@@ -46,15 +46,12 @@ export default {
     				title: '作者',
                     isActive: true
     			}
-    		},
-            count: 0
+    		}
     	}
     },
-    methods: {
-    	author_count (count){
-            this.count = count;            
-        }
-    },
+    computed: mapState({
+        count: state => state.auth.count
+    }),
     mounted (){
         // 获取url的参数
         var query = this.$url.getUrlParam('query');

@@ -5,9 +5,6 @@
         width: 100%;
         height: 100%;
         & &-wrap {
-            min-width: 240px;
-            min-height: 360px;
-            .default_backgroud_3;
             .default_mar_auto;
             margin-bottom: 30px;
         }
@@ -59,7 +56,9 @@
             .default_center;
         }
         & .list-author__desc {
+            height: 2rem;
             line-height: 1rem;
+            overflow: hidden;
             .default_font_size_1;
             .default_color_2;
         }
@@ -90,7 +89,7 @@
 <!-- html代码 -->
 <template>
 <div class="c-author-list" :class="'z-' + resType">
-<div class="c-author-list-wrap" :style="{'height': Math.ceil(count/5)*360 + 'px', 'width': (count <= 5 ? count*240 : 1200) + 'px'}">
+<div class="c-author-list-wrap" :style="{'height': Math.ceil(1)*360 + 'px', 'width': (count && count <= 5 ? count*240 : 1200) + 'px'}">
     <a class="list-author__item" v-for="data in lists" :href="'author.work.html?user_id=' + data.uid">
         <div class="list-author__avatar">
             <img :src="data.avatar_url || avatar"  />
@@ -99,12 +98,12 @@
         <div class="list-author__desc">{{data.signature}}</div>
         <!-- <div class="list-author__work">作品：{{data.opus_count}}</div> -->
         <!-- <div class="list-author__fans">粉丝：{{data.fans_count}}</div> -->
-        <div v-if="data.relation == 0" class="list-author__btn list-author__btn-1" @click.stop.prevent="addFollow(data.uid)">关注</div>
+        <div v-if="data.relation == 0" class="list-author__btn list-author__btn-1 z-active" @click.stop.prevent="addFollow(data.uid)">关注</div>
         <div v-if="data.relation == 1 || data.relation == 3" class="list-author__btn list-author__btn-2" @click.stop.prevent="delFollow(data.uid)">已关注</div>
         <div v-if="data.relation == 2" class="list-author__btn list-author__btn-3" @click.stop.prevent="addFollow(data.uid)">相互关注</div>
         <div v-if="data.black == 1" class="list-author__btn list-author__btn-3" @click.stop.prevent="delBlack(data.uid)">取消拉黑</div>
     </a>
-    <Empty v-if="count <= 0" />
+    <Empty v-if="count <= 0 && !isHideEmpty" />
 </div>
 <Page 
     :count="count" 
@@ -127,7 +126,7 @@ export default {
             query: ''
         }
     },
-    props: ['resType'],
+    props: ['resType', 'isHideEmpty'],
     computed: mapState({
         count: state => state.auth.count,
         user: state => state.user.info,

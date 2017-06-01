@@ -258,7 +258,7 @@
         min-height: 700px;
         & .c-edit-content-wrap {
             min-height: 650px;
-            overflow: hidden;
+            overflow-y: auto;
         }
     }
 </style>
@@ -364,13 +364,7 @@ export default {
     },
     watch: {
         content (){
-            if (this.editor.$txt.html()) {
-                // return false;
-            }
             this.editor.$txt.html(this.content);
-            if (this.chapterContent) {
-                this.chapterContent.refresh();
-            }
         }
     },
     mounted (){
@@ -416,16 +410,6 @@ export default {
         $(window).on('resize', res => {
             this.autoHeight();
         })
-
-        // 创建iscroll
-        this.chapterContent = new this.$iScroll('#c-edit-content-wrap', {
-            bounce: false,
-            scrollbars: true,
-            mouseWheel: true,
-            interactiveScrollbars: true,
-            shrinkScrollbars: 'scale',
-            // fadeScrollbars: true
-        });
     }
 }
 </script>

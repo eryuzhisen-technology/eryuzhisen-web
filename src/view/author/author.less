@@ -1,11 +1,10 @@
 @module: m-author;
 
 .@{module} {
-	padding-top: 20px;
 	padding-bottom: 40px;
-	.default_backgroud_5;
+	.default_backgroud_7;
 	& &-wrap {
-		.default_width_960;
+		.default_width_1200;
 		.default_mar_auto;
 	}
 	& .author-header {
@@ -15,58 +14,16 @@
 	}
 	& .author-content {
 		position: relative;
-		min-height: 260px;
-
-		& .content-right {
-			width: 680px;
-			margin-left: 280px;
-			& .title {
-				width: 100%;
-				height: 50px;
-				line-height: 50px;
-				padding-left: 20px;
-				.default_font_size_2;
-				.default_color_2;
-				.default_backgroud_7;
-				& .number {
-					.default_font_family_bolder;
-	                .default_font_size_7;
-	    			.default_color_7;
-				}
-			}
-			& .result {
+		min-height: 400px;
+		padding-top: 40px;
+		padding-bottom: 60px;
+		& .result {
+			width: 100%;
+			height: 100%;
+			& .result-content {
 				width: 100%;
 				height: 100%;
-				& .result-content {
-					width: 100%;
-					height: 100%;
-				}
 			}
 		}
-	}
-}
-
-.c-menu-left .item:nth-child(1){
-	& .item__icon {
-		.skin_icon_author-1;
-	}
-	&:hover .item__icon {
-		.skin_icon_author-1_on;
-	}
-}
-.c-menu-left .item:nth-child(2){
-	& .item__icon {
-		.skin_icon_author-2;
-	}
-	&:hover .item__icon {
-		.skin_icon_author-2_on;
-	}
-}
-.c-menu-left .item:nth-child(3){
-	& .item__icon {
-		.skin_icon_author-3;
-	}
-	&:hover .item__icon {
-		.skin_icon_author-3_on;
 	}
 }

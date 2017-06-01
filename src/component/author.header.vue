@@ -7,21 +7,22 @@
         position: relative;
         z-index: 2;
         width: 100%;
-        height: 260px;
-        padding-top: 40px;
-        .user_background_1;
+        padding-top: 60px;
+        padding-bottom: 80px;
+        .default_backgroud_6;
         & &-wrap {
-            .default_width_960;
+            width: 600px;
             .default_mar_auto;
         }
     }
-    .@{module}_left {
+    .@{module}_img {
         position: relative;
-        float: left;
         width: 180px;
         height: 180px;
-        margin-right: 20px;
-        .default_backgroud_4;
+        overflow: hidden;
+        .default_mar_auto;
+        margin-bottom: 20px;
+        .default_backgroud_5;
         .default_border-r-50;
         & .img {
             width: 100%;
@@ -30,102 +31,147 @@
             .default_border-r-50;
         }
         & .icon {
+            display: none;
             position: absolute;
-            bottom: 0;
-            right: 0;
-            width: 40px;
-            height: 40px;
-            .default_border-r-50;
-            .default_backgroud_6;
-            .skin_icon_author-6;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            line-height: 180px;
+            background-color: rgba(0,0,0,0.8);
+            .default_color_1;
+            .default_font_size_7;
+            .default_font_bolder;
+            .default_center;
             .default_pointer;
-            &:hover {
-                .skin_icon_author-6_on;
-            }
+        }
+        &:hover .icon {
+            display: block;
         }
     }
-    .@{module}_right {
-        float: left;
-        width: 760px;
+    .@{module}_text {
+        margin-bottom: 30px;
+        .default_center;
         & .name {
-            height: 30px;
-            overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             & .name-text {
-                float: left;
-                margin-right: 15px;
+                display: inline-block;
+                margin-right: 10px;
                 .default_color_1;
                 .default_font_size_6;
                 .default_font_bolder;
             }
             & .name-time {
-                float: left;
-                height: 30px;
-                line-height: 30px;
+                display: inline-block;
                 .default_font_size_2;
-                .default_color_1;
-            }
-        }
-        & .btn {
-            height: 40px;
-            margin-bottom: 15px;
-            & .btn-item {
-                float: left;
-                height: 40px;
-                line-height: 40px;
-                margin-right: 10px;
-                .default_backgroud_5;
-                .default_border-r-4;
-                .default_center;
-                .default_color_1;
-                .default_font_size_2;
-                .default_pointer;
-                & a {
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                    text-decoration: none;
-                    .default_color_1;
-                    .default_font_size_2;
-                }
-                & .cpm_sub_more {
-                    width: 150px;
-                }
-                &:hover {
-                    & .cpm_sub_more {
-                        display: block;
-                    }
-                }
-            }
-            & .btn-item:last-child {
-                margin-right: 0;
-            }
-            & .btn-mark {
-                width: 600px;
-            }
-            & .btn-share {
-                width: 100px;
-                position: relative;
-                .default_pointer;
-                .skin_icon_author-5;
-                &:hover {
-                    .skin_icon_author-5_on;
-                }
-            }
-            & .btn-more {
-                width: 40px;
-                position: relative;
-                .default_pointer;
-                .skin_icon_author-4;
-                &:hover {
-                    .skin_icon_author-4_on;
-                }
+                .default_color_2;
             }
         }
         & .text {
+            width: 100%;
             line-height: 1.5rem;
-            .default_color_1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            .default_color_2;
             .default_font_size_2;
+        }
+    }
+    .@{module}_btn {
+        .default_center;
+        & .btn-item {
+            position: relative;
+            display: inline-block;
+            height: 50px;
+            line-height: 50px;
+            margin-right: 10px;
+            .default_backgroud_4;
+            .default_border-r-4;
+            .default_center;
+            .default_pointer;
+            .default_middle;
+            & span,
+            & a {
+                text-decoration: none;
+                .default_color_3;
+                .default_font_size_2;
+            }
+            & .cpm_sub_more {
+                width: 150px;
+            }
+            &:hover {
+                & span,
+                & a {
+                    .default_color_2;    
+                }
+                & .cpm_sub_more {
+                    display: block;
+                }
+            }
+            &.z-active {
+                .default_backgroud_13;
+            }
+        }
+        & .btn-item:last-child {
+            margin-right: 0;
+        }
+        & .btn-mark {
+            width: 150px;
+        }
+        & .btn-share {
+            width: 50px;
+            .default_backgroud_13;
+            .skin_icon_author-5;
+            &:hover {
+                .skin_icon_author-5_on;
+            }
+        }
+        & .btn-more {
+            width: 50px;
+            .default_backgroud_13;
+            .skin_icon_author-4;
+            &:hover {
+                .skin_icon_author-4_on;
+            }
+        }
+    }
+    .@{module}_menu {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        & .menu-item {
+            float: left;
+            width: 40px;
+            margin-right: 60px;
+            .default_center;
+            .default_pointer;
+            & a,
+            & span {
+                display: block;
+                width: 100%;
+                height: 100%;
+                padding-bottom: 16px;
+                text-decoration: none;
+                .default_color_1;
+                .default_font_size_2; 
+            }
+            &:hover a,
+            &:hover span {
+                .default_color_fff;
+            }
+            &:nth-child(3) {
+                margin-right: 0;
+            }
+        }
+        & .menu-arrow {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #fff;
+            transition: left @default_speed_1;
         }
     }
 </style>
@@ -134,9 +180,11 @@
 <template>
 <div class="c-author-header">
 <div class="c-author-header-wrap">
-    <div class="c-author-header_left">
-        <div class="img"><img :src="user.avatar_url || avatar" /></div>
-        <div v-show="userInfo.uid == user_id" class="icon" id="author_upload_image_select"></div>
+    <div class="c-author-header_img">
+        <div class="img">
+            <img :src="user.avatar_url || avatar" />
+        </div>
+        <div v-show="userInfo.uid == user_id" class="icon" id="author_upload_image_select">修改头像</div>
         <UploadImg 
             type="1" 
             select="author_upload_image_select"
@@ -144,61 +192,73 @@
             @uploadImg_uploaded="uploaded" 
         />
     </div>
-    <div class="c-author-header_right">
+    <div class="c-author-header_text">
         <div class="name">
             <div class="name-text">{{user.nick_name}}</div>
             <div class="name-time">社区年龄：<span>{{user.c_age}}</span></div>
         </div>
-        <div class="btn">
-            <div class="btn-item btn-mark" 
-                :class="[{'z-width': user.relation == -1}]" 
-                @click="follow"
-            >
-                <span v-if="userInfo.uid != user_id">{{ user.relation == 1 || user.relation == 3 ? '已关注' : '添加关注' }}</span>
-                <a v-else href="setting.userinfo.html">个人设置</a>
-            </div>
-            <div class="btn-item btn-share">
-                <div class="cpm_sub_more z-left">
-                    <div class="item">
-                        <div class="item-icon z-wx"></div>
-                        <div class="item-text">微信</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-peng"></div>
-                        <div class="item-text">朋友圈</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-wb"></div>
-                        <div class="item-text">微博</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-qq"></div>
-                        <div class="item-text">QQ 好友</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-kong"></div>
-                        <div class="item-text">QQ 空间</div>
-                    </div>
-                    <div class="item">
-                        <div class="item-icon z-more"></div>
-                        <div class="item-text">更多</div>
-                    </div>
+        <div class="text">{{user.signature}}</div>
+    </div>
+    <div class="c-author-header_btn">
+        <div class="btn-item btn-mark" 
+            @click="follow"
+            :class="{'z-active': user.relation != 1 && user.relation != 3}"
+        >
+            <span v-if="userInfo.uid != user_id">{{ user.relation == 1 || user.relation == 3 ? '已关注' : '添加关注' }}</span>
+            <a v-else href="setting.userinfo.html">个人设置</a>
+        </div>
+        <div class="btn-item btn-share">
+            <div class="cpm_sub_more z-left">
+                <div class="item">
+                    <div class="item-icon z-wx"></div>
+                    <div class="item-text">微信</div>
                 </div>
-            </div>
-            <div v-if="userInfo.uid != user_id" class="btn-item btn-more">
-                <div class="cpm_sub_more z-left">
-                    <div class="item" @click="addBlackDialog">
-                        <div class="item-icon z-black"></div>
-                        <div class="item-text">加入黑名单</div>
-                    </div>
-                    <div class="item" @click="addReport">
-                        <div class="item-icon z-report"></div>
-                        <div class="item-text">举报</div>
-                    </div>
+                <div class="item">
+                    <div class="item-icon z-peng"></div>
+                    <div class="item-text">朋友圈</div>
+                </div>
+                <div class="item">
+                    <div class="item-icon z-wb"></div>
+                    <div class="item-text">微博</div>
+                </div>
+                <div class="item">
+                    <div class="item-icon z-qq"></div>
+                    <div class="item-text">QQ 好友</div>
+                </div>
+                <div class="item">
+                    <div class="item-icon z-kong"></div>
+                    <div class="item-text">QQ 空间</div>
+                </div>
+                <div class="item">
+                    <div class="item-icon z-more"></div>
+                    <div class="item-text">更多</div>
                 </div>
             </div>
         </div>
-        <div class="text">{{user.signature}}</div>
+        <div v-if="userInfo.uid != user_id" class="btn-item btn-more">
+            <div class="cpm_sub_more z-left">
+                <div class="item" @click="addBlackDialog">
+                    <div class="item-icon z-black"></div>
+                    <div class="item-text">加入黑名单</div>
+                </div>
+                <div class="item" @click="addReport">
+                    <div class="item-icon z-report"></div>
+                    <div class="item-text">举报</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="c-author-header_menu">
+        <div 
+            class="menu-item" 
+            v-for="(item, index) in menu"
+            @mouseover="enter(index)"
+            @mouseout="out(index)"
+        >
+            <a v-if="!item.isActive" :href="item.url">{{item.title}}</a>
+            <span v-else>{{item.title}}</span>
+        </div>
+        <div class="menu-arrow" :style="{'left': (index == -1 ? menuIndex : index)*100 + 'px'}"></div>
     </div>
 </div>
 </div>
@@ -209,16 +269,24 @@ import {mapState} from 'vuex'
 import avatar from '../common/images/img/avatar.png';
 export default {
     data () {
-        return  {
+        return {
+            index: -1,
             avatar: avatar,
             user_id: '',
             user: {}
         }
     },
+    props: ['menu', 'menuIndex'],
     computed: mapState({
         userInfo: state => state.user.info,
     }),
     methods: {
+        enter (index){
+            this.index = index;
+        },
+        out (){
+            this.index = -1;
+        },
         uploaded (fileUrl, isAgain){
             if (isAgain) {
                 return false;

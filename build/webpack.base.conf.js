@@ -82,7 +82,8 @@ module.exports = {
     plugins: [
         // 提前加载模块并全局
         new webpack.ProvidePlugin({
-            $: 'jquery'
+            $: 'jquery',
+            'jQuery': 'jquery'
         }),
 
         new HappyPack({
