@@ -9,9 +9,12 @@
             width: 100%;
             height: 100%;
             min-height: 300px;
-            min-width: 240px;
+            min-width: 720px;
             .default_mar_auto;
             margin-bottom: 30px;
+        }
+        & a {
+            text-decoration: none;
         }
         & .c-artice-item:first-child,
         & .c-artice-item:nth-child(1),
