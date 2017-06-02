@@ -32,9 +32,7 @@
     			<div class="title">
     				简介
     			</div>
-    			<div class="content">
-    				{{catalog.catalog_desc}}
-    			</div>
+    			<div class="content" v-html="desc"></div>
             </div>
 		</div>
     </div>
@@ -70,7 +68,11 @@ export default {
     },
     computed: mapState({
         userInfo: state => state.user.info,
-        catalog: state => state.opus.catalog.info
+        catalog: state => state.opus.catalog.info,
+        desc (){
+            var _desc = this.$store.state.opus.catalog.info.catalog_desc ? this.$store.state.opus.catalog.info.catalog_desc.replace(/[\r\n]/g, '<br />') : '';
+            return _desc;
+        }
     }),
     methods: {
     	

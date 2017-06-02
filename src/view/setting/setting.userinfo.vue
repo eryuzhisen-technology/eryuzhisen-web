@@ -209,7 +209,7 @@ export default {
         }
     },
     mounted (){
-        this.$watch('user.nick_name', value => {
+        /*this.$watch('user.nick_name', value => {
             this.$store.dispatch('user_setUserInfo', {
                 nick_name: String(value).substr(0, 10)
             })
@@ -218,7 +218,7 @@ export default {
             this.$store.dispatch('user_setUserInfo', {
                 signature: String(value).substr(0, 100)
             })
-        })
+        })*/
 
         this.getInviteCode();
     }

@@ -300,7 +300,6 @@
             // overflow: hidden;
             .default_backgroud_3;
             & .edit-content_read {
-                padding: 0 40px;
                 & .edit-content_read-title {
                     padding: 40px 0;
                     .default_color_1;
@@ -309,7 +308,8 @@
                 }
                 & .edit-content_read-content-wrap {
                     width: 100%;
-                    overflow: hidden;
+                    padding: 0 40px;
+                    overflow-y: auto;
                 }
                 & .edit-content_read-content {
                     & p {
@@ -442,7 +442,7 @@
             <!-- 文章展示 -->
             <div v-if="chapter && chapter_id != -1" class="edit-content">
                 <div v-if="chapter.chapter_status == 0" class="edit-content_read">
-                    <div class="edit-content_read-content-wrap" ref="chapterContent">
+                    <div class="edit-content_read-content-wrap">
                     <div>
                         <div class="edit-content_read-title">
                             {{chapter.chapter_title}}
@@ -480,7 +480,7 @@
         </div> 
         <div class="cpm_clear"></div>
     </div>
-    <Edit :resType="resType" />
+    <Edit resType="edit" />
     <Bubble />
 </div>
 </template>
@@ -490,7 +490,6 @@ import {mapState} from 'vuex'
 export default {
     data () {
         return {
-            resType: 'edit',
             from: '',
 
             reg_title: true,
@@ -875,12 +874,6 @@ export default {
             var chapaterEdit_edit = this.$version.chapaterEdit_edit;
             var key = chapaterEdit_edit.key + '_' + this.catalog_id + '_' + this.chapter_id;
             this.$cache.setStore(key, chapter, chapaterEdit_edit.version, chapaterEdit_edit.time);
-        },
-
-        lists (lists){
-            if (this.isCreate && this.chapter_id == -1) {
-                // this.addEnpry();
-            }
         }
     },
     created (){
@@ -926,18 +919,7 @@ export default {
             $(window).on('resize', function(){
                 $('.edit-content_read-content-wrap').height($(window).height());
             })
-
-            // 设置高度
-            this.chapterContent = new this.$iScroll(this.$refs.chapterContent, {
-                bounce: false,
-                scrollbars: true,
-                mouseWheel: true,
-                interactiveScrollbars: true,
-                shrinkScrollbars: 'scale',
-                // fadeScrollbars: true
-            });
         } else {
-            this.chapterContent && this.chapterContent.destroy();
             $(window).off('resize');
             $('.edit-content_edit-title').height(60);
         }

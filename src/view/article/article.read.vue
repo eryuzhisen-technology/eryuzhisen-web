@@ -8,7 +8,8 @@
     .@{module} {
         position: relative;
         padding-top: 60px;
-        .default_backgroud_5;
+        padding-bottom: 80px;
+        .default_backgroud_7;
         & &-wrap {
             position: relative;
             width: 100%;
@@ -22,44 +23,104 @@
         height: 60px;
         .default_backgroud_13;
         & .head-wrap {
+            position: relative;
             .default_width_720;
             .default_mar_auto;
+            & .head-title {
+                height: 60px;
+                line-height: 60px;
+                .default_color_3;
+                .default_font_size_2;
+            }
+            & .head-btns {
+                position: absolute;
+                top: 0;
+                right: 0;
+                height: 60px;
+                & .btn-item {
+                    position: relative;
+                    float: left;
+                    width: 40px;
+                    height: 60px;
+                    .default_pointer;
+                    &:hover {
+                        background-color: #000;
+                        & .btn-more {
+                            display: block;
+                        }
+                    }
+                }
+                & .btn-mark {
+                    .skin_icon_article-mark;
+                    &:hover {
+                        .skin_icon_article-mark_on;
+                    }
+                    &.z-active {
+                        .skin_icon_article-mark_active;   
+                    }
+                }
+                & .btn-menu {
+                    .skin_icon_article-menu;
+                    &:hover {
+                        .skin_icon_article-menu_on;
+                    }
+                }
+                & .btn-more {
+                    display: none;
+                }
+                & .menu-list {
+                    position: absolute;
+                    top: 60px;
+                    left: 0;
+                    width: 200px;
+                    height: 400px;
+                    overflow: hidden;
+                    .default_backgroud_3;
+                    & .menu-item {
+                        width: 200px;
+                        & a {
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                            height: 50px;
+                            line-height: 50px;
+                            padding-left: 20px;
+                            .default_color_2;
+                            .default_font_size_2;
+                        }
+                        &.z-active a {
+                            .default_color_1;
+                            .default_backgroud_14;
+                        }
+                        &:hover a{
+                            .default_color_1;
+                        }
+                    }
+                }
+            }
         }
     }
     .@{module}__content {
         .default_width_720;
         .default_mar_auto;
         .default_border-r-4;
-        margin-bottom: 40px;
-        & .content__header {
-            width: 100%;
-            height: 50px;
-            line-height: 50px;
-            padding-left: 30px;
-            .default_backgroud_7;
-            & h1,
-            & p {
-                float: left;
-                height: 50px;
-                line-height: 50px;
-                .default_font_size_2;
-                .default_color_2;
-            }
-            & h1 {
-                margin-left: 5px;
-                .default_color_1;
-            }
-        }
+        margin-bottom: 50px;
         & .content__read{
             .default_backgroud_2;
+            & .content__read-title {
+                padding: 40px;
+                .default_font_size_6;
+                .default_color_1;
+                .default_font_bolder;
+            }
             & .content__read-text {
-                padding: 40px 30px;
+                padding: 0 40px 50px;
                 & p {
                     width: 100%;
                     line-height: 1.75rem;
                     margin-bottom: 20px;
                     .default_font_size_3;
-                    .default_color_2;
+                    .default_color_10;
                 }
                 & img {
                     max-width: 100%;
@@ -69,10 +130,10 @@
             }
             & .content__read-switch {
                 overflow: hidden;
-                height: 70px;
-                padding: 20px 0;
-                .default_border-t-14;
-                .default_border-b-14;
+                height: 80px;
+                padding: 25px 0;
+                .default_border-t-5;
+                .default_border-b-5;
                 .default_center;
                 & .switch-item {
                     .default_disline;
@@ -91,17 +152,17 @@
                         }
                     }
                     & .switch-item {
-                        .default_border-rr-4;
+                        .default_border-rr-5;
                     }
                 }
             }
             & .content__read-author {
-                height: 70px;
-                padding-top: 20px;
+                height: 80px;
+                padding-top: 30px;
                 .default_center;
                 & .author-img {
-                    width: 30px;
-                    height: 30px;
+                    width: 20px;
+                    height: 20px;
                     overflow: hidden;
                     margin-right: 10px;
                     vertical-align: middle;
@@ -110,8 +171,8 @@
                     .default_backgroud_5;
                 }
                 & .author-name {
-                    height: 30px;
-                    line-height: 30px;
+                    height: 20px;
+                    line-height: 20px;
                     vertical-align: middle;
                     .default_disline;
                     .default_color_2;
@@ -128,14 +189,14 @@
             width: 100%;
             height: 50px;
             line-height: 50px;
-            padding-left: 20px;
-            .default_font_size_2;
-            .default_color_2;
+            margin-bottom: 20px;
+            .default_font_size_5;
+            .default_color_1;
             .default_backgroud_7;
             & span {
                 .default_font_family_bolder;
-                .default_font_size_7;
-                .default_color_7;
+                .default_font_size_6;
+                .default_color_1;
             }
         }
     }
@@ -146,33 +207,37 @@
             width: 100%;
             height: 50px;
             line-height: 50px;
-            padding-left: 20px;
+            margin-bottom: 20px;
             .default_backgroud_7;
-            .default_font_size_2; 
-            .default_color_2;
+            .default_font_size_5; 
+            .default_color_1;
         }
         & .speak-form {
-            padding: 30px;
-            height: 160px;
-            width: 100&;
-            .default_backgroud_6;
+            padding: 20px;
+            height: 140px;
+            width: 100%;
+            .default_backgroud_3;
             & .speak-form-left,
             & .speak-form-right {
                 position: relative;
                 float: left;
             }
             & .speak-form-left {
-                width: 450px;
+                width: 500px;
                 margin-right: 20px;
-                .default_backgroud_4;
+                .default_backgroud_6;
+                .default_border-13;
+                .default_border-r-4;
                 & input, 
                 & textarea {
-                    .default_color_4;
+                    width: 100%;
+                    height: 100%;
+                    .default_color_2;
                     .default_font_size_2;
                 }
             }
             & .speak-form-right {
-                width: 150px;
+                width: 160px;
                 height: 100px;
             }
             & .speak-form-input {
@@ -186,7 +251,7 @@
             }
             & .speak-form-icon {
                 float: left;
-                height: 40px;
+                margin-top: 10px;
                 .default_font_size_1;
                 .default_color_3;
                 .default_pointer;
@@ -237,7 +302,7 @@
                 .default_color_2;
                 .default_font_size_2;
                 .default_border-r-4;
-                .default_backgroud_2;
+                .default_backgroud_13;
                 .default_pointer;
                 &:hover {
                     .default_color_1;
@@ -260,7 +325,7 @@
             & .speak-form {
                 height: 60px;
                 overflow: hidden;
-                padding: 10px 30px;
+                padding: 10px 20px;
             }
             & .speak-form-textarea {
                 display: none;
@@ -286,13 +351,29 @@
         <div class="m-artice-read__head">
             <div class="head-wrap">
                 <div class="head-title">
-                    <h1>{{ isScan ?　chapter_bat.chapter_title : chapter.info.chapter_title}}</h1>
-                </div>    
+                    {{ isScan ?　chapter_bat.chapter_title : catalog.info.catalog_title}}
+                </div>
+                <div class="head-btns">
+                    <div class="btn-item btn-mark" :class="{'z-active': catalog.info.is_collected == 1}" @click="mark(catalog_id)"></div>
+                    <div class="btn-item btn-menu" @mouseover="enter" >
+                        <div class="btn-more menu-list" v-if="menuShow" ref="chapterMenu">
+                        <div class="menu-wrap">
+                            <div class="menu-item" 
+                                v-for="item in chapter.lists"
+                                :class="{'z-active': chapter_id == item.chapter_id}"
+                            ><a :href="'article.read.html?catalog_id='+ catalog_id +'&chapter_id=' + item.chapter_id">
+                                {{item.chapter_title}}
+                            </a></div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
         <div class="m-artice-read__content">
             <div class="content__read">
-                <div class="content__read-text" v-html=" isScan ?　chapter_bat.chapter_content : chapter.info.chapter_content">
+                <div class="content__read-title">{{isScan ?　chapter_bat.chapter_title : chapter.info.chapter_title}}</div>
+                <div class="content__read-text" v-html="isScan ?　chapter_bat.chapter_content : chapter.info.chapter_content">
                 </div>
                 <div v-if="pre || next" class="content__read-switch">
                     <div v-if="pre" class="switch-item switch-left"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.lists[index-1].chapter_id">上一篇</a></div>
@@ -315,7 +396,7 @@
             </div>
         </div>
         <div v-if="!isScan" class="m-artice-read__speak">
-            <div class="speak-header">参与评论</div>
+            <div class="speak-header">评论</div>
             <div class="speak-form">
                 <div class="speak-form-left speak-form-input">
                     <input @focus="inputFocus" type="text" placeholder="好作品全取决于你的鞭策..." />
@@ -339,6 +420,9 @@
         </div>
     </div>
     </div>
+    <FooterDom />
+    <SideMenu />
+    <Bubble />
 </div>
 </template>
 
@@ -348,6 +432,7 @@ export default {
     data () {
         return {
             comment_con: '',
+            menuShow: false,
 
             isScan: false,
             chapter_bat: {}
@@ -395,9 +480,9 @@ export default {
     }),
     methods: {
         resize () {
-            var left = $('.m-artice-read-wrap').offset().left;
+            var left = $('.m-artice-read__content').offset().left;
             $('.m-artice-read__speak').css({
-                left: left + 280
+                left: left
             })
         },
         speak (init){
@@ -546,6 +631,24 @@ export default {
                 this.addFavorites(catalogId);
             }
         },
+        enter (){
+            this.menuShow = true;
+        },
+        out (){
+            this.menuShow = false;
+        }
+    },
+    updated (){
+        if (this.menuShow) {
+            if (this.chapterMenu) {
+                this.chapterMenu.refresh();
+            } else {
+                this.chapterMenu = new this.$iScroll(this.$refs.chapterMenu, {
+                    bounce: false,
+                    mouseWheel: true
+                });
+            }
+        }
     },
     mounted (){
         // 获取url的参数

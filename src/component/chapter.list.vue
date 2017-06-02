@@ -60,12 +60,16 @@
 <template>
 <div class="c-chapter-list">
 <div class="c-chapter-list-wrap">
-    <div class="c-chapter-list-item add">
+    <div v-if="catalog.owner == 1" class="c-chapter-list-item add">
         <a class="add-text" :href="'article.edit.html?catalog_id=' + catalog_id">
             添加新章节
         </a>
     </div>
-    <div class="c-chapter-list-item content" v-for="(data, index) in chapter.lists">
+    <div 
+        class="c-chapter-list-item content" 
+        v-for="(data, index) in chapter.lists"
+        v-if="data.chapter_status == 0"
+    >
         <a class="link" :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+ data.chapter_id">
             {{data.chapter_title}}
         </a>
@@ -89,6 +93,7 @@ export default {
         }
     },
     computed: mapState({
+        catalog: state => state.opus.catalog.info,
         chapter: state => state.opus.chapter
     }),
     methods: {

@@ -7,6 +7,7 @@
         position: relative;
         z-index: 2;
         width: 100%;
+        min-width: 1200px;
         padding-top: 60px;
         padding-bottom: 80px;
         .default_backgroud_6;
@@ -287,11 +288,7 @@ export default {
         out (){
             this.index = -1;
         },
-        uploaded (fileUrl, isAgain){
-            if (isAgain) {
-                return false;
-            }
-                
+        uploaded (fileUrl){
             // 设置上传的图片
             this.$store.dispatch('user_setUserInfo', {
                 avatar_url: fileUrl

@@ -1033,7 +1033,7 @@ export default {
 
         this.$eventHub.$on('header_article_setShow', option => {
             this.show = option.show;
-
+console.log(option)
             if (option.catalog) {
                 this.create = true;
                 this.image = option.catalog.catalog_cover_url;

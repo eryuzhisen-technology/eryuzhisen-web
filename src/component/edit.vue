@@ -255,9 +255,8 @@
     // ---------- end 编辑器 ------------
 
     .c-edit {
-        min-height: 700px;
+        // min-height: 700px;
         & .c-edit-content-wrap {
-            min-height: 650px;
             overflow-y: auto;
         }
     }
@@ -352,7 +351,6 @@ export default {
             this.$emit('scan', value);
         },
         change (){
-            this.chapterContent.refresh();
             var value = this.editor.$txt.html();
             this.$emit('edit', value);
         },

@@ -293,6 +293,7 @@
         <div class="menu-arrow" :style="{'left': (index == -1 ? menuIndex : index)*100 + 'px'}"></div>
     </div>
 </div>
+    <Edit resType="article" />
 </div>
 </template>
 
