@@ -193,7 +193,7 @@
         <div class="c-artice-item-wrap"
             :data-catalog_id="data.catalog_id"
         >
-            <a :href="'./article.html?catalog_id=' + data.catalog_id" class="c-artice-item-wrap-link">
+            <a :href="'./article.intro.html?catalog_id=' + data.catalog_id" class="c-artice-item-wrap-link">
                 <!-- 头部 -->
                 <div class="item-hd">
                     <div class="item-hd-img">
