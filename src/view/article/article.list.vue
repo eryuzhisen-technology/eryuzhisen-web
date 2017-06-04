@@ -6,7 +6,7 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom />
     <ArticleHeaderDom class="m-artice-header" :menu="menu" :menuIndex="menuIndex" />
     <div class="m-artice">

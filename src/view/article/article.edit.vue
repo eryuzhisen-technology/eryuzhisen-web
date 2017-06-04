@@ -3,7 +3,9 @@
 @import (less) '../../common/css/common.less';
     @module: m-artice-edit;
     .app-body {
+        height: 100%;
         padding-top: 0;
+        padding-bottom: 0;
     }
     .@{module} {
         width: 100%;
@@ -378,107 +380,109 @@
 
 <!-- html代码 -->
 <template>
-<div class="m-artice-edit">
-    <div class="m-artice-edit-wrap">
-        <div class="m-artice-edit__edit">
+<div class="app-body">
+    <div class="m-artice-edit">
+        <div class="m-artice-edit-wrap">
+            <div class="m-artice-edit__edit">
 
-            <!-- 目录-列表 -->
-            <div class="edit-catalog">
-                <div class="catalog-hd">
-                    <div class="catalog-hd_back" @click="formback">返</div>
-                    <div class="catalog-hd_add" @click="addCatalog">创建新故事</div>
-                </div>
-                <div class="catalog-menu" ref="catalogMenu">
-                <div class="catalog-menu-wrap">
-                    <div 
-                        class="catalog-menu_item" v-for="item in article.lists" 
-                        @click="getChapterList(item.catalog_id, true)" 
-                        :class="{'z-active': catalog_id == item.catalog_id}"
-                    >
-                        <div class="catalog-menu_item-icon"></div>
-                        <div class="catalog-menu_item-text">{{item.catalog_title}}</div>
-                        <div class="catalog-menu_item-more">
-                            <div class="cpm_sub_more z-left">
-                                <div class="item">
-                                    <div class="item-text" @click.stop="updateCatalog(item)">编辑</div>
-                                </div>
-                                <div class="item">
-                                    <div class="item-text" @click.stop="removeCatalog(item.catalog_id)">删除</div>
+                <!-- 目录-列表 -->
+                <div class="edit-catalog">
+                    <div class="catalog-hd">
+                        <div class="catalog-hd_back" @click="formback">返</div>
+                        <div class="catalog-hd_add" @click="addCatalog">创建新故事</div>
+                    </div>
+                    <div class="catalog-menu" ref="catalogMenu">
+                    <div class="catalog-menu-wrap">
+                        <div 
+                            class="catalog-menu_item" v-for="item in article.lists" 
+                            @click="getChapterList(item.catalog_id, true)" 
+                            :class="{'z-active': catalog_id == item.catalog_id}"
+                        >
+                            <div class="catalog-menu_item-icon"></div>
+                            <div class="catalog-menu_item-text">{{item.catalog_title}}</div>
+                            <div class="catalog-menu_item-more">
+                                <div class="cpm_sub_more z-left">
+                                    <div class="item">
+                                        <div class="item-text" @click.stop="updateCatalog(item)">编辑</div>
+                                    </div>
+                                    <div class="item">
+                                        <div class="item-text" @click.stop="removeCatalog(item.catalog_id)">删除</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </div>
                 </div>
-                </div>
-            </div>
 
-            <!-- 章节列表 -->
-            <div class="edit-chapter">
-                <div v-if="catalog_id" class="chapter-hd" @click="addEnpry">
-                    <div class="chapter-hd_icon"></div>
-                    <div class="chapter-hd_text">增加新章节</div>
+                <!-- 章节列表 -->
+                <div class="edit-chapter">
+                    <div v-if="catalog_id" class="chapter-hd" @click="addEnpry">
+                        <div class="chapter-hd_icon"></div>
+                        <div class="chapter-hd_text">增加新章节</div>
+                    </div>
+                    <div v-if="lists && lists.length" class="chapter-menu" ref="chapterMenu">
+                    <div class="chapter-menu-wrap">
+                        <div 
+                            class="chapter-menu_item"
+                            v-for="item in lists" 
+                            :class="{'z-active': chapter_id == item.chapter_id, 'z-finish': item.chapter_status == 0}"
+                            @click="getChapterDetail(item.chapter_id)" 
+                        >
+                            <div class="chapter-menu_item-icon">
+                                <div class="c-dialog__tip z-top">
+                                    <div class="tip-arrow"></div>
+                                    <div class="tip-text">{{item.chapter_status == 0 ? '已发布' : '未发布'}}</div>
+                                </div>
+                            </div>
+                            <div class="chapter-menu_item-text">{{ chapter_id != item.chapter_id ? item.chapter_title : title}}</div>
+                            <div class="chapter-menu_item-delete" @click.stop="remove(item.chapter_id, item.chapter_status == 0)"></div>
+                        </div>
+                    </div>
+                    </div>
                 </div>
-                <div v-if="lists && lists.length" class="chapter-menu" ref="chapterMenu">
-                <div class="chapter-menu-wrap">
-                    <div 
-                        class="chapter-menu_item"
-                        v-for="item in lists" 
-                        :class="{'z-active': chapter_id == item.chapter_id, 'z-finish': item.chapter_status == 0}"
-                        @click="getChapterDetail(item.chapter_id)" 
-                    >
-                        <div class="chapter-menu_item-icon">
-                            <div class="c-dialog__tip z-top">
+
+                <!-- 文章展示 -->
+                <div v-if="chapter && chapter_id != -1" class="edit-content">
+                    <div v-if="chapter.chapter_status == 0" class="edit-content_read">
+                        <div class="edit-content_read-content-wrap">
+                        <div>
+                            <div class="edit-content_read-title">
+                                {{chapter.chapter_title}}
+                            </div>
+                            <div class="edit-content_read-content" v-html="chapter.chapter_content"></div>
+                        </div>
+                        </div>
+                    </div>
+                    <div v-else class="edit-content_edit">
+                        <div class="edit-content_edit-title">
+                            <input class="edit-content_edit-title-input" type="text" placeholder="填写章节标题" v-model="title" @focus="hideTip" />
+                            <!-- <span class="edit-content_edit-title-number" :class="{'z-warn': title.length > 10}">{{title.length}}/10</span> -->
+                            <div v-if="!reg_title" class="c-dialog__tip">
                                 <div class="tip-arrow"></div>
-                                <div class="tip-text">{{item.chapter_status == 0 ? '已发布' : '未发布'}}</div>
+                                <div class="tip-text">{{reg_title_con}}</div>
                             </div>
                         </div>
-                        <div class="chapter-menu_item-text">{{ chapter_id != item.chapter_id ? item.chapter_title : title}}</div>
-                        <div class="chapter-menu_item-delete" @click.stop="remove(item.chapter_id, item.chapter_status == 0)"></div>
-                    </div>
-                </div>
-                </div>
-            </div>
-
-            <!-- 文章展示 -->
-            <div v-if="chapter && chapter_id != -1" class="edit-content">
-                <div v-if="chapter.chapter_status == 0" class="edit-content_read">
-                    <div class="edit-content_read-content-wrap">
-                    <div>
-                        <div class="edit-content_read-title">
-                            {{chapter.chapter_title}}
-                        </div>
-                        <div class="edit-content_read-content" v-html="chapter.chapter_content"></div>
-                    </div>
-                    </div>
-                </div>
-                <div v-else class="edit-content_edit">
-                    <div class="edit-content_edit-title">
-                        <input class="edit-content_edit-title-input" type="text" placeholder="填写章节标题" v-model="title" @focus="hideTip" />
-                        <!-- <span class="edit-content_edit-title-number" :class="{'z-warn': title.length > 10}">{{title.length}}/10</span> -->
-                        <div v-if="!reg_title" class="c-dialog__tip">
-                            <div class="tip-arrow"></div>
-                            <div class="tip-text">{{reg_title_con}}</div>
-                        </div>
-                    </div>
-                    <div class="edit-content_edit-body">
-                        <Create 
-                            :content="contentEdit"
-                            @update='update'
-                            @publish='publish'
-                            @scan="scan"
-                            @edit="edit"
-                            @edit_init="edit_init"
-                            @edit_click="hideTip"
-                        />
-                        <div v-if="!reg_content" class="c-dialog__tip">
-                            <div class="tip-arrow"></div>
-                            <div class="tip-text">{{reg_content_con}}</div>
+                        <div class="edit-content_edit-body">
+                            <Create 
+                                :content="contentEdit"
+                                @update='update'
+                                @publish='publish'
+                                @scan="scan"
+                                @edit="edit"
+                                @edit_init="edit_init"
+                                @edit_click="hideTip"
+                            />
+                            <div v-if="!reg_content" class="c-dialog__tip">
+                                <div class="tip-arrow"></div>
+                                <div class="tip-text">{{reg_content_con}}</div>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div> 
-        <div class="cpm_clear"></div>
+            </div> 
+            <div class="cpm_clear"></div>
+        </div>
     </div>
     <Edit resType="edit" />
     <Bubble />
@@ -769,10 +773,11 @@ export default {
                 "catalog_id": this.catalog_id, //目录id
                 "chapter_title": status == 1 ? '无标题文章' : this.title, //章节标题
                 "chapter_desc": status == 1 ? '' : this.desc, //简介
-                "chapter_content": status == 1 ? '<p><br /></p>' : this.content, //内容　***base64 编码***
+                "chapter_content": status == 1 ? '<p>若故事有效总字数超过10000</p><p>可发邮件至editor@eryuzhisen.com申请进入首页并获取定制封面</p><p>邮件标题为：耳语作者申请</p><p>邮件内容为：用户名+故事名</p>' : this.content, //内容　***base64 编码***
                 "chapter_status": status //　0 发布，已完成 1 临时保存 未完成
             }).then( res => {
-                this.getChapterList(this.catalog_id, true);
+                this.chapter_id = res.chapter_id;     
+                this.getChapterList(this.catalog_id);
 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
@@ -817,11 +822,11 @@ export default {
 
                 if (res.list.length && isget) {
                     this.chapter_id = res.list[0].chapter_id;
-                    this.getChapterDetail(this.chapter_id);   
                 } else {
-                    this.chapter_id = -1;
+                    // this.chapter_id = -1;
                     this.$store.dispatch('opus_setChapterInfo', {});
                 }
+                this.getChapterDetail(this.chapter_id); 
 
                 //todo
                 this.$store.dispatch('bubble_success', res);

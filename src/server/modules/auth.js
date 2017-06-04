@@ -175,7 +175,7 @@ export default {
 		auth_getInviteCode (context, payload){
 			var promise = auth.getInviteCode(payload).then( res => {
 				context.commit('auth_setCode', {
-					"code": res.invite_code
+					"code": res
 				})
 				return Promise.resolve(res);
 			}).catch( (res) => {

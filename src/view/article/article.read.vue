@@ -19,6 +19,7 @@
         position: fixed;
         top: 0;
         left: 0;
+        z-index: 10;
         width: 100%;
         height: 60px;
         .default_backgroud_13;
@@ -345,7 +346,7 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
     <div class="m-artice-read" :class="{'z-scan': isScan}">
     <div class="m-artice-read-wrap">
         <div class="m-artice-read__head">
@@ -375,19 +376,19 @@
                 <div class="content__read-title">{{isScan ?　chapter_bat.chapter_title : chapter.info.chapter_title}}</div>
                 <div class="content__read-text" v-html="isScan ?　chapter_bat.chapter_content : chapter.info.chapter_content">
                 </div>
-                <div v-if="pre || next" class="content__read-switch">
-                    <div v-if="pre" class="switch-item switch-left"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.lists[index-1].chapter_id">上一篇</a></div>
-                    <div v-if="next" class="switch-item switch-right"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.lists[index+1].chapter_id">下一篇</a></div>
+                <div v-if="chapter.pre_id || chapter.next_id" class="content__read-switch">
+                    <div v-if="chapter.pre_id" class="switch-item switch-left"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.pre_id">上一篇</a></div>
+                    <div v-if="chapter.next_id" class="switch-item switch-right"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.next_id">下一篇</a></div>
                 </div>
-                <div class="content__read-author">
+                <div v-if="catalog.info.user" class="content__read-author"><a target="_black" :href="'author.work.html?user_id=' + catalog.info.user.uid">
                     <div class="author-img">
                         <img :src="catalog.info.user && catalog.info.user.avatar_url" />
                     </div>
                     <div class="author-name">{{catalog.info.user && catalog.info.user.nick_name}}</div>
-                </div>
+                </a></div>
             </div>
         </div>
-        <div v-if="!isScan" class="m-artice-read__comment">
+        <div v-show="!isScan && comment.count" class="m-artice-read__comment">
             <div class="comment-header">
                 <span>{{comment.count}}</span> 条评论
             </div>
@@ -399,7 +400,7 @@
             <div class="speak-header">评论</div>
             <div class="speak-form">
                 <div class="speak-form-left speak-form-input">
-                    <input @focus="inputFocus" type="text" placeholder="好作品全取决于你的鞭策..." />
+                    <input @focus="inputFocus" type="text" placeholder="好作品全取决于你的鞭策..." spellcheck="false" />
                 </div>
                 <div class="speak-form-left speak-form-textarea">
                     <textarea @blur="textareaBlur"  placeholder="发表评论..." v-model="comment_con"></textarea>
@@ -452,30 +453,6 @@ export default {
                 }
             }
             return index;
-        },
-        next () {
-            if (this.$store.state.opus.chapter.lists.length == 1) {
-                return false;
-            }
-            var vai = false;
-            for (var i = 0, len = this.$store.state.opus.chapter.lists.length; i < len; i++) {
-                if (this.$store.state.opus.chapter.lists[i].chapter_id == this.chapter_id && i != len - 1) {
-                    vai = true;
-                }
-            }
-            return vai;
-        },
-        pre () {
-            if (this.$store.state.opus.chapter.lists.length == 1) {
-                return false;
-            }
-            var vai = false;
-            for (var i = 0, len = this.$store.state.opus.chapter.lists.length; i < len; i++) {
-                if (this.$store.state.opus.chapter.lists[i].chapter_id == this.chapter_id && i != 0) {
-                    vai = true;
-                }
-            }
-            return vai;
         }
     }),
     methods: {
@@ -486,7 +463,7 @@ export default {
             })
         },
         speak (init){
-            var top = $('.m-artice-read__comment').offset().top;
+            var top = $('.m-artice-read__comment').length ? $('.m-artice-read__comment').offset().top : $('.m-artice-read__speak').offset().top;
             var scrollTop = $(window).scrollTop();
             var height = $(window).height();
             if (top < scrollTop + height) {
@@ -606,6 +583,14 @@ export default {
             this.$store.dispatch('opus_addFavorites', {
                 catalogId: catalogId
             }).then( res => {
+                this.$store.dispatch('bubble_showBubble', {
+                    show: true,
+                    type: 'top',
+                    top: {
+                        status: 'z-default',
+                        msg: '《'+ this.catalog.info.catalog_title +'》已加入收藏'
+                    }
+                })
                 this.getCatalogDetail();
 
                 this.$store.dispatch('bubble_success', res);

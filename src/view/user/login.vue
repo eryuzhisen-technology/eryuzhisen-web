@@ -19,7 +19,7 @@
     				<div class="tip-text">{{phone_reg_con}}</div>
     			</div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !phone_reg}">
-    				<input name="phone" type="text" placeholder="手机号" @keyup.enter="login" v-model="phone" autocomplete="new-password" />
+    				<input name="phone" type="text" placeholder="手机号" @keyup.enter="login" v-model="phone" autocomplete="new-password" spellcheck="false" />
     			</div>
     		</div>
 
@@ -30,7 +30,7 @@
     				<div class="tip-text">{{password_reg_con}}</div>
     			</div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !password_reg}">
-    				<input name="password" type="password" placeholder="密码" @keyup.enter="login" v-model="password" autocomplete="new-password" />
+    				<input name="password" type="password" placeholder="密码" @keyup.enter="login" v-model="password" autocomplete="new-password" spellcheck="false" />
     			</div>
     		</div>
     		<div v-if="pwd_err_times >= 5" class="m-user-dialog__item">
@@ -39,7 +39,7 @@
     				<div class="tip-text">{{pic_code_reg_con}}</div>
     			</div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !pic_code_reg}">
-    				<input name="pic_code" type="text" placeholder="图形码" v-model="pic_code" @keyup.enter="login" />
+    				<input name="pic_code" type="text" placeholder="图形码" v-model="pic_code" @keyup.enter="login" spellcheck="false" />
     				<img v-if="isCodeCan" @click="getCode" :src="'data:image/png;base64,' + pic_vcode" autocomplete="off" />
     			</div>
     		</div>

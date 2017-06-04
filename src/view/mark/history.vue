@@ -6,17 +6,17 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom :pageIndex="pageIndex" />
 	<div class="m-mark">
 	<div class="m-mark-wrap">
 		<div class="m-mark-content">
 		<MenuLeft :data="menuLeft" />
-			<div v-if="article.lists.length" class="title" :style="{'width': (article.lists.length <= 5 ? article.lists.length*240 : 1200) + 'px'}">
+			<div class="title" :style="{'width': (article.lists.length == 0 ? 720 : article.lists.length <= 5 ? article.lists.length*240 : 1200) + 'px'}">
 				<span class="number">{{article.count}}</span>个故事
 				<strong class="clear" @click="clear">清空浏览历史</strong>
 			</div>
-			<div class="result" :class="{'z-empty': !article.lists.length}">
+			<div class="result">
 				<ListDom 
                     resType='history'
 					class="result-content z-small z-mark" 

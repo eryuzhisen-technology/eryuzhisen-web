@@ -254,7 +254,7 @@
                     v-if="index == data.replayIndex"
                 >
                     <div class="content__reply-form cpm_form_input">
-                        <input type="text" placeholder="回复评论..." v-model="comment_con" />
+                        <input type="text" placeholder="回复评论..." v-model="comment_con" spellcheck="false" />
                     </div>
                     <div class="content__reply-btn" @click="sendReplyComment(data.comment_id, reply.comment_id)">提交</div>
                 </div>
@@ -267,14 +267,15 @@
             v-if="data.replayIndex == -1"
         >
             <div class="content__reply-form cpm_form_input">
-                <input type="text" placeholder="回复评论..." v-model="comment_con" />
+                <input type="text" placeholder="回复评论..." v-model="comment_con" spellcheck="false" />
             </div>
             <div class="content__reply-btn" @click="sendComment(data.comment_id)">提交</div>
         </div>
     </div>
-    <Empty v-if="comment.count == 0" />
+    <!-- <Empty v-if="comment.count == 0" /> -->
 </div>
 <Page
+    v-if="comment.count > 5"
     :count="comment.count" 
     :length="pageSize"
     :index="pageIndex"
@@ -297,6 +298,9 @@ export default {
 
             commentIndex: 1,
             commentSize: 5,
+
+            subPageIndex: 1,
+            subPageSize: 2,
 
             comment_con: ''
         }
@@ -335,8 +339,10 @@ export default {
                 "catalogId": this.catalog_id, //目录id,必填项
                 "type": this.type || 2, // 排序类型  1 最热(按评论数,点赞数) 2 最新(时间) 不传表示默认(按照写入的先后顺序)
                 "chapterId":  this.chapter_id, //章节id,选填,如果有则获取章节下的评论,否则获取目录的所有评论
-                "subPageSize": this.commentSize // //子评论列表首次显示数量 默认为5
+                "subPageSize": this.subPageSize // //子评论列表首次显示数量 默认为5
             }).then( res => {
+                this.subPageIndex = 1;
+
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
                 this.$store.dispatch('bubble_fail', err);
@@ -385,6 +391,7 @@ export default {
             this.$store.dispatch('opus_addCommentPraise', {
                 commentId: comment_id
             }).then( res => {
+                this.getCommentList();
                 this.$store.dispatch('bubble_success', res);
             }).catch(err => {
                 this.$store.dispatch('bubble_fail', err);
@@ -433,10 +440,10 @@ export default {
         },
         // 获取子评论
         getSubCommentMore (data){
-            this.commentIndex++;
+            this.subPageIndex++;
             this.$store.dispatch('opus_getReplyCommentList', {
-                "page": this.commentIndex, //页数,默认不传查询第一页
-                "pageSize": this.commentSize, //每页数量 默认10
+                "page": this.subPageIndex, //页数,默认不传查询第一页
+                "pageSize": this.subPageSize, //每页数量 默认10
                 "pagination": 1, //1表示返回页码相关信息 0 或者 不传 则不返回
                 "commentId": data.comment_id //目录id,必填项
             }).then( res => {

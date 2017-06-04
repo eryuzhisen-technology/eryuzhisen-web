@@ -66,7 +66,7 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom />
     <div class="m-setting">
 	<div class="m-setting-wrap">
@@ -91,7 +91,7 @@
                             <div class="tip-text">{{phone_reg_con}}</div>
                         </div>
                         <div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !phone_reg}">
-                            <input type="text" :placeholder="step == 1 ? '旧手机号' : '新手机好号'" v-model="phone" />
+                            <input type="text" :placeholder="step == 1 ? '旧手机号' : '新手机好号'" v-model="phone" spellcheck="false" />
                         </div>
                     </div>
                     <div class="m-user-dialog__item">
@@ -100,7 +100,7 @@
                             <div class="tip-text">{{pic_code_reg_con}}</div>
                         </div>
                         <div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !pic_code_reg}">
-                            <input type="text" placeholder="图形码" v-model="pic_code" />
+                            <input type="text" placeholder="图形码" v-model="pic_code" spellcheck="false" />
                             <img v-if="isCodeCan" @click="getCode" :src="'data:image/png;base64,' + pic_vcode" />
                         </div>
                     </div>
@@ -110,7 +110,7 @@
                             <div class="tip-text">{{phone_vcode_reg_con}}</div>
                         </div>
                         <div class="m-user-dialog__input m-user-dialog__input-phone cpm_form_input cpm_left" :class="{'z-error': !phone_vcode_reg}">
-                            <input type="text" placeholder="验证码" v-model="phone_vcode" />
+                            <input type="text" placeholder="验证码" v-model="phone_vcode" spellcheck="false" />
                         </div>
                         <div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_button_default cpm_right" @click="getPhoneVerifyCode">{{timeText}}</div>
                     </div>

@@ -1,150 +1,161 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (reference) '../common/css/common';
-    @module: c-comment-info;
-
-    .@{module} {
+    .c-comment-info {
         & &-wrap {
             margin-bottom: 30px;
         }
     }
-    .@{module}-list {
+    .c-comment-info-list {
         padding: 20px;
         .default_border-b-13;
         .default_backgroud_3;
         .default_border-b-5;
+        .default_pointer;
         &.z-unread {
             .default_backgroud_4;
         }
         &:last-child {
             .default_border-n;
         }
-    }
-    .@{module}__top {
-        height: 20px;
-        overflow: hidden;
-        margin-bottom: 10px;
-        & .top__img {
-            float: left;
-            width: 20px;
+        .c-comment-info__top {
             height: 20px;
-            margin-right: 10px;
-            .default_border-r-50;
-            .default_backgroud_5;
-        }
-        & .top__name {
-            float: left;
-            height: 20px;
-            line-height: 20px;
-            margin-right: 5px;
-            .default_font_size_1;
-            .default_color_6;
-        }
-        & .top__text {
-            float: left;
-            height: 20px;
-            line-height: 20px;
-            .default_font_size_2;
-            .default_color_2;
-        }
-        & .top__detail {
-            float: right;
-            height: 20px;
-            line-height: 20px;
-            & a {
-                text-decoration: none;
+            overflow: hidden;
+            margin-bottom: 10px;
+            & .top__img {
+                float: left;
+                width: 20px;
+                height: 20px;
+                margin-right: 10px;
+                .default_border-r-50;
+                .default_backgroud_5;
+                overflow: hidden;
+            }
+            & .top__name {
+                float: left;
+                height: 20px;
+                line-height: 20px;
+                margin-right: 5px;
                 .default_font_size_1;
-                .default_color_3;
-                &:hover {
-                    .default_color_2;
+                .default_color_6;
+            }
+            & .top__text {
+                float: left;
+                height: 20px;
+                line-height: 20px;
+                .default_font_size_2;
+                .default_color_2;
+            }
+            & .top__detail {
+                display: none;
+                float: right;
+                height: 20px;
+                line-height: 20px;
+                & a {
+                    text-decoration: none;
+                    .default_font_size_1;
+                    .default_color_3;
+                    &:hover {
+                        .default_color_2;
+                    }
                 }
             }
         }
-    }
-    .@{module}__comment {
-        padding-left: 30px;
-        margin-bottom: 20px;
-        .default_color_10;
-        .default_font_size_2;
-        & .comment__body {
-            line-height: 1.5rem;
-            margin-bottom: 15px;
-        }
-    }
-    .@{module}__form {
-        padding-left: 30px;
-        overflow: hidden;
-        & .form__top {
-            height: 12px;
-            margin-bottom: 15px;
-            .default_font_size_1;
-            .default_color_3;
-        }
-        & .form__top__jubao {
-            float: left;
-            .default_pointer;
-            .default_font_size_1;
-            .default_color_3;
-            &:hover {
-                .default_color_1;
-            }
-        }
-        & .form__top__time {
-            float: right;
-            margin-right: 15px;
-            .default_font_size_1;
-            .default_color_3;
-        }
-        & .form__top__record {
-            float: right;
-            .default_pointer;
-            .default_font_size_1;
-            .default_color_2;
-            &:hover {
-                .default_color_1;
-            }
-        }
-        & .form__body {
-            width: 100%;
-            overflow: hidden;
-        }
-        & .form__body__write {
-            float: left;
-            width: 570px;
-            height: 40px;
-            margin-right: 10px;
-            & input {
-                height: 40px;
-                padding: 13px 20px;
-            }
-        }
-        & .form_body__commit {
-            float: right;
-            width: 70px;
-            height: 40px;
-            line-height: 40px;
-
-            .default_center;
+        .c-comment-info__comment {
+            padding-left: 30px;
+            margin-bottom: 20px;
+            .default_color_10;
             .default_font_size_2;
-            .default_color_2;
-            .default_border-r-4;
-            .default_pointer;
-            .default_backgroud_13;
-            &:hover {
-                .default_color_1;
+            & .comment__body {
+                line-height: 1.5rem;
+                margin-bottom: 15px;
+            }
+        }
+        .c-comment-info__form {
+            padding-left: 30px;
+            overflow: hidden;
+            & .form__top {
+                height: 12px;
+                margin-bottom: 15px;
+                .default_font_size_1;
+                .default_color_3;
+            }
+            & .form__top__jubao {
+                display: none;
+                float: left;
+                .default_pointer;
+                .default_font_size_1;
+                .default_color_3;
+                &:hover {
+                    .default_color_1;
+                }
+            }
+            & .form__top__time {
+                float: right;
+                margin-right: 15px;
+                .default_font_size_1;
+                .default_color_3;
+            }
+            & .form__top__record {
+                float: right;
+                .default_pointer;
+                .default_font_size_1;
+                .default_color_2;
+                &:hover {
+                    .default_color_1;
+                }
+            }
+            & .form__body {
+                width: 100%;
+                overflow: hidden;
+            }
+            & .form__body__write {
+                float: left;
+                width: 570px;
+                height: 40px;
+                margin-right: 10px;
+                & input {
+                    height: 40px;
+                    padding: 13px 20px;
+                }
+            }
+            & .form_body__commit {
+                float: right;
+                width: 70px;
+                height: 40px;
+                line-height: 40px;
+
+                .default_center;
+                .default_font_size_2;
+                .default_color_2;
+                .default_border-r-4;
+                .default_pointer;
+                .default_backgroud_13;
+                &:hover {
+                    .default_color_1;
+                }
+            }
+        }
+        &:hover {
+            & .top__detail {
+                display: block;
+            }
+            & .form__top__jubao {
+                display: block;
             }
         }
     }
+
 </style>
 
 <!-- html代码 -->
 <template>
 <div class="c-comment-info">
 <div class="c-comment-info-wrap">
-    <div class="c-comment-info-list" v-for="(data, index) in message.list" :class="{'z-unread': data.read == 0}">
+    <div class="c-comment-info-list" v-for="(data, index) in message.list" :class="{'z-unread': data.read == 0}"  @click="recordSwitch(index, data.msg_id, data.read)">
         <div class="c-comment-info__top">
             <div class="top__img">
-                {{data.message.sender.avatar_utl}}
+                <img :src="data.message.sender.avatar_url" />
             </div>
             <div class="top__name">{{data.message.sender.nick_name}}</div>
             <div class="top__text" v-html="data.message.content.title"></div>
@@ -159,14 +170,14 @@
         <div class="c-comment-info__form">
             <div class="form__top">
                 <div class="form__top__jubao" @click="addReport(data.message.sender.user_id)">举报</div>
-                <div @click="recordSwitch(index, data.msg_id, data.read)" class="form__top__record">{{recordIndex == index ? '收起回复' : '回复'}}</div>
+                <div @click.stop="recordSwitch(index, data.msg_id, data.read)" class="form__top__record">{{recordIndex == index ? '收起回复' : '回复'}}</div>
                 <div class="form__top__time">{{data.create_time}}</div>
             </div>
             <div v-if="recordIndex == index" class="form__body">
                 <div class="form__body__write cpm_form_input">
-                    <input type="text" placeholder="回复TA..." v-model="comment" />
+                    <input type="text" placeholder="回复TA..." spellcheck="false" v-model="comment" @click.stop="" spellcheck="false" />
                 </div>
-                <div class="form_body__commit" @click="emitComment(data.message.arguments)">提交</div>
+                <div class="form_body__commit" @click="emitComment(data.message.arguments)" @click.stop="">提交</div>
             </div>
         </div>
     </div>
@@ -274,7 +285,12 @@ export default {
             }).then( res => {
                 this.comment = '';
                 this.recordIndex = -2;
-                this.getMessageList();
+                
+                this.$store.dispatch('bubble_success', {
+                    ret: 0,
+                    type: 'top',
+                    msg: '消息发送成功！'
+                });
 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
@@ -287,7 +303,7 @@ export default {
                 return false;
             }
             this.addComment({
-                "to_reply_comment_id": option.to_comment_id, //一级评论下的二级回复性评论id,表示针对那条二级评论做的回复('xxx回复了xxx',在列表查询时需要使用),当前发表的是一级评论不需要带此参数.
+                "to_comment_id": option.to_comment_id, //一级评论下的二级回复性评论id,表示针对那条二级评论做的回复('xxx回复了xxx',在列表查询时需要使用),当前发表的是一级评论不需要带此参数.
                 "comment": this.comment, //评论
                 "catalog_id": option.catalog_id, //目录id,必填
                 "chapter_id": option.chapter_id //

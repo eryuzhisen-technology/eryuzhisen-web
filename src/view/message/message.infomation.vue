@@ -9,16 +9,14 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom />
     <div class="m-message">
 	<div class="m-message-wrap">
 		<div class="message-content">
 			<MenuLeft class="message-left c-menu-left" :data="menuLeft" />
 			<div class="title">
-                <p v-if="message.count != 0">
-				    <span class="number">{{message.count}}</span> 条新通知
-                </p>
+			    <span class="number">{{message.count}}</span> 条新通知
 			</div>
 			<div class="content">
                 <CommentList />

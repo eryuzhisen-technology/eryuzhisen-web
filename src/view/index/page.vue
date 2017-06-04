@@ -84,7 +84,7 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom pageIndex="page" />
 	<div class="m-page">
         <div class="m-page-label">

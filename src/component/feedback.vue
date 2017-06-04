@@ -83,7 +83,7 @@
                     <div class="tip-arrow"></div>
                     <div class="tip-text">{{contact_reg_con}}</div>
                 </div>
-                <input type="text" placeholder="留下你的联系方式..." v-model="contact" />
+                <input type="text" placeholder="留下你的联系方式..." v-model="contact" spellcheck="false" />
             </div>
         </div>
         <div class="content-btn">
@@ -124,14 +124,14 @@ export default {
                 this.content_reg_con = '';
             }
 
-            if (!$.trim(this.contact)) {
+            /*if (!$.trim(this.contact)) {
                 this.contact_reg = false;
                 this.contact_reg_con = '输入您的联系方式';
                 return false
             } else {
                 this.contact_reg = true;
                 this.contact_reg_con = '';
-            }
+            }*/
 
             this.$store.dispatch('common_addFeedback', {
                 "content": this.content, //文本内容
@@ -143,10 +143,23 @@ export default {
                     type: 'top',
                     msg: '反馈成功'
                 });
+
+                this.content = '';
+
+                // 记录联系方式
+                var userInfoExtra = this.$version.userInfoExtra;
+                var _userInfoExtra = this.$cache.getStore(userInfoExtra.key , userInfoExtra.version) || {};
+                    _userInfoExtra.contact = this.contact;
+                this.$cache.setStore(userInfoExtra.key, _userInfoExtra, userInfoExtra.version, userInfoExtra.time);
             }).catch( err => {
                 this.$store.dispatch('bubble_fail', err);
             })
         }
+    },
+    mounted (){
+        var userInfoExtra = this.$version.userInfoExtra;
+        var userInfoExtra = this.$cache.getStore(userInfoExtra.key , userInfoExtra.version) || {};
+        this.contact = userInfoExtra.contact;
     }
 }
 </script>

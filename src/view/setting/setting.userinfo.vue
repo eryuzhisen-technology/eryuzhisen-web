@@ -92,7 +92,7 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom />
     <div class="m-setting m-setting-userinfo">
 	<div class="m-setting-wrap">
@@ -106,7 +106,7 @@
 				<div class="content-wrap">
                     <div class='content-item content-nick'>
                         <div class="label">昵称</div>
-                        <input type="text" placeholder="姓名" :value="user.nick_name" @input="uploadname" />
+                        <input type="text" placeholder="姓名" :value="user.nick_name" @input="uploadname" spellcheck="false" />
                     </div>
                     <div class='content-item content-sex'>
                         <div class="label">性别</div>
@@ -117,7 +117,7 @@
                     </div>
                     <div class='content-item content-word'>
                         <div class="label">简介</div>
-                        <textarea placeholder="描述你自己..." :value="user.signature" @input="uploadtext"></textarea>
+                        <textarea placeholder="描述你自己..." :value="user.signature" @input="uploadtext" spellcheck="false"></textarea>
                     </div>
                     <div class="content-save cpm_button_default" @click="saveInfo">保存</div>
                 </div>
@@ -209,16 +209,16 @@ export default {
         }
     },
     mounted (){
-        /*this.$watch('user.nick_name', value => {
+        this.$watch('user.nick_name', value => {
             this.$store.dispatch('user_setUserInfo', {
-                nick_name: String(value).substr(0, 10)
+                nick_name: String(value).substr(0, 15)
             })
         })
         this.$watch('user.signature', value => {
             this.$store.dispatch('user_setUserInfo', {
-                signature: String(value).substr(0, 100)
+                signature: String(value).substr(0, 1000)
             })
-        })*/
+        })
 
         this.getInviteCode();
     }

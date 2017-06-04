@@ -6,17 +6,15 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom 
         resType='search'
     />
 	<div class="m-search">
 		<div class="m-search-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="title" :style="{'width': (count <= 5 ? count*240 : 1200) + 'px'}">
-                <p v-if="count">
-    				<span class="number">{{count}}</span>个用户
-                </p>
+			<div class="title" :style="{'width': (count == 0 ? 720 : count <= 5 ? count*240 : 1200) + 'px'}">
+    			<span class="number">{{count}}</span>个用户
 			</div>
 			<div class="result">
 				<AuthorDom 
@@ -39,13 +37,17 @@ export default {
     	return {
     		menuLeft: {
     			article: {
-    				title: '作品',
+                    title: '故事',
                     url: 'search.article.html'
-    			},
-    			author: {
-    				title: '作者',
+                },
+                tag: {
+                    title: '标签',
+                    url: 'search.tag.html'
+                },
+                author: {
+                    title: '用户',
                     isActive: true
-    			}
+                }
     		}
     	}
     },
@@ -57,6 +59,7 @@ export default {
         var query = this.$url.getUrlParam('query');
         if (query) {
             this.menuLeft.article.url += '?query=' + query;
+            this.menuLeft.author.url += '?query=' + query;
         }
     }
 }

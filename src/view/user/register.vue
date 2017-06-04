@@ -2,6 +2,16 @@
 <style lang="less">
 @import (less) '../../common/css/common.less';
 @import (less) './user.less';
+.c-dialog__tip-yao {
+    height: 80px;
+    top: 50%;
+    transform: translate(-115%, -50%);
+    & .tip-text {
+        line-height: 1.5rem;
+        padding: 15px;
+        height: 80px;
+    }
+}
 </style>
 
 <!-- html代码 -->
@@ -18,8 +28,12 @@
                     <div class="tip-arrow"></div>
                     <div class="tip-text">{{yao_reg_con}}</div>
                 </div>
+                <div v-if="yao_reg && focus" class="c-dialog__tip c-dialog__tip-yao">
+                    <div class="tip-arrow"></div>
+                    <div class="tip-text">因BETA内测的原因而采用邀请码制，请加QQ群432769756向管员索取</div>
+                </div>
                 <div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !yao_reg}">
-                    <input name="yao" type="text" placeholder="邀请码" @keyup.enter="register" v-model="yao" autocomplete="new-password" />
+                    <input name="yao" type="text" placeholder="邀请码" @keyup.enter="register" v-model="yao" autocomplete="new-password" @focus="show" @blur="hide" spellcheck="false" />
                 </div>
             </div>
 
@@ -30,7 +44,7 @@
                     <div class="tip-text">{{phone_reg_con}}</div>
                 </div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !phone_reg}">
-    				<input name="phone" type="text" placeholder="手机号" @keyup.enter="register" v-model="phone" autocomplete="new-password" />
+    				<input name="phone" type="text" placeholder="手机号" @keyup.enter="register" v-model="phone" autocomplete="new-password" spellcheck="false" />
     			</div>
     		</div>
 
@@ -41,7 +55,7 @@
                     <div class="tip-text">{{password_reg_con}}</div>
                 </div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !password_reg}">
-    				<input name="password" type="password" placeholder="密码" @keyup.enter="register" v-model="password" autocomplete="new-password" />
+    				<input name="password" type="password" placeholder="密码" @keyup.enter="register" v-model="password" autocomplete="new-password" spellcheck="false" />
     			</div>
     		</div>
 
@@ -52,7 +66,7 @@
                     <div class="tip-text">{{pic_code_reg_con}}</div>
                 </div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !pic_code_reg}">
-    				<input name="pic_code" type="text" placeholder="图形码" @keyup.enter="register" v-model="pic_code" autocomplete="new-password" />
+    				<input name="pic_code" type="text" placeholder="图形码" @keyup.enter="register" v-model="pic_code" autocomplete="new-password" spellcheck="false" />
     				<img v-if="isCodeCan" @click="getCode" :src="'data:image/png;base64,' + pic_vcode" />
     			</div>
     		</div>
@@ -64,7 +78,7 @@
                     <div class="tip-text">{{phone_vcode_reg_con}}</div>
                 </div>
     			<div class="m-user-dialog__input cpm_form_input m-user-dialog__input-phone cpm_left" :class="{'z-error': !phone_vcode_reg}">
-    				<input name="phone_vcode" type="text" placeholder="验证码" @keyup.enter="register" v-model="phone_vcode" autocomplete="new-password" />
+    				<input name="phone_vcode" type="text" placeholder="验证码" @keyup.enter="register" v-model="phone_vcode" autocomplete="new-password" spellcheck="false" />
     			</div>
     			<div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_right cpm_button_weak" @click="getPhoneVerifyCode">{{timeText}}</div>
     		</div>
@@ -78,9 +92,9 @@
             <!-- 协议 -->
             <div class="m-user-dialog__text m-user-dialog__agree">
                 注册即同意并愿意遵守耳语之森
-                <a href="#none">用户协议</a> 
+                <a href="./agreement.html">用户协议</a> 
                 和 
-                <a href="#none">隐私政策</a>
+                <a href="./privacy.html">隐私政策</a>
             </div>
 
             <!-- 登陆跳转 -->
@@ -108,6 +122,7 @@ export default {
             pic_code: '',
             phone_vcode: '',
 
+            focus: false,
             yao_reg: true,
             phone_reg: true,
             password_reg: true,
@@ -127,6 +142,12 @@ export default {
         timeText: state => state.user.time ? '重新发送 ' + state.user.time : '发送验证码'
     }),
     methods: {
+        show (){
+            this.focus = true;
+        },
+        hide (){
+            this.focus = false;
+        },
 		getCode (init){
             this.$store.dispatch('user_getPicVerifyCode', {
                 init: init

@@ -6,17 +6,15 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom
         resType='search'
     />
 	<div class="m-search">
 		<div class="m-search-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="title" :style="{'width': (article.count <= 5 ? article.count*240 : 1200) + 'px'}">
-                <p v-if="article.count">
-                    <span class="number">{{article.count}}</span>个故事
-                </p>
+			<div class="title" :style="{'width': (article.count == 0 ? 720 : article.count <= 5 ? article.count*240 : 1200) + 'px'}">
+                <span class="number">{{article.count}}</span>个故事
             </div>
 			<div class="result">
 				<ListDom 
@@ -40,11 +38,15 @@ export default {
     	return {
     		menuLeft: {
     			article: {
-    				title: '作品',
+                    title: '故事',
                     isActive: true
-    			},
+                },
+                tag: {
+                    title: '标签',
+                    url: 'search.tag.html'
+                },
     			author: {
-    				title: '作者',
+    				title: '用户',
                     url: 'search.author.html'
     			}
     		},
@@ -58,6 +60,7 @@ export default {
         // 获取url的参数
         var query = this.$url.getUrlParam('query');
         if (query) {
+            this.menuLeft.tag.url += '?query=' + query;
             this.menuLeft.author.url += '?query=' + query;
         }
     }

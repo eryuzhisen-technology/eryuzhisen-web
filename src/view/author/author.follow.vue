@@ -6,7 +6,7 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom resType="author" />
     <AuthorHeaderDom class="author-header" :menu="menu" :menuIndex="menuIndex" />
 	<div class="m-author">

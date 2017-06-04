@@ -19,7 +19,7 @@
                     <div class="tip-text">{{phone_reg_con}}</div>
                 </div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !phone_reg}">
-    				<input name="phone" type="text" placeholder="手机号" @keyup.enter="resetPwd" v-model="phone" autocomplete="new-password" />
+    				<input name="phone" type="text" placeholder="手机号" @keyup.enter="resetPwd" v-model="phone" autocomplete="new-password" spellcheck="false" />
     			</div>
     		</div>
 
@@ -30,7 +30,7 @@
                     <div class="tip-text">{{pic_code_reg_con}}</div>
                 </div>
     			<div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !pic_code_reg}">
-    				<input name="pic_code" type="text" placeholder="图形码" @keyup.enter="resetPwd" v-model="pic_code" autocomplete="new-password" />
+    				<input name="pic_code" type="text" placeholder="图形码" @keyup.enter="resetPwd" v-model="pic_code" autocomplete="new-password" spellcheck="false" />
     				<img v-if="isCodeCan" @click="getCode" :src="'data:image/png;base64,' + pic_vcode" />
     			</div>
     		</div>
@@ -42,7 +42,7 @@
                     <div class="tip-text">{{phone_vcode_reg_con}}</div>
                 </div>
     			<div class="m-user-dialog__input m-user-dialog__input-phone cpm_form_input cpm_left" :class="{'z-error': !phone_vcode_reg}">
-    				<input name="phone_vcode" type="text" placeholder="验证码" @keyup.enter="resetPwd" v-model="phone_vcode" autocomplete="new-password" />
+    				<input name="phone_vcode" type="text" placeholder="验证码" @keyup.enter="resetPwd" v-model="phone_vcode" autocomplete="new-password" spellcheck="false" />
     			</div>
     			<div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_button_warn cpm_right" @click="getPhoneVerifyCode">{{timeText}}</div>
     		</div>
@@ -55,7 +55,7 @@
                     <div class="tip-text">{{password_reg_con}}</div>
                 </div>
                 <div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !password_reg}">
-                    <input name="password" type="password" placeholder="新密码" @keyup.enter="resetPwd" v-model="password" autocomplete="new-password" />
+                    <input name="password" type="password" placeholder="新密码" @keyup.enter="resetPwd" v-model="password" autocomplete="new-password" spellcheck="false" />
                 </div>
             </div>
 
@@ -66,7 +66,7 @@
                     <div class="tip-text">{{repassword_reg_con}}</div>
                 </div>
                 <div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !repassword_reg}">
-                    <input name="repassword" type="password" placeholder="确认新密码" @keyup.enter="resetPwd" v-model="repassword" autocomplete="new-password" />
+                    <input name="repassword" type="password" placeholder="确认新密码" @keyup.enter="resetPwd" v-model="repassword" autocomplete="new-password" spellcheck="false" />
                 </div>
             </div>
             
@@ -243,16 +243,36 @@ export default {
                 this.$store.dispatch('user_backPwd', {
                     device_no: (new Date()).getTime(),//设备号,没有则新生成一个,统计用
                 }).then( res => {
-                    window.location.href = this.url.login;
+                    // 自动登录
+                    this.$store.dispatch('user_sigin', {
+                        "device_no": (new Date()).getTime(),//设备号,没有则新生成一个,统计用
+                        _header: {
+                            "Client_type": 3, // 设备号
+                        },
+                        isSave: true // 是否记住密码
+                    }).then( res => {
+                        this.goNext();
+                        this.$store.dispatch('bubble_success', res);
+                    }).catch( err => {
+                        this.$store.dispatch('bubble_fail', err);
+                    });
+                    // window.location.href = this.url.login;
                 }).catch( err => {
                     this.$store.dispatch('bubble_fail', err);
                 });
             })
-    	},	
+    	},
+        goNext (){
+            if (this.from) {
+                window.location.href = decodeURIComponent(this.from);
+            } else {
+                window.location.href = './index.html';
+            }
+        }
     },
     mounted(){
         var that = this;
-
+        this.from = this.$url.getUrlParam('from') || '';
     	this.$store.dispatch('user_getPicVerifyCode', {
             init: true
         }).catch( err => {

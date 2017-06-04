@@ -45,6 +45,11 @@
                         height: 100%;
                     }
                 }
+                & a {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
             }
             & .banner-index {
                 float: left;
@@ -60,6 +65,11 @@
                         height: 160px;
                     }
                 }
+                & a {
+                    display: block;
+                    width: 100%;
+                    height: 100%;
+                }
             }
             & .banner-btn {
                 display: none;
@@ -71,47 +81,20 @@
                 margin-top: -30px;
                 background-color: rgba(0,0,0,0.5);
                 .default_pointer;
-                & span {
-                    display: inline-block;
-                    width: 100%;
-                    height: 100%;
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    transition: opacity @default_speed_1;
-                }
-                & span:nth-child(1) {
-                    opacity: 1;
-                }
-                & span:nth-child(2) {
-                    opacity: 0;
-                }
-                &:hover span:nth-child(1) {
-                    opacity: 0;
-                }
-                &:hover span:nth-child(2) {
-                    opacity: 1;
+                transition: all @default_speed_1;
+                &:hover {
+                    background-color: rgba(0,0,0,1);
                 }
             }
             & .banner-left {
                 left: 0;
                 .default_border-r-r-4;
-                & span:nth-child(1) {
-                    .skin_icon_left-2;
-                }
-                & span:nth-child(2) {
-                    .skin_icon_left-2_on;
-                }
+                .skin_banner_left;
             }
             & .banner-right {
                 right: 0;
                 .default_border-r-l-4;
-                & span:nth-child(1) {
-                    .skin_icon_right-2;
-                }
-                & span:nth-child(2) {
-                    .skin_icon_right-2_on;
-                }
+                .skin_banner_right;
             }
             &:hover {
                 & .banner-btn {
@@ -174,31 +157,25 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom pageIndex="index" />
 	<div class="m-index">
-        <div class="m-index-banner">
+        <div class="m-index-banner" @mouseenter="enter" @mouseleave="out">
             <div class="m-index-banner-wrap z-active">
                 <div class="banner-lists">
-                    <div class="banner-item" v-for="(item, index) in banner_images" :class="{'z-on': index == big_index -1}">
+                    <div class="banner-item" v-for="(item, index) in banner_images" :class="{'z-on': index == big_index -1}"><a href="./index.html">
                         <img :src="item.image_url" />
-                    </div>
+                    </a></div>
                 </div>
                 <div class="banner-index">
                 <div class="banner-index-wrap" :style="{transform: 'translate(0,-'+ small_index*160 +'px)'}">
-                    <div class="banner-item" v-for="(item, index) in banner_images">
+                    <div class="banner-item" v-for="(item, index) in banner_images"><a href="./index.html">
                         <img :src="item.image_url" />
-                    </div>
+                    </a></div>
                 </div>
                 </div>
-                <div class="banner-btn banner-left" @click="bannerSwitch('left')">
-                    <span></span>
-                    <span></span>
-                </div>
-                <div class="banner-btn banner-right" @click="bannerSwitch('right')">
-                    <span></span>
-                    <span></span>
-                </div>
+                <div class="banner-btn banner-left" @click="bannerSwitch('right')"></div>
+                <div class="banner-btn banner-right" @click="bannerSwitch('left')"></div>
             </div>
         </div>
         <div class="m-index-enter">
@@ -266,6 +243,16 @@ export default {
         }
     }),
     methods: {
+        enter (){
+            clearTimeout(this.bannerTimer);
+            clearTimeout(this.bannerTimerMouse);
+        },
+        out (){
+            this.bannerTimerMouse = setTimeout( res => {
+                this.isCan = false;
+                this.switch();
+            }, 3000)
+        },
         bannerSwitch (type){
             if (!this.isCan) {
                 return false;
@@ -276,7 +263,7 @@ export default {
         switch (type) {
             clearTimeout(this.bannerTimer);
 
-            var type = type || 'right';
+            var type = type || 'left';
 
             var lists = $('.m-index-banner-wrap');
             lists.removeClass('z-active');

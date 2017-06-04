@@ -30,15 +30,15 @@
             .default_color_1;   
         }
         &.z-prev {
-            .skin_icon_prev;
+            .skin_page_left;
             &:hover {
-                .skin_icon_prev_on;
+                .skin_page_left_on;
             }
         }
         &.z-next {
-            .skin_icon_next;
+            .skin_page_right;
             &:hover {
-                .skin_icon_next_on;
+                .skin_page_right_on;
             }
         }
     }
@@ -176,7 +176,7 @@ export default {
                 index != pages ? <div class="item z-next" data-index="next" onClick={that.pageSwitch}></div> : ''
             }
                 <div class="text">共页<span>{pages}</span>，跳转</div>
-                <div class="input cpm_form_input"><input type="text"/></div> 
+                <div class="input cpm_form_input"><input type="text" spellcheck="false" /></div> 
                 <div class="btn cpm_button_default">GO</div> 
             </div>
         )

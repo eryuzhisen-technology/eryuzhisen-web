@@ -21,7 +21,7 @@
 			height: 50px;
 			margin-top: 5px;
 			margin-right: 30px;
-			.skin_icon_logo;
+			.skin_head_logo;
 			.default_pointer;
 			& a {
 				display: inline-block;
@@ -84,9 +84,9 @@
 					display: inline-block;
 					width: 20px;
 					height: 20px;
-					.skin_icon_search;
+					.skin_head_search;
 					&:hover {
-						.skin_icon_search_on;
+						.skin_head_search_on;
 					}
 				}
 				&:hover {
@@ -103,7 +103,7 @@
 				padding: 15px 0;
 				height: 30px;
 				line-height: 30px;
-				.default_font_size_3;
+				.default_font_size_2;
 				.default_color_2;
 				.default_font_family_bolder;
 				& a {
@@ -136,18 +136,18 @@
 					& .member-show-notice_img {
 						width: 100%;
 						height: 100%;
-						.skin_icon_notice;
+						.skin_head_notice;
 						.default_pointer;
 						.default_border-r-50;
 						.default_backgroud_6;
 						&:hover {
-							.skin_icon_notice_on;
+							.skin_head_notice_on;
 						}
 					}
 					& .member-show-notice_number {
 						position: absolute;
 						top: 15px;
-						right: 0;
+						right: 10px;
 						width: 8px;
 						height: 8px;
 						.default_border-r-50;
@@ -161,9 +161,10 @@
 						width: 180px;
 						z-index: 11;
 						overflow: hidden;
-						.default_backgroud_6;
+						.default_backgroud_2;
 						.default_border-r-4;
-						.default_border_shadow_5;
+						.default_pointer;
+						.default_border_shadow_4;
 						& .member-notice-item {
 							width: 180px;
 							height: 50px;
@@ -194,6 +195,8 @@
 								height: 50px;
 								line-height: 50px;
 								margin-right: 10px; 
+								.default_font_size_2;
+								.default_color_2;
 							}
 							&:first-child { 
 								.default_border-r-t-4;
@@ -202,13 +205,10 @@
 								.default_border-r-b-4;
 							}
 							&:nth-child(1) .member-notice-item__icon { 
-								.skin_icon_er; 
+								.skin_head_comment; 
 							}
 							&:nth-child(2) .member-notice-item__icon { 
-								.skin_icon_cmt; 
-							}
-							&:nth-child(3) .member-notice-item__icon { 
-								.skin_icon_msg; 
+								.skin_head_msg; 
 							}
 							&:hover {
 								.default_backgroud_14;
@@ -216,9 +216,8 @@
 								& .member-notice-item__text {
 									.default_color_1;	
 								}
-								&:nth-child(1) .member-notice-item__icon { .skin_icon_er_on; }
-								&:nth-child(2) .member-notice-item__icon { .skin_icon_cmt_on; }
-								&:nth-child(3) .member-notice-item__icon { .skin_icon_msg_on; }
+								&:nth-child(1) .member-notice-item__icon { .skin_head_comment_on; }
+								&:nth-child(2) .member-notice-item__icon { .skin_head_msg_on; }
 							}
 						}
 					}
@@ -284,22 +283,22 @@
 							&:last-child { 
 								.default_border-r-b-4;
 							}
-							&:nth-child(1) .member-center-item__icon { .skin_icon_invite; }
-							&:nth-child(2) .member-center-item__icon { .skin_icon_me; }
-							&:nth-child(3) .member-center-item__icon { .skin_icon_set; }
-							&:nth-child(4) .member-center-item__icon { .skin_icon_back; }
-							&:nth-child(5) .member-center-item__icon { .skin_icon_logout; }
+							&:nth-child(1) .member-center-item__icon { .skin_head_yao; }
+							&:nth-child(2) .member-center-item__icon { .skin_head_center; }
+							&:nth-child(3) .member-center-item__icon { .skin_head_setting; }
+							&:nth-child(4) .member-center-item__icon { .skin_head_feedback; }
+							&:nth-child(5) .member-center-item__icon { .skin_head_outlogin; }
 							&:hover {
 								.default_backgroud_14;
 								.default_border_shadow_4;
 								& .member-center-item__text {
 									.default_color_1;	
 								}
-								&:nth-child(1) .member-center-item__icon { .skin_icon_invite_on; }
-								&:nth-child(2) .member-center-item__icon { .skin_icon_me_on; }
-								&:nth-child(3) .member-center-item__icon { .skin_icon_set_on; }
-								&:nth-child(4) .member-center-item__icon { .skin_icon_back_on; }
-								&:nth-child(5) .member-center-item__icon { .skin_icon_logout_on; }
+								&:nth-child(1) .member-center-item__icon { .skin_head_yao_on; }
+								&:nth-child(2) .member-center-item__icon { .skin_head_center_on; }
+								&:nth-child(3) .member-center-item__icon { .skin_head_setting_on; }
+								&:nth-child(4) .member-center-item__icon { .skin_head_feedback_on; }
+								&:nth-child(5) .member-center-item__icon { .skin_head_outlogin_on; }
 							}
 						}
 					}
@@ -398,15 +397,16 @@
 	<div class="c-header-content">
 		<div class="logo"><a :href='url.index'></a></div>
 		<div class="menu">
-			<a class="item" :class="{'z-on': pageIndex == 'index'}" :href='url.index'>发现</a>
-			<a class="item" :class="{'z-on': pageIndex == 'mark'}" :href='url.mark'>收藏</a>
+			<a href="javascript:void(0);" class="item" :class="{'z-on': pageIndex == 'index'}" @click="gourl('index')">发现</a>
+			<a href="javascript:void(0);" class="item" :class="{'z-on': pageIndex == 'mark'}" @click="gourl('mark')">收藏</a>
 		</div>
 		<div class="search">
-			<input type="text" placeholder="搜索" @keyup.enter="seachGo" v-model="search_value">
+			<input type="text" placeholder="搜索" @keyup.enter="seachGo" v-model="search_value" spellcheck="false" />
 			<a href="javascript:void(0)" @click="seachGo"><span></span></a>
 		</div>
-		<div v-if="user.isLogin" class="publish">
-			<a class="publish-btn cpm_button_weaks" :href="url.edit">创作</a>
+		<div class="publish">
+			<a  v-if="user.isLogin" class="publish-btn cpm_button_weaks" :href="url.edit">创作</a>
+			<a  v-else class="publish-btn cpm_button_weaks" :href="url.login">创作</a>
 			<!-- <div class="publish-show">
 				<ul class="publish-show-lists">
 					<li class="publish-show-item"><a :href="url.edit">
@@ -422,7 +422,7 @@
 		</div>
 		<div class="user">
 			<div v-if="!user.isLogin" class="btn">
-				<a :href="url.register">注册</a><span>·</span><a :href="url.login">登录</a>
+				<a :href="url.register">注册</a> <span>·</span> <a :href="url.login">登录</a>
 			</div>
 			<div v-else class="member">
 				<div class="member-show-item member-show-notice">
@@ -430,20 +430,15 @@
 					<div v-if="hasMessage" class="member-show-notice_number"></div>
 					<div class="member-show member-notice">
 						<ul class="member-notice-lists">
-							<li class="member-notice-item"><a :href="url.better">
-								<span class="member-notice-item__list member-notice-item__icon"></span>
-								<span class="member-notice-item__list member-notice-item__text">精选</span>
-								<span v-if="!!unread.message1 && unread.message1 != 0" class="member-notice-item__list member-notice-item__number">·{{unread.message1}}</span>
-							</a></li>
 							<li class="member-notice-item"><a :href="url.comment">
 								<span class="member-notice-item__list member-notice-item__icon"></span>
-								<span class="member-notice-item__list member-notice-item__text">评论我</span>
-								<span v-if="!!unread.message2 && unread.message2 != 0" class="member-notice-item__list member-notice-item__number">·{{unread.message2}}</span>
+								<span class="member-notice-item__list member-notice-item__text">评论</span>
+								<span v-if="!!unread.message2 && unread.message2 != 0" class="member-notice-item__list member-notice-item__number"> · {{unread.message2}}</span>
 							</a></li>
 							<li class="member-notice-item"><a :href="url.infomation">
 								<span class="member-notice-item__list member-notice-item__icon"></span>
-								<span class="member-notice-item__list member-notice-item__text">其他消息</span>
-								<span v-if="!!unread.message0 && unread.message0 != 0" class="member-notice-item__list member-notice-item__number">·{{unread.message0}}</span>
+								<span class="member-notice-item__list member-notice-item__text">通知</span>
+								<span v-if="!!unread.message0 && unread.message0 != 0" class="member-notice-item__list member-notice-item__number"> · {{unread.message0}}</span>
 							</a></li>
 						</ul>
 					</div>
@@ -530,7 +525,33 @@ export default {
         }
     }),
     methods: {
+    	gourl (url){
+    		if (url == this.pageIndex) {
+    			return false;
+    		}
+
+    		// 收藏要登录
+    		if (url == 'mark' && !this.user.isLogin) {
+    			window.location.href = './login.html';
+    			return false;
+    		}
+
+    		window.location.href = './' + url + '.html';
+    	},
     	seachGo (){
+    		// 如果没有内容阻止
+    		if ($.trim(this.search_value) == '') {
+    			this.$store.dispatch('bubble_setState', {
+					type: 'top',
+					show: true,
+					top: {
+						status: 'z-warn',
+						msg: '输入内容后再搜索！'
+					}
+				});
+    			return false;
+    		}
+
     		if (this.resType == 'search') {
     			this.$eventHub.$emit('header_serach', {
     				query: this.search_value

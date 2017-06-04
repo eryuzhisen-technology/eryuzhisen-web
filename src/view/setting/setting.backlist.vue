@@ -46,14 +46,14 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom />
     <div class="m-setting">
 	<div class="m-setting-wrap">
 		<div class="m-setting-content">
 			<MenuLeft :data="menuLeft" />
 			<div class="setting-content">
-				<div class="title" :style="{'width': (count <= 5 ? count*240 : 1200) + 'px'}"
+				<div class="title" :style="{'width': (count == 0 ? 720 : count <= 5 ? count*240 : 1200) + 'px'}"
                 >
 					黑名单
 				</div>

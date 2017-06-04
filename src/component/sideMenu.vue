@@ -24,11 +24,11 @@
         transition: opacity @default_speed_1;
         &:nth-child(1) {
             opacity: 1;
-            .skin_icon_top_1;
+            .skin_sime_menu_1;
         }
         &:nth-child(2) {
             opacity: 0;
-            .skin_icon_top_1_on;
+            .skin_sime_menu_1_on;
         }
         
     }

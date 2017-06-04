@@ -70,7 +70,7 @@
         v-for="(data, index) in chapter.lists"
         v-if="data.chapter_status == 0"
     >
-        <a class="link" :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+ data.chapter_id">
+        <a class="link" target="_blank" :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+ data.chapter_id">
             {{data.chapter_title}}
         </a>
     </div>

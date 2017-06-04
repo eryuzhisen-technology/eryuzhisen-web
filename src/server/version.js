@@ -36,12 +36,21 @@ var version = {
 		time: 60*60*1000
 	},
 
+	// userInfoExtra
+	userInfoExtra: {
+		key: 'eryuzhisen_userInfoExtra',
+		version: '1.0',
+		time: 24*60*60*1000
+	},
+
+	// 文章编辑
 	chapaterEdit: {
 		key: 'eryuzhisen_chapaterEdit',
 		version: '1.0',
 		time: 1*1000
 	},
 
+	// 文章内容编辑区域
 	chapaterEdit_edit: {
 		key: 'eryuzhisen_chapaterEdit_edit',
 		version: '1.0',

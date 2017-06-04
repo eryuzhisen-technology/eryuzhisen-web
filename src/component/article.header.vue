@@ -38,6 +38,15 @@
                 .default_backgroud_13;
                 .default_center;
                 .default_middle;
+                &.z-level0 {
+                    .default_color_2;
+                }
+                &.z-level1 {
+                    .default_color_6;   
+                }
+                &.z-level2 {
+                    .default_color_8;
+                }
             }
         }
         & .text {
@@ -47,7 +56,7 @@
                 overflow: hidden;
                 margin-bottom: 20px;
                 .default_center;
-                & p {
+                & a {
                     display: inline-block;
                     height: 30px;
                     line-height: 30px;
@@ -58,6 +67,9 @@
                     .default_font_size_2;
                     .default_backgroud_3;
                     .default_center;
+                    &:hover {
+                        .default_color_1;
+                    }
                 }
             }
             & .text-number {
@@ -122,7 +134,7 @@
                 & .cpm_sub_more {
                     width: 150px;
                 }
-                &:hover {
+                &.z-active {
                     & .cpm_sub_more {
                         display: block;
                     }
@@ -213,11 +225,14 @@
 <div class="c-article-header-wrap">
     <div class="name">
         <div class="name-text">{{catalog.catalog_title}}</div>
-        <div class="name-tag">{{level['level'+catalog.level]}}</div>
+        <div class="name-tag" :class="'z-level'+catalog.level">{{level['level'+catalog.level]}}</div>
     </div>
     <div class="text">
         <div class="text-tag">
-            <p v-for="item in catalog.labels">{{item}}</p>
+            <a
+                :href="'./page.html?labelTag='+ label" 
+                v-for="label in catalog.labels"
+            >{{label}}</a>
         </div>
         <div class="text-number">
             <div class="text-number-item text-zan">
@@ -239,41 +254,41 @@
             >{{ catalog.is_collected == 1 ? '取消收藏' : '加入收藏' }}</span>
             <span v-else @click="updateCatalog">修改目录信息</span>
         </div>
-        <div class="btn-item btn-share">
+        <div class="btn-item btn-share j-close-1" @click="selctEnter">
             <div class="cpm_sub_more z-left">
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-wx"></div>
                     <div class="item-text">微信</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-peng"></div>
                     <div class="item-text">朋友圈</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-wb"></div>
                     <div class="item-text">微博</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-qq"></div>
                     <div class="item-text">QQ 好友</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-kong"></div>
                     <div class="item-text">QQ 空间</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-more"></div>
                     <div class="item-text">更多</div>
                 </div>
             </div>
         </div>
-        <div class="btn-item btn-more">
+        <div class="btn-item btn-more j-close-1" @click="selctEnter">
             <div class="cpm_sub_more z-left">
-                <div v-if="catalog.owner != 1" class="item" @click="addReport">
+                <div v-if="catalog.owner != 1" class="item" @click.stop="addReport">
                     <div class="item-icon z-report"></div>
                     <div class="item-text">举报</div>
                 </div>
-                <div v-if="catalog.owner == 1" class="item" @click="removeCatalog(catalog.catalog_id)">
+                <div v-if="catalog.owner == 1" class="item" @click.stop="removeCatalog(catalog.catalog_id, $event)">
                     <div class="item-icon z-del"></div>
                     <div class="item-text">删除作品</div>
                 </div>
@@ -319,14 +334,24 @@ export default {
         catalog: state => state.opus.catalog.info
     }),
     methods: {
+        selctEnter (e){
+            $('.j-close-1').removeClass('z-active');
+            $(e.currentTarget).addClass('z-active');
+        },
         enter (index){
             this.index = index;
         },
         out (){
             this.index = -1;
         },
-        removeCatalog (catalogId){
+        shareFn (e){
+            $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
+        },
+        removeCatalog (catalogId, e){
             var that = this;
+
+            $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
+
             this.$store.dispatch('bubble_showBubble', {
                 show: true,
                 type: 'warn',
@@ -396,6 +421,15 @@ export default {
             this.$store.dispatch('opus_addFavorites', {
                 catalogId: catalogId
             }).then( res => {
+                this.$store.dispatch('bubble_showBubble', {
+                    show: true,
+                    type: 'top',
+                    top: {
+                        status: 'z-default',
+                        msg: '《'+ this.catalog.catalog_title +'》已加入收藏'
+                    }
+                })
+
                 this.getCatalogDetail();
 
                 this.$store.dispatch('bubble_success', res);
@@ -420,7 +454,9 @@ export default {
             }
         },
         // 举报
-        addReport (){
+        addReport (e){
+            $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
+
             // 判断登陆
             if (!this.userInfo.isLogin) {
                 return this.$store.dispatch('bubble_fail', {
@@ -451,6 +487,13 @@ export default {
 
         // 获取文章目录详情
         this.getCatalogDetail();
+
+        $('body').on('click', e => {
+            var node = $(e.target);
+            if (!node.hasClass('j-close-1') && node.parents('.j-close-1').length == 0) {
+                $('.j-close-1').removeClass('z-active');
+            }
+        })
     }
 }
 </script>

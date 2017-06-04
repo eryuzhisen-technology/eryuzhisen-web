@@ -43,6 +43,12 @@ export default {
 					text: '已完结'
 				}
 			],
+			articletypeArr: [
+				{
+					category_title: '文字',
+					category_id: 1
+				}
+			],
 			levelArr: [
 				{
 					text: '普通',
@@ -66,7 +72,9 @@ export default {
 			lists: [],
 			more: 0,
 			info: {},
-			chapter_id: ''
+			chapter_id: '',
+			pre_id: '',
+			next_id: ''
 		},
 
 		// 评论列表
@@ -337,7 +345,11 @@ export default {
 			};
 			var promise = opus.getReplyCommentList(payload).then( res => {
 	            // 更新指定id的子评论
-	            var list = context.state.comment.list;
+	            var list = [];
+	            context.state.comment.list.map( (item, index) =>{
+	            	var obj = Object.assign({}, item)
+	            	list.push(obj);
+	            })
 	            for (var i = 0, len = list.length; i < len; i++) {
 	            	if (list[i].comment_id == payload.commentId) {
 	            		list[i].reply_page_info = res.page_info;
@@ -558,7 +570,9 @@ export default {
 
 			var promise = opus.getChapterDetail(payload).then( res => {
 	            context.commit('opus_setChapter', {
-	            	info: res.info
+	            	info: res.info,
+	            	next_id: res.next_id,
+	            	pre_id: res.pre_id
 	            });
 	            return Promise.resolve(res);
 	        }).catch(err => {

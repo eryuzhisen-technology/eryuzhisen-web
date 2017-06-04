@@ -71,9 +71,10 @@
         & .text {
             width: 100%;
             line-height: 1.5rem;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            text-align: left;
+            // overflow: hidden;
+            // text-overflow: ellipsis;
+            // white-space: nowrap;
             .default_color_2;
             .default_font_size_2;
         }
@@ -105,11 +106,13 @@
                 & a {
                     .default_color_2;    
                 }
+            }
+            &.z-active {
                 & .cpm_sub_more {
                     display: block;
                 }
             }
-            &.z-active {
+            &.z-strong {
                 .default_backgroud_13;
             }
         }
@@ -198,51 +201,51 @@
             <div class="name-text">{{user.nick_name}}</div>
             <div class="name-time">社区年龄：<span>{{user.c_age}}</span></div>
         </div>
-        <div class="text">{{user.signature}}</div>
+        <div class="text" v-html="textFormat(user.signature || '')"></div>
     </div>
     <div class="c-author-header_btn">
         <div class="btn-item btn-mark" 
             @click="follow"
-            :class="{'z-active': user.relation != 1 && user.relation != 3}"
+            :class="{'z-strong': user.relation != 1 && user.relation != 3}"
         >
             <span v-if="userInfo.uid != user_id">{{ user.relation == 1 || user.relation == 3 ? '已关注' : '添加关注' }}</span>
             <a v-else href="setting.userinfo.html">个人设置</a>
         </div>
-        <div class="btn-item btn-share">
+        <div class="btn-item btn-share j-close-1" @click="selctEnter">
             <div class="cpm_sub_more z-left">
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-wx"></div>
                     <div class="item-text">微信</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-peng"></div>
                     <div class="item-text">朋友圈</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-wb"></div>
                     <div class="item-text">微博</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-qq"></div>
                     <div class="item-text">QQ 好友</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-kong"></div>
                     <div class="item-text">QQ 空间</div>
                 </div>
-                <div class="item">
+                <div class="item" @click.stop="shareFn">
                     <div class="item-icon z-more"></div>
                     <div class="item-text">更多</div>
                 </div>
             </div>
         </div>
-        <div v-if="userInfo.uid != user_id" class="btn-item btn-more">
+        <div v-if="userInfo.uid != user_id" class="btn-item btn-morej-close-1" @click="selctEnter">
             <div class="cpm_sub_more z-left">
-                <div class="item" @click="addBlackDialog">
+                <div class="item" @click.stop="addBlackDialog">
                     <div class="item-icon z-black"></div>
                     <div class="item-text">加入黑名单</div>
                 </div>
-                <div class="item" @click="addReport">
+                <div class="item" @click.stop="addReport">
                     <div class="item-icon z-report"></div>
                     <div class="item-text">举报</div>
                 </div>
@@ -282,11 +285,18 @@ export default {
         userInfo: state => state.user.info,
     }),
     methods: {
+        selctEnter (e){
+            $('.j-close-1').removeClass('z-active');
+            $(e.currentTarget).addClass('z-active');
+        },
         enter (index){
             this.index = index;
         },
         out (){
             this.index = -1;
+        },
+        shareFn (e){
+            $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
         },
         uploaded (fileUrl){
             // 设置上传的图片
@@ -354,8 +364,10 @@ export default {
                 });
             }
         },
-        addBlackDialog (){
+        addBlackDialog (e){
             var that = this;
+
+            $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
 
             // 判断登陆
             if (!this.userInfo.isLogin) {
@@ -400,7 +412,9 @@ export default {
             });
         },
         // 举报
-        addReport (){
+        addReport (e){
+            $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
+
             // 判断登陆
             if (!this.userInfo.isLogin) {
                 return this.$store.dispatch('bubble_fail', {
@@ -417,6 +431,9 @@ export default {
                     content_type: 3
                 }
             })
+        },
+        textFormat: function (value) {  
+            return value.replace(/[\r\n]/g, '<br />');
         }
     },
     mounted () {
@@ -433,6 +450,13 @@ export default {
 
         // 获取用户信息
         this.getAuthorInfo();
+
+        $('body').on('click', e => {
+            var node = $(e.target);
+            if (!node.hasClass('j-close-1') && node.parents('.j-close-1').length == 0) {
+                $('.j-close-1').removeClass('z-active');
+            }
+        })
     }
 }
 </script>

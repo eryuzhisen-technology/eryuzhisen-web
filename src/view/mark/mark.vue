@@ -6,13 +6,13 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom :pageIndex="pageIndex" />
 	<div class="m-mark">
 	<div class="m-mark-wrap">
 		<div class="m-mark-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="title" :style="{'width': (article.count <= 5 ? article.count*240 : 1200) + 'px'}">
+			<div class="title" :style="{'width': (article.count == 0 ? 720 : article.count <= 5 ? article.count*240 : 1200) + 'px'}">
                 <p v-if="article.count">
                     <span class="number">{{article.count}}</span>个故事
                 </p>

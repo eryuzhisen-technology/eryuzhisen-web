@@ -6,7 +6,7 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom />
 	<div class="m-company">
     <div class="m-company-wrap">

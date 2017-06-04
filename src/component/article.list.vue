@@ -9,7 +9,7 @@
             width: 100%;
             height: 100%;
             min-height: 300px;
-            min-width: 720px;
+            // min-width: 720px;
             .default_mar_auto;
             margin-bottom: 30px;
         }
@@ -71,7 +71,7 @@
                 width: 50px;
                 height: 50px;
                 line-height: 50px;
-                .skin_icon_article-7;
+                .skin_article_tag;
                 & .item-hd-tag_text {
                     position: absolute;
                     bottom: 10px;
@@ -84,7 +84,6 @@
         & .item-bd {
             position: relative;
             width: 100%;
-            height: 100%;
             & .item-bd-title {
                 line-height: 1.5em;
                 margin-bottom: 8px;
@@ -123,6 +122,7 @@
             position: absolute;
             bottom: 10px;
             left: 10px;
+            width: 100%;
             & .item-ft-btn {
                 display: inline-block;
                 height: 20px;
@@ -154,6 +154,24 @@
                     .default_color_1;
                 }
             }
+            & .item-ft-btn-more {
+                position: absolute;
+                bottom: -10px;
+                right: 0;
+                width: 36px;
+                height: 36px;
+                padding: 10px;
+                .skin_mark_more;
+                & .cpm_sub_more {
+                    width: 150px;
+                }
+                &:hover {
+                    .skin_mark_more_on;
+                    & .cpm_sub_more {
+                        display: block;
+                    }
+                }
+            }
         }
         &.z-left_right {
             width: 400px;
@@ -168,6 +186,7 @@
         &.z-left_right .item-bd {
             float: right;
             width: 150px;
+            height: 100%;
             padding: 10px;
             & .item-bd-tags {
                 position: absolute;
@@ -196,21 +215,21 @@
         <div class="c-artice-item-wrap"
             :data-catalog_id="data.catalog_id"
         >
-            <a :href="'./article.intro.html?catalog_id=' + data.catalog_id" class="c-artice-item-wrap-link">
+            <a target="_black" :href="'./article.list.html?catalog_id=' + data.catalog_id" class="c-artice-item-wrap-link">
                 <!-- 头部 -->
                 <div class="item-hd">
                     <div class="item-hd-img">
                         <img :src="data.catalog_cover_url" />
                     </div>
-                    <div class="item-hd-tag">
+                    <!-- <div class="item-hd-tag">
                         <div class="item-hd-tag_text">{{data.category_title}}</div>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- 内容 -->
                 <div class="item-bd">
                     <div class="item-bd-title">{{data.catalog_title}}</div>
-                    <div v-if="showType == 'left_right'" class="item-bd-content">{{data.catalog_desc}}</div>
+                    <div v-if="showType == 'left_right'" class="item-bd-content" v-html="textFormat(data.catalog_desc)"></div>
                     <div class="item-bd-tags">
                         <a
                             :href="'./page.html?labelTag='+ label" 
@@ -222,22 +241,32 @@
 
                 <!-- 作者 -->
                 <div class="item-ft">
-                    <a v-if="resType != 'author'" class="item-ft-btn" :href="'author.work.html?user_id=' + data.user.uid">
+                    <a v-if="resType != 'author'" class="item-ft-btn" target="_blank" :href="'author.work.html?user_id=' + data.user.uid">
                         <div class="item-ft-img">
                             <img :src="data.user.avatar_url || avatar" />
                         </div>
                         <div class="item-ft-name">{{data.user.nick_name}}</div>
                     </a>
 
-                    <div v-if="resType == 'history'" class="item-ft-btn item-ft-unmark" @click.prevent="delHistory(data.catalog_id)">删除记录</div>
-
-                    <div v-if="resType == 'mark' && data.owner != 1 && data.is_collected == 1" class="item-ft-btn item-ft-unmark" @click.prevent="delFavorites">取消收藏</div>
-                    
-                    <div v-if="resType == 'search' && data.owner != 1 && data.is_collected != 1" class="item-ft-btn item-ft-mark">加入收藏</div>
-                    
-                    <a v-if="resType == 'author' && data.owner == 1" class="item-ft-btn item-ft-add" :href="'./article.edit.html?catalog_id='+ data.catalog_id + '&chapter_id=-1'">添加章节</a>
-                    
-                    <div v-if="resType == 'author' && data.owner == 1" class="item-ft-btn item-ft-del" @click.stop.prevent="remove(data.catalog_id)">删除作品</div>
+                    <div v-if="resType == 'mark'" class="item-ft-btn item-ft-btn-more">
+                        <div class="cpm_sub_more z-left">
+                            <div v-if="resType == 'history'" class="item" @click.prevent="delHistory(data.catalog_id)">
+                                <div class="item-text">删除记录</div>
+                            </div>
+                            <div v-if="resType == 'mark' && data.owner != 1 && data.is_collected == 1" class="item" @click.prevent="delFavorites">
+                                <div class="item-text">删除</div>
+                            </div>
+                            <div v-if="resType == 'search' && data.owner != 1 && data.is_collected != 1" class="item">
+                                <div class="item-text">加入收藏</div>
+                            </div>
+                            <a v-if="resType == 'author' && data.owner == 1" class="item" :href="'./article.edit.html?catalog_id='+ data.catalog_id + '&chapter_id=-1'">
+                                <div class="item-text">添加章节</div>
+                            </a>
+                            <div v-if="resType == 'author' && data.owner == 1" class="item" @click.stop.prevent="remove(data.catalog_id)">
+                                <div class="item-text">删除作品</div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </a>
         </div>
@@ -423,6 +452,9 @@ export default {
             }
             this.$cache.setStore(cache_history.key, lists, cache_history.version, cache_history.time);
             this.getList();
+        },
+        textFormat: function (value) {  
+            return value.replace(/[\r\n]/g, '<br />');
         }
     },
     created (){

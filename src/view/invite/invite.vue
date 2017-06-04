@@ -6,7 +6,7 @@
 
 <!-- html代码 -->
 <template>
-<div>
+<div class="app-body">
 	<HeaderDom />
 	<div class="m-invite">
 		<div class="invite-bg">
@@ -23,9 +23,9 @@
 					</div>
 					<div class="txt-content">
 						<div class="content-code-bg"></div>
-						<div class="content-code">Bi1O1ssE</div>
+						<div class="content-code">{{code.invite_code}}</div>
 						<div class="content-times-bg"></div>
-						<div class="content-times"><span class="times-num">3</span><span class="times-txt">次</span></div>
+						<div class="content-times"><span class="times-num">{{code.remaining_times}}</span><span class="times-txt">次</span></div>
 					</div>
 				</div>
 			</div>
@@ -52,6 +52,28 @@
 </template>
 
 <script>
-
+import { mapState } from 'vuex'
+export default {
+    data () {
+    	return {
+    		
+    	}
+    },
+    computed: mapState({
+        code: state => state.auth.code
+    }),
+    methods: {
+        getInviteCode (){
+            this.$store.dispatch('auth_getInviteCode', {}).then( res =>{
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        }
+    },
+    mounted (){
+        this.getInviteCode();
+    }
+}
 </script>
 
