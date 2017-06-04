@@ -137,20 +137,34 @@
             }
         }
     }
-    .@{module}-tag {
-        position: relative;
-        width: 100%;
-        margin-bottom: 40px
-    }
     .@{module}-list {
         position: relative;
         width: 100%;
         height: 100%;
+        margin-bottom: 40px;
+        &:last-child {
+            margin-bottom: 0;
+        }
+        .@{module}-list-title {
+            height: 60px;
+            line-height: 60px;
+            padding-left: 30px;
+            .default_width_1200;
+            .default_mar_auto;
+            .default_backgroud_4;
+            .default_color_1;
+            .default_font_size_7;
+        }
         .@{module}-list-wrap {
             position: relative;
             overflow: hidden;
             .default_width_1200;
             .default_mar_auto;
+            // .default_backgroud_3;
+        }
+        & .c-empty {
+            min-height: 300px;
+            width: 100%;
         }
     }
 </style>
@@ -185,19 +199,20 @@
                 <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
             </div>
         </div>
-        <div class="m-index-tag">
-            <div class="cpm-top-menu" :style="{'width': category.label.length*90 + 'px'}">
-                <div 
-                    v-for="(item, index) in category.label" 
-                    @click="setTagIndex(item.category_id, index)" 
-                    class="menu-item" 
-                    :class="{'z-active': category.index == item.category_id}"
-                >
-                    {{item.category_title}}
-                </div>
+        <div class="m-index-list">
+            <div class="m-index-list-title">经典故事</div>
+            <div class="m-index-list-wrap">
+                <ListDom 
+                    class="list-left__body"
+                    resType='hot'
+                    loadType="none"
+                    catalog_type="2"
+                />
             </div>
+            <div class="cpm_clear"></div>
         </div>
         <div class="m-index-list">
+            <div class="m-index-list-title">优秀连载</div>
             <div class="m-index-list-wrap">
                 <ListDom 
                     class="list-left__body"
@@ -260,68 +275,6 @@ export default {
             this.isCan = false;
             this.switch(type);
         },
-        switch (type) {
-            clearTimeout(this.bannerTimer);
-
-            var type = type || 'left';
-
-            var lists = $('.m-index-banner-wrap');
-            lists.removeClass('z-active');
-
-            if (type == 'left' && this.small_index == 0) {
-                this.small_index = this.banner_size;
-            } else if (type == 'right' && this.small_index == this.banner_size) {
-                this.small_index = 0;
-            }
-
-            if (type == 'left' && this.big_index == 1) {
-                this.big_index = this.banner_size + 1;
-            } else if (type == 'right' && this.big_index == this.banner_size) {
-                this.big_index = 0;
-            }
-
-            setTimeout( res => {
-                lists.addClass('z-active');
-                if (type == 'left') {
-                    this.big_index--;
-                    this.small_index--;
-                } else {
-                    this.big_index++;
-                    this.small_index++;
-                }
-                setTimeout( res => {
-                    this.isCan = true;
-                    this.bannerTimer = setTimeout( res => {
-                        this.switch();
-                    }, 3000)
-                }, 500)
-            }, 10)
-        },
-        hotSwitch (type){
-            if (!this.hot_number) {
-                return false;
-            }
-            if (type == 'left' && this.hot_index == 1) {
-                return false;
-            }
-            if (type == 'right' && this.hot_index == this.hot_number) {
-                return false;
-            }
-            if (!this.hot_isCan) {
-                return false;
-            }
-            this.hot_number = false;
-
-            if (type == 'left') {
-                this.hot_index--;
-            } else {
-                this.hot_index++;
-            }
-
-            setTimeout( res => {
-                this.hot_isCan = true;
-            }, 500)
-        },
         // 获取文章
         setTagIndex (category_id, index){
             this.tagIndex = index;          
@@ -375,9 +328,6 @@ export default {
 
         // 获取banner信息
         this.getHomeBanner();
-
-        // 获取分类标签
-        this.getCategoryList();
     }
 }
 </script>

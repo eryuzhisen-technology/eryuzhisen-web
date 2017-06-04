@@ -55,13 +55,13 @@ export default {
 					level_id: 0
 				},
 				{
+					text: '首发',
+					level_id: 2
+				},
+				{
 					text: '独家',
 					level_id: 1
 				},
-				{
-					text: '首发',
-					level_id: 2
-				}
 			],
 			info: {}
 		},

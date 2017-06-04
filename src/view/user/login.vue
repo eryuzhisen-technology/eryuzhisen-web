@@ -75,7 +75,7 @@ import {mapState} from 'vuex'
 export default {
     data () {
     	return {
-    		isSelect: false,
+    		isSelect: true,
     		url: {
                 register: './register.html',
                 index: './index.html',

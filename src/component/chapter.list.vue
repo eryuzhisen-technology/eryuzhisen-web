@@ -88,7 +88,7 @@ export default {
             index: 0,
             catalog_id: '',
 
-            pageSize: 5,
+            pageSize: 100,
             pageIndex: 1
         }
     },

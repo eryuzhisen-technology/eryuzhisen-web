@@ -6,6 +6,7 @@ import css2 from '../css/component.less'
 import Vue from 'vue'
 import vue_url from '../../lib/vue.url'
 import vue_cache from '../../lib/vue.cache'
+import vue_share from '../../lib/vue.share'
 import vue_iScroll from '../../lib/vue.iScroll'
 import vue_eventHub from '../../lib/vue.eventHub'
 import vue_upload from '../../lib/upload/plupload.dev'
@@ -14,6 +15,7 @@ import store from '../../server/store'
 import version from '../../server/version'
 Vue.use(vue_url)
 Vue.use(vue_cache)
+Vue.use(vue_share)
 Vue.use(vue_eventHub)
 Vue.use(vue_upload)
 Vue.use(vue_edit)

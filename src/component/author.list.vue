@@ -89,7 +89,7 @@
 <!-- html代码 -->
 <template>
 <div class="c-author-list" :class="'z-' + resType">
-<div class="c-author-list-wrap" :style="{'height': Math.ceil(1)*360 + 'px', 'width': (count == 0 ? 720 : count <= 5 ? count*240 : 1200) + 'px'}">
+<div class="c-author-list-wrap" :style="{'height': Math.ceil(1)*360 + 'px', 'width': (lists.length == 0 ? 720 : lists.length <= 5 ? lists.length*240 : 1200) + 'px'}">
     <a class="list-author__item" v-for="data in lists" :href="'author.work.html?user_id=' + data.uid">
         <div class="list-author__avatar">
             <img :src="data.avatar_url || avatar"  />

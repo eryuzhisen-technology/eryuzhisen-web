@@ -517,7 +517,14 @@ export default {
         user: state => state.user.info,
         chapter: state => state.opus.chapter.info,
         article: state => state.opus.article,
-        lists: state => state.opus.chapter.lists
+        lists () {
+            var list = [];
+            this.$store.state.opus.chapter.lists.map((item, index)=>{
+                list.push(item);
+            })
+            list = list.reverse();
+            return list;
+        }
     }),
     methods: {
         hideTip (){
@@ -826,7 +833,7 @@ export default {
                     // this.chapter_id = -1;
                     this.$store.dispatch('opus_setChapterInfo', {});
                 }
-                this.getChapterDetail(this.chapter_id); 
+                this.chapter_id != -1 && this.getChapterDetail(this.chapter_id); 
 
                 //todo
                 this.$store.dispatch('bubble_success', res);

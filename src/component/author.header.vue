@@ -213,29 +213,21 @@
         </div>
         <div class="btn-item btn-share j-close-1" @click="selctEnter">
             <div class="cpm_sub_more z-left">
-                <div class="item" @click.stop="shareFn">
-                    <div class="item-icon z-wx"></div>
-                    <div class="item-text">微信</div>
-                </div>
-                <div class="item" @click.stop="shareFn">
-                    <div class="item-icon z-peng"></div>
-                    <div class="item-text">朋友圈</div>
-                </div>
-                <div class="item" @click.stop="shareFn">
+                <div class="item" @click.stop="shareFn('wb', $event)">
                     <div class="item-icon z-wb"></div>
                     <div class="item-text">微博</div>
                 </div>
-                <div class="item" @click.stop="shareFn">
+                <div class="item" @click.stop="shareFn('tb', $event)">
+                    <div class="item-icon z-tb"></div>
+                    <div class="item-text">贴吧</div>
+                </div>
+                <div class="item" @click.stop="shareFn('qq', $event)">
                     <div class="item-icon z-qq"></div>
                     <div class="item-text">QQ 好友</div>
                 </div>
-                <div class="item" @click.stop="shareFn">
+                <div class="item" @click.stop="shareFn('kong', $event)">
                     <div class="item-icon z-kong"></div>
                     <div class="item-text">QQ 空间</div>
-                </div>
-                <div class="item" @click.stop="shareFn">
-                    <div class="item-icon z-more"></div>
-                    <div class="item-text">更多</div>
                 </div>
             </div>
         </div>
@@ -295,8 +287,23 @@ export default {
         out (){
             this.index = -1;
         },
-        shareFn (e){
+        shareFn (app, e){
             $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
+            // 分享
+            var option = {
+                app: app,
+                url: window.location.href,
+                title: this.user.nick_name,
+                pic: this.user.avatar_url,
+
+                desc: this.user.signature,
+                summary: this.user.signature,
+                showcount: 0,
+                source: '',
+                sourceUrl: '',
+                site: '',
+            }
+            this.$share.shareToAPP(option);
         },
         uploaded (fileUrl){
             // 设置上传的图片

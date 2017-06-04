@@ -484,7 +484,7 @@
                 <!-- 状态 -->
                 <!-- 等级 -->
                 <div class="create-top-item z-mini">
-                    <div @click="selctEnter" class="create-top-select create-top-type j-close-1">
+                    <!-- <div @click="selctEnter" class="create-top-select create-top-type j-close-1">
                         <div v-if="!reg_type" class="c-dialog__tip">
                             <div class="tip-arrow"></div>
                             <div class="tip-text">{{reg_type_con}}</div>
@@ -493,8 +493,8 @@
                         <div class="c-sub-more cpm_sub_more">
                             <div class="item" v-for="item in catalog.articletypeArr" @click.stop="typeShowValue" :data-id="item.category_id">{{item.category_title}}</div>
                         </div>
-                    </div>
-                    <div @click="selctEnter" class="create-top-select create-top-status j-close-1">
+                    </div> -->
+                    <div @click="selctEnter" class="create-top-select create-top-status j-close-1 z-width">
                         <div v-if="!reg_status" class="c-dialog__tip z-top">
                             <div class="tip-arrow"></div>
                             <div class="tip-text">{{reg_status_con}}</div>
@@ -504,7 +504,7 @@
                             <div class="item" v-for="item in catalog.statusArr" @click.stop="statusShowValue" :data-audit_status="item.audit_status">{{item.text}}</div>
                         </div>
                     </div>
-                    <div @click="selctEnter" class="create-top-select create-top-level j-close-1">
+                    <div @click="selctEnter" class="create-top-select create-top-level j-close-1 z-width">
                         <div v-if="!reg_level" class="c-dialog__tip z-right">
                             <div class="tip-arrow"></div>
                             <div class="tip-text">{{reg_level_con}}</div>
@@ -521,7 +521,7 @@
                         <div class="tip-arrow"></div>
                         <div class="tip-text">{{reg_tag_con}}</div>
                     </div>
-                    <div class="tag-wrap cpm_form_input" :class="{'z-limit': tags.length>3, 'z-error': tagsshow}">
+                    <div class="tag-wrap cpm_form_input" :class="{'z-limit': tags.length>3}">
                         <div class="tag-list">
                             <div class="tag-item" v-for="(item, index) in tags"><div class="tag-item-text">{{item}}</div><em @click.stop="deleteTag" :data-index="index"></em></div>
                         </div>
@@ -552,7 +552,7 @@
             <div class="cpm_clear"></div>
             <div class="create-top-agree" :class="{'z-on': agree}">
                 <em @click="agreeSwitch"></em>
-                <p @click="agreeSwitch">我已阅读并同意遵守 <a  target="_blank" href='./statement.html'>《耳语之森原创声明及相关功能使用协议》 </a>
+                <p>我已阅读并同意遵守 <a  target="_blank" href='./statement.html'>《耳语之森原创声明及相关功能使用协议》 </a>
                 </p>
             </div>
         </div>
@@ -939,7 +939,8 @@ export default {
                 "level": this.level_id, // 等级
                 "translate": this.control_id, // 0 不是翻译类 1 翻译类
                 "reprint": this.share_id, // 0 不允许转载 1 允许
-                "category_id": this.category_id, // 类别id
+                // "category_id": this.category_id, // 类别id - 写死1文字
+                "category_id": 1, // 类别id - 写死1文字
                 "catalog_id": this.catalog_id, // 目录id
                 "catalog_title": this.articlename, //目录标题
                 "catalog_desc": this.intro, //简介

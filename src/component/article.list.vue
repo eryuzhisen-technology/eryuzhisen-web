@@ -210,8 +210,8 @@
 <!-- html代码 -->
 <template>
 <div class="c-artice-list">
-<div class="c-artice-list-wrap" :style="{'height': Math.ceil(article.lists.length/(showType == 'left_right' ? 3 : 5))*(showType == 'left_right' ? 350 : 480) + 'px', 'width': (article.lists.length && article.lists.length <= 3 ? article.lists.length*(showType == 'left_right' ? 400 : 240) : 1200) + 'px'}">
-    <div class="c-artice-item" v-for="data in article.lists" :class="{'z-left_right': showType == 'left_right'}">
+<div class="c-artice-list-wrap" :style="{'height': Math.ceil(lists.length/(showType == 'left_right' ? 3 : 5))*(showType == 'left_right' ? 350 : 480) + 'px', 'width': (lists.length && lists.length <= 3 ? lists.length*(showType == 'left_right' ? 400 : 240) : 1200) + 'px'}">
+    <div class="c-artice-item" v-for="data in lists" :class="{'z-left_right': showType == 'left_right'}">
         <div class="c-artice-item-wrap"
             :data-catalog_id="data.catalog_id"
         >
@@ -271,18 +271,18 @@
             </a>
         </div>
     </div>
-    <Empty v-if="article.count <= 0" />
+    <Empty v-if="count <= 0" />
 </div>
 
-<div v-if="loadType == 'more' && article.count != 0" v-show="false" class="list-more">
-    <div v-if="article.more == 1 && !article.load" class="btn-more-before">{{user.isLogin ? '加载更多' : '登录查看更多'}}</div>
-    <div v-else-if="article.more == 1" class="btn-more-loading"><em></em><span>加载中...</span></div>
+<div v-if="loadType == 'more' && count != 0 && loadType != 'none'" v-show="false" class="list-more">
+    <div v-if="more == 1 && !load" class="btn-more-before">{{user.isLogin ? '加载更多' : '登录查看更多'}}</div>
+    <div v-else-if="more == 1" class="btn-more-loading"><em></em><span>加载中...</span></div>
     <div v-else class="btn-more-end"><em></em><span>没有更多</span></div>
 </div>
 
-<Page v-if="loadType != 'more'"
+<Page v-if="loadType != 'more' && loadType != 'none'"
     class="list-pages"
-    :count="article.count" 
+    :count="count" 
     :length="pageSize"
     :index="pageIndex"
     @page_switch="pageSwitch"
@@ -307,9 +307,20 @@ export default {
     },
     props: ['resType', 'loadType', 'userType', 'catalog_type', 'showType'],
     computed: mapState({
-        article: state => state.opus.article,
         tag: state => state.opus.category,
-        user: state => state.user.info
+        user: state => state.user.info,
+        lists (){
+            return this.resType != 'hot' ? this.$store.state.opus.article.lists : this.$store.state.opus.hot.lists;
+        },
+        count (){
+            return this.resType != 'hot' ? this.$store.state.opus.article.count : this.$store.state.opus.hot.count;
+        },
+        more (){
+            return this.resType != 'hot' ? this.$store.state.opus.article.more : this.$store.state.opus.hot.more;
+        },
+        load (){
+            return this.$store.state.opus.article.load;
+        }
     }),
     methods: {
         pageSwitch (pageIndex) {
@@ -356,10 +367,11 @@ export default {
                     "fuzzy_query": this.query || '' // 模糊查询文字
                 }
             }).then( res => {
-                this.$emit('article_count', this.article.count);
+                this.$emit('article_count', this.count);
 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
+                this.pageIndex--;
                 this.$store.dispatch('bubble_fail', err);
             })
         },
@@ -374,8 +386,31 @@ export default {
                 "page": this.pageIndex, //页数,默认不传查询第一页
                 "pageSize": this.pageSize //每页数量 默认10
             }).then( res => {
-                this.$emit('article_count', this.article.count);
+                this.$emit('article_count', this.count);
 
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.pageIndex--;
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        getHotList (){
+            // 未登录处理
+            /*if (!this.user.isLogin && this.resType != 'index') {
+                console.log('----error----on login, getHotList');
+                return false;
+            }*/
+
+            this.$store.dispatch('opus_getHotList', {
+                "params": {
+                    "pagination": "1",
+                    "page": this.pageIndex, //页数,默认不传查询第一页
+                    "pageSize": this.pageSize //每页数量 默认10
+                },
+                "body": {
+                    "catalog_type": "1" // 0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
+                }
+            }).then( res => {
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
                 this.$store.dispatch('bubble_fail', err);
@@ -391,6 +426,7 @@ export default {
                 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
+                this.pageIndex--;
                 this.$store.dispatch('bubble_fail', err);
             })
         },
@@ -410,10 +446,12 @@ export default {
                     lists: lists,
                     count: history.length
                 }).then( res => {
-                    this.$emit('article_count', this.article.count);
+                    this.$emit('article_count', this.count);
                 })
             } else if (this.user.uid && this.user.uid == this.user_id) {
                 this.getMyCatalogList();
+            } else if (this.resType == 'hot') {
+                this.getHotList();
             } else {
                 this.getCatalogList();
             }
@@ -455,6 +493,20 @@ export default {
         },
         textFormat: function (value) {  
             return value.replace(/[\r\n]/g, '<br />');
+        },
+        loadMore (){
+            $(window).on('scroll', e => {
+                if ($('.btn-more-before').length <= 0 || this.loadType == 'none') {
+                    return false;
+                }
+                var top = $(window).scrollTop();
+                var height = $(window).height();
+                var _top = $('.btn-more-before').offset().top;
+                if (_top + 20 <= top + height) {
+                    this.getMore();    
+                }
+            })
+
         }
     },
     created (){
@@ -472,18 +524,10 @@ export default {
     }, 
     mounted (){
         // 加载更多
-        $(window).on('scroll', e => {
-            if ($('.btn-more-before').length <= 0) {
-                return false;
-            }
-            var top = $(window).scrollTop();
-            var height = $(window).height();
-            var _top = $('.btn-more-before').offset().top;
-            if (_top + 20 <= top + height) {
-                this.getMore();    
-            }
-        })
-
+        if (this.resType != 'hot') {
+            this.loadMore();
+        }
+        
         // 获取url的参数
         this.query = decodeURIComponent(this.$url.getUrlParam('query'));
         this.user_id = this.$url.getUrlParam('user_id');

@@ -362,6 +362,7 @@
                             <div class="menu-item" 
                                 v-for="item in chapter.lists"
                                 :class="{'z-active': chapter_id == item.chapter_id}"
+                                v-if="item.chapter_status == 0"
                             ><a :href="'article.read.html?catalog_id='+ catalog_id +'&chapter_id=' + item.chapter_id">
                                 {{item.chapter_title}}
                             </a></div>
@@ -388,7 +389,7 @@
                 </a></div>
             </div>
         </div>
-        <div v-show="!isScan && comment.count" class="m-artice-read__comment">
+        <div v-show="!isScan && comment.count != 0" class="m-artice-read__comment">
             <div class="comment-header">
                 <span>{{comment.count}}</span> 条评论
             </div>
