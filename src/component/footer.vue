@@ -50,9 +50,9 @@
 		·
 		<a href="statement.html">原创声明</a>
 		·
-		<a href="contact.html">联系我们</a>
-		·
 		<a href="standard.html">社区规范</a>
+		·
+		<a href="contact.html">联系我们</a>
 	</div>
 	<div class="text">© 2017 耳语之森 BETA1.0版 沪ICP备17018710号</div>
 </div>

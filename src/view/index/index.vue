@@ -9,7 +9,7 @@
     }
     .@{module}-banner {
         width: 100%;
-        height: 350px;
+        height: 340px;
         padding-bottom: 20px;
         overflow: hidden;
         .default_backgroud_6;
@@ -155,6 +155,7 @@
             .default_backgroud_4;
             .default_color_1;
             .default_font_size_7;
+            .default_border-r-4;
         }
         .@{module}-list-wrap {
             position: relative;
@@ -197,8 +198,8 @@
             <div class="m-index-enter-wrap">
                 <a href="./about.html" class="enter-item"><img src="../../common/images/index/enter-1.png" /></a>
                 <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-2.png" /></a>
+                <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-4.png" /></a>
                 <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
-                <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-4.png" /></a>
             </div>
         </div>
         <!-- <div class="m-index-list">

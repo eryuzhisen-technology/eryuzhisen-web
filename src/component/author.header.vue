@@ -71,13 +71,15 @@
         & .text {
             width: 100%;
             line-height: 1.5rem;
-            text-align: left;
             // overflow: hidden;
             // text-overflow: ellipsis;
             // white-space: nowrap;
             word-break: break-all;
             .default_color_2;
             .default_font_size_2;
+        }
+        & .text.z-left {
+            text-align: left;
         }
     }
     .@{module}_btn {
@@ -200,7 +202,7 @@
     <div class="c-author-header_text">
         <div class="name">
             <div class="name-text">{{user.nick_name}}</div>
-            <div class="name-time">社区年龄：<span>{{user.c_age}}</span></div>
+            <div class="name-time"><span>{{user.c_age}}</span></div>
         </div>
         <div class="text" v-html="textFormat(user.signature || '')"></div>
     </div>
@@ -232,7 +234,7 @@
                 </div>
             </div>
         </div>
-        <div v-if="userInfo.uid != user_id" class="btn-item btn-morej-close-1" @click="selctEnter">
+        <div v-if="userInfo.uid != user_id" class="btn-item btn-more j-close-1" @click="selctEnter">
             <div class="cpm_sub_more z-left">
                 <div class="item" @click.stop="addBlackDialog">
                     <div class="item-icon z-black"></div>
@@ -443,6 +445,13 @@ export default {
         textFormat: function (value) {  
             return value.replace(/[\r\n]/g, '<br />');
         }
+    },
+    updated(){
+        $(".c-author-header_text").find('.text').each(function(){
+            if ($(this).height() > 30) {
+                $(this).addClass('z-left');
+            }
+        })
     },
     mounted () {
         $('body').on('click', e => {

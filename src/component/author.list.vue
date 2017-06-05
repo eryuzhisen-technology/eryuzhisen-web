@@ -61,6 +61,10 @@
             overflow: hidden;
             .default_font_size_1;
             .default_color_2;
+            .default_center;
+            &.z-left {
+                text-align: left;
+            }
         }
         & .list-author__btn {
             position: absolute;
@@ -253,7 +257,14 @@ export default {
             this.query = option.query;
             this.getList();
         });
-    },  
+    }, 
+    updated(){
+        $(".c-author-header_text").find('.text').each(function(){
+            if ($(this).height() > 30) {
+                $(this).addClass('z-left');
+            }
+        })
+    }, 
     mounted (){
         // 获取url的参数
         this.query = this.$url.getUrlParam('query');

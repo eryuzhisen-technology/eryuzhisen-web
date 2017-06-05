@@ -119,14 +119,14 @@
                 & p {
                     width: 100%;
                     line-height: 1.75rem;
-                    margin-bottom: 20px;
+                    // margin-bottom: 20px;
                     .default_font_size_3;
                     .default_color_10;
                 }
                 & img {
                     max-width: 100%;
                     width: auto;
-                    margin-bottom: 10px;
+                    // margin-bottom: 10px;
                 }
             }
             & .content__read-switch {

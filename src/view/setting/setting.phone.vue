@@ -18,7 +18,7 @@
             & strong {
                 display: block;
                 float: left;
-                .default_backgroud_4;
+                .default_backgroud_6;
             }
             & span {
                 height: 4px;
@@ -44,7 +44,7 @@
         & .content-step.z-step-1 {
             & .content-step-1,
             & .content-step-2 {
-                .default_backgroud_6;
+                .default_backgroud_14;
             }
         }
         & .content-step.z-step-2 {
@@ -52,7 +52,7 @@
             & .content-step-2,
             & .content-step-3,
             & .content-step-4 {
-                .default_backgroud_6;
+                .default_backgroud_14;
             }
         }
         & .m-user-dialog__input-phone {
@@ -74,7 +74,7 @@
 			<MenuLeft :data="menuLeft" />
 			<div class="setting-right">
 				<div class="title">
-					解除手机号绑定
+					更换手机号码
 				</div>
                 <div class="content">
 				<div class="content-wrap">

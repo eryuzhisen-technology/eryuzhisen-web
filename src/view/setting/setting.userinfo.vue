@@ -30,6 +30,12 @@
                 padding: 0 20px;
                 .default_color_2;
                 .default_font_size_2;
+                .default_border-13;
+                .default_border-r-4;
+                &:focus {
+                    // .default_border-12;
+                    .default_border-dcdcdc;
+                }
             }
             & span {
                 position: absolute;
@@ -44,9 +50,10 @@
             & .content-sex-item {
                 float: left;
                 width: 120px;
-                height: 50px;
-                line-height: 50px;
+                height: 40px;
+                line-height: 40px;
                 margin-right: 10px;
+                .default_border-13;
                 .default_font_size_2;
                 .default_color_4;
                 .default_backgroud_6;
@@ -63,16 +70,23 @@
             & .content-sex-item.z-active {
                 .default_color_10;
                 .default_backgroud_14;
+                .default_border-n;
             }
         }
         & .content-word {
-            padding: 20px;
             height: 150px;
             & textarea {
                 width: 100%;
-                height: 100%;
+                height: 150px;
+                padding: 20px;
                 .default_color_10;
                 .default_font_size_2;
+                .default_border-13;
+                .default_border-r-4;
+                &:focus {
+                    // .default_border-12;
+                    .default_border-dcdcdc;
+                }
             }
             & span {
                 position: absolute;
@@ -104,7 +118,7 @@
 				</div>
                 <div class="content">
 				<div class="content-wrap">
-                    <div class='content-item content-nick'>
+                    <div class='content-item content-nick '>
                         <div class="label">昵称</div>
                         <input type="text" placeholder="姓名" :value="user.nick_name" @input="uploadname" spellcheck="false" />
                     </div>

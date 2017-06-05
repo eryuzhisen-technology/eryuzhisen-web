@@ -44,7 +44,7 @@
     			<div class="m-user-dialog__input m-user-dialog__input-phone cpm_form_input cpm_left" :class="{'z-error': !phone_vcode_reg}">
     				<input name="phone_vcode" type="text" placeholder="验证码" @keyup.enter="resetPwd" v-model="phone_vcode" autocomplete="new-password" spellcheck="false" />
     			</div>
-    			<div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_button_warn cpm_right" @click="getPhoneVerifyCode">{{timeText}}</div>
+    			<div class="m-user-dialog__btn m-user-dialog__btn-phone cpm_button_default cpm_right" @click="getPhoneVerifyCode">{{timeText}}</div>
     		</div>
             <div class="cpm_clear"></div>
 

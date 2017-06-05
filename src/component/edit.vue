@@ -83,7 +83,7 @@
             padding: 40px;
             text-align: left;
             & p {
-                margin-bottom: 30px;
+                // margin-bottom: 30px;
                 line-height: 1.5em;
                 word-wrap: break-word;
                 word-break: break-all;
@@ -103,7 +103,7 @@
             & img {
                 width: auto;
                 max-width: 100%;
-                margin-bottom: 10px;
+                // margin-bottom: 10px;
             }
         }
         & textarea {
@@ -133,7 +133,7 @@
             height: 50px;
             line-height: 50px;
             &:hover {
-                .default_backgroud_6;
+                .default_backgroud_14;
             }
             // 菜单
             & a {

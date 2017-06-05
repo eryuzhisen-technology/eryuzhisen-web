@@ -162,7 +162,8 @@
 						z-index: 11;
 						overflow: hidden;
 						.default_backgroud_2;
-						.default_border-r-4;
+						// .default_border-r-4;
+						.default_border-r-b-4;
 						.default_pointer;
 						.default_border_shadow_4;
 						& .member-notice-item {
@@ -212,7 +213,7 @@
 							}
 							&:hover {
 								.default_backgroud_14;
-								.default_border_shadow_4;
+								// .default_border_shadow_4;
 								& .member-notice-item__text {
 									.default_color_1;	
 								}
@@ -249,7 +250,8 @@
 						width: 180px;
 						z-index: 11;
 						.default_backgroud_2;
-						.default_border-r-4;
+						// .default_border-r-4;
+						.default_border-r-b-4;
 						.default_pointer;
 						.default_border_shadow_4;
 						& .member-center-item {
@@ -290,7 +292,7 @@
 							&:nth-child(5) .member-center-item__icon { .skin_head_outlogin; }
 							&:hover {
 								.default_backgroud_14;
-								.default_border_shadow_4;
+								// .default_border_shadow_4;
 								& .member-center-item__text {
 									.default_color_1;	
 								}

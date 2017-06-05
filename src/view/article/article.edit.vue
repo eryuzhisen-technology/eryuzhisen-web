@@ -14,7 +14,7 @@
             min-width: 1200px;
             width: 100%;
             height: 100%;
-            .default_backgroud_5;
+            .default_backgroud_3;
         }
     }
     .@{module}__edit {
@@ -144,7 +144,7 @@
                     }
                     &:hover,
                     &.z-active {
-                        .default_backgroud_5;
+                        .default_backgroud_2;
                         & .catalog-menu_item-icon {
                             .skin_icon_edit-8_on;
                         }
@@ -176,7 +176,7 @@
                 .default_mar_auto;
                 .default_border-b-5;
                 .default_pointer;
-                .default_backgroud_2;
+                .default_backgroud_3;
                 & .chapter-hd_icon {
                     position: absolute;
                     top: 50%;
@@ -616,7 +616,7 @@ export default {
                 show: true,
                 type: 'warn',
                 warn: {
-                    title: '确定要删除已发布的章节？',
+                    title: '删除已发布的章节？',
                     content: '若删除已发布的章节，读者也将永远无法看见，请谨慎操作',
                     comfireFn: function(){
                         that.deleteChapter(chapterId)

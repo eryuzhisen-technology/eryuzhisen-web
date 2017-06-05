@@ -16,6 +16,8 @@
             left: 50%;
             width: 360px;
             transform: translate(-50%, -50%);
+            overflow: hidden;
+            .default_border-r-4;
         }
         & .content-form {
             width: 360px;
@@ -45,7 +47,7 @@
             height: 50px;
             padding: 10px 0;
             overflow: hidden;
-            .default_backgroud_7;
+            .default_backgroud_2;
             & .content-btn-item {
                 float: left;
                 width: 50%;
@@ -60,7 +62,7 @@
                 }
             }
             & .content-btn-cancel {
-                .default_border-rr-2;
+                .default_border-rr-5;
             }
         }
     }

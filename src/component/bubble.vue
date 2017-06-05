@@ -38,18 +38,20 @@
 		z-index: 30;
 		width: 300px;
 		transform: translate(-50%, -50%);
+		overflow: hidden;
+		.default_border-r-4;
 		& .report-title {
 			width: 100%;
 			height: 50px;
 			line-height: 50px;
-			padding-left: 30px;
+			padding-left: 20px;
 			.default_font_size_2;
-			.default_color_3;
-			.default_backgroud_7;
+			.default_color_2;
+			.default_backgroud_2;
 		}
 		& .report-content {
-			padding: 20px 30px 30px 30px;
-			.default_backgroud_2;
+			padding: 20px 20px 30px 20px;
+			.default_backgroud_3;
 			& .select-item {
 				height: 20px;
 				margin-bottom: 15px;
@@ -61,7 +63,7 @@
 					height: 20px;
 					padding: 2px;
 					margin-right: 10px;
-					border: 2px solid #919191;
+					border: 2px solid @default_color_1;
 					.default_border-r-50;
 					& em {
 						display: block;
@@ -78,19 +80,20 @@
 					.default_font_size_2;
 					.default_color_2;
 				}
+				&.z-on .select-item-text {
+					.default_color_1;
+				}
 				&.z-on .select-item-radio em {
-					.default_backgroud_12;
+					.default_backgroud_16;
 				}
 			}
 			& .select-item:nth-child(3) {
 				margin-bottom: 20px;
 			}
 			& .textare-item {
-				width: 240px;
+				width: 260px;
 				height: 150px;
 				padding: 20px;
-				.default_border-r-4;
-				.default_backgroud_4;
 				& textarea {
 					.default_font_size_2;
 					.default_color_4;
@@ -102,7 +105,7 @@
 			height: 50px;
 			padding: 10px 0;
 			overflow: hidden;
-			.default_backgroud_7;
+			.default_backgroud_2;
 			& .report-bottom-item {
 				float: left;
 				width: 50%;
@@ -117,7 +120,7 @@
 				}
 			}
 			& .report-bottom-cancel {
-				.default_border-rr-2;
+				.default_border-rr-5;
 			}
 		}
 	}
@@ -175,14 +178,14 @@
 		z-index: 30;
 		width: 300px;
 		transform: translate(-50%, -50%);
-		.default_backgroud_2;
+		overflow: hidden;
+		.default_backgroud_3;
 		.default_border-r-4;
 		& .warn-title {
 			padding-top: 30px;
 			margin-bottom: 20px;
 			text-align: center;
-			.default_color_7;
-			.default_font_bolder;
+			.default_color_1;
 			.default_font_size_4;
 		}
 		& .warn-content {
@@ -209,7 +212,7 @@
 			height: 50px;
 			padding: 10px 0;
 			overflow: hidden;
-			.default_backgroud_7;
+			.default_backgroud_2;
 			& .warn-bottom-item {
 				float: left;
 				width: 50%;
@@ -224,7 +227,7 @@
 				}
 			}
 			& .warn-bottom-cancel {
-				.default_border-rr-2;
+				.default_border-rr-5;
 			}
 		}
 	}
@@ -355,7 +358,7 @@
     			<span class="select-item-radio"><em></em></span>
     			<span class="select-item-text">其他原因</span>
     		</div>
-    		<div class="textare-item">
+    		<div class="textare-item cpm_form_textarea">
     			<textarea placeholder="请输入举报原因" v-model="content"></textarea>
     		</div>
     	</div>

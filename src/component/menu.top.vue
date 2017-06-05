@@ -18,8 +18,9 @@
                 display: block;
                 width: 100%;
                 height: 100%;
-                padding-left: 20px;
+                // padding-left: 20px;
 				text-decoration: none;
+                .default_center;
             }
             & .item__icon {
                 float: left;
@@ -40,7 +41,7 @@
                 }
             }
             &.z-on {
-                .default_backgroud_6;
+                .default_backgroud_14;
             }
 
             &:hover .item__title,
