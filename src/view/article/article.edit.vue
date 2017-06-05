@@ -129,7 +129,8 @@
                         width: 50px;
                         height: 50px;
                         .skin_icon_edit-14;
-                        &:hover {
+                        &.z-more {
+                            display: block;
                             .skin_icon_edit-14_on;
                             & .cpm_sub_more {
                                 display: block;
@@ -138,10 +139,8 @@
                             }
                         }
                     }
-                    &:hover {
-                        & .catalog-menu_item-more {
-                            display: block;
-                        }
+                    &:hover .catalog-menu_item-more {
+                        display: block;
                     }
                     &:hover,
                     &.z-active {
@@ -260,9 +259,12 @@
                         .default_color_2;
                     }
                     & .c-dialog__tip {
-                        width: 70px;
+                        width: 60px;
                         top: -50px;
                         display: none;
+                        &.z-publsh {
+                            width: 105px;
+                        }
                     }
                     &.z-active {
                         border-left: 5px solid @default_backgroud_13;
@@ -400,7 +402,7 @@
                         >
                             <div class="catalog-menu_item-icon"></div>
                             <div class="catalog-menu_item-text">{{item.catalog_title}}</div>
-                            <div class="catalog-menu_item-more">
+                            <div class="catalog-menu_item-more j-close-1" @click.stop="selctEnter">
                                 <div class="cpm_sub_more z-left">
                                     <div class="item">
                                         <div class="item-text" @click.stop="updateCatalog(item)">编辑</div>
@@ -430,9 +432,13 @@
                             @click="getChapterDetail(item.chapter_id)" 
                         >
                             <div class="chapter-menu_item-icon">
-                                <div class="c-dialog__tip z-top">
+                                <div 
+                                    class="c-dialog__tip z-top"
+                                    :class="{'z-publsh': item.chapter_status == 0}"
+
+                                >
                                     <div class="tip-arrow"></div>
-                                    <div class="tip-text">{{item.chapter_status == 0 ? '已发布' : '未发布'}}</div>
+                                    <div class="tip-text">{{item.chapter_status == 0 ? '已发布不能修改' : '未发布'}}</div>
                                 </div>
                             </div>
                             <div class="chapter-menu_item-text">{{ chapter_id != item.chapter_id ? item.chapter_title : title}}</div>
@@ -527,6 +533,10 @@ export default {
         }
     }),
     methods: {
+        selctEnter (e){
+            $('.j-close-1').removeClass('z-more');
+            $(e.currentTarget).addClass('z-more');
+        },
         refresh (){
             this.reg_title = true;
             this.reg_content = true;
@@ -762,12 +772,22 @@ export default {
                         chapter.chapter_content = this.content;
                     this.$cache.setStore(key, chapter, chapaterEdit_edit.version, chapaterEdit_edit.time);
                 } else {
+                    var catalog;
+                    this.article.lists.map((item, index)=>{
+                        if (this.catalog_id == item.catalog_id) {
+                            catalog = item;
+                        }
+                    })
                     that.getChapterList(that.catalog_id, true);
                     this.$store.dispatch('bubble_showBubble', {
                         show: true,
                         type: 'complete',
                         complete: {
-                            title: this.title
+                            title: this.title,
+                            url: './article.read.html?catalog_id='+ that.catalog_id +'&chapter_id='+ that.chapter_id,
+                            pic: catalog.catalog_cover_url,
+                            desc: catalog.catalog_desc,
+                            summary: catalog.catalog_desc
                         },
                         methods: {
                             cancel (){
@@ -883,12 +903,12 @@ export default {
                 $('.j-save-btn').addClass('j-save-btn-update').find('a').text('已保存');
                 this.timeSave = setTimeout( res => {
                     $('.j-save-btn').removeClass('j-save-btn-update').find('a').text('保存');
-                }, 3000)
+                }, 1000)
             } else if (isUpdata == 3) {
                 $('.j-save-btn').addClass('j-save-btn-update').find('a').text('保存失败');
                 this.timeSave = setTimeout( res => {
                     $('.j-save-btn').removeClass('j-save-btn-update').find('a').text('保存');
-                }, 3000)
+                }, 1000)
             } else if (isUpdata == 0) {
                 clearTimeout(this.timeSave);
                 $('.j-save-btn').removeClass('j-save-btn-update').find('a').text('保存');
@@ -960,6 +980,13 @@ export default {
 
         // 获取目录
         this.getMyCatalogList();
+
+        $('body').on('click', e => {
+            var node = $(e.target);
+            if (!node.hasClass('j-close-1') && node.parents('.j-close-1').length == 0) {
+                $('.j-close-1').removeClass('z-more');
+            }
+        })
     }
 }
 </script>

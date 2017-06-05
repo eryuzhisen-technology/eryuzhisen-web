@@ -275,40 +275,28 @@
 		 				margin-right: 0;
 		 			}
 		 		}
-		 		& .share-py {
-					.skin_icon_complete-1;
+		 		& .share-wb {
+					.skin_share_wb;
 					&:hover {
-						.skin_icon_complete-1_on;
+						.skin_share_wb_on;
 					}
 		 		}
-		 		& .share-line {
-					.skin_icon_complete-2;
+		 		& .share-tb {
+					.skin_share_tb;
 					&:hover {
-						.skin_icon_complete-2_on;
+						.skin_share_tb_on;
 					}
 		 		}
 		 		& .share-qq {
-					.skin_icon_complete-3;
+					.skin_share_qq;
 					&:hover {
-						.skin_icon_complete-3_on;
+						.skin_share_qq_on;
 					}
 		 		}
 		 		& .share-kong {
-					.skin_icon_complete-4;
+					.skin_share_kong;
 					&:hover {
-						.skin_icon_complete-4_on;
-					}
-		 		}
-		 		& .share-wb {
-					.skin_icon_complete-5;
-					&:hover {
-						.skin_icon_complete-5_on;
-					}
-		 		}
-		 		& .share-more {
-					.skin_icon_complete-6;
-					&:hover {
-						.skin_icon_complete-6_on;
+						.skin_share_kong_on;
 					}
 		 		}
 		 	}
@@ -414,14 +402,12 @@
     	<div class="complete-title">{{data.complete.title}}</div>
     	<div class="complete-content">
     		<p>发布成功</p>
-    		<p>我们审核后会推送至首页，但你可以先分享好友阅读</p>
+    		<p>快把你的故事分享给好友吧</p>
     		<div class="complete-share">
-    			<div class="share-item share-py"></div>
-    			<div class="share-item share-line"></div>
-    			<div class="share-item share-qq"></div>
-    			<div class="share-item share-kong"></div>
-    			<div class="share-item share-wb"></div>
-    			<div class="share-item share-more"></div>
+    			<div class="share-item share-wb" @click="shareFn('wb', $event)"></div>
+    			<div class="share-item share-tb" @click="shareFn('tb', $event)"></div>
+    			<div class="share-item share-qq" @click="shareFn('qq', $event)"></div>
+    			<div class="share-item share-kong" @click="shareFn('kong', $event)"></div>
     		</div>
     	</div>
     	<div class="complete-bottom">
@@ -448,6 +434,19 @@ export default {
     		this.data.methods.cancel && this.data.methods.cancel();
     		this.$store.dispatch('bubble_closeBubble');
     	},
+    	shareFn (app, e){
+            $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
+            // 分享
+            var option = {
+                app: app,
+                url: window.location.href,
+                title: this.data.complete.title,
+                pic: this.data.complete.pic,
+                desc: this.data.complete.desc,
+                summary: this.data.complete.summary
+            }
+            this.$share.shareToAPP(option);
+        },
     	radioSwitch (event){
     		$('.c-bubble-report .report-content .select-item').removeClass('z-on');
     		$(event.currentTarget).addClass('z-on');

@@ -14,6 +14,7 @@
     }
     .c-artice-comment-list {
         padding-bottom: 20px;
+        .default_border-b-5;
         & .comment__content {
             padding: 20px;
             & .content__top {

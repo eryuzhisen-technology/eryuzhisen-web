@@ -14,24 +14,15 @@
         position: relative;
         float: left;
         margin-right: 10px;
-        .default_border-r-4;
-        .default_backgroud_3;
-        & a {
-            display: block;
-            width: 100%;
-            height: 100%;
-            text-decoration: none;
-            .default_color_1;
-            .default_font_size_7;
-            &:hover {
-                .default_color_fff;
-            }
-        }
+        margin-bottom: 10px;
         &.add {
             width: 240px;
             height: 60px;
             padding: 10px 0;
+            .default_backgroud_3;
+            .default_border-r-4;
             & .add-text {
+                display: block;
                 width: 200px;
                 height: 40px;
                 line-height: 40px;
@@ -48,10 +39,23 @@
             }
         }
         &.content {
-            height: 50px;
-            line-height: 50px;
-            padding: 0 30px;
-            margin-top: 10px;
+            height: 60px;
+            padding-top: 10px;
+            & a {
+                display: block;
+                width: 100%;
+                height: 50px;
+                padding: 0 30px;
+                line-height: 50px;
+                text-decoration: none;
+                .default_backgroud_3;
+                .default_border-r-4;
+                .default_color_1;
+                .default_font_size_7;
+                &:hover {
+                    .default_color_fff;
+                }
+            }
         }
     }
 </style>

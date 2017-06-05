@@ -8,7 +8,7 @@
     }
     .c-comment-info-list {
         padding: 20px;
-        .default_border-b-13;
+        // .default_border-b-13;
         .default_backgroud_3;
         .default_border-b-5;
         .default_pointer;
@@ -165,7 +165,7 @@
         </div>
         <div class="c-comment-info__comment">
             <div class="comment__body">{{data.message.content.content}}</div>
-            <div v-if="data.message.content.cite" class="comment__bottom">{{data.message.content.cite}}</div>
+            <!-- <div v-if="data.message.content.cite" class="comment__bottom">{{data.message.content.cite}}</div> -->
         </div>
         <div class="c-comment-info__form">
             <div class="form__top">
@@ -175,7 +175,7 @@
             </div>
             <div v-if="recordIndex == index" class="form__body">
                 <div class="form__body__write cpm_form_input">
-                    <input type="text" placeholder="回复TA..." spellcheck="false" v-model="comment" @click.stop="" spellcheck="false" />
+                    <input type="text" placeholder="回复TA..." v-model="comment" @click.stop="" spellcheck="false" />
                 </div>
                 <div class="form_body__commit" @click="emitComment(data.message.arguments)" @click.stop="">提交</div>
             </div>

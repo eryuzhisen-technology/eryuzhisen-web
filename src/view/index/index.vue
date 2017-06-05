@@ -10,7 +10,7 @@
     .@{module}-banner {
         width: 100%;
         height: 350px;
-        padding-bottom: 30px;
+        padding-bottom: 20px;
         overflow: hidden;
         .default_backgroud_6;
         .@{module}-banner-wrap {
@@ -113,20 +113,21 @@
     }
     .@{module}-enter {
         width: 100%;
-        height: 240px;
-        margin-bottom: 40px;
+        height: 170px;
+        margin-bottom: 20px;
         .default_backgroud_6;
         & .m-index-enter-wrap {
-            height: 200px;
+            height: 150px;
             .default_width_1200;
             .default_mar_auto;
             & .enter-item {
                 float: left;
                 display: block;
-                width: 380px;
-                height: 200px;
-                margin-right: 30px;
-                overflow-y: hidden;
+                width: 285px;
+                height: 150px;
+                margin-right: 20px;
+                overflow: hidden;
+                .default_border-r-4;
                 & img {
                     width: 100%;
                     height: 100%;
@@ -197,9 +198,10 @@
                 <a href="./about.html" class="enter-item"><img src="../../common/images/index/enter-1.png" /></a>
                 <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-2.png" /></a>
                 <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
+                <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-4.png" /></a>
             </div>
         </div>
-        <div class="m-index-list">
+        <!-- <div class="m-index-list">
             <div class="m-index-list-title">经典故事</div>
             <div class="m-index-list-wrap">
                 <ListDom 
@@ -210,9 +212,9 @@
                 />
             </div>
             <div class="cpm_clear"></div>
-        </div>
+        </div> -->
         <div class="m-index-list">
-            <div class="m-index-list-title">优秀连载</div>
+            <div class="m-index-list-title">故事连载</div>
             <div class="m-index-list-wrap">
                 <ListDom 
                     class="list-left__body"
