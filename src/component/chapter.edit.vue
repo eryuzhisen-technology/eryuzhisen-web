@@ -125,7 +125,7 @@
                         font-size: 14px;
                         border: 1px solid #232323;
                         border-radius: 4px;
-                        .default_backgroud_4;
+                        .default_backgroud_6;
                         & span {
                             display: block;
                             float: left;
@@ -545,7 +545,7 @@
                         <div class="tip-arrow"></div>
                         <div class="tip-text">{{reg_intro_con}}</div>
                     </div>
-                    <textarea placeholder="填写作品简介..." v-model="intro" @focus="focus" @blur="blur"></textarea>
+                    <textarea placeholder="填写作品简介..." v-model="intro" @focus="focus" @blur="blur" spellcheck="false"></textarea>
                     <!-- <span>{{intro.length}}/100</span> -->
                 </div>
             </div>
@@ -595,7 +595,7 @@ export default {
             articletype: '类型',
             status: '状态',
             level: '等级',
-            category_id: -1,
+            category_id: 1, // 默认写死文字-1
             audit_status: -1,
             level_id: -1,
             tags: [],
@@ -1105,7 +1105,7 @@ export default {
                 this.create = false;
                 this.image = image;
                 this.articlename = '';
-                this.category_id = -1;
+                this.category_id = 1; //默认写死1-文字
                 this.audit_status = -1;
                 this.level_id = -1;
                 this.intro = '';

@@ -303,6 +303,9 @@ export default {
             query: '', // 模糊查询文字
             pageIndex: 1, //页数,默认不传查询第一页
             pageSize: 5, //每页数量 默认10
+
+            pageHotIndex: 1,
+            pageHotSize: 10
         }
     },
     props: ['resType', 'loadType', 'userType', 'catalog_type', 'showType'],
@@ -362,7 +365,7 @@ export default {
                 },
                 "body": {
                     "label": this.resType == 'page' ? this.labelTag : '', //标签，
-                    "catalog_type": this.catalog_type, // 0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
+                    "catalog_type": this.catalog_type || 0, // 0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
                     "user_id": this.userType == 'user_id' ? this.user_id : '',
                     "fuzzy_query": this.query || '' // 模糊查询文字
                 }
@@ -400,15 +403,14 @@ export default {
                 console.log('----error----on login, getHotList');
                 return false;
             }*/
-
             this.$store.dispatch('opus_getHotList', {
                 "params": {
                     "pagination": "1",
-                    "page": this.pageIndex, //页数,默认不传查询第一页
-                    "pageSize": this.pageSize //每页数量 默认10
+                    "page": this.pageHotIndex, //页数,默认不传查询第一页
+                    "pageSize": this.pageHotSize //每页数量 默认10
                 },
                 "body": {
-                    "catalog_type": "1" // 0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
+                    "catalog_type": this.catalog_type || 0 // 0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
                 }
             }).then( res => {
                 this.$store.dispatch('bubble_success', res);
@@ -431,11 +433,13 @@ export default {
             })
         },
         getMore (){
-            this.pageIndex++;
-            this.getList();
+            this.getList(true);
         },
-        getList (){
+        getList (getMore){
             if (this.resType == 'mark') {
+                if (getMore) {
+                    this.pageIndex++;
+                }
                 this.getFavoritesList();
             } else if (this.resType == 'history') {
                 // 从缓存中获取
@@ -449,10 +453,19 @@ export default {
                     this.$emit('article_count', this.count);
                 })
             } else if (this.user.uid && this.user.uid == this.user_id) {
+                if (getMore) {
+                    this.pageIndex++;
+                }
                 this.getMyCatalogList();
             } else if (this.resType == 'hot') {
+                if (getMore) {
+                    this.pageHotIndex++;
+                }
                 this.getHotList();
             } else {
+                if (getMore) {
+                    this.pageIndex++;
+                }
                 this.getCatalogList();
             }
         },

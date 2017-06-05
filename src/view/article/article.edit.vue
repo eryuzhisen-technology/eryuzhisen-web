@@ -417,7 +417,7 @@
 
                 <!-- 章节列表 -->
                 <div class="edit-chapter">
-                    <div v-if="catalog_id" class="chapter-hd" @click="addEnpry">
+                    <div v-if="catalog_id != -1" class="chapter-hd" @click="addEnpry">
                         <div class="chapter-hd_icon"></div>
                         <div class="chapter-hd_text">增加新章节</div>
                     </div>
@@ -522,11 +522,25 @@ export default {
             this.$store.state.opus.chapter.lists.map((item, index)=>{
                 list.push(item);
             })
-            list = list.reverse();
+            // list = list.reverse();
             return list;
         }
     }),
     methods: {
+        refresh (){
+            this.reg_title = true;
+            this.reg_content = true;
+            this.reg_title_con = '';
+            this.reg_content_con = '';
+
+            this.isUpdata = 0;
+            this.isCreate = true;
+
+            this.title = '';
+            this.desc = '';
+            this.content = '';
+            this.contentEdit = '';
+        },
         hideTip (){
             this.reg_title = true;
             this.reg_title_con = '';
@@ -818,6 +832,8 @@ export default {
 
         // 获取文章列表
         getChapterList (catalog_id, isget){
+            this.refresh();
+
             this.$store.dispatch('opus_getChapterList', {
                 'resType': 'edit',
                 "catalogId": catalog_id, // 目录id
@@ -830,7 +846,9 @@ export default {
                 if (res.list.length && isget) {
                     this.chapter_id = res.list[0].chapter_id;
                 } else {
-                    // this.chapter_id = -1;
+                    if (!res.list.length) {
+                        this.chapter_id = -1;
+                    }
                     this.$store.dispatch('opus_setChapterInfo', {});
                 }
                 this.chapter_id != -1 && this.getChapterDetail(this.chapter_id); 
@@ -878,10 +896,10 @@ export default {
         },
 
         chapter (chapter){
-            this.contentEdit = chapter.chapter_content;
-            this.content = chapter.chapter_content;
-            this.title = chapter.chapter_title;
-            this.desc = chapter.chapter_desc;
+            this.contentEdit = chapter.chapter_content || '';
+            this.content = chapter.chapter_content || '';
+            this.title = chapter.chapter_title || '';
+            this.desc = chapter.chapter_desc || '';
 
             var chapaterEdit_edit = this.$version.chapaterEdit_edit;
             var key = chapaterEdit_edit.key + '_' + this.catalog_id + '_' + this.chapter_id;

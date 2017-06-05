@@ -75,6 +75,7 @@
             // overflow: hidden;
             // text-overflow: ellipsis;
             // white-space: nowrap;
+            word-break: break-all;
             .default_color_2;
             .default_font_size_2;
         }

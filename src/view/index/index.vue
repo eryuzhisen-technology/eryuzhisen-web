@@ -206,7 +206,7 @@
                     class="list-left__body"
                     resType='hot'
                     loadType="none"
-                    catalog_type="2"
+                    catalog_type="1"
                 />
             </div>
             <div class="cpm_clear"></div>
@@ -274,6 +274,43 @@ export default {
             }
             this.isCan = false;
             this.switch(type);
+        },
+        switch (type) {
+            clearTimeout(this.bannerTimer);
+
+            var type = type || 'left';
+
+            var lists = $('.m-index-banner-wrap');
+            lists.removeClass('z-active');
+
+            if (type == 'left' && this.small_index == 0) {
+                this.small_index = this.banner_size;
+            } else if (type == 'right' && this.small_index == this.banner_size) {
+                this.small_index = 0;
+            }
+
+            if (type == 'left' && this.big_index == 1) {
+                this.big_index = this.banner_size + 1;
+            } else if (type == 'right' && this.big_index == this.banner_size) {
+                this.big_index = 0;
+            }
+
+            setTimeout( res => {
+                lists.addClass('z-active');
+                if (type == 'left') {
+                    this.big_index--;
+                    this.small_index--;
+                } else {
+                    this.big_index++;
+                    this.small_index++;
+                }
+                setTimeout( res => {
+                    this.isCan = true;
+                    this.bannerTimer = setTimeout( res => {
+                        this.switch();
+                    }, 3000)
+                }, 500)
+            }, 10)
         },
         // 获取文章
         setTagIndex (category_id, index){

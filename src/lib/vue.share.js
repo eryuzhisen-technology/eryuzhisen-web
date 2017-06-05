@@ -31,7 +31,7 @@
     }
     // 创建url实例
     Share.prototype = {
-        shareToAPP (option){
+        shareToAPP: function(option){
             var app = option.app;
             switch (app){
                 case 'qq':
@@ -49,7 +49,7 @@
                     break;
             }
         },
-        shareToSinaWB (option){            
+        shareToSinaWB: function(option){            
             var _shareUrl = 'http://v.t.sina.com.cn/share/share.php?&appkey=895033136';     //真实的appkey，必选参数 
                 _shareUrl += '&url='+ encodeURIComponent(option.url||document.location);     //参数url设置分享的内容链接|默认当前页location，可选参数
                 // _shareUrl += '&title=' + encodeURIComponent(option.title||document.title);    //参数title设置分享的标题|默认当前页标题，可选参数
@@ -60,7 +60,7 @@
                 _shareUrl += '&pic=' + encodeURIComponent(option.pic||'');  //参数pic设置图片链接|默认为空，可选参数
                 window.open(_shareUrl,'width='+option.width+',height='+option.height+',top='+option.top+',left='+option.left+',toolbar=no,menubar=no,scrollbars=no, resizable=1,location=no,status=0');
         },
-        shareToQzone (option){
+        shareToQzone: function(option){
             var _shareUrl = 'https://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?';
                 _shareUrl += 'url=' + encodeURIComponent(option.url||document.location);   //参数url设置分享的内容链接|默认当前页location
                 _shareUrl += '&desc=' + encodeURIComponent(option.desc||'分享的描述');    //参数desc设置分享的描述，可选参数
@@ -70,7 +70,7 @@
                 _shareUrl += '&pics=' + encodeURIComponent(option.pic||'');   //参数pics设置分享图片的路径，多张图片以＂|＂隔开，可选参数
                 window.open(_shareUrl,'width='+option.width+',height='+option.height+',top='+option.top+',left='+option.left+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
         },
-        shareToTieba (option){
+        shareToTieba: function(option){
             var _shareUrl = 'http://tieba.baidu.com/f/commit/share/openShareApi?';
                 _shareUrl += 'title=' + encodeURIComponent(option.title||document.title);  //分享的标题
                 _shareUrl += '&content=' + 'utf-8';   //参数content设置页面编码gb2312|utf-8，可选参数
@@ -79,7 +79,7 @@
                 _shareUrl += '&pics=' + encodeURIComponent(option.pic||'');    //分享的图片
                 window.open(_shareUrl,'width='+option.width+',height='+option.height+',left='+option.left+',top='+option.top+',toolbar=no,menubar=no,scrollbars=no,resizable=1,location=no,status=0');
         },
-        shareToQQ (option){
+        shareToQQ: function(option){
             var _shareUrl = 'http://connect.qq.com/widget/shareqq/index.html?';
                 _shareUrl += 'url=' + encodeURIComponent(option.url||document.location);   //参数url设置分享的内容链接|默认当前页location
                 _shareUrl += '&desc=' + encodeURIComponent(option.desc||'分享的描述');    //参数desc设置分享的描述，可选参数

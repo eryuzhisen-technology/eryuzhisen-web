@@ -210,7 +210,7 @@ export default {
 		// 获取章节列表
 		opus_getChapterList (context, payload){
 			var promise = opus.getChapterList(payload).then( res => {
-				res.list = res.list.reverse();
+				// res.list = res.list.reverse();
 				context.commit('opus_setChapterList', {
 					count: Number(res.page_info.total_count),
 					lists: res.list,

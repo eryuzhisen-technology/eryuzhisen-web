@@ -42,17 +42,17 @@
 <div class="c-footer">
 <div class="c-footer-content">
 	<div class="menu">
-		<a href="url.about">关于我们</a>
+		<a href="about.html">关于我们</a>
 		·
-		<a href="agreement.about">用户协议</a>
+		<a href="agreement.html">用户协议</a>
 		·
-		<a href="privacy.about">隐私政策</a>
+		<a href="privacy.html">隐私政策</a>
 		·
-		<a href="statement.about">原创声明</a>
+		<a href="statement.html">原创声明</a>
 		·
-		<a href="contact.contact">联系我们</a>
+		<a href="contact.html">联系我们</a>
 		·
-		<a href="standard.contact">社区规范</a>
+		<a href="standard.html">社区规范</a>
 	</div>
 	<div class="text">© 2017 耳语之森 BETA1.0版 沪ICP备17018710号</div>
 </div>
