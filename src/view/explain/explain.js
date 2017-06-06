@@ -13,6 +13,8 @@ import UploadImg from '../../component/uploadImg.vue'
 
 Vue.component('HeaderDom', HeaderDom)
 Vue.component('FooterDom', FooterDom)
+Vue.component('SideMenu', SideMenu)
+Vue.component('Feedback', Feedback)
 
 import explain from './explain.vue'
 new Vue({

@@ -174,8 +174,8 @@
 <!-- html代码 -->
 <template>
 <div class="app-body">
-	<HeaderDom pageIndex="index" />
-	<div class="m-index">
+    <HeaderDom pageIndex="index" />
+    <div class="m-index">
         <div class="m-index-banner" @mouseenter="enter" @mouseleave="out">
             <div class="m-index-banner-wrap z-active">
                 <div class="banner-lists">
@@ -197,7 +197,7 @@
         <div class="m-index-enter">
             <div class="m-index-enter-wrap">
                 <a href="./about.html" class="enter-item"><img src="../../common/images/index/enter-1.png" /></a>
-                <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-2.png" /></a>
+                <a href="./explain.html" class="enter-item"><img src="../../common/images/index/enter-2.png" /></a>
                 <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-4.png" /></a>
                 <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
             </div>
@@ -227,8 +227,8 @@
             <div class="cpm_clear"></div>
         </div>
     </div>
-	<FooterDom />
-	<SideMenu />
+    <FooterDom />
+    <SideMenu />
     <Bubble />
 </div>
 </template>
@@ -238,7 +238,7 @@ import {mapState} from 'vuex'
 
 export default {
     data () {
-    	return {
+        return {
             // banner
             isCan: false,
             big_index: 1,
@@ -246,7 +246,7 @@ export default {
             bannerTimer: null,
 
             tagIndex: 0
-    	}
+        }
     },
     computed: mapState({
         category: state => state.opus.category,

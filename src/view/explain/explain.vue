@@ -27,6 +27,7 @@
 				<p class="text">私人订制</p>
 				<p class="bottom-text">「字数1W以上可申请进入首页并领取定制封面」</p>
 			</div>
+		</div>
 	</div>
 	<FooterDom />
 	<SideMenu />
