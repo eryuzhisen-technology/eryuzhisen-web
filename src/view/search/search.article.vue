@@ -41,10 +41,10 @@ export default {
                     title: '故事',
                     isActive: true
                 },
-                tag: {
-                    title: '标签',
-                    url: 'search.tag.html'
-                },
+                // tag: {
+                //     title: '标签',
+                //     url: 'search.tag.html'
+                // },
     			author: {
     				title: '用户',
                     url: 'search.author.html'

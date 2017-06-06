@@ -499,7 +499,9 @@ export default {
     		if (newVal) {
 				console.log('-----error-----no login, clear user info');
 				this.$cache.removeStore(this.$version.userInfo.key);
-    			this.$store.dispatch('user_ourlogin');
+    			this.$store.dispatch('user_ourlogin').then(res=>{
+	        		// window.location.href = './index.html';
+	        	});
     		}
     	})
     }

@@ -392,6 +392,7 @@ export default {
 			});
 			// 登录成功后，讲token写入cookie
 			Cookies.remove('token', {});
+			return Promise.resolve(1);
 		},
 		// 接触手机绑定
 		user_unboundPhone(context, payload) {

@@ -160,7 +160,7 @@
             <div class="top__name">{{data.message.sender.nick_name}}</div>
             <div class="top__text" v-html="data.message.content.title"></div>
             <div class="top__detail">
-                <a href="javascript:void(0);">查看详细</a>
+                <a :href="'./article.read.html?catalog_id='+ data.message.arguments.catalog_id +'&chapter_id='+ data.message.arguments.chapter_id">查看详细</a>
             </div>
         </div>
         <div class="c-comment-info__comment">

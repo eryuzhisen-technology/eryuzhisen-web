@@ -589,7 +589,9 @@ export default {
         ourlogin (){
         	this.centerShow = false;
         	this.$cache.removeStore(this.$version.userInfo.key);
-        	this.$store.dispatch('user_ourlogin');
+        	this.$store.dispatch('user_ourlogin').then(res=>{
+        		window.location.href = './index.html';
+        	});
         },
         // 反馈打开
         feedbackOpen (){

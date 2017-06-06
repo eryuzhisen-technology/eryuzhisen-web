@@ -452,6 +452,11 @@ export default {
                 $(this).addClass('z-left');
             }
         })
+        $(".c-author-header_text").find('.name-text').each(function(){
+            $(this).css({
+                'padding-left': $(this).next().width() + 10
+            });
+        })
     },
     mounted () {
         $('body').on('click', e => {

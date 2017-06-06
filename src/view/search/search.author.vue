@@ -40,10 +40,10 @@ export default {
                     title: '故事',
                     url: 'search.article.html'
                 },
-                tag: {
-                    title: '标签',
-                    url: 'search.tag.html'
-                },
+                // tag: {
+                //     title: '标签',
+                //     url: 'search.tag.html'
+                // },
                 author: {
                     title: '用户',
                     isActive: true

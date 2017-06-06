@@ -138,6 +138,12 @@
                                 width: 180px;
                             }
                         }
+                        & .cpm_sub_more .item {
+                            .default_font_size_2;
+                            &:hover {
+                                .default_backgroud_14;
+                            }
+                        }
                     }
                     &:hover .catalog-menu_item-more {
                         display: block;

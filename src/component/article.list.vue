@@ -181,7 +181,7 @@
         &.z-left_right .item-hd {
             float: left;
             width: 220px;
-            margin-right: 10px;
+            margin-right: 9px;
         }
         &.z-left_right .item-bd {
             float: right;
