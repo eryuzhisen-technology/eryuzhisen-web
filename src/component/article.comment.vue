@@ -103,6 +103,7 @@
             margin: 0 20px 0 40px;
             padding: 0 20px;
             .default_backgroud_2;
+            .default_border-r-4;
             & .record__item {
                 padding: 10px 0;
             }
@@ -202,6 +203,9 @@
                     width: 580px;
                 }
             }
+        }
+        &:last-child {
+            .default_border-n;
         }
     }
 </style>

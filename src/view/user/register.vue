@@ -30,7 +30,7 @@
                 </div>
                 <div v-if="yao_reg && focus" class="c-dialog__tip c-dialog__tip-yao">
                     <div class="tip-arrow"></div>
-                    <div class="tip-text">因BETA内测的原因而采用邀请码制，请加QQ群432769756向管员索取</div>
+                    <div class="tip-text">因社区内测原因而采用邀请码制，请加QQ群562204658向管理员索取</div>
                 </div>
                 <div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !yao_reg}">
                     <input name="yao" type="text" placeholder="邀请码" @keyup.enter="register" v-model="yao" autocomplete="new-password" @focus="show" @blur="hide" spellcheck="false" />

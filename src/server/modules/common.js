@@ -38,8 +38,24 @@ export default {
 		// 获取banner列表
 		common_getHomeBanner (context, payload){
 			var promise = common.getHomeBanner().then( res => {
+				// 数据结构处理
+				var list = res.list;
+				list.map((item, index) => {
+					switch(item.jumpui.page_id){
+						case 'catalog_info':
+							item.url = "article.list.html?catalog_id=" + item.jumpui.arguments.catalog_id;
+							break;
+						case 'user_info':
+							item.url = "author.work.html?user_id=" + item.jumpui.arguments.user_id;
+							break;
+						case 'chapter_info':
+							item.url = 'article.read.html?catalog_id='+ item.jumpui.arguments.catalog_id +'&chapter_id=' + item.jumpui.arguments.chapter_id;
+							break;
+					}
+				})
+				console.log(list)
                 context.commit('common_setBannerList', {
-                	list: res.list
+                	list: list
                 });
                 return Promise.resolve(res);
             }).catch(err => {

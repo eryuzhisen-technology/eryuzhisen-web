@@ -58,15 +58,21 @@
 }
 .cpm_form_textarea {
 	position: relative;
-	padding: 20px;
-	.default_border-r-4;
 	.default_backgroud_6;
-	.default_border-13;
+	.default_border-r-4;
 	& textarea {
 		width: 100%;
 		height: 100%;
+		padding: 20px;
+		overflow: hidden;
 		.default_color_10;
 		.default_font_size_2;
+		.default_border-r-4;
+		.default_border-13;
+		&:focus {
+			// .default_border-12;
+			.default_border-dcdcdc;
+		}
 	}
 	& span {
 		position: absolute;

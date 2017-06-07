@@ -155,7 +155,7 @@
             .default_backgroud_4;
             .default_color_1;
             .default_font_size_7;
-            .default_border-r-4;
+            .default_border-r-t-4;
         }
         .@{module}-list-wrap {
             position: relative;
@@ -179,13 +179,13 @@
         <div class="m-index-banner" @mouseenter="enter" @mouseleave="out">
             <div class="m-index-banner-wrap z-active">
                 <div class="banner-lists">
-                    <div class="banner-item" v-for="(item, index) in banner_images" :class="{'z-on': index == big_index -1}"><a href="./index.html">
+                    <div class="banner-item" v-for="(item, index) in banner_images" :class="{'z-on': index == big_index -1}"><a :href="item.url">
                         <img :src="item.image_url" />
                     </a></div>
                 </div>
                 <div class="banner-index">
                 <div class="banner-index-wrap" :style="{transform: 'translate(0,-'+ small_index*160 +'px)'}">
-                    <div class="banner-item" v-for="(item, index) in banner_images"><a href="./index.html">
+                    <div class="banner-item" v-for="(item, index) in banner_images"><a :href="item.url">
                         <img :src="item.image_url" />
                     </a></div>
                 </div>
@@ -198,8 +198,8 @@
             <div class="m-index-enter-wrap">
                 <a href="./about.html" class="enter-item"><img src="../../common/images/index/enter-1.png" /></a>
                 <a href="./explain.html" class="enter-item"><img src="../../common/images/index/enter-2.png" /></a>
-                <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-4.png" /></a>
-                <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
+                <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
+                <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-4.png" /></a>
             </div>
         </div>
         <!-- <div class="m-index-list">

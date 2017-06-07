@@ -44,11 +44,12 @@
                     width: 40px;
                     height: 60px;
                     .default_pointer;
-                    &:hover {
+                    &:hover,
+                    &.z-active {
                         background-color: #000;
-                        & .btn-more {
-                            display: block;
-                        }
+                    }
+                    &.z-active .btn-more {
+                        display: block;
                     }
                 }
                 & .btn-mark {
@@ -74,9 +75,11 @@
                     top: 60px;
                     left: 0;
                     width: 200px;
-                    height: 400px;
+                    max-height: 400px;
                     overflow: hidden;
                     .default_backgroud_3;
+                    .default_border_shadow_6;
+                    .default_border-r-b-4;
                     & .menu-item {
                         width: 200px;
                         & a {
@@ -107,7 +110,8 @@
         .default_border-r-4;
         margin-bottom: 50px;
         & .content__read{
-            .default_backgroud_2;
+            .default_backgroud_3;
+            .default_border-r-b-4;
             & .content__read-title {
                 padding: 40px;
                 .default_font_size_6;
@@ -134,7 +138,6 @@
                 height: 80px;
                 padding: 25px 0;
                 .default_border-t-5;
-                .default_border-b-5;
                 .default_center;
                 & .switch-item {
                     .default_disline;
@@ -161,6 +164,7 @@
                 height: 80px;
                 padding-top: 30px;
                 .default_center;
+                .default_border-t-5;
                 & .author-img {
                     width: 20px;
                     height: 20px;
@@ -188,8 +192,6 @@
         margin-bottom: 30px;
         & .comment-header {
             width: 100%;
-            height: 50px;
-            line-height: 50px;
             margin-bottom: 20px;
             .default_font_size_5;
             .default_color_1;
@@ -206,8 +208,6 @@
         .default_mar_auto;
         & .speak-header {
             width: 100%;
-            height: 50px;
-            line-height: 50px;
             margin-bottom: 20px;
             .default_backgroud_7;
             .default_font_size_5; 
@@ -217,6 +217,7 @@
             padding: 20px;
             height: 140px;
             width: 100%;
+            .default_border-r-4;
             .default_backgroud_3;
             & .speak-form-left,
             & .speak-form-right {
@@ -284,18 +285,25 @@
                 }
             }
             & .speak-form-share {
+                position: relative;
                 float: right;
                 width: 16px;
                 height: 16px;
                 .skin_icon_read-1;
+                & .cpm_sub_more {
+                    width: 150px;
+                    top: -30px;
+                    transform: translate(0, -100%);
+                }
                 &:hover {
                     .skin_icon_read-1_on;
                 }
+                &.z-active .cpm_sub_more {
+                    display: block;
+                }
             }
-            & .speak-form-btn {
-                position: absolute;
-                bottom: 0;
-                left: 0;
+            & .speak-form-btn,
+            & .speak-form-first {
                 width: 70px;
                 height: 40px;
                 line-height: 40px;
@@ -309,24 +317,44 @@
                     .default_color_1;
                 }
             }
+            & .speak-form-btn {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+            }
+            & .speak-form-first {
+                float: left;
+                display: none;
+                margin-right: 20px;
+                .default_backgroud_6;
+            }
         }
         
         &.z-small {
             position: fixed;
             bottom: 0;
             left: 0;
+            .default_border-n;
             & .speak-header {
                 display: none;
             }
         }
         &.z-hide{
+            & .speak-form {
+                .default_backgroud_13;
+            }
             & .speak-header {
                 display: none;
             }
             & .speak-form {
                 height: 60px;
-                overflow: hidden;
                 padding: 10px 20px;
+            }
+            & .speak-form-right {
+                height: 40px;
+            }
+            & .speak-form-btn {
+                display: none;
             }
             & .speak-form-textarea {
                 display: none;
@@ -339,6 +367,25 @@
             }
             & .speak-form-share {
                 margin-top: 12px;
+                & .cpm_sub_more {
+                    top: -25px;
+                }
+            }
+            & .speak-form-fabulous {
+                margin-top: 12px;
+            }
+            & .speak-form-comment {
+                margin-top: 12px;
+            }
+            & .speak-form-left {
+                width: 450px;
+                margin-right: 10px;
+            }
+            & .speak-form-right {
+                width: 210px;
+            }
+            & .speak-form-first {
+                display: block;
             }
         }
     }
@@ -356,8 +403,8 @@
                 </div>
                 <div class="head-btns">
                     <div class="btn-item btn-mark" :class="{'z-active': catalog.info.is_collected == 1}" @click="mark(catalog_id)"></div>
-                    <div class="btn-item btn-menu" @mouseover="enter" >
-                        <div class="btn-more menu-list" v-if="menuShow" ref="chapterMenu">
+                    <div class="btn-item btn-menu j-close-1" @click="selctEnter">
+                        <div class="btn-more menu-list" ref="chapterMenu">
                         <div class="menu-wrap">
                             <div class="menu-item" 
                                 v-for="item in chapter.lists"
@@ -377,7 +424,7 @@
                 <div class="content__read-title">{{isScan ?　chapter_bat.chapter_title : chapter.info.chapter_title}}</div>
                 <div class="content__read-text" v-html="isScan ?　chapter_bat.chapter_content : chapter.info.chapter_content">
                 </div>
-                <div v-if="chapter.pre_id || chapter.next_id" class="content__read-switch">
+                <div v-if="!isScan && (chapter.pre_id || chapter.next_id)" class="content__read-switch">
                     <div v-if="chapter.pre_id" class="switch-item switch-left"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.pre_id">上一篇</a></div>
                     <div v-if="chapter.next_id" class="switch-item switch-right"><a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.next_id">下一篇</a></div>
                 </div>
@@ -401,12 +448,13 @@
             <div class="speak-header">评论</div>
             <div class="speak-form">
                 <div class="speak-form-left speak-form-input">
-                    <input @focus="inputFocus" type="text" placeholder="好作品全取决于你的鞭策..." spellcheck="false" />
+                    <input type="text" v-model="comment_con" placeholder="好作品全取决于你的鞭策..." spellcheck="false" />
                 </div>
                 <div class="speak-form-left speak-form-textarea">
                     <textarea @blur="textareaBlur"  placeholder="发表评论..." v-model="comment_con"></textarea>
                 </div>
                 <div class="speak-form-right">
+                    <div class="speak-form-first" @click="addComment">发送</div>
                     <div class="speak-form-icon speak-form-fabulous" @click="addPraise">
                         <em></em>
                         <span>{{chapter.info.praise_count}}</span>
@@ -415,7 +463,26 @@
                         <em></em>
                         <span>{{chapter.info.comment_count}}</span>
                     </div>
-                    <div class="speak-form-icon speak-form-share"></div>
+                    <div class="speak-form-icon speak-form-share j-close-1" @click="selctEnter">
+                        <div class="cpm_sub_more z-left">
+                            <div class="item" @click.stop="shareFn('wb', $event)">
+                                <div class="item-icon z-wb"></div>
+                                <div class="item-text">微博</div>
+                            </div>
+                            <div class="item" @click.stop="shareFn('tb', $event)">
+                                <div class="item-icon z-tb"></div>
+                                <div class="item-text">贴吧</div>
+                            </div>
+                            <div class="item" @click.stop="shareFn('qq', $event)">
+                                <div class="item-icon z-qq"></div>
+                                <div class="item-text">QQ 好友</div>
+                            </div>
+                            <div class="item" @click.stop="shareFn('kong', $event)">
+                                <div class="item-icon z-kong"></div>
+                                <div class="item-text">QQ 空间</div>
+                            </div>
+                        </div>
+                    </div>
                     <div class="speak-form-btn" @click="addComment">发送</div>
                 </div>
             </div>
@@ -434,7 +501,6 @@ export default {
     data () {
         return {
             comment_con: '',
-            menuShow: false,
 
             isScan: false,
             chapter_bat: {}
@@ -457,14 +523,36 @@ export default {
         }
     }),
     methods: {
+        shareFn (app, e){
+            $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
+            // 分享
+            var option = {
+                app: app,
+                url: window.location.href,
+                title: this.catalog.info.catalog_title,
+                pic: this.catalog.info.catalog_cover_url,
+
+                desc: this.catalog.info.catalog_desc,
+                summary: this.catalog.info.catalog_desc,
+                showcount: 0,
+                source: '',
+                sourceUrl: '',
+                site: '',
+            }
+            this.$share.shareToAPP(option);
+        },
+        selctEnter (e){
+            $('.j-close-1').removeClass('z-active');
+            $(e.currentTarget).addClass('z-active');
+        },
         resize () {
-            var left = $('.m-artice-read__content').offset().left;
+            var left = $('.m-artice-read__content').offset().left - $(window).scrollLeft();
             $('.m-artice-read__speak').css({
                 left: left
             })
         },
         speak (init){
-            var top = $('.m-artice-read__comment').length ? $('.m-artice-read__comment').offset().top : $('.m-artice-read__speak').offset().top;
+            var top = $('.m-artice-read__content').height() + 50;
             var scrollTop = $(window).scrollTop();
             var height = $(window).height();
             if (top < scrollTop + height) {
@@ -472,10 +560,6 @@ export default {
             } else {
                 $('.m-artice-read__speak').addClass('z-small z-hide');
             }
-        },
-        inputFocus (){
-            $('.m-artice-read__speak').removeClass('z-hide');
-            $('.m-artice-read__speak .speak-form-textarea textarea').focus();
         },
         textareaBlur (){
             this.speak();
@@ -616,12 +700,6 @@ export default {
             } else {
                 this.addFavorites(catalogId);
             }
-        },
-        enter (){
-            this.menuShow = true;
-        },
-        out (){
-            this.menuShow = false;
         }
     },
     updated (){
@@ -635,6 +713,7 @@ export default {
                 });
             }
         }
+        this.speak()
     },
     mounted (){
         // 获取url的参数
@@ -651,7 +730,10 @@ export default {
         this.resize();
         this.speak(true);
         $(window).on('resize', () => (this.resize() && this.speak()));
-        $(window).on('scroll', () => this.speak());
+        $(window).on('scroll', () => {
+            this.speak()
+            this.resize();
+        });
 
         // 获取文章目录详情
         this.getCatalogDetail();
@@ -660,7 +742,14 @@ export default {
         this.getChapterList();
 
         // 获取文章详情
-        this.getChapterDetail();  
+        this.getChapterDetail();
+
+        $('body').on('click', e => {
+            var node = $(e.target);
+            if (!node.hasClass('j-close-1') && node.parents('.j-close-1').length == 0) {
+                $('.j-close-1').removeClass('z-active');
+            }
+        })
     }
 }
 </script>

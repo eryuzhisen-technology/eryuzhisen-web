@@ -84,7 +84,7 @@
             text-align: left;
             & p {
                 // margin-bottom: 30px;
-                line-height: 1.5em;
+                line-height: 1.75em;
                 word-wrap: break-word;
                 word-break: break-all;
                 text-align: justify;

@@ -13,6 +13,9 @@
             .default_mar_auto;
             margin-bottom: 30px;
         }
+        &.z-index &-wrap {
+            margin-bottom: 0;
+        }
         & a {
             text-decoration: none;
         }
@@ -209,8 +212,10 @@
 
 <!-- html代码 -->
 <template>
-<div class="c-artice-list">
-<div class="c-artice-list-wrap" :style="{'height': Math.ceil(lists.length/(showType == 'left_right' ? 3 : 5))*(showType == 'left_right' ? 350 : 480) + 'px', 'width': (lists.length && lists.length <= 3 ? lists.length*(showType == 'left_right' ? 400 : 240) : 1200) + 'px'}">
+<div class="c-artice-list"
+    :class="'z-'+resType"
+>
+<div class="c-artice-list-wrap" :style="{'height': Math.ceil(lists.length/(showType == 'left_right' ? 3 : 5))*(showType == 'left_right' ? 350 : 480) + 'px', 'width': (lists.length && lists.length <= (showType == 'left_right' ? 3 : 5) ? lists.length*(showType == 'left_right' ? 400 : 240) : 1200) + 'px'}">
     <div class="c-artice-item" v-for="data in lists" :class="{'z-left_right': showType == 'left_right'}">
         <div class="c-artice-item-wrap"
             :data-catalog_id="data.catalog_id"
@@ -241,7 +246,7 @@
 
                 <!-- 作者 -->
                 <div class="item-ft">
-                    <a v-if="resType != 'author'" class="item-ft-btn" target="_blank" :href="'author.work.html?user_id=' + data.user.uid">
+                    <a v-if="resType != 'author'" class="item-ft-btn"  :href="'author.work.html?user_id=' + data.user.uid">
                         <div class="item-ft-img">
                             <img :src="data.user.avatar_url || avatar" />
                         </div>

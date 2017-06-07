@@ -223,16 +223,16 @@ export default {
         }
     },
     mounted (){
-        this.$watch('user.nick_name', value => {
-            this.$store.dispatch('user_setUserInfo', {
-                nick_name: String(value).substr(0, 15)
-            })
-        })
-        this.$watch('user.signature', value => {
-            this.$store.dispatch('user_setUserInfo', {
-                signature: String(value).substr(0, 1000)
-            })
-        })
+        // this.$watch('user.nick_name', value => {
+        //     this.$store.dispatch('user_setUserInfo', {
+        //         nick_name: String(value).substr(0, 15)
+        //     })
+        // })
+        // this.$watch('user.signature', value => {
+        //     this.$store.dispatch('user_setUserInfo', {
+        //         signature: String(value).substr(0, 1000)
+        //     })
+        // })
 
         this.getInviteCode();
     }

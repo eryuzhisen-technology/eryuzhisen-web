@@ -6,8 +6,9 @@
         width: 600px;
 		height: 50px;
 		margin: 0 auto;
+        border-radius: 4px;
+        overflow: hidden;
 		.default_backgroud_2;
-		border-radius: 4px;
         & .item {
             position: relative;
             width: 100px;
@@ -49,7 +50,6 @@
             &.z-on .item__title {
                 .default_color_1;
             }
-
         }
         &.z-left .item__title {
             padding-left: 40px;

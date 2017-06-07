@@ -152,7 +152,7 @@
 <template>
 <div class="c-comment-info">
 <div class="c-comment-info-wrap">
-    <div class="c-comment-info-list" v-for="(data, index) in message.list" :class="{'z-unread': data.read == 0}"  @click="recordSwitch(index, data.msg_id, data.read)">
+    <div class="c-comment-info-list" v-for="(data, index) in message.list" :class="{'z-unread': data.read == 0}">
         <div class="c-comment-info__top">
             <div class="top__img">
                 <img :src="data.message.sender.avatar_url" />
@@ -160,7 +160,7 @@
             <div class="top__name">{{data.message.sender.nick_name}}</div>
             <div class="top__text" v-html="data.message.content.title"></div>
             <div class="top__detail">
-                <a :href="'./article.read.html?catalog_id='+ data.message.arguments.catalog_id +'&chapter_id='+ data.message.arguments.chapter_id">查看详细</a>
+                <a :href="'./article.read.html?catalog_id='+ data.message.arguments.catalog_id +'&chapter_id='+ data.message.arguments.chapter_id" @click.top="">查看详细</a>
             </div>
         </div>
         <div class="c-comment-info__comment">

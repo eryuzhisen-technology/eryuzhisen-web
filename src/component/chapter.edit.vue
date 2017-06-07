@@ -39,21 +39,22 @@
             width: 100%;
             padding: 20px;
             .default_backgroud_3;
-            .default_border-r-4;
+            .default_border-r-t-4;
             & .create-top-left {
-                width: 210px;
+                width: 220px;
                 margin-right: 20px;
                 .default_float_l;
-                .default_border-r-4;
                 & .create-top-left-img {
                     position: relative;
                     width: 220px;
                     height: 330px;
                     .default_backgroud_5;
                     & .img {
+                        position: relative;
                         width: 100%;
                         height: 100%;
                         overflow: hidden;
+                        .default_border-r-t-4;
                         & img {
                             position: absolute;
                             top: 0;
@@ -96,6 +97,7 @@
                     .default_font_size_1;
                     .default_color_2;
                     .default_center;
+                    .default_border-r-b-4;
                 }
             }
             & .create-top-right {
@@ -119,19 +121,19 @@
                     &.create-top-oldimg {
                         position: relative;
                         width: 100%;
-                        height: 50px;
-                        line-height: 50px;
+                        height: 40px;
+                        line-height: 40px;
                         padding: 0 20px;
                         font-size: 14px;
                         border: 1px solid #232323;
                         border-radius: 4px;
-                        .default_backgroud_6;
+                        .default_backgroud_4;
                         & span {
                             display: block;
                             float: left;
                             width: 16px;
                             height: 16px;
-                            margin-top: 15px;
+                            margin-top: 12px;
                             margin-right: 10px;
                             .skin_icon_edit-12;
                             .default_pointer;
@@ -142,8 +144,8 @@
                         & input {
                             float: left;
                             width: 300px;
-                            height: 48px;
-                            line-height: 48px;
+                            height: 38px;
+                            line-height: 38px;
                             .default_color_4;
                         }
                     }
@@ -154,16 +156,24 @@
                         transform: translate(395px, 0);
                     }
                 }
+                & .create-top-old {
+                    &.cpm_form_input {
+                        .default_backgroud_4;
+                    }
+                    &.cpm_form_input > input {
+                        height: 40px;
+                    }
+                }
                 & .create-top-select {
                     position: relative;
                     float: left;
                     width: 120px;
                     height: 40px;
-                    line-height: 40px;
+                    line-height: 38px;
                     margin-left: 10px;
                     .default_border-13;
                     .default_border-r-4;
-                    .default_backgroud_4;
+                    .default_backgroud_6;
                     .default_color_2;
                     .default_font_size_2;
                     .default_center;
@@ -196,6 +206,12 @@
                     }
                     &.z-width {
                         width: 185px;
+                    }
+                    &.z-big {
+                        width: 380px;
+                    }
+                    &.z-week {
+                        .default_color_4;
                     }
                 }
                 & .create-top-tagsInput {
@@ -259,7 +275,7 @@
                 }
                 & .create-tags-select {
                     position: absolute;
-                    top: 53px;
+                    top: 50px;
                     left: 0;
                     z-index: 4;
                     width: 100%;
@@ -270,16 +286,16 @@
                     & .create-tags-select-title {
                         position: relative;
                         width: 100%;
-                        height: 50px;
-                        line-height: 50px;
-                        padding-left: 30px;
+                        height: 40px;
+                        line-height: 40px;
+                        padding-left: 20px;
                         .default_backgroud_2;
-                        .default_color_3;
-                        .default_font_size_3;
+                        .default_color_2;
+                        .default_font_size_2;
                         & em {
                             position: absolute;
                             top: 50%;
-                            right: 30px;
+                            right: 20px;
                             width: 20px;
                             height: 20px;
                             transform: translate(0, -50%);
@@ -288,20 +304,33 @@
                         }
                     }  
                     & .create-tags-select-body {
+                        height: 150px;
                         padding: 20px;
                         overflow: hidden;
                         .default_backgroud_3;
+                        & .create-tags-select-wrap {
+                            width: 100%;
+                            height: 100%;
+                            overflow: hidden;
+                        }
                         & .body-item {
-                            padding: 13px 15px;
+                            height: 30px;
+                            line-height: 30px;
+                            padding: 0 12px;
                             margin-right: 10px;
                             margin-bottom: 10px;
-                            .default_color_3;
+                            border-radius: 15px;
+                            .default_color_2;
                             .default_float_l;
-                            .default_backgroud_5;
-                            .default_border-r-4;
+                            .default_backgroud_6;
                             .default_pointer;
+                            .default_font_size_2;
                             &.z-select {
-                                .default_backgroud_7;
+                                .default_color_1;
+                                .default_backgroud_14;
+                            }
+                            &:hover {
+                                .default_color_1;
                             }
                         }
                     }
@@ -328,6 +357,7 @@
                     .default_backgroud_4;
                     .default_border-r-4;
                     .default_middle;
+                    .default_border-13;
                 }
                 & p {
                     float: left;
@@ -351,12 +381,14 @@
         & .create-bottom {
             width: 100%;
             height: 50px;
+            overflow: hidden;
+            .default_border-r-b-4;
             & .create-bottom-btn {
                 width: 100%;
                 height: 50px;
                 padding: 10px 0;
                 overflow: hidden;
-                .default_backgroud_7;
+                .default_backgroud_2;
                 & .create-bottom-item {
                     float: left;
                     height: 30px;
@@ -371,7 +403,7 @@
                 }
                 & .create-bottom-cancel {
                     width: 50%;
-                    .default_border-rr-2;
+                    .default_border-rr-5;
                 }
                 & .create-bottom-commit {
                     width: 50%;
@@ -383,190 +415,200 @@
 
 <!-- html代码 -->
 <template>
-<div v-if="show" class="c-artice-edit" ref="minHeight">
-<div class="c-artice-edit-scroll">
-<div class="c-artice-edit-mask" @scroll.stop="">
-<div class="c-artice-edit-wrap">
-    <div class="c-artice-edit__create">
-        <div class="create-top">
-            <div class='create-top-left'>
-                <div class="create-top-left-img">
-                    <div v-if="!reg_img" class="c-dialog__tip">
-                        <div class="tip-arrow"></div>
-                        <div class="tip-text">{{reg_img_con}}</div>
-                    </div>
-                    <div class="img">
-                        <div class="mask" id="article_upload_image_select">添加封面</div>
-                        <img v-if="image" :src="image" />
-                    </div>
-                    <UploadImg 
-                        type="2" 
-                        select="article_upload_image_select"
-                        container="article_container"
-                        @uploadImg_uploaded="uploaded"
-                    />
-                </div>
-                <div class="create-top-left-text">添加封面：建议540X810以上</div>
-            </div>
-            <div class='create-top-right'>
-                <!-- 名称 -->
-                <div class="create-top-item create-top-input create-top-name cpm_form_input" :class="{'z-limit': articlename.length>30}">
-                    <div v-if="!reg_name" class="c-dialog__tip z-right">
-                        <div class="tip-arrow"></div>
-                        <div class="tip-text">{{reg_name_con}}</div>
-                    </div>
-                    <input type="text" placeholder="作品名称" v-model="articlename" @focus="focus" @blur="blur" spellcheck="false" />
-                    <!-- <span>{{articlename.length}}/10</span> -->
-                </div>
-                <!-- 授权 -->
-                <!-- 转载 -->
-                <div class="create-top-item z-mini">
-                    <div @click="selctEnter" class="create-top-select create-top-control z-width j-close-1">
-                        <div v-if="!reg_control" class="c-dialog__tip">
+<div v-if="show" class="c-artice-edit">
+<div class="c-artice-edit-scroll" ref="minHeight">
+    <div class="c-artice-edit-mask">
+        <div class="c-artice-edit-wrap">
+        <div class="c-artice-edit__create">
+            <div class="create-top">
+                <div class='create-top-left'>
+                    <div class="create-top-left-img">
+                        <div v-if="!reg_img" class="c-dialog__tip">
                             <div class="tip-arrow"></div>
-                            <div class="tip-text">{{reg_control_con}}</div>
+                            <div class="tip-text">{{reg_img_con}}</div>
                         </div>
-                        <span>{{control}}</span>
-                        <div class="c-sub-more cpm_sub_more">
-                            <div class="item" @click.stop="controlShowValue" data-control_id="1">翻译授权：是</div>
-                            <div class="item" @click.stop="controlShowValue" data-control_id="0">翻译授权：否</div>
+                        <div class="img">
+                            <div class="mask" id="article_upload_image_select">添加封面</div>
+                            <img v-if="image" :src="image" />
                         </div>
+                        <UploadImg 
+                            type="2" 
+                            select="article_upload_image_select"
+                            container="article_container"
+                            @uploadImg_uploaded="uploaded"
+                        />
                     </div>
-                    <div @click="selctEnter" class="create-top-select create-top-share z-width j-close-1">
-                        <div v-if="!reg_share" class="c-dialog__tip z-right">
+                    <div class="create-top-left-text">添加封面：建议540X810以上</div>
+                </div>
+                <div class='create-top-right'>
+                    <!-- 名称 -->
+                    <div class="create-top-item create-top-input create-top-name cpm_form_input" :class="{'z-limit': articlename.length>30}">
+                        <div v-if="!reg_name" class="c-dialog__tip z-right">
                             <div class="tip-arrow"></div>
-                            <div class="tip-text">{{reg_share_con}}</div>
+                            <div class="tip-text">{{reg_name_con}}</div>
                         </div>
-                        <span>{{share}}</span>
-                        <div class="c-sub-more cpm_sub_more">
-                            <div class="item" @click.stop="shareShowValue" data-share_id="1">允许转载：是</div>
-                            <div class="item" @click.stop="shareShowValue" data-share_id="0">允许转载：否</div>
+                        <input type="text" placeholder="故事名字" v-model="articlename" @focus="focus" @blur="blur" spellcheck="false" />
+                        <!-- <span>{{articlename.length}}/10</span> -->
+                    </div>
+                    <!-- 授权 -->
+                    <!-- 转载 -->
+                    <div class="create-top-item z-mini">
+                        <div @click="selctEnter" class="create-top-select create-top-control z-width j-close-1"
+                        :class="{'z-week': control_id == -1}"
+                        >
+                            <div v-if="!reg_control" class="c-dialog__tip">
+                                <div class="tip-arrow"></div>
+                                <div class="tip-text">{{reg_control_con}}</div>
+                            </div>
+                            <span>{{control}}</span>
+                            <div class="c-sub-more cpm_sub_more">
+                                <div class="item" @click.stop="controlShowValue" data-control_id="1">翻译授权：是</div>
+                                <div class="item" @click.stop="controlShowValue" data-control_id="0">翻译授权：否</div>
+                            </div>
+                        </div>
+                        <div @click="selctEnter" class="create-top-select create-top-share z-width j-close-1"
+                        :class="{'z-week': share_id == -1}"
+                        >
+                            <div v-if="!reg_share" class="c-dialog__tip z-right">
+                                <div class="tip-arrow"></div>
+                                <div class="tip-text">{{reg_share_con}}</div>
+                            </div>
+                            <span>{{share}}</span>
+                            <div class="c-sub-more cpm_sub_more">
+                                <div class="item" @click.stop="shareShowValue" data-share_id="1">允许转载：是</div>
+                                <div class="item" @click.stop="shareShowValue" data-share_id="0">允许转载：否</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- 授权信息填写 -->
-                <div v-if="control_id == 1" class="create-top-item create-top-input create-top-old create-top-oldname cpm_form_input">
-                    <div v-if="!reg_old_name" class="c-dialog__tip z-right">
-                        <div class="tip-arrow"></div>
-                        <div class="tip-text">{{reg_old_name_con}}</div>
-                    </div>
-                    <input type="text" placeholder="原作品故事名字" v-model="oldname" @focus="focus" @blur="blur" spellcheck="false" />
-                </div>
-                <div v-if="control_id == 1" class="create-top-item create-top-input create-top-old create-top-oldauthor cpm_form_input">
-                    <div v-if="!reg_old_author" class="c-dialog__tip z-right">
-                        <div class="tip-arrow"></div>
-                        <div class="tip-text">{{reg_old_author_con}}</div>
-                    </div>
-                    <input type="text" placeholder="原作者" v-model="oldauthor" @focus="focus" @blur="blur" spellcheck="false" />
-                </div>
-                <div v-if="control_id == 1" class="create-top-item create-top-input create-top-old create-top-oldurl cpm_form_input">
-                    <div v-if="!reg_old_url" class="c-dialog__tip z-right">
-                        <div class="tip-arrow"></div>
-                        <div class="tip-text">{{reg_old_url_con}}</div>
-                    </div>
-                    <input type="text" placeholder="原作品连接" v-model="oldurl" @focus="focus" @blur="blur" spellcheck="false" />
-                </div>
-                <div v-if="control_id == 1" class="create-top-item create-top-input create-top-old create-top-oldimg">
-                    <div v-if="!reg_old_img" class="c-dialog__tip z-right">
-                        <div class="tip-arrow"></div>
-                        <div class="tip-text">{{reg_old_img_con}}</div>
-                    </div>
-                    <span id="old_upload_image_select"></span>
-                    <input type="text" disabled placeholder="上传翻译授权截图证明" v-model="oldimgname" spellcheck="false" />
-                    <UploadImg 
-                        type="2"
-                        select="old_upload_image_select"
-                        container="old_container"
-                        @uploadImg_uploaded="old_uploaded"
-                    />
-                </div>
-                <!-- 类型 -->
-                <!-- 状态 -->
-                <!-- 等级 -->
-                <div class="create-top-item z-mini">
-                    <!-- <div @click="selctEnter" class="create-top-select create-top-type j-close-1">
-                        <div v-if="!reg_type" class="c-dialog__tip">
+                    <!-- 授权信息填写 -->
+                    <div v-if="control_id == 1" class="create-top-item create-top-input create-top-old create-top-oldname cpm_form_input z-mini">
+                        <div v-if="!reg_old_name" class="c-dialog__tip z-right">
                             <div class="tip-arrow"></div>
-                            <div class="tip-text">{{reg_type_con}}</div>
+                            <div class="tip-text">{{reg_old_name_con}}</div>
                         </div>
-                        <span>{{articletype}}</span>
-                        <div class="c-sub-more cpm_sub_more">
-                            <div class="item" v-for="item in catalog.articletypeArr" @click.stop="typeShowValue" :data-id="item.category_id">{{item.category_title}}</div>
-                        </div>
-                    </div> -->
-                    <div @click="selctEnter" class="create-top-select create-top-status j-close-1 z-width">
-                        <div v-if="!reg_status" class="c-dialog__tip z-top">
+                        <input type="text" placeholder="原作品故事名字" v-model="oldname" @focus="focus" @blur="blur" spellcheck="false" />
+                    </div>
+                    <div v-if="control_id == 1" class="create-top-item create-top-input create-top-old create-top-oldauthor cpm_form_input z-mini">
+                        <div v-if="!reg_old_author" class="c-dialog__tip z-right">
                             <div class="tip-arrow"></div>
-                            <div class="tip-text">{{reg_status_con}}</div>
+                            <div class="tip-text">{{reg_old_author_con}}</div>
                         </div>
-                        <span>{{status}}</span>
-                        <div v-if="catalog.statusArr.length" class="c-sub-more cpm_sub_more">
-                            <div class="item" v-for="item in catalog.statusArr" @click.stop="statusShowValue" :data-audit_status="item.audit_status">{{item.text}}</div>
-                        </div>
+                        <input type="text" placeholder="原作者" v-model="oldauthor" @focus="focus" @blur="blur" spellcheck="false" />
                     </div>
-                    <div @click="selctEnter" class="create-top-select create-top-level j-close-1 z-width">
-                        <div v-if="!reg_level" class="c-dialog__tip z-right">
+                    <div v-if="control_id == 1" class="create-top-item create-top-input create-top-old create-top-oldurl cpm_form_input z-mini">
+                        <div v-if="!reg_old_url" class="c-dialog__tip z-right">
                             <div class="tip-arrow"></div>
-                            <div class="tip-text">{{reg_level_con}}</div>
+                            <div class="tip-text">{{reg_old_url_con}}</div>
                         </div>
-                        <span>{{level}}</span>
-                        <div v-if="catalog.levelArr.length" class="c-sub-more cpm_sub_more">
-                            <div class="item" v-for="item in catalog.levelArr" @click.stop="levelShowValue" :data-level_id="item.level_id">{{item.text}}</div>
+                        <input type="text" placeholder="原作品连接" v-model="oldurl" @focus="focus" @blur="blur" spellcheck="false" />
+                    </div>
+                    <div v-if="control_id == 1" class="create-top-item create-top-input create-top-old create-top-oldimg z-mini">
+                        <div v-if="!reg_old_img" class="c-dialog__tip z-right">
+                            <div class="tip-arrow"></div>
+                            <div class="tip-text">{{reg_old_img_con}}</div>
+                        </div>
+                        <span id="old_upload_image_select"></span>
+                        <input type="text" disabled placeholder="上传翻译授权截图证明" v-model="oldimgname" spellcheck="false" />
+                        <UploadImg 
+                            type="2"
+                            select="old_upload_image_select"
+                            container="old_container"
+                            @uploadImg_uploaded="old_uploaded"
+                        />
+                    </div>
+                    <!-- 类型 -->
+                    <!-- 状态 -->
+                    <!-- 等级 -->
+                    <div class="create-top-item z-mini">
+                        <!-- <div @click="selctEnter" class="create-top-select create-top-type j-close-1">
+                            <div v-if="!reg_type" class="c-dialog__tip">
+                                <div class="tip-arrow"></div>
+                                <div class="tip-text">{{reg_type_con}}</div>
+                            </div>
+                            <span>{{articletype}}</span>
+                            <div class="c-sub-more cpm_sub_more">
+                                <div class="item" v-for="item in catalog.articletypeArr" @click.stop="typeShowValue" :data-id="item.category_id">{{item.category_title}}</div>
+                            </div>
+                        </div> -->
+                        <div @click="selctEnter" class="create-top-select create-top-status j-close-1 z-width"
+                        :class="{'z-big': create, 'z-week': audit_status == -1}"
+                        >
+                            <div v-if="!reg_status" class="c-dialog__tip z-top">
+                                <div class="tip-arrow"></div>
+                                <div class="tip-text">{{reg_status_con}}</div>
+                            </div>
+                            <span>{{status}}</span>
+                            <div v-if="catalog.statusArr.length" class="c-sub-more cpm_sub_more">
+                                <div class="item" v-for="item in catalog.statusArr" @click.stop="statusShowValue" :data-audit_status="item.audit_status">{{item.text}}</div>
+                            </div>
+                        </div>
+                        <div v-if="!create" @click="selctEnter" class="create-top-select create-top-level j-close-1 z-width"
+                        :class="{'z-week': level_id == -1}"
+                        >
+                            <div v-if="!reg_level" class="c-dialog__tip z-right">
+                                <div class="tip-arrow"></div>
+                                <div class="tip-text">{{reg_level_con}}</div>
+                            </div>
+                            <span>{{level}}</span>
+                            <div v-if="catalog.levelArr.length" class="c-sub-more cpm_sub_more">
+                                <div class="item" v-for="item in catalog.levelArr" @click.stop="levelShowValue" :data-level_id="item.level_id">{{item.text}}</div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <!-- 标签 -->
-                <div class="create-top-item create-top-tagsInput j-close-2" @click="tagsshowOpen">
-                    <div v-if="!reg_tag" class="c-dialog__tip z-right">
-                        <div class="tip-arrow"></div>
-                        <div class="tip-text">{{reg_tag_con}}</div>
-                    </div>
-                    <div class="tag-wrap cpm_form_input" :class="{'z-limit': tags.length>3}">
-                        <div class="tag-list">
-                            <div class="tag-item" v-for="(item, index) in tags"><div class="tag-item-text">{{item}}</div><em @click.stop="deleteTag" :data-index="index"></em></div>
+                    <!-- 标签 -->
+                    <div class="create-top-item create-top-tagsInput j-close-2" @click="tagsshowOpen">
+                        <div v-if="!reg_tag" class="c-dialog__tip z-right">
+                            <div class="tip-arrow"></div>
+                            <div class="tip-text">{{reg_tag_con}}</div>
                         </div>
-                        <input class="tag-edit" @keyup.enter.stop.prevent="enter" @keyup.space.stop.prevent="enter" type="text" v-model="tagsVal" :placeholder="tags.length ? '' : '多个标签用空格区分'" />
-                        <!-- <span>{{tags.length}}/3</span> -->
-                    </div>
+                        <div class="tag-wrap cpm_form_input" :class="{'z-limit': tags.length>3}">
+                            <div class="tag-list">
+                                <div class="tag-item" v-for="(item, index) in tags"><div class="tag-item-text">{{item}}</div><em @click.stop="deleteTag" :data-index="index"></em></div>
+                            </div>
+                            <input class="tag-edit" @keyup.enter.stop.prevent="enter" @keyup.space.stop.prevent="enter" type="text" v-model="tagsVal" :placeholder="tags.length ? '' : '多个标签用空格区分'" />
+                            <!-- <span>{{tags.length}}/3</span> -->
+                        </div>
 
-                    <div v-if="tagsshow" class="create-tags-select">
-                        <div class="create-tags-select-title">
-                            <span>热门标签</span>
-                            <em @click="refresh"></em>
+                        <div v-if="tagsshow" class="create-tags-select">
+                            <div class="create-tags-select-title">
+                                <span>热门标签</span>
+                                <em @click="refresh"></em>
+                            </div>
+                            <div class="create-tags-select-body">
+                            <div class="create-tags-select-wrap">
+                                <div v-for="item in category.tags" @click="tagsSelect" class="body-item" :class="{'z-select': tags.indexOf(item) > -1}">{{item}}</div>
+                            </div>
+                            </div>
                         </div>
-                        <div class="create-tags-select-body">
-                            <div v-for="item in category.tags" @click="tagsSelect" class="body-item" :class="{'z-select': tags.indexOf(item) > -1}">{{item}}</div>
+                    </div>
+                    <!-- 介绍 -->
+                    <div class="create-top-item create-top-form cpm_form_textarea" :class="{'z-limit': intro.length>1000}">
+                        <div v-if="!reg_intro" class="c-dialog__tip z-right">
+                            <div class="tip-arrow"></div>
+                            <div class="tip-text">{{reg_intro_con}}</div>
                         </div>
+                        <textarea placeholder="填写作品简介" v-model="intro" @focus="focus" @blur="blur" spellcheck="false"></textarea>
+                        <!-- <span>{{intro.length}}/100</span> -->
                     </div>
                 </div>
-                <!-- 介绍 -->
-                <div class="create-top-item create-top-form cpm_form_textarea" :class="{'z-limit': intro.length>1000}">
-                    <div v-if="!reg_intro" class="c-dialog__tip z-right">
-                        <div class="tip-arrow"></div>
-                        <div class="tip-text">{{reg_intro_con}}</div>
-                    </div>
-                    <textarea placeholder="填写作品简介..." v-model="intro" @focus="focus" @blur="blur" spellcheck="false"></textarea>
-                    <!-- <span>{{intro.length}}/100</span> -->
+                <div class="cpm_clear"></div>
+                <div class="create-top-agree" :class="{'z-on': agree}">
+                    <em @click="agreeSwitch"></em>
+                    <p>我已阅读并同意遵守 <a  target="_blank" href='./statement.html'>《耳语之森原创声明及相关功能使用协议》 </a>
+                    </p>
                 </div>
             </div>
-            <div class="cpm_clear"></div>
-            <div class="create-top-agree" :class="{'z-on': agree}">
-                <em @click="agreeSwitch"></em>
-                <p>我已阅读并同意遵守 <a  target="_blank" href='./statement.html'>《耳语之森原创声明及相关功能使用协议》 </a>
-                </p>
+            <div class="create-bottom">       
+                <div class="create-bottom-btn z-on">
+                    <div class="create-bottom-item create-bottom-cancel" @click="cancel">取消</div>
+                    <div class="create-bottom-item create-bottom-commit" @click="save">
+                        <span>{{create ? '更新' : '创建'}}</span>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="create-bottom">       
-            <div class="create-bottom-btn z-on">
-                <div class="create-bottom-item create-bottom-cancel" @click="cancel">取消</div>
-                <div class="create-bottom-item create-bottom-commit" @click="save">
-                    <span>{{create ? '更新作品' : '创建新作品'}}</span>
-                </div>
-            </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 </div>
 </template>
@@ -631,7 +673,7 @@ export default {
             reg_intro_con: '',
 
             // 随机标签
-            count: 8
+            count: 16
         }
     },
     props: ['resType'],
@@ -1019,7 +1061,7 @@ export default {
         show (newVal){
             if (newVal) {
                 // 获取分类标签
-                this.getCategoryList();
+                // this.getCategoryList();
 
                 // 获取标签
                 this.getLabelList();
@@ -1036,7 +1078,10 @@ export default {
 
         // 高度扩展更新
         if (this.show) {
-            $(".c-artice-edit-scroll").height($(window).height());
+
+            // $(".c-artice-edit-scroll").height($(window).height());
+            var height = $(window).height() > $('.c-artice-edit-wrap').height() ? $(window).height() : $('.c-artice-edit-wrap').height();
+            $(".c-artice-edit-mask").height(height);
             if (!this.minHeight) {
                 // 创建iscroll
                 this.minHeight = new this.$iScroll(this.$refs.minHeight, {
@@ -1049,6 +1094,11 @@ export default {
             } else {
                 this.minHeight.refresh();
             }
+            $(window).off('resize.chapter.edit');
+            $(window).on('resize.chapter.edit', function(){
+                var height = $(window).height() > $('.c-artice-edit-wrap').height() ? $(window).height() : $('.c-artice-edit-wrap').height();
+                $(".c-artice-edit-mask").height(height);
+            })
         }
     },
     mounted (){
@@ -1066,7 +1116,7 @@ export default {
                 this.category_id = option.catalog.category_id;
                 this.catalog_id = option.catalog.catalog_id;
                 this.articletype = option.catalog.category_title;
-                this.audit_status = option.catalog.audit_status;
+                this.audit_status = option.catalog.catalog_status;
                 this.level_id = option.catalog.level;
                 this.intro = option.catalog.catalog_desc;
                 this.share_id = option.catalog.reprint;

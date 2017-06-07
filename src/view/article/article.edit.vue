@@ -22,11 +22,8 @@
         width: 100%;
         height: 100%;
         overflow: hidden;
-        padding-left: 500px;
         & .edit-catalog {
-            position: absolute;
-            top: 0;
-            left: 0;
+            float: left;
             width: 200px;
             height: 100%;
             .default_backgroud_4;
@@ -162,9 +159,7 @@
             }
         }
         & .edit-chapter {
-            position: absolute;
-            top: 0;
-            left: 200px;
+            float: left;
             width: 300px;
             height: 100%;
             .default_border-rr-5;
@@ -305,7 +300,7 @@
             }
         }
         & .edit-content {
-            width: 100%;
+            float: left;
             height: 100%;
             // overflow: hidden;
             .default_backgroud_3;
@@ -324,7 +319,6 @@
                 & .edit-content_read-content {
                     & p {
                         line-height: 1.75rem;
-                        margin-bottom: 30px;
                         .default_color_10;
                         .default_font_size_3;
                     }
@@ -818,9 +812,9 @@ export default {
         addChapter (status){
             this.$store.dispatch('opus_addChapter', {
                 "catalog_id": this.catalog_id, //目录id
-                "chapter_title": status == 1 ? '无标题文章' : this.title, //章节标题
+                "chapter_title": status == 1 ? '在此处添加标题' : this.title, //章节标题
                 "chapter_desc": status == 1 ? '' : this.desc, //简介
-                "chapter_content": status == 1 ? '<p>若故事有效总字数超过10000</p><p>可发邮件至editor@eryuzhisen.com申请进入首页并获取定制封面</p><p>邮件标题为：耳语作者申请</p><p>邮件内容为：用户名+故事名</p>' : this.content, //内容　***base64 编码***
+                "chapter_content": status == 1 ? '<p>若故事有效总字数超过10000</p><p>可发邮件至editor@eryuzhisen.com申请进入首页并获取定制封面</p><p>邮件标题为：耳语作者申请</p><p>邮件内容为：用户名+故事名</p><p>也可以加入QQ群562204658向管理员直接申请</p>' : this.content, //内容　***base64 编码***
                 "chapter_status": status //　0 发布，已完成 1 临时保存 未完成
             }).then( res => {
                 this.chapter_id = res.chapter_id;     
@@ -909,12 +903,12 @@ export default {
                 $('.j-save-btn').addClass('j-save-btn-update').find('a').text('已保存');
                 this.timeSave = setTimeout( res => {
                     $('.j-save-btn').removeClass('j-save-btn-update').find('a').text('保存');
-                }, 1000)
+                }, 500)
             } else if (isUpdata == 3) {
                 $('.j-save-btn').addClass('j-save-btn-update').find('a').text('保存失败');
                 this.timeSave = setTimeout( res => {
                     $('.j-save-btn').removeClass('j-save-btn-update').find('a').text('保存');
-                }, 1000)
+                }, 500)
             } else if (isUpdata == 0) {
                 clearTimeout(this.timeSave);
                 $('.j-save-btn').removeClass('j-save-btn-update').find('a').text('保存');
@@ -943,6 +937,7 @@ export default {
                 // 创建iscroll
                 this.catalogMenu = new this.$iScroll(this.$refs.catalogMenu, {
                     bounce: false,
+                    useTransform: false,
                     scrollbars: true,
                     mouseWheel: true,
                     interactiveScrollbars: true,
@@ -959,6 +954,7 @@ export default {
                 // 创建iscroll
                 this.chapterMenu = new this.$iScroll(this.$refs.chapterMenu, {
                     bounce: false,
+                    useTransform: false,
                     scrollbars: true,
                     mouseWheel: true,
                     interactiveScrollbars: true,
@@ -979,6 +975,12 @@ export default {
             $(window).off('resize');
             $('.edit-content_edit-title').height(60);
         }
+
+        $('.edit-content').width(document.body.offsetWidth - 500);
+        $(window).off('resize.edit');
+        $(window).on('resize.edit', function(){
+            $('.edit-content').width(document.body.offsetWidth - 500);
+        })
     },
     mounted (){
         // 获取url的参数

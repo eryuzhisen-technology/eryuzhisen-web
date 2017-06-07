@@ -13,6 +13,7 @@
     .default_font_size_7;
     .default_color_4;
     .default_backgroud_3;
+    .default_border-r-4;
     & .c-empty-text {
         height: 200px;
         line-height: 200px;
