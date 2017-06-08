@@ -298,11 +298,10 @@
 
 <script>
 import {mapState} from 'vuex'
-import avatar from '../common/images/img/avatar.png';
 export default {
     data () {
         return {
-            avatar: avatar,
+            avatar: this.$defaultData.avatar,
             labelTag: '',
             subMoreShow: false,
             query: '', // 模糊查询文字

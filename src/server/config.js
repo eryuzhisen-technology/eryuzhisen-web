@@ -10,7 +10,7 @@ var distUrl = '';
 var isdebug = window.location.href.indexOf('isdebug=1') > 0;
 
 if (process.env.NODE_ENV == 'development') {
-	baseUrl = 'https://api.eryuzhisen.com/java/eryuzhisen-server/';
+	baseUrl = '/java/eryuzhisen-server/';
 	distUrl = '/dist/html/';
 	imgBaseUrl = '';
 }else{

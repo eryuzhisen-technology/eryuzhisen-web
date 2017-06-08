@@ -306,11 +306,10 @@
 
 <script>
 import {mapState} from 'vuex'
-import avatar from '../common/images/img/avatar.png';
 export default {
     data () {
         return  {
-            avatar: avatar,
+            avatar: this.$defaultData.avatar,
             level: {
                 level0: '普通',
                 level1: '首发',

@@ -13,6 +13,7 @@ import vue_upload from '../../lib/upload/plupload.dev'
 import vue_edit from '../../lib/edit/edit'
 import store from '../../server/store'
 import version from '../../server/version'
+import defaultData from '../../server/defaultData'
 Vue.use(vue_url)
 Vue.use(vue_cache)
 Vue.use(vue_share)
@@ -20,6 +21,7 @@ Vue.use(vue_eventHub)
 Vue.use(vue_upload)
 Vue.use(vue_edit)
 Vue.use(version)
+Vue.use(defaultData)
 Vue.use(vue_iScroll)
 
 // 公共函数引入

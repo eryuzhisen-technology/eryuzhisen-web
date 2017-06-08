@@ -120,11 +120,10 @@
 
 <script>
 import {mapState} from 'vuex'
-import avatar from '../common/images/img/avatar.png';
 export default {
     data (){
         return {
-            avatar: avatar,
+            avatar: this.$defaultData.avatar,
             pageIndex: 1,
             pageSize: 5,
             query: ''

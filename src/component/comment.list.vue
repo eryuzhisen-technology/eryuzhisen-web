@@ -155,7 +155,7 @@
     <div class="c-comment-info-list" v-for="(data, index) in message.list" :class="{'z-unread': data.read == 0}">
         <div class="c-comment-info__top">
             <div class="top__img">
-                <img :src="data.message.sender.avatar_url" />
+                <img :src="data.message.sender.avatar_url || avatar" />
             </div>
             <div class="top__name">{{data.message.sender.nick_name}}</div>
             <div class="top__text" v-html="data.message.content.title"></div>
@@ -200,6 +200,7 @@ import {mapState} from 'vuex'
 export default {
     data (){
         return {
+            avatar: this.$defaultData.avatar,
             recordIndex: -1,
             pageIndex: 1,
             pageSize: 5,

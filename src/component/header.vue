@@ -280,7 +280,7 @@
 								.default_color_2;
 							}
 							&:first-child { 
-								.default_border-r-t-4;
+								// .default_border-r-t-4;
 							}
 							&:last-child { 
 								.default_border-r-b-4;
@@ -481,12 +481,11 @@
 
 <script>
 import {mapState} from 'vuex'
-import avatar from '../common/images/img/avatar.png';
 export default {
 	name: 'header',
     data () {
     	return {
-    		avatar: avatar,
+    		avatar: this.$defaultData.avatar,
     		hasMessage: false,
     		search_value: ''
     	}

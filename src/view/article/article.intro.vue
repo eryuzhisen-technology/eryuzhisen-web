@@ -24,9 +24,9 @@
                 <div class="img">
                     <img :src="catalog.catalog_cover_url" />
                 </div>
-                <div class="tag">
+                <!-- <div class="tag">
                     <div class="tag_text">{{catalog.category_title}}</div>
-                </div>
+                </div> -->
             </div>
             <div class="content-right">
     			<div class="title">
