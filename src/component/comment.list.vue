@@ -4,6 +4,8 @@
     .c-comment-info {
         & &-wrap {
             margin-bottom: 30px;
+            overflow: hidden;
+            .default_border-r-4;
         }
     }
     .c-comment-info-list {
@@ -11,7 +13,7 @@
         // .default_border-b-13;
         .default_backgroud_3;
         .default_border-b-5;
-        .default_pointer;
+        // .default_pointer;
         &.z-unread {
             .default_backgroud_4;
         }
@@ -58,6 +60,12 @@
                     &:hover {
                         .default_color_2;
                     }
+                }
+            }
+            & a {
+                .default_color_1;
+                &:hover {
+                    color: #fff;
                 }
             }
         }
@@ -144,6 +152,9 @@
                 display: block;
             }
         }
+        &:last-child {
+            .default_border-n;
+        }
     }
 
 </style>
@@ -154,10 +165,12 @@
 <div class="c-comment-info-wrap">
     <div class="c-comment-info-list" v-for="(data, index) in message.list" :class="{'z-unread': data.read == 0}">
         <div class="c-comment-info__top">
+            <a :href="'author.work.html?user_id=' + data.message.sender.user_id">
             <div class="top__img">
                 <img :src="data.message.sender.avatar_url || avatar" />
             </div>
             <div class="top__name">{{data.message.sender.nick_name}}</div>
+            </a>
             <div class="top__text" v-html="data.message.content.title"></div>
             <div class="top__detail">
                 <a :href="'./article.read.html?catalog_id='+ data.message.arguments.catalog_id +'&chapter_id='+ data.message.arguments.chapter_id" @click.top="">查看详细</a>
@@ -183,7 +196,7 @@
     </div>
     <Empty 
         class="content-empty" 
-        v-if="message.count <= 0"
+        v-if="message.count <= 0 && message.dataInit"
     />
 </div>
 <Page 

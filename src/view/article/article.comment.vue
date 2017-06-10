@@ -26,6 +26,7 @@
                 </div>
     			<div class="content">
                     <ArticleCommentDom
+                        resType="article"
                         class="content_comment"
                     />
     			</div>

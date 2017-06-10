@@ -46,13 +46,12 @@
         position: relative;
         width: 100%;
         height: 100%;
+        margin-top: 40px;
         & .m-page-list-wrap {
             position: relative;
             // min-height: 1020px;
             // overflow: hidden;
             padding-bottom: 50px;
-            .default_width_960;
-            .default_mar_auto;
         }
         & .title {
             width: 100%;
@@ -93,18 +92,6 @@
                 <div class="label-content">{{labelTag}}</div>
             </div>
         </div>
-        <div class="m-page-tag">
-            <div class="cpm-top-menu" :style="{'width': category.label.length*90 + 'px'}">
-                <div 
-                    v-for="(item, index) in category.label" 
-                    @click="setTagIndex(item.category_id, index)" 
-                    class="menu-item" 
-                    :class="{'z-active': category.index == item.category_id}"
-                >
-                    {{item.category_title}}
-                </div>
-            </div>
-        </div>
         <div class="m-page-list">
             <div class="m-page-list-wrap">
                     <div v-if="article.lists.length" class="title" :style="{'width': (article.lists.length <= 5 ? article.lists.length*240 : 1200) + 'px'}">
@@ -114,6 +101,7 @@
                     class="list"
                     resType='page'
                     loadType="page"
+                    isHideEmpty="true"
                 />
             </div>
             <div class="cpm_clear"></div>

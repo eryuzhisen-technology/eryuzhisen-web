@@ -20,6 +20,7 @@
             .default_backgroud_3;
             .default_border-t-5;
             .default_border-rr-5;
+            .default_border-r-4;
             & a {
                 text-decoration: none;
             }
@@ -33,7 +34,7 @@
             }
             &:last-child,
             &:nth-child(5n) {
-                .default_border-r-n;
+                .default_border-rr-n;
             }
         }
         & .list-author__avatar {
@@ -61,7 +62,6 @@
             overflow: hidden;
             .default_font_size_1;
             .default_color_2;
-            .default_center;
             &.z-left {
                 text-align: left;
             }
@@ -94,7 +94,7 @@
 <template>
 <div class="c-author-list" :class="'z-' + resType">
 <div class="c-author-list-wrap" :style="{'height': Math.ceil(1)*360 + 'px', 'width': (lists.length == 0 ? 720 : lists.length <= 5 ? lists.length*240 : 1200) + 'px'}">
-    <a class="list-author__item" v-for="data in lists" :href="'author.work.html?user_id=' + data.uid">
+    <a class="list-author__item" v-for="(data, index) in lists" :href="'author.work.html?user_id=' + data.uid">
         <div class="list-author__avatar">
             <img :src="data.avatar_url || avatar"  />
         </div>
@@ -103,11 +103,11 @@
         <!-- <div class="list-author__work">作品：{{data.opus_count}}</div> -->
         <!-- <div class="list-author__fans">粉丝：{{data.fans_count}}</div> -->
         <div v-if="data.relation == 0" class="list-author__btn list-author__btn-1 z-active" @click.stop.prevent="addFollow(data.uid)">关注</div>
-        <div v-if="data.relation == 1 || data.relation == 3" class="list-author__btn list-author__btn-2" @click.stop.prevent="delFollow(data.uid)">已关注</div>
+        <div v-if="data.relation == 1 || data.relation == 3" class="list-author__btn list-author__btn-2" @click.stop.prevent="delFollow(data.uid, index)">已关注</div>
         <div v-if="data.relation == 2" class="list-author__btn list-author__btn-3" @click.stop.prevent="addFollow(data.uid)">相互关注</div>
         <div v-if="data.black == 1" class="list-author__btn list-author__btn-3" @click.stop.prevent="delBlack(data.uid)">取消拉黑</div>
     </a>
-    <Empty v-if="count <= 0 && !isHideEmpty" />
+    <Empty v-if="count <= 0 && !isHideEmpty && dataInit" />
 </div>
 <Page 
     :count="count" 
@@ -131,6 +131,7 @@ export default {
     },
     props: ['resType', 'isHideEmpty'],
     computed: mapState({
+        dataInit: state => state.auth.dataInit,
         count: state => state.auth.count,
         user: state => state.user.info,
         lists: state => state.auth.lists,
@@ -168,11 +169,17 @@ export default {
                 tthis.$store.dispatch('bubble_fail', err);
             });
         },
-        delFollow (uid){
+        delFollow (uid, index){
             this.$store.dispatch('auth_delFollow', {
                 userId: uid
             }).then( res => {
-                this.getList();
+                if (this.resType != 'fansList' && this.resType != 'followList') {
+                    this.getList();
+                } else {
+                    this.$store.dispatch('auth_setListFollow', {
+                        index: index
+                    })
+                }
 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
@@ -266,7 +273,7 @@ export default {
     }, 
     mounted (){
         // 获取url的参数
-        this.query = this.$url.getUrlParam('query');
+        this.query = decodeURIComponent(this.$url.getUrlParam('query'));
         this.user_id = this.$url.getUrlParam('user_id');
 
         // 获取用户列表

@@ -51,7 +51,8 @@
             & .content-step-1,
             & .content-step-2,
             & .content-step-3,
-            & .content-step-4 {
+            & .content-step-4,
+            & .content-step-5 {
                 .default_backgroud_14;
             }
         }
@@ -91,7 +92,7 @@
                             <div class="tip-text">{{phone_reg_con}}</div>
                         </div>
                         <div class="m-user-dialog__input cpm_form_input" :class="{'z-error': !phone_reg}">
-                            <input type="text" :placeholder="step == 1 ? '旧手机号' : '新手机好号'" v-model="phone" spellcheck="false" />
+                            <input type="text" :placeholder="step == 1 ? '旧手机号' : '新手机号'" v-model="phone" spellcheck="false" />
                         </div>
                     </div>
                     <div class="m-user-dialog__item">
@@ -210,6 +211,12 @@ export default {
             }).then( () => {
                 this.$store.dispatch('user_getPhoneVerifyCode', {
                     verifyType: "1", //注册验证
+                }).then( resp => {
+                    this.$store.dispatch('bubble_success', {
+                        ret: 0,
+                        type: 'top',
+                        msg: '验证码已发送'
+                    });
                 }).catch( err => {
                     this.$store.dispatch('bubble_fail', err);
                 });

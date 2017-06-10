@@ -6,7 +6,7 @@
         position: fixed;
         top: 0;
         left: 0;
-        z-index: 20;
+        z-index: 40;
         width: 100%;
         height: 100%;
         & &-scroll {
@@ -531,7 +531,7 @@
                             </div>
                         </div> -->
                         <div @click="selctEnter" class="create-top-select create-top-status j-close-1 z-width"
-                        :class="{'z-big': create, 'z-week': audit_status == -1}"
+                        :class="{'z-week': audit_status == -1}"
                         >
                             <div v-if="!reg_status" class="c-dialog__tip z-top">
                                 <div class="tip-arrow"></div>
@@ -542,7 +542,7 @@
                                 <div class="item" v-for="item in catalog.statusArr" @click.stop="statusShowValue" :data-audit_status="item.audit_status">{{item.text}}</div>
                             </div>
                         </div>
-                        <div v-if="!create" @click="selctEnter" class="create-top-select create-top-level j-close-1 z-width"
+                        <div @click="selctEnter" class="create-top-select create-top-level j-close-1 z-width"
                         :class="{'z-week': level_id == -1}"
                         >
                             <div v-if="!reg_level" class="c-dialog__tip z-right">

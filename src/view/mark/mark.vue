@@ -12,10 +12,8 @@
 	<div class="m-mark-wrap">
 		<div class="m-mark-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="title" :style="{'width': (article.count == 0 ? 720 : article.count <= 5 ? article.count*240 : 1200) + 'px'}">
-                <p v-if="article.count">
-                    <span class="number">{{article.count}}</span>个故事
-                </p>
+			<div v-if="article.dataInit" class="title" :style="{'width': (article.count == 0 ? 720 : article.count <= 5 ? article.count*240 : 1200) + 'px'}">
+                <span class="number">{{article.count}}</span>个故事
             </div>
 			<div class="result">
 				<ListDom 

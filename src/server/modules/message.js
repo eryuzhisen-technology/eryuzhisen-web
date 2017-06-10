@@ -4,7 +4,8 @@ function _default(){
 	return {
 		message: {
 			list: [],
-			count: 0
+			count: 0,
+			dataInit: false
 		},
 		unread: {
 			list: []
@@ -22,6 +23,7 @@ export default {
 			for (var key in payload) {
 				state.message[key] = payload[key];
 			}
+			state.message.dataInit = true;
 		},
 		message_setUnread (state, payload){
 			for (var key in payload) {
@@ -37,6 +39,12 @@ export default {
 	actions: {
 		message_getMessageList (context, payload){
 			var promise = message.getMessageList(payload).then( res => {
+				// 作品名字解析
+				res.list.map((item, index) => {
+					var title = item.message.content.title;
+					var _arguments = item.message.arguments || {};
+					item.message.content.title = title.replace(/(《.*》)/, '<a href="article.read.html?catalog_id='+ _arguments.catalog_id +'&chapter_id='+ _arguments.chapter_id +'">$1</a>');
+				})
 				context.commit('message_setMessage', {
 					list: res.list,
 					more: res.more,

@@ -330,10 +330,14 @@ export default {
             $(e.currentTarget).addClass('z-active');
         },
         enter (index){
+            clearTimeout(this.timer);
             this.index = index;
         },
         out (){
-            this.index = -1;
+            clearTimeout(this.timer);
+            this.timer = setTimeout( res=> {
+                this.index = -1;
+            }, 500)
         },
         shareFn (app, e){
             $(e.currentTarget).parents('.j-close-1').removeClass('z-active');

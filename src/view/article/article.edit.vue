@@ -404,11 +404,11 @@
                             <div class="catalog-menu_item-text">{{item.catalog_title}}</div>
                             <div class="catalog-menu_item-more j-close-1" @click.stop="selctEnter">
                                 <div class="cpm_sub_more z-left">
-                                    <div class="item">
-                                        <div class="item-text" @click.stop="updateCatalog(item)">编辑</div>
+                                    <div class="item" @click.stop="updateCatalog(item)">
+                                        <div class="item-text">编辑</div>
                                     </div>
-                                    <div class="item">
-                                        <div class="item-text" @click.stop="removeCatalog(item.catalog_id)">删除</div>
+                                    <div class="item" @click.stop="removeCatalog(item.catalog_id)">
+                                        <div class="item-text">删除</div>
                                     </div>
                                 </div>
                             </div>
@@ -568,6 +568,8 @@ export default {
         formback (){
             if (this.from) {
                 window.location.href = this.from;
+            } else {
+                window.location.href = './index.html';
             }
         },
 
@@ -772,18 +774,19 @@ export default {
                         chapter.chapter_content = this.content;
                     this.$cache.setStore(key, chapter, chapaterEdit_edit.version, chapaterEdit_edit.time);
                 } else {
+                    var _title = this.title;
                     var catalog;
                     this.article.lists.map((item, index)=>{
                         if (this.catalog_id == item.catalog_id) {
                             catalog = item;
                         }
                     })
-                    that.getChapterList(that.catalog_id, true);
+                    this.getChapterList(this.catalog_id, true);
                     this.$store.dispatch('bubble_showBubble', {
                         show: true,
                         type: 'complete',
                         complete: {
-                            title: this.title,
+                            title: _title,
                             url: './article.read.html?catalog_id='+ that.catalog_id +'&chapter_id='+ that.chapter_id,
                             pic: catalog.catalog_cover_url,
                             desc: catalog.catalog_desc,

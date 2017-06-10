@@ -12,7 +12,7 @@
     height: 50px;
     transition: all @default_speed_1;
     .default_border-r-50;
-    .default_backgroud_13;
+    .default_backgroud_3;
     .default_pointer;
     & span {
         position: absolute;

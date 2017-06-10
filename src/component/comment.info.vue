@@ -47,6 +47,12 @@
             .default_font_size_1;
             .default_color_3;
         }
+        & a {
+            .default_color_1;
+            &:hover {
+                color: #fff;
+            }
+        }
     }
     .@{module}__content {
         padding-left: 30px;
@@ -65,10 +71,12 @@
 <div class="c-comment-info-wrap">
     <div class="c-comment-info-list" v-for="data in message.list">
         <div class="c-comment-info__top">
+            <a :href="'author.work.html?user_id=' + data.message.sender.user_id">
             <div class="top__img">
                 <img :src="data.message.sender.avatar_url || avatar" />
             </div>
             <div class="top__name">{{data.message.sender.nick_name}}</div>
+            </a>
             <div class="top__time">{{data.create_time}}</div>
         </div>
         <div class="c-comment-info__content">
@@ -77,7 +85,7 @@
     </div>
     <Empty 
         class="content-empty" 
-        v-if="message.count <= 0"
+        v-if="message.count <= 0 && message.dataInit"
     />
 </div>
 <Page 
@@ -110,7 +118,7 @@ export default {
                 "pageSize": this.pageSize,
                 "pagination": 1,
                 "messageType": this.messageType
-            }).then( res => {
+            }).then( res => {                
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
                 this.$store.dispatch('bubble_fail', err);

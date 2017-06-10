@@ -17,7 +17,6 @@
                     resType="fansList"
                     @author_count="author_count"
                     class="result-content" 
-                    isHideEmpty="true"
                 />
 			</div>	
 		</div>

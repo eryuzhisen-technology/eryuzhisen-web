@@ -105,7 +105,7 @@
 				line-height: 30px;
 				.default_font_size_2;
 				.default_color_2;
-				.default_font_family_bolder;
+				// .default_font_family_bolder;
 				& a {
 					text-decoration: none;
 					.default_color_1;
@@ -399,7 +399,7 @@
 	<div class="c-header-content">
 		<div class="logo"><a :href='url.index'></a></div>
 		<div class="menu">
-			<a href="javascript:void(0);" class="item" :class="{'z-on': pageIndex == 'index'}" @click="gourl('index')">发现</a>
+			<a href="javascript:void(0);" class="item" :class="{'z-on': pageIndex == 'index'}" @click="gourl('index')">故事</a>
 			<a href="javascript:void(0);" class="item" :class="{'z-on': pageIndex == 'mark'}" @click="gourl('mark')">收藏</a>
 		</div>
 		<div class="search">
@@ -553,13 +553,13 @@ export default {
     			return false;
     		}
 
-    		if (this.resType == 'search') {
-    			this.$eventHub.$emit('header_serach', {
-    				query: this.search_value
-    			});
-    		} else {
+    		// if (this.resType == 'search') {
+    			// this.$eventHub.$emit('header_serach', {
+    				// query: this.search_value
+    			// });
+    		// } else {
     			location.href = this.search;	
-    		}
+    		// }
     	},
     	// 获取用户信息
         getUserInfo () {

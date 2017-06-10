@@ -12,8 +12,8 @@
 	<div class="m-message-wrap">
 		<div class="message-content">
 			<MenuLeft class="message-left c-menu-left" :data="menuLeft" />
-            <div class="title">
-                <span class="number">{{message.count}}</span> 条新评论
+            <div v-if="message.dataInit" class="title">
+                <span class="number">{{unread.message2}}</span> 条新评论
             </div>
 			<div class="content">
 				<CommentList />
@@ -35,13 +35,11 @@ export default {
     		menuLeft: {
                 comment: {
                     title: '评论',
-                    isActive: true,
-                    number: 0
+                    isActive: true
                 },
                 infomation: {
                     title: '通知',
-                    url: 'message.infomation.html',
-                    number: 0
+                    url: 'message.infomation.html'
                 }
     		}
     	}

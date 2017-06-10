@@ -93,10 +93,10 @@
 			& .textare-item {
 				width: 260px;
 				height: 150px;
-				padding: 20px;
+				// padding: 20px;
 				& textarea {
-					.default_font_size_2;
-					.default_color_4;
+					// .default_font_size_2;
+					// .default_color_4;
 				}
 			}
 		}
@@ -238,14 +238,15 @@
 		z-index: 30;
 		width: 460px;
 		transform: translate(-50%, -50%);
-		.default_backgroud_2;
+		.default_backgroud_3;
 		.default_border-r-4;
 		& .complete-title {
 			padding-top: 30px;
 			margin-bottom: 15px;
 			text-align: center;
-			.default_color_7;
-			.default_font_size_6;
+			.default_color_1;
+			.default_font_size_7;
+			.default_font_bolder;
 		}
 		& .complete-content {
 			padding: 0 30px;
@@ -272,7 +273,7 @@
 		 			margin-right: 10px;
 		 			.default_border-r-50;
 		 			.default_middle;
-		 			.default_backgroud_7;
+		 			.default_backgroud_2;
 		 			.default_pointer;
 		 			&:last-child {
 		 				margin-right: 0;
@@ -309,7 +310,8 @@
 			height: 50px;
 			padding: 10px 0;
 			overflow: hidden;
-			.default_backgroud_7;
+			.default_backgroud_2;
+			.default_border-t-5;
 			& .complete-bottom-item {
 				float: left;
 				width: 50%;
@@ -324,7 +326,7 @@
 				}
 			}
 			& .complete-bottom-cancel {
-				.default_border-rr-2;
+				.default_border-rr-5;
 			}
 		}
 	}
@@ -472,10 +474,24 @@ export default {
 					"content_type": this.data.report.content_type, //举报内容类型 1 作品章节 2 评论 3 作者，
 					"add_reason": this.data.report.content, //附加信息 
     			}).then( res => {
+    				// 记录联系方式
+	                var userInfoExtra = this.$version.userInfoExtra;
+	                var _userInfoExtra = this.$cache.getStore(userInfoExtra.key , userInfoExtra.version) || {};
+	                    _userInfoExtra.reportContent = this.content;
+	                this.$cache.setStore(userInfoExtra.key, _userInfoExtra, userInfoExtra.version, userInfoExtra.time);
+
     				this.$store.dispatch('bubble_showBubble', {
 		                show: false
 		            })
+
+		            this.$store.dispatch('bubble_success', {
+                        ret: 0,
+                        type: 'top',
+                        msg: '发送成功'
+                    });
 		            this.$store.dispatch('bubble_success', res);
+    			}).catch( err => {
+    				this.$store.dispatch('bubble_fail', err);	
     			});
     		}).catch( err => {
     			this.$store.dispatch('bubble_fail', err);
@@ -504,6 +520,10 @@ export default {
 	        	});
     		}
     	})
+
+    	var userInfoExtra = this.$version.userInfoExtra;
+        var userInfoExtra = this.$cache.getStore(userInfoExtra.key , userInfoExtra.version) || {};
+        this.content = userInfoExtra.reportContent;
     }
 }
 </script>

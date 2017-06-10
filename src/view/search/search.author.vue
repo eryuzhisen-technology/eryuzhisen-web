@@ -13,8 +13,8 @@
 	<div class="m-search">
 		<div class="m-search-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="title" :style="{'width': (count == 0 ? 720 : count <= 5 ? count*240 : 1200) + 'px'}">
-    			<span class="number">{{count}}</span>个用户
+			<div v-if="auth.dataInit" class="title" :style="{'width': (auth.count == 0 ? 720 : auth.count <= 5 ? auth.count*240 : 1200) + 'px'}">
+    			<span class="number">{{auth.count}}</span>个用户
 			</div>
 			<div class="result">
 				<AuthorDom 
@@ -52,14 +52,14 @@ export default {
     	}
     },
     computed: mapState({
-        count: state => state.auth.count
+        auth: state => state.auth
     }),
     mounted (){
         // 获取url的参数
         var query = this.$url.getUrlParam('query');
         if (query) {
             this.menuLeft.article.url += '?query=' + query;
-            this.menuLeft.author.url += '?query=' + query;
+            // this.menuLeft.tag.url += '?query=' + query;
         }
     }
 }

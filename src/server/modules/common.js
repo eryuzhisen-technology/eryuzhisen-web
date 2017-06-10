@@ -43,7 +43,7 @@ export default {
 				list.map((item, index) => {
 					switch(item.jumpui.page_id){
 						case 'catalog_info':
-							item.url = "article.list.html?catalog_id=" + item.jumpui.arguments.catalog_id;
+							item.url = "article.intro.html?catalog_id=" + item.jumpui.arguments.catalog_id;
 							break;
 						case 'user_info':
 							item.url = "author.work.html?user_id=" + item.jumpui.arguments.user_id;
@@ -53,7 +53,6 @@ export default {
 							break;
 					}
 				})
-				console.log(list)
                 context.commit('common_setBannerList', {
                 	list: list
                 });

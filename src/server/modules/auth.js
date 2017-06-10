@@ -5,6 +5,7 @@ export default {
 		// 用户列表
 		count: 0,
 		lists: [],
+		dataInit: false,
 
 		// 邀请码
 		code: ''
@@ -28,13 +29,20 @@ export default {
 		auth_setLists (state, payload){
 			state.count = payload.count;
 			state.lists = payload.lists;
+			state.dataInit = true;
 		},
 		// 设置邀请码
 		auth_setCode (state, payload){
 			state.code = payload.code;
+		},
+		auth_setListFollow (state, payload){
+			state.lists[payload.index].relation = 0;
 		}
 	},
 	actions: {
+		auth_setListFollow (context, payload) {
+			context.commit('auth_setListFollow', payload);
+		},
 		// 设置state属性-cmommit
 		auth_setState (context, payload){
 			context.commit('auth_setState', payload);

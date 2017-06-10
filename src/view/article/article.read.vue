@@ -30,8 +30,10 @@
             & .head-title {
                 height: 60px;
                 line-height: 60px;
-                .default_color_3;
-                .default_font_size_2;
+                & a {
+                    .default_color_3;
+                    .default_font_size_2;
+                }
             }
             & .head-btns {
                 position: absolute;
@@ -44,12 +46,8 @@
                     width: 40px;
                     height: 60px;
                     .default_pointer;
-                    &:hover,
-                    &.z-active {
+                    &:hover  {
                         background-color: #000;
-                    }
-                    &.z-active .btn-more {
-                        display: block;
                     }
                 }
                 & .btn-mark {
@@ -63,6 +61,12 @@
                 }
                 & .btn-menu {
                     .skin_icon_article-menu;
+                    &.z-active {
+                        background-color: #000;
+                    }
+                    &.z-active .btn-more {
+                        display: block;
+                    }
                     &:hover {
                         .skin_icon_article-menu_on;
                     }
@@ -202,6 +206,10 @@
                 .default_color_1;
             }
         }
+        & .comment-content {
+            width: 100%;
+            .default_border-r-4;
+        }
     }
     .@{module}__speak {
         .default_width_720;
@@ -275,6 +283,9 @@
                         .skin_icon_read-3_on;
                     }
                 }
+                &.z-active em {
+                    .skin_icon_read-3_on;
+                }
             }
             & .speak-form-comment {
                 & em {
@@ -294,6 +305,7 @@
                     width: 150px;
                     top: -30px;
                     transform: translate(0, -100%);
+                    border-radius: 4px 4px 4px 0;
                 }
                 &:hover {
                     .skin_icon_read-1_on;
@@ -334,9 +346,11 @@
             position: fixed;
             bottom: 0;
             left: 0;
-            .default_border-n;
             & .speak-header {
                 display: none;
+            }
+            & .speak-form {
+                .default_border-r-n;
             }
         }
         &.z-hide{
@@ -398,11 +412,11 @@
     <div class="m-artice-read-wrap">
         <div class="m-artice-read__head">
             <div class="head-wrap">
-                <div class="head-title">
+                <div class="head-title"><a :href="'./article.intro.html?catalog_id=' + catalog.info.catalog_id">
                     {{ isScan ?　chapter_bat.chapter_title : catalog.info.catalog_title}}
-                </div>
+                </a></div>
                 <div class="head-btns">
-                    <div class="btn-item btn-mark" :class="{'z-active': catalog.info.is_collected == 1}" @click="mark(catalog_id)"></div>
+                    <div v-if="chapter.info.owner != 1" class="btn-item btn-mark" :class="{'z-active': catalog.info.is_collected == 1}" @click="mark(catalog_id)"></div>
                     <div class="btn-item btn-menu j-close-1" @click="selctEnter">
                         <div class="btn-more menu-list" ref="chapterMenu">
                         <div class="menu-wrap">
@@ -455,7 +469,7 @@
                 </div>
                 <div class="speak-form-right">
                     <div class="speak-form-first" @click="addComment">发送</div>
-                    <div class="speak-form-icon speak-form-fabulous" @click="addPraise">
+                    <div class="speak-form-icon speak-form-fabulous" @click="addPraise" :class="{'z-active': chapter.info.praised == 1}">
                         <em></em>
                         <span>{{chapter.info.praise_count}}</span>
                     </div>

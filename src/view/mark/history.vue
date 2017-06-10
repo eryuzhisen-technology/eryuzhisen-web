@@ -12,7 +12,7 @@
 	<div class="m-mark-wrap">
 		<div class="m-mark-content">
 		<MenuLeft :data="menuLeft" />
-			<div class="title" :style="{'width': (article.lists.length == 0 ? 720 : article.lists.length <= 5 ? article.lists.length*240 : 1200) + 'px'}">
+			<div v-if="article.dataInit" class="title" :style="{'width': (article.lists.length == 0 ? 720 : article.lists.length <= 5 ? article.lists.length*240 : 1200) + 'px'}">
 				<span class="number">{{article.count}}</span>个故事
 				<strong class="clear" @click="clear">清空浏览历史</strong>
 			</div>

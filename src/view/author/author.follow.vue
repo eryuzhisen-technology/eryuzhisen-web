@@ -16,7 +16,6 @@
 				<AuthorDom
                     resType="followList"
                     class="result-content" 
-                    isHideEmpty="true"
                 />
 			</div>	
 		</div>

@@ -54,7 +54,7 @@
         margin-bottom: 30px;
         .default_center;
         & .name {
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             & .name-text {
                 display: inline-block;
                 margin-right: 10px;
@@ -271,7 +271,8 @@ export default {
             index: -1,
             avatar: this.$defaultData.avatar,
             user_id: '',
-            user: {}
+            user: {},
+            timer: null
         }
     },
     props: ['menu', 'menuIndex'],
@@ -284,10 +285,14 @@ export default {
             $(e.currentTarget).addClass('z-active');
         },
         enter (index){
+            clearTimeout(this.timer);
             this.index = index;
         },
         out (){
-            this.index = -1;
+            clearTimeout(this.timer);
+            this.timer = setTimeout( res=> {
+                this.index = -1;
+            }, 500)
         },
         shareFn (app, e){
             $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
@@ -355,6 +360,11 @@ export default {
                 this.$store.dispatch('auth_delFollow', {
                     userId: this.user.uid
                 }).then( res => {
+                    this.$store.dispatch('bubble_success', {
+                        ret: 0,
+                        type: 'top',
+                        msg: '取消关注成功'
+                    });
                     this.getAuthorInfo();
 
                     this.$store.dispatch('bubble_success', res);
@@ -365,6 +375,11 @@ export default {
                 this.$store.dispatch('auth_addFollow', {
                     userId: this.user.uid
                 }).then( res => {
+                    this.$store.dispatch('bubble_success', {
+                        ret: 0,
+                        type: 'top',
+                        msg: '发送成功'
+                    });
                     this.getAuthorInfo();
 
                     this.$store.dispatch('bubble_success', res);

@@ -18,7 +18,6 @@
                     resType="author"
                     userType="user_id"
                     loadType="page"
-                    isHideEmpty="true"
                 />
 			</div>	
 		</div>

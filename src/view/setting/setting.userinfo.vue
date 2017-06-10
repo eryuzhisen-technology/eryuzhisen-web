@@ -9,7 +9,7 @@
         & .content-item {
             position: relative;
             height: 50px;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             .default_backgroud_6;
             .default_border-r-4;
             .label {
@@ -131,7 +131,7 @@
                     </div>
                     <div class='content-item content-word'>
                         <div class="label">简介</div>
-                        <textarea placeholder="描述你自己..." :value="user.signature" @input="uploadtext" spellcheck="false"></textarea>
+                        <textarea placeholder="黑暗低语中点盏幽幽青灯..." :value="user.signature" @input="uploadtext" spellcheck="false"></textarea>
                     </div>
                     <div class="content-save cpm_button_default" @click="saveInfo">保存</div>
                 </div>

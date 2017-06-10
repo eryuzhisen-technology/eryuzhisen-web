@@ -32,7 +32,7 @@
 	<div class="m-search">
 		<div class="m-search-content">
 			<MenuLeft :data="menuLeft" />
-			<div class="title" :style="{'width': (count == count ? 720 : count <= 5 ? count*240 : 1200) + 'px'}">
+			<div v-if="article.dataInit" class="title" :style="{'width': (count == count ? 720 : count <= 5 ? count*240 : 1200) + 'px'}">
                 <span class="number">{{count}}</span>个标签
             </div>
 			<div class="result">

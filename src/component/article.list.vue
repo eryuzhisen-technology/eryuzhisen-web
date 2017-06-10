@@ -29,7 +29,7 @@
         }
         & .c-artice-item:last-child,
         & .c-artice-item:nth-child(5n) {
-            .default_border-r-n;
+            .default_border-rr-n;
         }
     }
     .c-artice-item {
@@ -41,6 +41,7 @@
         .default_backgroud_3;
         .default_border-t-5;
         .default_border-rr-5;
+        .default_border-r-4;
         & &-wrap,
         & &-wrap-link {
             display: block;
@@ -170,16 +171,16 @@
                 }
                 &:hover {
                     .skin_mark_more_on;
-                    & .cpm_sub_more {
-                        display: block;
-                    }
+                }
+                &.z-active .cpm_sub_more {
+                    display: block;
                 }
             }
         }
         &.z-left_right {
             width: 400px;
             height: 350px;
-            overflow: hidden;
+            overflow: hidden;            
         }
         &.z-left_right .item-hd {
             float: left;
@@ -220,7 +221,7 @@
         <div class="c-artice-item-wrap"
             :data-catalog_id="data.catalog_id"
         >
-            <a :href="'./article.list.html?catalog_id=' + data.catalog_id" class="c-artice-item-wrap-link">
+            <a :href="'./article.intro.html?catalog_id=' + data.catalog_id" class="c-artice-item-wrap-link">
                 <!-- 头部 -->
                 <div class="item-hd">
                     <div class="item-hd-img">
@@ -253,7 +254,7 @@
                         <div class="item-ft-name">{{data.user.nick_name}}</div>
                     </a>
 
-                    <div v-if="resType == 'mark'" class="item-ft-btn item-ft-btn-more">
+                    <div v-if="resType == 'mark'" class="item-ft-btn item-ft-btn-more j-close-1" @click.stop.prevent="selctEnter">
                         <div class="cpm_sub_more z-left">
                             <div v-if="resType == 'history'" class="item" @click.prevent="delHistory(data.catalog_id)">
                                 <div class="item-text">删除记录</div>
@@ -276,7 +277,7 @@
             </a>
         </div>
     </div>
-    <Empty v-if="count <= 0" />
+    <Empty v-if="count <= 0 && !isHideEmpty && dataInit" />
 </div>
 
 <div v-if="loadType == 'more' && count != 0 && loadType != 'none'" v-show="false" class="list-more">
@@ -312,7 +313,7 @@ export default {
             pageHotSize: 10
         }
     },
-    props: ['resType', 'loadType', 'userType', 'catalog_type', 'showType'],
+    props: ['resType', 'loadType', 'userType', 'catalog_type', 'showType', 'isHideEmpty'],
     computed: mapState({
         tag: state => state.opus.category,
         user: state => state.user.info,
@@ -327,9 +328,16 @@ export default {
         },
         load (){
             return this.$store.state.opus.article.load;
+        },
+        dataInit (){
+            return this.resType != 'hot' ? this.$store.state.opus.article.dataInit : this.$store.state.opus.hot.dataInit;
         }
     }),
     methods: {
+        selctEnter (e){
+            $('.j-close-1').removeClass('z-active');
+            $(e.currentTarget).addClass('z-active');
+        },
         pageSwitch (pageIndex) {
             if (this.pageIndex == pageIndex) {
                 return false;
@@ -369,7 +377,7 @@ export default {
                 },
                 "body": {
                     "label": this.resType == 'page' ? this.labelTag : '', //标签，
-                    "catalog_type": this.catalog_type || 0, // 0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
+                    "catalog_type": this.catalog_type || '', // 0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
                     "user_id": this.userType == 'user_id' ? this.user_id : '',
                     "fuzzy_query": this.query || '' // 模糊查询文字
                 }
@@ -570,6 +578,13 @@ export default {
         }
 
         this.getList();    
+
+        $('body').on('click', e => {
+            var node = $(e.target);
+            if (!node.hasClass('j-close-1') && node.parents('.j-close-1').length == 0) {
+                $('.j-close-1').removeClass('z-active');
+            }
+        })
     }
 }
 </script>

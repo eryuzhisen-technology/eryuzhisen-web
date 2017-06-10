@@ -35,6 +35,9 @@
                     line-height: 20px;
                     .default_color_3;
                     .default_font_size_1;
+                    &:hover {
+                        .default_color_1;
+                    }
                 }
             }
             & .content__body {
@@ -221,11 +224,12 @@
     >
         <div class="comment__content">
             <div class="content__top">
+            <a :href="'author.work.html?user_id=' + data.user.uid">
                 <div class="top-img">
                     <img :src="data.user.avatar_url || avatar" />
                 </div>
                 <div class="top-name">{{data.user.nick_name}}</div>
-            </div>
+            </a></div>
             <div class="content__body">{{data.comment}}</div>
             <div class="content__bottom">
                 <div class="bottom-jubao" @click="addReport">举报</div>
@@ -277,7 +281,7 @@
             <div class="content__reply-btn" @click="sendComment(data.comment_id)">提交</div>
         </div>
     </div>
-    <!-- <Empty v-if="comment.count == 0" /> -->
+    <Empty v-if="comment.count == 0 && resType == 'article'" />
 </div>
 <Page
     v-if="comment.count > 5"
@@ -316,7 +320,7 @@ export default {
         // catalog_id: state => state.opus.catalog.catalog_id,
         // chapter_id: state => state.opus.chapter.chapter_id
     }),
-    props: ['type'],
+    props: ['type', 'resType'],
     methods: {
         // 子评论回复
         replayCommit (_index, replayIndex){

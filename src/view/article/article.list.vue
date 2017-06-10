@@ -25,7 +25,9 @@
     				章节
     			</div>
     			<div class="content">
-    				<Chapter />
+    				<Chapter 
+                        :isHideEmpty="userInfo && catalog && catalog.user && catalog.user.uid == userInfo.uid"
+                    />
     			</div>
             </div>
 		</div>

@@ -72,13 +72,14 @@
     <div 
         class="c-chapter-list-item content" 
         v-for="(data, index) in chapter.lists"
-        v-if="data.chapter_status == 0"
+        v-if="data.chapter_status == 0 || (catalog && catalog.user && userInfo && catalog.user.uid == userInfo.uid)"
     >
         <a class="link" target="_blank" :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+ data.chapter_id">
             {{data.chapter_title}}
         </a>
     </div>
 </div>
+<Empty v-if="chapter.count == 0 && !isHideEmpty" />
 </div>
 </template>
 
@@ -96,7 +97,9 @@ export default {
             pageIndex: 1
         }
     },
+    props: ['isHideEmpty'],
     computed: mapState({
+        userInfo: state => state.user.info,
         catalog: state => state.opus.catalog.info,
         chapter: state => state.opus.chapter
     }),

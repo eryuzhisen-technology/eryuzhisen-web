@@ -7,7 +7,8 @@ export default {
 			count: 0,
 			lists: [],
 			load: 0,
-			more: 0
+			more: 0,
+			dataInit: false
 		},
 
 		// 热门文章推荐
@@ -15,6 +16,7 @@ export default {
 			count: 0,
 			lists: [],
 			more: 0,
+			dataInit: false
 		},
 
 		// 文章分类
@@ -89,6 +91,7 @@ export default {
 			for (var key in payload) {
 				state.article[key] = payload[key];
 			}
+			payload.lists && (state.article.dataInit = true);
 		},
 		// 设置分类：文章标签、文章分类标签...
 		opus_setCategory (state, payload){
@@ -135,6 +138,7 @@ export default {
 			for (var key in payload) {
 				state.hot[key] = payload[key];
 			}
+			payload.lists && (state.hot.dataInit = true);
 		}
 	},
 	actions: {
@@ -195,7 +199,8 @@ export default {
 					count: res.page_info.total_count,
 					lists: lists,
 					more: res.more,
-					load: 0
+					load: 0,
+					dataInit: true
 				})
 				return Promise.resolve(res);
 			}).catch( err => {
@@ -267,7 +272,8 @@ export default {
 	            context.commit('opus_setArticle', {
 	            	count: res.page_info.total_count,
 					lists: res.list,
-					more: res.more
+					more: res.more,
+					dataInit: true
 	            });
 	            return Promise.resolve(res);
 	        }).catch(err => {
@@ -590,7 +596,8 @@ export default {
 				context.commit('opus_setHot', {
 					count: res.page_info.total_count,
 					lists: res.list,
-					more: res.more
+					more: res.more,
+					dataInit: true
 				})
 				return Promise.resolve(res);
 			}).catch( err => {
@@ -635,7 +642,8 @@ export default {
 				context.commit('opus_setArticle', {
 					count: res.page_info.total_count,
 					lists: lists,
-					more: res.more
+					more: res.more,
+					dataInit: true
 				})
 				return Promise.resolve(res);
 			}).catch( err => {

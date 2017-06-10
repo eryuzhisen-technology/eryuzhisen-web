@@ -198,7 +198,7 @@
             <div class="m-index-enter-wrap">
                 <a href="./about.html" class="enter-item"><img src="../../common/images/index/enter-1.png" /></a>
                 <a href="./explain.html" class="enter-item"><img src="../../common/images/index/enter-2.png" /></a>
-                <a href="./invite.html" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
+                <a :href=" isLogin ? './invite.html' : './login.html'" class="enter-item"><img src="../../common/images/index/enter-3.png" /></a>
                 <a href="./mobile.html" class="enter-item"><img src="../../common/images/index/enter-4.png" /></a>
             </div>
         </div>
@@ -222,6 +222,7 @@
                     resType='index'
                     loadType="more"
                     catalog_type="2"
+                    isHideEmpty="true"
                 />
             </div>
             <div class="cpm_clear"></div>
@@ -249,6 +250,7 @@ export default {
         }
     },
     computed: mapState({
+        isLogin: state => state.user.info.isLogin,
         category: state => state.opus.category,
         banner_size: state => state.common.banner_images.length,
         banner_images () {
@@ -269,7 +271,7 @@ export default {
             this.bannerTimerMouse = setTimeout( res => {
                 this.isCan = false;
                 this.switch();
-            }, 3000)
+            }, 1000)
         },
         bannerSwitch (type){
             if (!this.isCan) {

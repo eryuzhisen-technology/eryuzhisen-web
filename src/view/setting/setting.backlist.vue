@@ -53,7 +53,7 @@
 		<div class="m-setting-content">
 			<MenuLeft :data="menuLeft" />
 			<div class="setting-content">
-				<div class="title" :style="{'width': (count == 0 ? 720 : count <= 5 ? count*240 : 1200) + 'px'}"
+				<div v-if="dataInit" class="title" :style="{'width': (count == 0 ? 720 : count <= 5 ? count*240 : 1200) + 'px'}"
                 >
 					黑名单
 				</div>
@@ -104,7 +104,8 @@ export default {
     },
     computed: mapState({
         count: state => state.auth.count,
-        lists: state => state.auth.lists
+        lists: state => state.auth.lists,
+        dataInit: state => state.auth.dataInit
     }),
     methods: {
         author_count (count){

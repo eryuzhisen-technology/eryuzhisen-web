@@ -188,6 +188,12 @@ export default {
             }).then( () => {
                 this.$store.dispatch('user_getPhoneVerifyCode', {
                     verifyType: "0", //注册验证
+                }).then( resp => {
+                    this.$store.dispatch('bubble_success', {
+                        ret: 0,
+                        type: 'top',
+                        msg: '验证码已发送'
+                    });
                 }).catch( err => {
                     this.$store.dispatch('bubble_fail', err);
                 }); 
