@@ -51,6 +51,7 @@
                     }
                 }
                 & .btn-mark {
+                    display: none;
                     .skin_icon_article-mark;
                     &:hover {
                         .skin_icon_article-mark_on;
@@ -283,8 +284,13 @@
                         .skin_icon_read-3_on;
                     }
                 }
-                &.z-active em {
-                    .skin_icon_read-3_on;
+                &.z-active {
+                    & em {
+                        .skin_icon_read-3_on;
+                    }
+                    & span {
+                        .default_color_1;
+                    }
                 }
             }
             & .speak-form-comment {
@@ -416,7 +422,7 @@
                     {{ isScan ?　chapter_bat.chapter_title : catalog.info.catalog_title}}
                 </a></div>
                 <div class="head-btns">
-                    <div v-if="chapter.info.owner != 1" class="btn-item btn-mark" :class="{'z-active': catalog.info.is_collected == 1}" @click="mark(catalog_id)"></div>
+                    <div class="btn-item btn-mark" :class="{'z-active': catalog.info.is_collected == 1, 'z-show': chapter.info.owner != 1}" @click="mark(catalog_id)"></div>
                     <div class="btn-item btn-menu j-close-1" @click="selctEnter">
                         <div class="btn-more menu-list" ref="chapterMenu">
                         <div class="menu-wrap">

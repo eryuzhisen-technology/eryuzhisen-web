@@ -62,6 +62,12 @@
         & strong {
             .default_color_5;
         }
+        & a {
+            .default_color_1;
+            &:hover {
+                color: #fff;
+            }
+        }
     }
 </style>
 
@@ -79,9 +85,7 @@
             </a>
             <div class="top__time">{{data.create_time}}</div>
         </div>
-        <div class="c-comment-info__content">
-            {{data.message.content.content}}
-        </div>
+        <div class="c-comment-info__content" v-html="data.message.content.content"></div>
     </div>
     <Empty 
         class="content-empty" 

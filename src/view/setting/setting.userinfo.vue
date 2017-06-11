@@ -9,7 +9,7 @@
         & .content-item {
             position: relative;
             height: 50px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             .default_backgroud_6;
             .default_border-r-4;
             .label {
@@ -46,6 +46,7 @@
             }
         }
         & .content-sex {
+            height: 40px;
             .default_backgroud_n;
             & .content-sex-item {
                 float: left;

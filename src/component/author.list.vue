@@ -105,7 +105,7 @@
         <div v-if="data.relation == 0" class="list-author__btn list-author__btn-1 z-active" @click.stop.prevent="addFollow(data.uid)">关注</div>
         <div v-if="data.relation == 1 || data.relation == 3" class="list-author__btn list-author__btn-2" @click.stop.prevent="delFollow(data.uid, index)">已关注</div>
         <div v-if="data.relation == 2" class="list-author__btn list-author__btn-3" @click.stop.prevent="addFollow(data.uid)">相互关注</div>
-        <div v-if="data.black == 1" class="list-author__btn list-author__btn-3" @click.stop.prevent="delBlack(data.uid)">取消拉黑</div>
+        <div v-if="data.black == 1 && resType != 'followList'" class="list-author__btn list-author__btn-3" @click.stop.prevent="delBlack(data.uid)">取消拉黑</div>
     </a>
     <Empty v-if="count <= 0 && !isHideEmpty && dataInit" />
 </div>

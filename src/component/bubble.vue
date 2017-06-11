@@ -238,6 +238,7 @@
 		z-index: 30;
 		width: 460px;
 		transform: translate(-50%, -50%);
+		overflow: hidden;
 		.default_backgroud_3;
 		.default_border-r-4;
 		& .complete-title {
@@ -474,11 +475,7 @@ export default {
 					"content_type": this.data.report.content_type, //举报内容类型 1 作品章节 2 评论 3 作者，
 					"add_reason": this.data.report.content, //附加信息 
     			}).then( res => {
-    				// 记录联系方式
-	                var userInfoExtra = this.$version.userInfoExtra;
-	                var _userInfoExtra = this.$cache.getStore(userInfoExtra.key , userInfoExtra.version) || {};
-	                    _userInfoExtra.reportContent = this.content;
-	                this.$cache.setStore(userInfoExtra.key, _userInfoExtra, userInfoExtra.version, userInfoExtra.time);
+    				this.content = '';
 
     				this.$store.dispatch('bubble_showBubble', {
 		                show: false
@@ -520,10 +517,6 @@ export default {
 	        	});
     		}
     	})
-
-    	var userInfoExtra = this.$version.userInfoExtra;
-        var userInfoExtra = this.$cache.getStore(userInfoExtra.key , userInfoExtra.version) || {};
-        this.content = userInfoExtra.reportContent;
     }
 }
 </script>

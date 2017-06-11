@@ -54,7 +54,7 @@
         margin-bottom: 30px;
         .default_center;
         & .name {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
             & .name-text {
                 display: inline-block;
                 margin-right: 10px;
@@ -360,11 +360,6 @@ export default {
                 this.$store.dispatch('auth_delFollow', {
                     userId: this.user.uid
                 }).then( res => {
-                    this.$store.dispatch('bubble_success', {
-                        ret: 0,
-                        type: 'top',
-                        msg: '取消关注成功'
-                    });
                     this.getAuthorInfo();
 
                     this.$store.dispatch('bubble_success', res);
@@ -378,7 +373,7 @@ export default {
                     this.$store.dispatch('bubble_success', {
                         ret: 0,
                         type: 'top',
-                        msg: '发送成功'
+                        msg: '关注成功'
                     });
                     this.getAuthorInfo();
 

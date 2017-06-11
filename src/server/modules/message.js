@@ -40,11 +40,20 @@ export default {
 		message_getMessageList (context, payload){
 			var promise = message.getMessageList(payload).then( res => {
 				// 作品名字解析
-				res.list.map((item, index) => {
-					var title = item.message.content.title;
-					var _arguments = item.message.arguments || {};
-					item.message.content.title = title.replace(/(《.*》)/, '<a href="article.read.html?catalog_id='+ _arguments.catalog_id +'&chapter_id='+ _arguments.chapter_id +'">$1</a>');
-				})
+				if (payload.messageType == 0) {
+					res.list.map((item, index) => {
+						var content = item.message.content.content;
+						var _arguments = item.message.arguments || {};
+						item.message.content.content = content.replace(/(《.*》)/, '<a href="article.read.html?catalog_id='+ _arguments.catalog_id +'&chapter_id='+ _arguments.chapter_id +'">$1</a>');
+					})
+				} else {
+					res.list.map((item, index) => {
+						var title = item.message.content.title;
+						var _arguments = item.message.arguments || {};
+						item.message.content.title = title.replace(/(《.*》)/, '<a href="article.read.html?catalog_id='+ _arguments.catalog_id +'&chapter_id='+ _arguments.chapter_id +'">$1</a>');
+					})
+				}
+				
 				context.commit('message_setMessage', {
 					list: res.list,
 					more: res.more,
