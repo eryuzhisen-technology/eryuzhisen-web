@@ -32,16 +32,14 @@
 	<div class="m-search">
 		<div class="m-search-content">
 			<MenuLeft :data="menuLeft" />
-			<div v-if="article.dataInit" class="title" :style="{'width': (count == count ? 720 : count <= 5 ? count*240 : 1200) + 'px'}">
-                <span class="number">{{count}}</span>个标签
+			<div v-if="category.dataInit" class="title" :style="{'width': (!category.tags.length ? 720 : category.tags.length <= 5 ? category.tags.length*240 : 1200) + 'px'}">
+                <span class="number">{{category.tags.length}}</span>个标签
             </div>
 			<div class="result">
                 <div class="tag-wrap">
-                    <div class="tag-item">心理解忧真</div>
-                    <div class="tag-item">真识流</div>
-                    <div class="tag-item">都市真奇</div>
-                    <div class="tag-item">真狱</div>
+                    <a class="tag-item" v-for="item in category.tags" :href="'./page.html?labelTag='+ item">{{item}}</a>
                 </div>
+                <Empty v-if="category.tags.length <= 0 && category.dataInit" />
 			</div>
 		</div>
 	</div>
@@ -70,15 +68,35 @@ export default {
                     title: '用户',
                     url: 'search.author.html'
                 }
-            },
-            count: 4
+            }
     	}
     },
     computed: mapState({
-        article: state => state.opus.article,
+        category: state => state.opus.category,
     }),
     methods: {
-
+        // 获取标签
+        getLabelList (query){
+            this.$store.dispatch('opus_getLabelList', {
+                "fuzzyLabel": decodeURIComponent(query)
+            }).then( res => {
+                // todo
+                
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            });
+        }
+    },
+    updated (){
+        if (this.category.tags.length) {
+            var w = 0;
+            $('.tag-item').each(function(){
+                w += ($(this).width() + 40) + 10;
+            })
+            $('.tag-wrap').width(w);
+            $('.title').width(w);
+        }
     },
     mounted (){
         // 获取url的参数
@@ -87,13 +105,7 @@ export default {
             this.menuLeft.article.url += '?query=' + query;
             this.menuLeft.author.url += '?query=' + query;
         }
-
-        var w = 0;
-        $('.tag-item').each(function(){
-            w += ($(this).width() + 40) + 10;
-        })
-        $('.tag-wrap').width(w);
-        $('.title').width(w);
+        this.getLabelList(query);
     }
 }
 </script>

@@ -41,10 +41,10 @@ export default {
                     title: '故事',
                     isActive: true
                 },
-                // tag: {
-                //     title: '标签',
-                //     url: 'search.tag.html'
-                // },
+                tag: {
+                    title: '标签',
+                    url: 'search.tag.html'
+                },
     			author: {
     				title: '用户',
                     url: 'search.author.html'
@@ -59,7 +59,7 @@ export default {
         // 获取url的参数
         var query = this.$url.getUrlParam('query');
         if (query) {
-            // this.menuLeft.tag.url += '?query=' + query;
+            this.menuLeft.tag.url += '?query=' + query;
             this.menuLeft.author.url += '?query=' + query;
         }
     }

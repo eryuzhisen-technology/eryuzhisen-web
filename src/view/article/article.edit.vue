@@ -781,6 +781,8 @@ export default {
                             catalog = item;
                         }
                     })
+
+                    var desc = '我在耳语之森连载了新章节《'+ _title +'》，只属于你的怪诞故事';
                     this.getChapterList(this.catalog_id, true);
                     this.$store.dispatch('bubble_showBubble', {
                         show: true,
@@ -788,9 +790,9 @@ export default {
                         complete: {
                             title: _title,
                             url: './article.read.html?catalog_id='+ that.catalog_id +'&chapter_id='+ that.chapter_id,
-                            pic: catalog.catalog_cover_url,
-                            desc: catalog.catalog_desc,
-                            summary: catalog.catalog_desc
+                            pic: catalog.catalog_cover_url.indexOf('http') > -1 ? catalog.catalog_cover_url : 'http://www.eryuzhisen.com' + catalog.catalog_cover_url,
+                            desc: desc,
+                            summary: desc
                         },
                         methods: {
                             cancel (){

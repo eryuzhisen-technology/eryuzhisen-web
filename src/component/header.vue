@@ -494,7 +494,7 @@ export default {
     computed: mapState({
         user: state => state.user.info,
         search (){
-        	var path = location.pathname.indexOf('search.author.html') > -1 ? 'search.author.html' : 'search.article.html';
+        	var path = location.pathname.indexOf('search.author.html') > -1 ? 'search.author.html' : ( location.pathname.indexOf('search.tag.html') > -1 ? 'search.tag.html' : 'search.article.html' );
         	return './' + path + '?query=' + this.search_value
         },
         url (){

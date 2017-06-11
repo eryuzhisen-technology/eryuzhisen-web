@@ -29,7 +29,8 @@ export default {
 	        laberSubnode: [],
 	        index: 0,
 	        tags: [],
-	        load: 0
+	        load: 0,
+	        dataInit: false
 		},
 
 		// 文章目录详情
@@ -98,6 +99,7 @@ export default {
 			for (var key in payload) {
 				state.category[key] = payload[key];
 			}
+			state.category.dataInit = true;
 		},
 		// 设置章节列表
 		opus_setChapterList (state, payload){
@@ -522,7 +524,8 @@ export default {
 			}*/
 			var promise = opus.getLabelList({
 				// "categoryId": payload.categoryId,
-				"count": payload.count
+				"count": payload.count,
+				"fuzzyLabel": payload.fuzzyLabel
 			}).then( res => {
 				context.commit('opus_setCategory', {
 					tags: res.list

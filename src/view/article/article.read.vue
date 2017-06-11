@@ -49,6 +49,9 @@
                     &:hover  {
                         background-color: #000;
                     }
+                    &.z-show {
+                        display: block;
+                    }
                 }
                 & .btn-mark {
                     display: none;
@@ -545,15 +548,22 @@ export default {
     methods: {
         shareFn (app, e){
             $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
+            
             // 分享
+            var desc;
+            if (this.chapter.info.owner == 1) {
+                desc = '我在耳语之森连载了新章节《'+ this.chapter.info.chapter_title +'》，只属于你的怪诞故事';
+            } else {
+                desc = '我在耳语之森发现了一份神秘资料，没胆千万别看我在耳语之森发现了章节《'+ this.chapter.info.chapter_title +'》，一则怪诞离奇的故事';
+            }
             var option = {
                 app: app,
                 url: window.location.href,
-                title: this.catalog.info.catalog_title,
+                title: this.chapter.info.chapter_title,
                 pic: this.catalog.info.catalog_cover_url,
 
-                desc: this.catalog.info.catalog_desc,
-                summary: this.catalog.info.catalog_desc,
+                desc: desc,
+                summary: desc,
                 showcount: 0,
                 source: '',
                 sourceUrl: '',

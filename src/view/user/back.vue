@@ -8,7 +8,7 @@
 <template>
 <div class="m-user">
 <div class="m-user-wrap">
-    <div class="m-user-logo"></div>
+    <div class="m-user-logo"><a href="./index.html"></a></div>
     <div class="m-user-dialog">
     	<div class="m-user-dialog__tit">找回密码</div>
     	<div class="m-user-dialog__con">

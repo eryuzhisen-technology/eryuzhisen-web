@@ -339,7 +339,6 @@
 	<div class="c-bubble-mask" @click="close"></div>
 	<!-- 服务请求提示 -->
     <div v-if="data.type == 'top'" class="c-bubble-top" :class="data.top.status">
-
     	{{data.top.msg}}
     </div>
 

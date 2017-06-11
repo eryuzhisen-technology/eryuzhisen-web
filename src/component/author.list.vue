@@ -57,11 +57,13 @@
             .default_center;
         }
         & .list-author__desc {
-            height: 2rem;
+            max-height: 2rem;
             line-height: 1rem;
             overflow: hidden;
+            word-break: break-all;
             .default_font_size_1;
             .default_color_2;
+            .default_center;
             &.z-left {
                 text-align: left;
             }
@@ -265,8 +267,8 @@ export default {
         });
     }, 
     updated(){
-        $(".c-author-header_text").find('.text').each(function(){
-            if ($(this).height() > 30) {
+        $(".c-author-list .list-author__desc").each(function(){
+            if ($(this).height() > 16) {
                 $(this).addClass('z-left');
             }
         })

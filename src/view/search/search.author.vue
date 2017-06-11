@@ -40,10 +40,10 @@ export default {
                     title: '故事',
                     url: 'search.article.html'
                 },
-                // tag: {
-                //     title: '标签',
-                //     url: 'search.tag.html'
-                // },
+                tag: {
+                    title: '标签',
+                    url: 'search.tag.html'
+                },
                 author: {
                     title: '用户',
                     isActive: true
@@ -59,7 +59,7 @@ export default {
         var query = this.$url.getUrlParam('query');
         if (query) {
             this.menuLeft.article.url += '?query=' + query;
-            // this.menuLeft.tag.url += '?query=' + query;
+            this.menuLeft.tag.url += '?query=' + query;
         }
     }
 }

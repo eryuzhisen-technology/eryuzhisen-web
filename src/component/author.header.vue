@@ -296,15 +296,22 @@ export default {
         },
         shareFn (app, e){
             $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
+
+            var desc;
+            if (this.userInfo.uid == this.user_id) {
+                desc = '这是我在耳语之森的神秘资料，没胆千万别看';
+            } else {
+                desc = '我在耳语之森发现了一份神秘资料，没胆千万别看';
+            }
             // 分享
             var option = {
                 app: app,
                 url: window.location.href,
                 title: this.user.nick_name,
-                pic: this.user.avatar_url,
+                pic: this.user.avatar_url || this.avatar,
 
-                desc: this.user.signature,
-                summary: this.user.signature,
+                desc: desc,
+                summary: desc,
                 showcount: 0,
                 source: '',
                 sourceUrl: '',

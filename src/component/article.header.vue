@@ -342,14 +342,20 @@ export default {
         shareFn (app, e){
             $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
             // 分享
+            var desc;
+            if (this.catalog.owner == 1) {
+                desc = '我在耳语之森发布了新连载《'+ this.catalog.catalog_title +'》，只属于你的怪诞故事';
+            } else {
+                desc = '我在耳语之森发现了连载《'+ this.catalog.catalog_title +'》，一则怪诞离奇的故事';
+            }
             var option = {
                 app: app,
                 url: window.location.href,
                 title: this.catalog.catalog_title,
                 pic: this.catalog.catalog_cover_url,
 
-                desc: this.catalog.catalog_desc,
-                summary: this.catalog.catalog_desc,
+                desc: desc,
+                summary: desc,
                 showcount: 0,
                 source: '',
                 sourceUrl: '',
