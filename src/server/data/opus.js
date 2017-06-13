@@ -1032,6 +1032,39 @@ function getMyCatalogList(option){
 	return prosime;
 }
 
+/**
+ * 作品浏览(如果只针对目录，chapterId设为0)
+URL:http://domain/eryuzhisen-server/opus/pageviews/{catalogId}/{chapterId}
+Method:PUT
+
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx"
+}
+ * @param {[type]} option [description]
+ */
+function pageviews(option){
+	var url = baseUrl + 'opus/pageviews/' + option.catalogId + '/0/';
+	var prosime = axios({
+		method: 'PUT',
+		url: url,
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+            return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+		return _rejectObj(error);
+	});
+
+	return prosime;
+}
+
 export {
 	getLabelList,
 	getCategoryList,
@@ -1054,6 +1087,7 @@ export {
 	delChapter,
 	delCatalog,
 	getMyCatalogList,
+	pageviews,
 	_reject,
 	_rejectObj
 }

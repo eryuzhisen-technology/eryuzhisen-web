@@ -208,10 +208,9 @@
     </div>
     <div class="c-author-header_btn">
         <div class="btn-item btn-mark" 
-            @click="follow"
             :class="{'z-strong': user.relation != 1 && user.relation != 3}"
         >
-            <span v-if="userInfo.uid != user_id">{{ user.relation == 1 || user.relation == 3 ? '已关注' : '添加关注' }}</span>
+            <span @click="follow" v-if="userInfo.uid != user_id">{{ user.relation == 1 || user.relation == 3 ? '已关注' : '添加关注' }}</span>
             <a v-else href="setting.userinfo.html">个人设置</a>
         </div>
         <div class="btn-item btn-share j-close-1" @click="selctEnter">
@@ -463,11 +462,11 @@ export default {
         }
     },
     updated(){
-        $(".c-author-header_text").find('.text').each(function(){
-            if ($(this).height() > 30) {
-                $(this).addClass('z-left');
-            }
-        })
+        // $(".c-author-header_text").find('.text').each(function(){
+        //     if ($(this).height() > 30) {
+        //         $(this).addClass('z-left');
+        //     }
+        // })
         $(".c-author-header_text").find('.name-text').each(function(){
             $(this).css({
                 'padding-left': $(this).next().width() + 10

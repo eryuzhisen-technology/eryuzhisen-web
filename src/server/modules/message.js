@@ -44,7 +44,12 @@ export default {
 					res.list.map((item, index) => {
 						var content = item.message.content.content;
 						var _arguments = item.message.arguments || {};
-						item.message.content.content = content.replace(/(《.*》)/, '<a href="article.read.html?catalog_id='+ _arguments.catalog_id +'&chapter_id='+ _arguments.chapter_id +'">$1</a>');
+						if (_arguments.chapter_id && _arguments.catalog_id) {
+							item.message.content.content = content.replace(/(《.*》)/, '<a href="article.read.html?catalog_id='+ _arguments.catalog_id +'&chapter_id='+ _arguments.chapter_id +'">$1</a>');	
+						} else if (_arguments.catalog_id) {
+							item.message.content.content = content.replace(/(《.*》)/, '<a href="article.intro.html?catalog_id='+ _arguments.catalog_id +'">$1</a>');	
+						}
+						
 					})
 				} else {
 					res.list.map((item, index) => {

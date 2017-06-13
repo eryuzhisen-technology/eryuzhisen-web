@@ -72,7 +72,6 @@
     <div 
         class="c-chapter-list-item content" 
         v-for="(data, index) in chapter.lists"
-        v-if="data.chapter_status == 0 || (catalog && catalog.user && userInfo && catalog.user.uid == userInfo.uid)"
     >
         <a class="link" target="_blank" :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+ data.chapter_id">
             {{data.chapter_title}}
@@ -116,6 +115,7 @@ export default {
         },
         getChapterList (){
             this.$store.dispatch('opus_getChapterList', {
+                "chapterStatus": 0,
                 "catalogId": this.catalog_id, // 目录id
                 "pagination": "1", // 获取总数
                 "page": this.pageIndex, //页数,默认不传查询第一页

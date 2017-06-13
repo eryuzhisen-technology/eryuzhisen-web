@@ -59,8 +59,8 @@
                             position: absolute;
                             top: 0;
                             left: 50%;
-                            height: 100%;
-                            width: auto;
+                            // height: 100%;
+                            // width: auto;
                             transform: translate(-50%, 0);
                         }
                     }
@@ -429,7 +429,7 @@
                         </div>
                         <div class="img">
                             <div class="mask" id="article_upload_image_select">添加封面</div>
-                            <img v-if="image" :src="image" />
+                            <img v-if="image" :src="image.indexOf('?') < 0 ? image + '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg' : image" />
                         </div>
                         <UploadImg 
                             type="2" 

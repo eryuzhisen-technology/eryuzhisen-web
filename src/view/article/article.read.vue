@@ -127,10 +127,12 @@
                 .default_font_bolder;
             }
             & .content__read-text {
+                text-align: justify;
                 padding: 0 40px 50px;
                 & p {
                     width: 100%;
                     line-height: 1.75rem;
+                    min-height: 1.75rem;
                     // margin-bottom: 20px;
                     .default_font_size_3;
                     .default_color_10;
@@ -432,7 +434,6 @@
                             <div class="menu-item" 
                                 v-for="item in chapter.lists"
                                 :class="{'z-active': chapter_id == item.chapter_id}"
-                                v-if="item.chapter_status == 0"
                             ><a :href="'article.read.html?catalog_id='+ catalog_id +'&chapter_id=' + item.chapter_id">
                                 {{item.chapter_title}}
                             </a></div>
@@ -554,7 +555,7 @@ export default {
             if (this.chapter.info.owner == 1) {
                 desc = '我在耳语之森连载了新章节《'+ this.chapter.info.chapter_title +'》，只属于你的怪诞故事';
             } else {
-                desc = '我在耳语之森发现了一份神秘资料，没胆千万别看我在耳语之森发现了章节《'+ this.chapter.info.chapter_title +'》，一则怪诞离奇的故事';
+                desc = '我在耳语之森发现了章节《'+ this.chapter.info.chapter_title +'》，一则怪诞离奇的故事';
             }
             var option = {
                 app: app,
@@ -598,6 +599,7 @@ export default {
         // 获取文章列表
         getChapterList (){
             this.$store.dispatch('opus_getChapterList', {
+                "chapterStatus": 0,
                 "catalogId": this.catalog_id, // 目录id
                 "pagination": "1", // 获取总数
                 "page": 1, //页数,默认不传查询第一页
@@ -730,6 +732,16 @@ export default {
             } else {
                 this.addFavorites(catalogId);
             }
+        },
+
+        pageviews (catalog_id){
+            this.$store.dispatch('opus_pageviews', {
+                catalogId: catalog_id
+            }).then(res => {
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
         }
     },
     updated (){
@@ -780,6 +792,8 @@ export default {
                 $('.j-close-1').removeClass('z-active');
             }
         })
+
+        this.pageviews(this.catalog_id);
     }
 }
 </script>

@@ -62,8 +62,7 @@ export default {
                     title: '评论',
                     url: 'article.comment.html'
                 }
-            ],
-            catalog_id: ''
+            ]
     	}
     },
     computed: mapState({
@@ -75,7 +74,15 @@ export default {
         }
     }),
     methods: {
-    	
+    	pageviews (catalog_id){
+            this.$store.dispatch('opus_pageviews', {
+                catalogId: catalog_id
+            }).then(res => {
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        }
     },
     mounted (){
         // 获取url的参数
@@ -85,6 +92,8 @@ export default {
                 item.url += '?catalog_id=' + catalog_id;
             }
         })
+
+        this.pageviews(catalog_id);
     }
 }
 </script>

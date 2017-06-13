@@ -59,11 +59,11 @@ export default {
 				},
 				{
 					text: '首发',
-					level_id: 2
+					level_id: 1
 				},
 				{
 					text: '独家',
-					level_id: 1
+					level_id: 2
 				},
 			],
 			info: {}
@@ -166,6 +166,15 @@ export default {
 			context.commit('opus_setCommentList', payload);
 			return Promise.resolve(1);
 		},
+		// 设置文章列表
+		opus_setChapterList (context, payload) {
+			context.commit('opus_setChapterList', {
+            	count: payload.count,
+				lists: payload.lists,
+				more: payload.more
+            });	
+            return Promise.resolve(1);
+		},
 		// 设置文章详情
 		opus_setChapterInfo (context, payload) {
 			context.commit('opus_setChapter', {
@@ -197,6 +206,11 @@ export default {
 				} else {
 					lists = res.list;
 				}
+				lists.map((item, index) => {
+					if (item.catalog_cover_url.indexOf('?') < 0) {
+						lists[index].catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+					}
+				})
 				context.commit('opus_setArticle', {
 					count: res.page_info.total_count,
 					lists: lists,
@@ -451,6 +465,11 @@ export default {
 			};
 
 			var promise = opus.getCatalogDetail(payload).then( res => {
+				// 封面图片加压缩参数
+				if (res.info.catalog_cover_url.indexOf('?') < 0) {
+					res.info.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+				}
+
 	            context.commit('opus_setCatalog', {
 	            	info: res.info
 	            });
@@ -596,6 +615,11 @@ export default {
                 payload.body.category_id = context.state.category.index;
             }
 			var promise = opus.getCatalogList(payload).then( res => {
+				res.list.map((item, index) => {
+					if (item.catalog_cover_url.indexOf('?') < 0) {
+						item.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+					}
+				})
 				context.commit('opus_setHot', {
 					count: res.page_info.total_count,
 					lists: res.list,
@@ -642,12 +666,28 @@ export default {
 			var promise = opus.getMyCatalogList(payload).then( res => {
 				var lists = res.list;
 					lists = lists.reverse();
+				// 封面图片加压缩参数
+				lists.map((item, index) => {
+					if (item.catalog_cover_url.indexOf('?') < 0) {
+						item.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+					}					
+				})
 				context.commit('opus_setArticle', {
 					count: res.page_info.total_count,
 					lists: lists,
 					more: res.more,
 					dataInit: true
 				})
+				return Promise.resolve(res);
+			}).catch( err => {
+				return Promise.reject(err);
+			})
+
+			return promise;
+		},
+		// 作品目录浏览
+		opus_pageviews (context, payload){
+			var promise = opus.pageviews(payload).then( res => {
 				return Promise.resolve(res);
 			}).catch( err => {
 				return Promise.reject(err);

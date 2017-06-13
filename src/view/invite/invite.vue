@@ -24,8 +24,8 @@
 					<div class="txt-content">
 						<div class="content-code-bg"></div>
 						<div class="content-code">{{code.invite_code}}</div>
-						<div class="content-times-bg"></div>
-						<div class="content-times"><span class="times-num">{{code.remaining_times}}</span><span class="times-txt">次</span></div>
+						<!-- <div class="content-times-bg"></div> -->
+						<!-- <div class="content-times"><span class="times-num">{{code.remaining_times}}</span><span class="times-txt">次</span></div> -->
 					</div>
 				</div>
 			</div>

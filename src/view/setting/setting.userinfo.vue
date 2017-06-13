@@ -132,7 +132,7 @@
                     </div>
                     <div class='content-item content-word'>
                         <div class="label">简介</div>
-                        <textarea placeholder="黑暗低语中点盏幽幽青灯..." :value="user.signature" @input="uploadtext" spellcheck="false"></textarea>
+                        <textarea placeholder="请填写简介..." :value="user.signature" @input="uploadtext" spellcheck="false"></textarea>
                     </div>
                     <div class="content-save cpm_button_default" @click="saveInfo">保存</div>
                 </div>

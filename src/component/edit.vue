@@ -84,6 +84,7 @@
             text-align: left;
             & p {
                 // margin-bottom: 30px;
+                min-height: 1.75rem;
                 line-height: 1.75em;
                 word-wrap: break-word;
                 word-break: break-all;
@@ -175,6 +176,12 @@
                 .skin_icon_edit-2;
                 &:hover {
                     .skin_icon_edit-2_on;
+                }
+            }
+            & .wangeditor-menu-img-align-center {
+                .skin_article_center;
+                &:hover {
+                    .skin_article_center_on;
                 }
             }
             & .wangeditor-menu-img-italic {

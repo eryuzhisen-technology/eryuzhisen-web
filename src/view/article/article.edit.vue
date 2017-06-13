@@ -317,8 +317,10 @@
                     overflow-y: auto;
                 }
                 & .edit-content_read-content {
+                    text-align: justify;
                     & p {
                         line-height: 1.75rem;
+                        min-height: 1.75rem;
                         .default_color_10;
                         .default_font_size_3;
                     }
@@ -599,9 +601,20 @@ export default {
             this.$store.dispatch('opus_delCatalog', {
                 "catalogId": catalogId
             }).then( res => {
-               this.getMyCatalogList();
+                this.getMyCatalogList();
 
-               this.$store.dispatch('bubble_success', res);
+                // 若果删除的是当前打开的目录，清空章节列表和文章详情
+                if (catalogId == this.catalog_id) {
+                    this.$store.dispatch('opus_setChapterList', {
+                        count: 0,
+                        lists: [],
+                        more: 0
+                    })
+                    this.catalog_id = -1;
+                    this.chapter_id = -1;
+                }
+
+                this.$store.dispatch('bubble_success', res);
             }).catch( err => {
                 this.$store.dispatch('bubble_fail', err);
             });
@@ -768,7 +781,7 @@ export default {
 
                     var chapaterEdit_edit = this.$version.chapaterEdit_edit;
                     var key = chapaterEdit_edit.key + '_' + this.catalog_id + '_' + this.chapter_id;
-                    var chapter = this.$cache.getStore(key, chapaterEdit_edit.version);
+                    var chapter = this.$cache.getStore(key, chapaterEdit_edit.version) || {};
                         chapter.chapter_title = this.title;
                         chapter.chapter_desc = this.desc;
                         chapter.chapter_content = this.content;
@@ -819,7 +832,7 @@ export default {
                 "catalog_id": this.catalog_id, //目录id
                 "chapter_title": status == 1 ? '在此处添加标题' : this.title, //章节标题
                 "chapter_desc": status == 1 ? '' : this.desc, //简介
-                "chapter_content": status == 1 ? '<p>若故事有效总字数超过10000</p><p>可发邮件至editor@eryuzhisen.com申请进入首页并获取定制封面</p><p>邮件标题为：耳语作者申请</p><p>邮件内容为：用户名+故事名</p><p>也可以加入QQ群562204658向管理员直接申请</p>' : this.content, //内容　***base64 编码***
+                "chapter_content": status == 1 ? '<p>若故事有效总字数超过10000</p><p>可发邮件至editor@eryuzhisen.com申请进入首页并获取定制封面</p><p>邮件标题为：耳语作者申请</p><p>邮件内容为：用户名+故事名</p><p>也可以加入QQ群432769756向管理员直接申请</p>' : this.content, //内容　***base64 编码***
                 "chapter_status": status //　0 发布，已完成 1 临时保存 未完成
             }).then( res => {
                 this.chapter_id = res.chapter_id;     

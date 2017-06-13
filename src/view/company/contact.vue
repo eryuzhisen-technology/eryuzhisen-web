@@ -17,12 +17,12 @@
 					{{menuTop[menuTopType].title}}
 				</div>
 				<div class="content m-contact">
-					<p class="text">QQ交流群:562204658</p>
+					<p class="text">QQ交流群:432769756</p>
 					<p class="text">商务合作:business@eryuzhisen.com</p>
 					<p class="text">客服联系:server@eryuzhisen.com</p>
 					<!--<div class="item">
 						<div class="item-title">QQ交流群</div>
-						<div class="item-text">562204658</div>
+						<div class="item-text">432769756</div>
 					</div>
                     <div class="item">
                         <div class="item-title">商务合作</div>

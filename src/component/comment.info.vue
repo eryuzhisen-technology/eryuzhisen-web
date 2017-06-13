@@ -75,7 +75,7 @@
 <template>
 <div class="c-comment-info">
 <div class="c-comment-info-wrap">
-    <div class="c-comment-info-list" v-for="data in message.list">
+    <div class="c-comment-info-list" v-for="data in message.list" :class="{'z-unread': data.read == 0}">
         <div class="c-comment-info__top">
             <a :href="'author.work.html?user_id=' + data.message.sender.user_id">
             <div class="top__img">

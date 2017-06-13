@@ -1230,7 +1230,8 @@ _e(function (E, $) {
         var timeoutId;
         $menuItem.find('a').on('mouseenter', function (e) {
             if (!self.active() && !self.disabled()) {
-                timeoutId = setTimeout(show, 200);
+                // timeoutId = setTimeout(show, 200);
+                timeoutId = setTimeout(show, 0);
             }
         }).on('mouseleave', function (e) {
             timeoutId && clearTimeout(timeoutId);
@@ -2421,9 +2422,8 @@ _e(function (E, $) {
             // 执行命令
             if (resultHtml) {
                 editor.command(e, 'insertHtml', resultHtml);
-
                 // 删除内容为空的 p 和嵌套的 p
-                self.clearEmptyOrNestP();
+                // self.clearEmptyOrNestP();
             }
         });
 
@@ -2453,7 +2453,7 @@ _e(function (E, $) {
                     childNodesClone.push(item);
                 });
                 // 遍历子元素，执行操作
-                $.each(childNodesClone, function () {
+                $.each(childNodesClone, function () {               
                     handle(this);
                 });
                 return;
@@ -2503,7 +2503,7 @@ _e(function (E, $) {
 
                 // 剔除 a img 之外的元素
                 htmlForP = htmlForP.replace(/<.*?>/ig, function (tag) {
-                    if (tag === '</a>' || tag.indexOf('<a ') === 0 || tag.indexOf('<img ') === 0) {
+                    if (tag === '<br>' || tag === '</a>' || tag.indexOf('<a ') === 0 || tag.indexOf('<img ') === 0) {
                         return tag;
                     } else {
                         return '';
@@ -3201,6 +3201,7 @@ _e(function (E, $) {
     E.config.menus = [
         // 'source',
         'indent',
+        'aligncenter',
         // '|',
         'bold',
         // 'underline',
@@ -3217,7 +3218,6 @@ _e(function (E, $) {
         // 'unorderlist',
         // 'orderlist',
         // 'alignleft',
-        // 'aligncenter',
         // 'alignright',
         // '|',
         // 'link',
@@ -4560,7 +4560,7 @@ _e(function (E, $) {
     });
 });*/
 // aligncenter 菜单
-/*_e(function (E, $) {
+_e(function (E, $) {
 
     E.createMenu(function (check) {
         var menuId = 'aligncenter';
@@ -4577,6 +4577,11 @@ _e(function (E, $) {
             title: lang.aligncenter,
             commandName: 'JustifyCenter'
         });
+
+        // 定义选中状态下的click事件
+        menu.clickEventSelected = function (e) {
+            editor.command(e, 'JustifyLeft');
+        };
 
         // 定义 update selected 事件
         menu.updateSelectedEvent = function () {
@@ -4604,7 +4609,7 @@ _e(function (E, $) {
         // 增加到editor对象中
         editor.menus[menuId] = menu;
     });
-});*/
+});
 // alignright 菜单
 /*_e(function (E, $) {
 

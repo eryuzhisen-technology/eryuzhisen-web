@@ -84,6 +84,10 @@ export default {
 		},
 		// 设置用户信息
 		user_setUserInfo(context, payload) {
+			// 图片头像加压缩
+			if (payload.avatar_url.indexOf('?') < 0) {
+				payload.avatar_url += '?x-oss-process=image/resize,w_180,h_180,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+			}
 			context.commit('user_setUserInfo', payload);
 			return Promise.resolve(1);
 		},
@@ -365,6 +369,11 @@ export default {
 			}
 
 			var promise = user.getUserInfo(payload).then(res => {
+				// 用户头像加入压缩条件
+				if (res.info.avatar_url.indexOf('?') < 0) {
+					res.info.avatar_url += '?x-oss-process=image/resize,w_180,h_180,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+				}
+
 				// 自己的信息用token拿
 				if (!payload.userId) {
 					context.commit('user_setUserInfo', res.info);
