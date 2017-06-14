@@ -208,7 +208,7 @@ export default {
 				}
 				lists.map((item, index) => {
 					if (item.catalog_cover_url.indexOf('?') < 0) {
-						lists[index].catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+						lists[index].catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_fixed/auto-orient,1/quality,q_100/format,jpg';
 					}
 				})
 				context.commit('opus_setArticle', {
@@ -467,7 +467,7 @@ export default {
 			var promise = opus.getCatalogDetail(payload).then( res => {
 				// 封面图片加压缩参数
 				if (res.info.catalog_cover_url.indexOf('?') < 0) {
-					res.info.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+					res.info.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_fixed/auto-orient,1/quality,q_100/format,jpg';
 				}
 
 	            context.commit('opus_setCatalog', {
@@ -617,7 +617,7 @@ export default {
 			var promise = opus.getCatalogList(payload).then( res => {
 				res.list.map((item, index) => {
 					if (item.catalog_cover_url.indexOf('?') < 0) {
-						item.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+						item.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_fixed/auto-orient,1/quality,q_100/format,jpg';
 					}
 				})
 				context.commit('opus_setHot', {
@@ -669,7 +669,7 @@ export default {
 				// 封面图片加压缩参数
 				lists.map((item, index) => {
 					if (item.catalog_cover_url.indexOf('?') < 0) {
-						item.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg';
+						item.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_fixed/auto-orient,1/quality,q_100/format,jpg';
 					}					
 				})
 				context.commit('opus_setArticle', {

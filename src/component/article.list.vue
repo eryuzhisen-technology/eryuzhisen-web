@@ -66,6 +66,8 @@
                 overflow: hidden;
                 & img {
                     max-width: 100%;
+                    width: 100%;
+                    height: 100%;
                 }
             }
             & .item-hd-tag {
@@ -456,7 +458,7 @@ export default {
             } else if (this.resType == 'history') {
                 // 从缓存中获取
                 var cache_history = this.$version.history;
-                var history = this.$cache.getStore(cache_history.key, cache_history.version);
+                var history = this.$cache.getStore(cache_history.key, cache_history.version) || [];
                 var lists = history.slice((this.pageIndex-1)*this.pageSize, this.pageSize*this.pageIndex);
                 this.$store.dispatch('opus_setArticle', {
                     lists: lists,

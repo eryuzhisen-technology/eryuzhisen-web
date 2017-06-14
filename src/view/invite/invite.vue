@@ -41,7 +41,7 @@
 					<p class="text">请你也谨慎邀请身边荒诞不经的朋友</p>
 					<p class="text">耳语品质和未来的命运</p>
 					<p class="text">将由你来制定</p>
-					<div class="bottom-text">「每个邀请码仅限3次有效」</div>
+					<div class="bottom-text">「邀请码可重复使用」</div>
 				</div>
 			</div>
 		</div>

@@ -189,7 +189,7 @@
 <div class="c-author-header-wrap">
     <div class="c-author-header_img">
         <div class="img">
-            <img :src="user.avatar_url || avatar" />
+            <img :src="(user.avatar_url || avatar).indexOf('?') > -1 ? (user.avatar_url || avatar) : (user.avatar_url || avatar) + '?x-oss-process=image/resize,w_180,h_180,m_fill/auto-orient,1/quality,q_100/format,jpg'" />
         </div>
         <div v-show="userInfo.uid == user_id" class="icon" id="author_upload_image_select">修改头像</div>
         <UploadImg 
