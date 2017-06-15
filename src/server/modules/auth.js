@@ -27,6 +27,9 @@ export default {
 		},
 		// 设置数据列表
 		auth_setLists (state, payload){
+			payload.map((item, index)=>{
+				item.avatar_url += '?x-oss-process=image/resize,w_180,h_180,m_fill/auto-orient,1/quality,q_100/format,jpg';
+			})
 			state.count = payload.count;
 			state.lists = payload.lists;
 			state.dataInit = true;

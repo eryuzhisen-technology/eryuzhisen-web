@@ -133,6 +133,8 @@
                     width: 100%;
                     line-height: 1.75rem;
                     min-height: 1.75rem;
+                    word-wrap: break-word;
+                    word-break: break-all;
                     // margin-bottom: 20px;
                     .default_font_size_3;
                     .default_color_10;
