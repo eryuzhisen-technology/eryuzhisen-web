@@ -165,8 +165,11 @@
                             .default_color_1;
                         }
                     }
-                    & .switch-item {
+                    &:first-child {
                         .default_border-rr-5;
+                    }
+                    &:last-child {
+                        .default_border-n;
                     }
                 }
             }
@@ -734,9 +737,10 @@ export default {
             }
         },
 
-        pageviews (catalog_id){
+        pageviews (catalog_id, chapter_id){
             this.$store.dispatch('opus_pageviews', {
-                catalogId: catalog_id
+                catalogId: catalog_id,
+                chapterId: chapter_id
             }).then(res => {
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
@@ -793,7 +797,7 @@ export default {
             }
         })
 
-        this.pageviews(this.catalog_id);
+        this.pageviews(this.catalog_id, this.chapter_id);
     }
 }
 </script>

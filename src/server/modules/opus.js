@@ -210,6 +210,9 @@ export default {
 					if (item.catalog_cover_url.indexOf('?') < 0) {
 						lists[index].catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_fixed/auto-orient,1/quality,q_100/format,jpg';
 					}
+					if (item.user.avatar_url.indexOf('?') < 0) {
+						item.user.avatar_url += '?x-oss-process=image/resize,w_180,h_180,m_fill/auto-orient,1/quality,q_80/format,jpg';
+					}
 				})
 				context.commit('opus_setArticle', {
 					count: res.page_info.total_count,
@@ -469,6 +472,9 @@ export default {
 				if (res.info.catalog_cover_url.indexOf('?') < 0) {
 					res.info.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_fixed/auto-orient,1/quality,q_100/format,jpg';
 				}
+				if (res.info.user.avatar_url.indexOf('?') < 0) {
+					res.info.user.avatar_url += '?x-oss-process=image/resize,w_180,h_180,m_fill/auto-orient,1/quality,q_80/format,jpg';
+				}
 
 	            context.commit('opus_setCatalog', {
 	            	info: res.info
@@ -619,6 +625,9 @@ export default {
 					if (item.catalog_cover_url.indexOf('?') < 0) {
 						item.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_fixed/auto-orient,1/quality,q_100/format,jpg';
 					}
+					if (item.user.avatar_url.indexOf('?') < 0) {
+						item.user.avatar_url += '?x-oss-process=image/resize,w_180,h_180,m_fill/auto-orient,1/quality,q_80/format,jpg';
+					}
 				})
 				context.commit('opus_setHot', {
 					count: res.page_info.total_count,
@@ -670,7 +679,10 @@ export default {
 				lists.map((item, index) => {
 					if (item.catalog_cover_url.indexOf('?') < 0) {
 						item.catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_fixed/auto-orient,1/quality,q_100/format,jpg';
-					}					
+					}
+					if (item.user.avatar_url.indexOf('?') < 0) {
+						item.user.avatar_url += '?x-oss-process=image/resize,w_180,h_180,m_fill/auto-orient,1/quality,q_80/format,jpg';
+					}
 				})
 				context.commit('opus_setArticle', {
 					count: res.page_info.total_count,

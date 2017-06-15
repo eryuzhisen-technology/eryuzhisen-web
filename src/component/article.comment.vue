@@ -248,8 +248,8 @@
                 <div class="record__item-content">
                     <div class="item-text">
                         <p>
-                            <strong>{{reply.user.nick_name}}</strong> 
-                            <em v-if="reply.reply_to_user"> 回复 <strong>{{reply.reply_to_user.nick_name}}</strong></em>：
+                            <a :href="'author.work.html?user_id=' + reply.user.uid"><strong>{{reply.user.nick_name}}</strong></a> 
+                            <em v-if="reply.reply_to_user"> 回复 <a :href="'author.work.html?user_id=' + reply.reply_to_user.uid"><strong>{{reply.reply_to_user.nick_name}}</strong></a></em>：
                             {{reply.comment}}
                         </p>
                     </div>

@@ -1046,7 +1046,7 @@ response:
  * @param {[type]} option [description]
  */
 function pageviews(option){
-	var url = baseUrl + 'opus/pageviews/' + option.catalogId + '/0/';
+	var url = baseUrl + 'opus/pageviews/' + option.catalogId + (option.chapterId ? '/' + option.chapterId + '/' : '/0/');
 	var prosime = axios({
 		method: 'PUT',
 		url: url,
