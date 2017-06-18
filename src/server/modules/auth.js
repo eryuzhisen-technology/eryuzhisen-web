@@ -27,7 +27,7 @@ export default {
 		},
 		// 设置数据列表
 		auth_setLists (state, payload){
-			payload.map((item, index)=>{
+			payload.lists.map((item, index)=>{
 				item.avatar_url += '?x-oss-process=image/resize,w_180,h_180,m_fill/auto-orient,1/quality,q_100/format,jpg';
 			})
 			state.count = payload.count;
@@ -54,7 +54,7 @@ export default {
 		auth_getFollowList (context, payload){
 			var promise = auth.getFollowList(payload).then( res => {
 				res.list.map(list => {
-    				list.relation = 1;
+    				// list.relation = 1;
     			})
 				context.commit('auth_setLists', {
 					"lists": res.list,

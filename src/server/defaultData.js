@@ -15,8 +15,10 @@ function install(_Vue) {
 
 // 全站默认数据
 import avatar from '../common/images/img/avatar.png';
+import mbavatar from '../common/images/mb/author-avatar.png';
 var defaultData = {
-	avatar: avatar
+	avatar: avatar,
+    mbavatar: mbavatar
 }
 
 export default {

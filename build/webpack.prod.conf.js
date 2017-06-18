@@ -1,7 +1,7 @@
 var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
-var config = require('../config')
+var config = require('./config')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
@@ -12,6 +12,16 @@ var HtmlWebpackPlugin = require('html-webpack-plugin')
 var ChunkManifestPlugin = require('webpack-manifest-plugin')
 var WebpackChunkHash = require("webpack-chunk-hash")
 var InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin")
+
+// 项目区分name = npm run dev pc
+// 页面区分page = npm run dev pc index
+var argv;
+try {
+    argv = JSON.parse(process.env.npm_config_argv).original;
+}   catch(ex) {
+    argv = process.argv;
+}
+var project_name = argv[2] || 'pc';
 
 // 插件
 baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat(function() {
@@ -48,10 +58,10 @@ var webpackConfig = merge(baseWebpackConfig, {
         })
     },
     output: {
-        path: path.join(__dirname, '../dist'),
+        path: path.join(__dirname, '../dist/' + project_name),
         filename: 'js/[name].[chunkHash].js',
         // chunkFilename: 'js/[id].[chunkhash].js',
-        publicPath: '/dist/'
+        publicPath: '/dist/' + project_name + '/'
     },
     devtool: config.build.productionSourceMap ? '#source-map' : false,
     plugins: [
@@ -74,7 +84,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         }),
         // css模块提取出来
         new ExtractTextPlugin({
-            filename: 'css/[name].[contenthash].css'
+            filename: project_name + '/css/[name].[contenthash].css'
         }),
         // Compress extracted CSS. We are using this plugin so that possible
         // duplicated CSS from different components can be deduped.

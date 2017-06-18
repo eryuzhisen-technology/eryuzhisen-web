@@ -1,0 +1,143 @@
+/**
+ * 公共样式
+ */
+@import (reference) './mb.default';
+@import (reference) './mb.skin';
+
+* {
+	transition: color @default_speed_1;
+}
+
+// 文字布局
+.default_flex_middle {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+.default_flex_center {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.default_flex__v_middle {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.default_flex_left {
+	display: flex;
+	// justify-content: center;
+	align-items: center;
+}
+.default_flex_right {
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+.default_center { text-align: center; }
+.default_justify { text-align: justify; }
+.default_textOut {
+	overflow:hidden; 
+	text-overflow: ellipsis;
+	display: -webkit-box; 
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 2; 
+}
+
+// 边框
+.default_border-5 { border: 1px solid @default_backgroud_5; }
+.default_border-12 { border: 1px solid @default_backgroud_12; }
+.default_border-13 { border: 1px solid @default_backgroud_13; }
+.default_border-15 { border: 1px solid @default_backgroud_15; }
+.default_border-t-5 { border-top: 1px solid @default_backgroud_5; }
+.default_border-t-4 { border-top: 1px solid @default_backgroud_4; }
+.default_border-b-2 { border-bottom: 1px solid @default_backgroud_2; }
+.default_border-b-4 { border-bottom: 1px solid @default_backgroud_4; }
+.default_border-b-5 { border-bottom: 1px solid @default_backgroud_5; }
+.default_border-b-6 { border-bottom: 1px solid @default_backgroud_6; }
+.default_border-b-13 { border-bottom: 1px solid @default_backgroud_13; }
+.default_border-b-14 { border-bottom: 1px solid @default_backgroud_14; }
+.default_border-l-4 { border-left: 1px solid @default_backgroud_4; }
+.default_border-rr-2 { border-right: 1px solid @default_backgroud_2; }
+.default_border-rr-4 { border-right: 1px solid @default_backgroud_4; }
+.default_border-rr-5 { border-right: 1px solid @default_backgroud_5; }
+.default_border-rr-14 { border-right: 1px solid @default_backgroud_14; }
+.default_border-t-14 { border-top: 1px solid @default_backgroud_14; }
+.default_border-3 { border: 1px solid @default_backgroud_3; }
+.default_border-6 { border: 1px solid @default_backgroud_6; }
+.default_border-8 { border: 1px solid @default_backgroud_8; }
+.default_border-9 { border: 1px solid @default_backgroud_9; }
+.default_border-11 { border: 1px solid @default_backgroud_11; }
+.default_border-a-7 { border: 1px solid @default_backgroud_7; }
+.default_border-a-7 { border: 1px solid @default_backgroud_7; }
+.default_border-dcdcdc { border: 1px solid #dcdcdc; }
+.default_border-n { border: none; }
+.default_border-rr-n { border-right: none; }
+.default_border-t-n { border-top: none; }
+.default_border-r-n { border-radius: initial; }
+.default_border-r-4 { border-radius: 4px; }
+.default_border-r-t-4 { border-radius: 4px 4px 0 0; }
+.default_border-r-r-4 { border-radius: 0 4px 4px 0; }
+.default_border-r-l-4 { border-radius: 4px 0 0 4px; }
+.default_border-r-b-4 { border-radius: 0 0 4px 4px; }
+.default_border-r-10 { border-radius: 10px; }
+.default_border-r-50 { border-radius: 50%; }
+.default_border_shadow_1 { box-shadow: 0 0 1px @default_backgroud_14 inset; }
+.default_border_shadow_2 { box-shadow: 0 0 5px @default_backgroud_14 inset; }
+.default_border_shadow_3 { box-shadow: 0 0 1px @default_backgroud_14; }
+.default_border_shadow_4 { box-shadow: 0 0 30px @default_backgroud_14; }
+.default_border_shadow_5 { box-shadow: 0 0 20px @default_backgroud_14; }
+.default_border_shadow_6 { box-shadow: 0 0 10px 5px rgba(0,0,0,0.1); }
+
+// 文字颜色
+.default_color_1 { color: @default_color_1; }
+.default_color_2 { color: @default_color_2; }
+.default_color_3 { color: @default_color_3; }
+.default_color_4 { color: @default_color_4; }
+.default_color_5 { color: @default_color_5; }
+.default_color_6 { color: @default_color_6; }
+.default_color_7 { color: @default_color_7; }
+.default_color_8 { color: @default_color_8; }
+.default_color_9 { color: @default_color_9; }
+.default_color_fff { color: #fff; }
+
+// 背景颜色
+.default_backgroud_1 { background-color: @default_backgroud_1; }
+.default_backgroud_2 { background-color: @default_backgroud_2; }
+.default_backgroud_3 { background-color: @default_backgroud_3; }
+.default_backgroud_4 { background-color: @default_backgroud_4; }
+.default_backgroud_5 { background-color: @default_backgroud_5; }
+.default_backgroud_6 { background-color: @default_backgroud_6; }
+.default_backgroud_7 { background-color: @default_backgroud_7; }
+.default_backgroud_8 { background-color: @default_backgroud_8; }
+.default_backgroud_9 { background-color: @default_backgroud_9; }
+.default_backgroud_10 { background-color: @default_backgroud_10; }
+.default_backgroud_11 { background-color: @default_backgroud_11; }
+.default_backgroud_12 { background-color: @default_backgroud_12; }
+.default_backgroud_13 { background-color: @default_backgroud_13; }
+.default_backgroud_14 { background-color: @default_backgroud_14; }
+.default_backgroud_15 { background-color: @default_backgroud_15; }
+.default_backgroud_16 { background-color: @default_backgroud_16; }
+.default_backgroud_17 { background-color: @default_backgroud_17; }
+.default_backgroud_000 { background-color: #000; }
+.default_backgroud_fff { background-color: #fff; }
+.default_backgroud_n { background: none; }
+
+// 字体大小
+.default_font_size_1 { font-size: @default_font_size_1; }
+.default_font_size_2 { font-size: @default_font_size_2; }
+.default_font_size_3 { font-size: @default_font_size_3; }
+.default_font_size_4 { font-size: @default_font_size_4; }
+.default_font_size_5 { font-size: @default_font_size_5; }
+.default_font_size_6 { font-size: @default_font_size_6; }
+.default_font_size_7 { font-size: @default_font_size_7; }
+.default_font_size_8 { font-size: @default_font_size_8; }
+.default_font_size_9 { font-size: @default_font_size_9; }
+.default_font_size_10 { font-size: @default_font_size_10; }
+.default_font_size_11 { font-size: @default_font_size_11; }
+.default_font_bolder { font-weight: bolder; }
+
+
+
+

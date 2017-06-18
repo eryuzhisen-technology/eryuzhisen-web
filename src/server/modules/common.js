@@ -43,10 +43,18 @@ export default {
 				list.map((item, index) => {
 					switch(item.jumpui.page_id){
 						case 'catalog_info':
-							item.url = "article.intro.html?catalog_id=" + item.jumpui.arguments.catalog_id;
+							if (payload.isMB) {
+								item.url = "article.html?catalog_id=" + item.jumpui.arguments.catalog_id;
+							} else {
+								item.url = "article.intro.html?catalog_id=" + item.jumpui.arguments.catalog_id;	
+							}
 							break;
 						case 'user_info':
-							item.url = "author.work.html?user_id=" + item.jumpui.arguments.user_id;
+							if (payload.isMB) {
+								item.url = "author.html?user_id=" + item.jumpui.arguments.user_id;
+							} else {
+								item.url = "author.work.html?user_id=" + item.jumpui.arguments.user_id;
+							}
 							break;
 						case 'chapter_info':
 							item.url = 'article.read.html?catalog_id='+ item.jumpui.arguments.catalog_id +'&chapter_id=' + item.jumpui.arguments.chapter_id;

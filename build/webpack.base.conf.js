@@ -2,20 +2,33 @@ var path = require('path')
 var glob = require('glob')
 var webpack = require('webpack')
 var utils = require('./utils')
-var config = require('../config')
+var config = require('./config')
 var CopyWebpackPlugin = require('copy-webpack-plugin')
-var vueLoaderConfig = require('./vue-loader.conf')
 
 var os = require('os'); 
 var HappyPack = require('happypack');
 var happyThreadPool = HappyPack.ThreadPool({ size: os.cpus().length });
 
+
+// 项目区分name = npm run dev pc
+// 页面区分page = npm run dev pc index
+var argv;
+try {
+    argv = JSON.parse(process.env.npm_config_argv).original;
+}   catch(ex) {
+    argv = process.argv;
+}
+var project_name = argv[2] || 'pc';
+var page_name = argv[3] || '';
+    page_name = page_name.split(',');
+
+// 项目定义enter入口
+// 项目定义html
 var sourceObj = getSource();
 
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
-
 // 获取源文件
 function getSource() {
     var source = {
@@ -23,8 +36,38 @@ function getSource() {
         entry: {}
     };
 
-    var pageSource = glob.sync(resolve('/src/common/html/index.html'))[0];
+    var pageSource = glob.sync(resolve('/src/common/html/'+ project_name +'.html'))[0];
     var jsSource = glob.sync(resolve('/src/view/**/*.js'));
+    if (!pageSource || !jsSource) {
+        return source;
+    }
+
+    // 根据项目区分 | 页面区分进行筛选
+    for (var i = 0, len = jsSource.length; i < len;) {
+        var _module = jsSource[i];
+        if (_module && _module.indexOf('/view/'+ project_name) < 0) {
+            jsSource.splice(i, 1);
+        } else {
+            i++;
+        }
+    }
+    for (var i = 0; i < jsSource.length;) {
+        var isHave = false;
+        var _module = jsSource[i];
+   
+        for (var j = 0, _len = page_name.length; j < _len; j++) {
+            if (_module && _module.indexOf('/view/'+ project_name + '/' + page_name[j]) > -1) {
+                isHave = true;
+                break;
+            }
+        }
+
+        if (!isHave) {
+            jsSource.splice(i, 1);
+        } else {
+            i++;
+        }
+    }
 
     jsSource.forEach(function(item) {
         var name = path.basename(item, '.js');
@@ -44,8 +87,13 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.vue', '.css', '.less', '.json'],
         alias: {
-            'vue$': 'vue/dist/vue.esm.js',
-            '@': resolve('src'),
+            '@': resolve('./src'),
+            '@common': resolve('./src/common'),
+            '@css': resolve('./src/common/css'),
+            '@js': resolve('./src/common/js'),
+            '@lib': resolve('./src/lib'),
+            '@server': resolve('./src/server'),
+            '@component': resolve('./src/component')
         }
     },
     module: {
@@ -53,7 +101,14 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                options: vueLoaderConfig
+                options: {
+                    loaders: utils.cssLoaders({
+                        sourceMap: process.env.NODE_ENV === 'production'
+                          ? config.build.productionSourceMap
+                          : config.dev.cssSourceMap,
+                        extract: process.env.NODE_ENV === 'production'
+                    })
+                }
             }, 
             {
                 test: /\.js$/,

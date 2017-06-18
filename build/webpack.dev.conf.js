@@ -1,7 +1,7 @@
 var path = require('path')
 var utils = require('./utils')
 var webpack = require('webpack')
-var config = require('../config')
+var config = require('./config')
 var merge = require('webpack-merge')
 var baseWebpackConfig = require('./webpack.base.conf')
 var FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin')
@@ -14,6 +14,16 @@ var InlineManifestWebpackPlugin = require("inline-manifest-webpack-plugin")
 Object.keys(baseWebpackConfig.entry).forEach(function(name) {
     baseWebpackConfig.entry[name] = ['./build/dev-client'].concat(baseWebpackConfig.entry[name])
 })
+
+// 项目区分name = npm run dev pc
+// 页面区分page = npm run dev pc index
+var argv;
+try {
+    argv = JSON.parse(process.env.npm_config_argv).original;
+}   catch(ex) {
+    argv = process.argv;
+}
+var project_name = argv[2] || 'pc';
 
 // 插件
 baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat(function() {
@@ -32,6 +42,7 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat(function() {
     });
     return arr;
 }());
+
 baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat([
     // 定义魔法变量
     new webpack.DefinePlugin({
@@ -50,9 +61,9 @@ delete baseWebpackConfig.htmlFiles;
 
 module.exports = merge(baseWebpackConfig, {
     output: {
-        path: path.join(__dirname, '../dist'),
+        path: path.join(__dirname, '../dist' + project_name),
         filename: 'js/[name].js',
-        publicPath: '/dist/'
+        publicPath: '/dist/' + project_name + '/'
     },
     module: {
         // css-loader

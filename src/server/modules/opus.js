@@ -349,7 +349,7 @@ export default {
 					res.list[i].replayIndex = -2;
 				}
 	            context.commit('opus_setComment', {
-	            	count: res.page_info.total_count,
+	            	count: res.page_info ? res.page_info.total_count : res.list.length,
 					list: res.list,
 					more: res.more
 	            });

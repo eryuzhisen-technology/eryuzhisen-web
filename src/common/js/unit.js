@@ -15,3 +15,4 @@ String.prototype.gblen = function() {
 	}
 	return len;
 }
+
