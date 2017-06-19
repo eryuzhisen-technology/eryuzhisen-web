@@ -180,7 +180,7 @@
                                 <span>点赞：{{catalog.praise_count}}</span>
                                 <span>评论：{{catalog.comment_count}}</span>
                             </div>
-                            <a :href="'author.work.html?user_id=' + catalog.user.uid" v-if="catalog.user" class="info-text info-avatar">
+                            <a :href="'author.html?user_id=' + catalog.user.uid" v-if="catalog.user" class="info-text info-avatar">
                                 <img :src="catalog.user.avatar_url" />
                                 <span>{{catalog.user.nick_name}}</span>
                             </a>

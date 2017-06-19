@@ -37,6 +37,7 @@ export default {
 		},
 		// 获取banner列表
 		common_getHomeBanner (context, payload){
+			var payload = payload || {};
 			var promise = common.getHomeBanner().then( res => {
 				// 数据结构处理
 				var list = res.list;
@@ -66,7 +67,7 @@ export default {
                 });
                 return Promise.resolve(res);
             }).catch(err => {
-                return Promise.reject(res);
+                return Promise.reject(err);
             });
 
             return promise;

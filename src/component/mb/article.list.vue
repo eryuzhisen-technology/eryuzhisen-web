@@ -152,11 +152,11 @@
                     <p v-for="tag in item.labels" class="tag">{{tag}}</p>
                 </div>
             </div>
-            <div v-if="item.user" class="list-ft">
+            <a v-if="item.user" :href="'author.html?user_id=' + item.user.uid" class="list-ft">
                 <div class="ft-img" :style="{'background-image': 'url('+item.user.avatar_url+')'}">
                 </div>
                 <div class="ft-name">{{item.user.nick_name}}</div>
-            </div>
+            </a>
         </a>
         <div v-if="count == 0" class="list-empty">
             没有相关结果

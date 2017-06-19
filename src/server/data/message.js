@@ -1,5 +1,4 @@
-import axios from 'axios'
-import {baseUrl, _reject, _rejectObj} from '../config'
+import {baseUrl, _reject, _rejectObj, axios} from '../config'
 import Cookies from 'js-cookie';
 var token = Cookies.get('token');
 

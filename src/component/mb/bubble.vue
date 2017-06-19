@@ -1,35 +1,33 @@
 <!-- style样式代码 -->
 <style lang="less">
-@import (reference) '../../common/css/common';
+@import (reference) '../../common/css/mb.common';
 	@bubble: c-bubble;
 
 	.@{bubble}-mask {
 		width: 100%;
 		height: 100%;
-		z-index: 20;
+		z-index: 2;
 		position: fixed;
 		left: 0;
 		top: 0;
 		background: rgba(0,0,0,0.5);
+		&.z-nobg {
+			background: none;
+		}
 	}
 	.@{bubble}-top {
 		position: fixed;
-		top: 0;
-		left: 0;
-		z-index: 30;
-		width: 100%;
-		height: .6rem;
-		line-height: .6rem;
-		.default_font_size_3;
+		top: 50%;
+		left: 50%;
+		z-index: 200;
+		width: 4rem;
+		height: 2rem;
+		margin: -1.5rem 0 0 -2rem;
+		background: rgba(0,0,0,1);
+		.default_border-r-10;
+		.default_font_size_6;
 		.default_color_1;
-		.default_center;
-		.default_border_shadow_5;
-		&.z-default {
-			.default_backgroud_3;
-		}
-		&.z-warn {
-			.default_backgroud_1;
-		}
+		.default_flex__v_middle;
 	}
 	.@{bubble}-warn {
 		position: fixed;
@@ -40,7 +38,7 @@
 		transform: translate(-50%, -50%);
 		overflow: hidden;
 		.default_backgroud_3;
-		.default_border-r-4;
+		.default_border-r-10;
 		& .warn-title {
 			padding-top: 30px;
 			margin-bottom: 20px;
@@ -49,14 +47,21 @@
 			.default_font_size_4;
 		}
 		& .warn-content {
-			padding: 0 30px;
+			padding: 0 .6rem;
 			line-height: 1.5rem;
 			margin-bottom: 30px;
 			.default_color_2;
-			.default_font_size_2;
+			.default_font_size_3;
+			& h3 {
+				margin-bottom: .4rem;
+				.default_color_1;
+				.default_font_size_8;
+				.default_font_bolder;
+				.default_center;
+			}
 			& p {
-				line-height: 1.5rem;
-				margin-bottom: 20px;
+				line-height: 1.5em;
+				.default_center;
 			}
 		 	& a {
 		 		line-height: 1.5rem;
@@ -69,25 +74,22 @@
 		}
 		& .warn-bottom {
 			width: 100%;
-			height: 50px;
-			padding: 10px 0;
+			height: 1rem;
+			padding: .2rem 0;
 			overflow: hidden;
 			.default_backgroud_2;
+			.default_flex_center;
 			& .warn-bottom-item {
-				float: left;
-				width: 50%;
-				height: 30px;
-				line-height: 30px;
+				flex: 1;
+				height: .6rem;
+				line-height: .6rem;
 				text-align: center;
 				.default_color_2;
-				.default_font_size_2;
-				.default_pointer;
-				&:hover {
-					.default_color_1;
-				}
+				.default_font_size_6;
+				.default_font_bolder;
 			}
 			& .warn-bottom-cancel {
-				.default_border-rr-5;
+				.default_border-rr-4;
 			}
 		}
 	}
@@ -96,9 +98,9 @@
 <!-- html代码 -->
 <template>
 <div id="bubble" class="c-bubble" :class="{cpm_hide: !data.show}">
-	<div class="c-bubble-mask" @click="close"></div>
+	<div class="c-bubble-mask" @click="close" :class="{'z-nobg': data.type == 'top'}"></div>
 	<!-- 服务请求提示 -->
-    <div v-if="data.type == 'top'" class="c-bubble-top" :class="data.top.status">
+    <div v-if="data.type == 'top'" class="c-bubble-top">
     	{{data.top.msg}}
     </div>
 
@@ -108,8 +110,8 @@
     	<div v-if="data.warn.html" class="warn-content" v-html="data.warn.html"></div>
     	<div v-else class="warn-content">{{data.warn.content}}</div>
     	<div class="warn-bottom">
-    		<div class="warn-bottom-item warn-bottom-cancel" @click="close">取消</div>
-    		<div class="warn-bottom-item warn-bottom-comfire" @click="comfire">确认</div>
+    		<div class="warn-bottom-item warn-bottom-cancel" @click="close">{{data.warn.btnCancel || '取消'}}</div>
+    		<div class="warn-bottom-item warn-bottom-comfire" @click="comfire">{{data.warn.btnComfire || '确认'}}</div>
     	</div>
     </div>
 </div>

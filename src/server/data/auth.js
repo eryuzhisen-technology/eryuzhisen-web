@@ -1,9 +1,5 @@
-import {baseUrl, _reject, _rejectObj} from '../config'
+import {baseUrl, _reject, _rejectObj, axios} from '../config'
 import Cookies from 'js-cookie';
-// 设置基本的请求headers
-import axios from 'axios'
-axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
-axios.defaults.headers.get['X-Requested-With'] = 'XMLHttpRequest';
 var token = Cookies.get('token');
 
 /**

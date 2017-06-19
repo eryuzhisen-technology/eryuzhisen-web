@@ -4,6 +4,13 @@
  * baseUrl: 域名地址
  * imgBaseUrl: 图片所在域名地址
  */
+import axios from 'axios'
+//  统一设置请求头部
+axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.get['X-Requested-With'] = 'XMLHttpRequest';
+axios.defaults.headers.common['client_type'] = '3';
+axios.defaults.headers.common['client_version'] = '1.0';
+
 var baseUrl; 
 var imgBaseUrl = '';
 var distUrl = '';
@@ -44,5 +51,6 @@ export {
 	imgBaseUrl,
 	distUrl,
 	_reject,
-	_rejectObj
+	_rejectObj,
+	axios
 }

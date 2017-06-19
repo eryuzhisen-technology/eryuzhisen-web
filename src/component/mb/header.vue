@@ -41,7 +41,7 @@
 <template>
 <div class="c-header">
 	<div class="c-header-wrap">
-		<div class="logo"></div>
+		<a href="./index.html" class="logo"></a>
 		<a href="https://www.eryuzhisen.com" class="btn">切换电脑版</a>
 	</div>
 </div>

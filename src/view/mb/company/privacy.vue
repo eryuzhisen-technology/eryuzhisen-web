@@ -94,34 +94,7 @@
 export default {
     data () {
     	return {
-			menuTopType: 'privacy',
-			menuTop: {
-                about: {
-                    title: '关于我们',
-                    url: 'about.html'
-                },
-				agreement: {
-                    title: '用户协议',
-                    url: 'agreement.html'
-                },
-				privacy: {
-                    title: '隐私政策',
-                    url: 'privacy.html',
-					isActive:true
-                },
-				statement: {
-                    title: '原创声明',
-                    url: 'statement.html'
-                },
-				standard: {
-					title: '社区规范',
-					url: 'standard.html'
-				},
-                contact: {
-                    title: '联系我们',
-                    url: 'contact.html'
-                }
-            }
+			
     	}
     },
     methods: {
