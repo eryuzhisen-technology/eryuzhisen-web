@@ -199,7 +199,7 @@
         }
         & .article-home {
             position: fixed;
-            bottom: .8rem;
+            bottom: 1.8rem;
             right: .3rem;
             width: 1.1rem;
             height: 1.1rem;
