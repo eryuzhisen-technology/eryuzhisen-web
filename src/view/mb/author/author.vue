@@ -5,6 +5,7 @@
         width: 100%;
         height: 100%;
         padding: .3rem;
+        padding-bottom: 1.3rem;
         & .author-hd {
             position: relative;
             width: 100%;
@@ -135,9 +136,10 @@
             right: .3rem;
             width: 1.1rem;
             height: 1.1rem;
-            .default_backgroud_16;
+            .default_backgroud_3;
             .default_border-r-50;
             .skin_home;
+            .default_border_shadow_6;
         }
     }
 </style>

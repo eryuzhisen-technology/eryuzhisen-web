@@ -68,16 +68,6 @@
                 .default_border-r-50;
             }
         }
-        & .top {
-            position: fixed;
-            bottom: .8rem;
-            right: .3rem;
-            width: 1.1rem;
-            height: 1.1rem;
-            .default_backgroud_16;
-            .default_border-r-50;
-            .skin_top;
-        }
     }
 </style>
 
@@ -99,7 +89,6 @@
         <a v-if="catalog.user" class="author" target="_black" :href="'author.html?user_id=' + catalog.user.uid">
             <img :src="catalog.user.avatar_url" />
         </a>   
-        <div v-if="hasScroll" class="top" @click="top"></div> 
     </div>
     </div>
     <Bubble />
@@ -112,7 +101,6 @@ export default {
     data (){
         return {
             catalog_id: '',
-            hasScroll: false
         }
     },
     props: ['resType', 'isHideEmpty'],
@@ -149,9 +137,6 @@ export default {
         textFormat: function (value) {  
             return value.replace(/[\r\n]/g, '<br />');
         },
-        top (){
-            $(window).scrollTop(0);
-        }
     },
     created (){
         
@@ -163,15 +148,6 @@ export default {
         // 获取url的参数
         this.catalog_id = this.$url.getUrlParam('catalog_id');
         this.chapter_id = this.$url.getUrlParam('chapter_id');
-
-        $(window).scroll( e => {
-            var scrollTop = $(window).scrollTop();
-            if (scrollTop > $(window).height()/2) {
-                this.hasScroll = true;
-            } else {
-                this.hasScroll = false;
-            }
-        })
 
         // 获取文章目录详情
         this.getCatalogDetail();

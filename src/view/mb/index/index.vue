@@ -5,6 +5,7 @@
         width: 100%;
         padding: 0 .3rem;
         padding-top: .2rem;
+        padding-bottom: 1.3rem;
         & .banner {
             overflow: hidden;
             .default_border-r-10;
@@ -92,9 +93,10 @@
             right: .3rem;
             width: 1.1rem;
             height: 1.1rem;
-            .default_backgroud_16;
+            .default_backgroud_3;
             .default_border-r-50;
             .skin_top;
+            .default_border_shadow_6;
         }
     }
 </style>
@@ -125,10 +127,10 @@
                 isHideEmpty="true"
             />
         </div>
-        <div class="ft">
+        <!-- <div class="ft">
             <a href="./register.html" class="ft-item">注册</a>
             <a href="./login.html" class="ft-item">登陆</a>
-        </div>
+        </div> -->
         <div v-if="hasScroll" class="top" @click="top"></div>
     </div>
     <Bubble />
