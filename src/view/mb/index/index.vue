@@ -5,7 +5,6 @@
         width: 100%;
         padding: 0 .3rem;
         padding-top: .2rem;
-        padding-bottom: 1.3rem;
         & .banner {
             overflow: hidden;
             .default_border-r-10;
