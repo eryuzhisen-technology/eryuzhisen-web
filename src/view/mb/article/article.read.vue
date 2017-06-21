@@ -5,9 +5,12 @@
         width: 100%;
         height: 100%;
         padding: .3rem;
+        padding-top: 0;
         & .m-article-read-wrap {
             width: 100%;
             height: 100%;
+            overflow: hidden;
+            border-radius: 0 0 .1rem .1rem;
             .default_backgroud_3;
         }
         & .content {
@@ -17,6 +20,7 @@
                 margin-bottom: .6rem;
                 .default_font_size_11;
                 .default_color_1;
+                .default_font_bolder;
             }
             & .content-read {
                 .default_color_2;
@@ -64,6 +68,16 @@
                 .default_border-r-50;
             }
         }
+        & .top {
+            position: fixed;
+            bottom: .8rem;
+            right: .3rem;
+            width: 1.1rem;
+            height: 1.1rem;
+            .default_backgroud_16;
+            .default_border-r-50;
+            .skin_top;
+        }
     }
 </style>
 
@@ -84,7 +98,8 @@
         <a :href="'article.html?catalog_id=' + catalog_id" class="chapter">查看全部章节</a>
         <a v-if="catalog.user" class="author" target="_black" :href="'author.html?user_id=' + catalog.user.uid">
             <img :src="catalog.user.avatar_url" />
-        </a>    
+        </a>   
+        <div v-if="hasScroll" class="top" @click="top"></div> 
     </div>
     </div>
     <Bubble />
@@ -96,7 +111,8 @@ import {mapState} from 'vuex'
 export default {
     data (){
         return {
-            catalog_id: ''
+            catalog_id: '',
+            hasScroll: false
         }
     },
     props: ['resType', 'isHideEmpty'],
@@ -132,6 +148,9 @@ export default {
         },
         textFormat: function (value) {  
             return value.replace(/[\r\n]/g, '<br />');
+        },
+        top (){
+            $(window).scrollTop(0);
         }
     },
     created (){
@@ -144,6 +163,15 @@ export default {
         // 获取url的参数
         this.catalog_id = this.$url.getUrlParam('catalog_id');
         this.chapter_id = this.$url.getUrlParam('chapter_id');
+
+        $(window).scroll( e => {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > $(window).height()/2) {
+                this.hasScroll = true;
+            } else {
+                this.hasScroll = false;
+            }
+        })
 
         // 获取文章目录详情
         this.getCatalogDetail();

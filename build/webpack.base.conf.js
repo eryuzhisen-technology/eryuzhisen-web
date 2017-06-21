@@ -137,8 +137,9 @@ module.exports = {
     plugins: [
         // 提前加载模块并全局
         new webpack.ProvidePlugin({
-            $: 'jquery',
-            'jQuery': 'jquery'
+            $: project_name == 'mb' ? 'webpack-zepto' : 'jquery',
+            'zepto': project_name == 'mb' ? 'webpack-zepto' : 'jquery',
+            'jQuery': project_name == 'mb' ? 'webpack-zepto' : 'jquery'
         }),
 
         new HappyPack({

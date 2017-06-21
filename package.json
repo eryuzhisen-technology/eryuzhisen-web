@@ -24,6 +24,7 @@
     "vue": "^2.2.2",
     "vue-quill-editor": "^2.0.4",
     "vue-resource": "^1.2.1",
+    "vue-touch": "^2.0.0-beta.4",
     "vuex": "^2.2.1",
     "webpack-chunk-hash": "^0.4.0",
     "webpack-manifest-plugin": "^1.1.0",

@@ -117,9 +117,9 @@ export default {
     	},
         goNext (){
             if (this.from) {
-                window.location.href = decodeURIComponent(this.from);
+                window.location.replace(decodeURIComponent(this.from));
             } else {
-                window.location.href = './index.html';
+                window.location.replace('./index.html');
             }
         }
     },

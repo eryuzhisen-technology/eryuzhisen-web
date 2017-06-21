@@ -19,7 +19,7 @@
             </div>
             <div class="form-item-input">
                 <input type="text" v-model="pic_code" placeholder="图形码" />
-                <img :click="getCode" class="pic" :src="'data:image/png;base64,' + pic_vcode" />
+                <img @click="getCode" class="pic" :src="'data:image/png;base64,' + pic_vcode" />
             </div>
             <div class="form-item-input">
                 <input type="text" v-model="phone_vcode" placeholder="验证码" />
@@ -88,7 +88,6 @@ export default {
             if ($.trim(this.phone) == '') {
                 vaid = false;
                 msg = '请输入手机号';
-                return false;
             } else if (!/^1\d{10}$/i.test(this.phone)) {
                 vaid = false;
                 msg = '手机号格式不正确';
@@ -194,12 +193,26 @@ export default {
                 this.$store.dispatch('user_sigup', {
                     device_no: (new Date()).getTime()
                 }).then(() => {
-                    window.location.href = './setting.userinfo.html';
+                    this.goNext();
                 }).catch( err => {
                     this.$store.dispatch('bubble_fail', err);
                 }); 
             }); 
-    	}
+    	},
+        goNext (){
+            if (this.from) {
+                window.location.replace(decodeURIComponent(this.from));
+            } else {
+                window.location.replace('./index.html');
+            }
+        }
+    },
+    watch: {
+        isLogin (newVal){
+            if (newVal) {
+                this.goNext();
+            }
+        }
     },
     mounted(){
         var that = this;

@@ -10,12 +10,15 @@ import store from '@server/store'
 import HeaderDom from '@component/mb/header.vue';
 import Bubble from '@component/mb/bubble.vue';
 import ArticleList from '@component/mb/article.list.vue';
-
+import VueTouch from 'vue-touch';
 
 Vue.component('HeaderDom', HeaderDom)
 Vue.component('Bubble', Bubble)
 Vue.component('ArticleList', ArticleList)
-
+Vue.use(VueTouch, {name: 'v-touch'})
+VueTouch.config.swipe = {
+	threshold: 50
+}
 
 export {
 	Vue,

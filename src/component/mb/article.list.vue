@@ -69,6 +69,7 @@
             padding-left: .2rem;
             .default_flex_left;
             .default_backgroud_4;
+            border-radius: 0 0 .1rem .1rem;
             & .ft-img {
                 width: .3rem;
                 height: .3rem;
@@ -84,8 +85,10 @@
             }
         }
         & .list-left {
+            position: relative;
             width: 4.2rem;
-            height: 2.5rem;
+            height: 100%;
+            padding: .3rem 0;
             & .list-left-tit {
                 margin-bottom: .2rem;
                 .default_font_size_5;
@@ -106,10 +109,22 @@
                     .default_font_size_1;
                 }
             }
+            & .list-left-btns {
+                position: absolute;
+                bottom: .3rem;
+                left: 0;
+                & .btn {
+                    margin-right: .2rem;
+                    .default_font_size_3;
+                    .default_color_2;
+                }
+            }
         }
         & .list-right {
             width: 1.8rem;
             height: 2.7rem;
+            overflow: hidden;
+            .default_border-r-10;
         }
         & .list-empty {
             width: 100%;
@@ -128,12 +143,15 @@
 <template>
 <div class="c-article">
     <div class="c-article-wrap">
-        <a v-if="showType == 1" v-for="item in lists" class="c-article-list" :class="{'z-lr': showType == 1}" :href="'article.html?catalog_id=' + item.catalog_id">
+        <a v-if="showType == 1" v-for="(item, index) in lists" class="c-article-list" :class="{'z-lr': showType == 1}" :href="'article.html?catalog_id=' + item.catalog_id">
             <div class="list-left">
                 <div class="list-left-tit">{{item.catalog_title}}</div>
                 <div class="list-left-text">{{item.catalog_desc}}</div>
                 <div class="list-left-tag">
                     <p v-for="tag in item.labels" class="tag">{{tag}}</p>
+                </div>
+                <div class="list-left-btns">
+                    <div class="btn" @click.stop.prevent="mark(item, index)">{{item.is_collected == 1 ? '已收藏' : '加入收藏'}}</div>
                 </div>
             </div>
             <div class="list-right">
@@ -216,7 +234,6 @@ export default {
 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
-                this.pageIndex--;
                 this.$store.dispatch('bubble_fail', err);
             })
         },
@@ -235,7 +252,6 @@ export default {
 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
-                this.pageIndex--;
                 this.$store.dispatch('bubble_fail', err);
             }
             )
@@ -266,7 +282,65 @@ export default {
                 }
                 this.getCatalogList();
             }
-        }
+        },
+        delFavorites (catalog, index){
+            this.$store.dispatch('opus_delFavorites', {
+                catalogId: catalog.catalog_id
+            }).then( res => {
+                var _catalog = $.extend(true, {}, catalog);
+                    _catalog.is_collected = 0;
+                console.log('------',_catalog.is_collected)
+                this.$store.dispatch('opus_setArticleDetail', {
+                    index: index,
+                    catalog: _catalog
+                })
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        addFavorites (catalog, index){
+            this.$store.dispatch('opus_addFavorites', {
+                catalogId: catalog.catalog_id
+            }).then( res => {
+                this.$store.dispatch('bubble_showBubble', {
+                    show: true,
+                    type: 'top',
+                    top: {
+                        msg: '《'+ catalog.catalog_title +'》已加入收藏'
+                    }
+                })
+                var _catalog = $.extend(true, {}, catalog);
+                    _catalog.is_collected = 1;
+                console.log(_catalog.is_collected)
+
+                this.$store.dispatch('opus_setArticleDetail', {
+                    index: index,
+                    catalog: _catalog
+                })
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        mark (catalog, index){
+            // 判断登陆
+            if (!this.user.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
+            if (catalog.is_collected == 1) {
+                this.delFavorites(catalog, index);
+            } else {
+                this.addFavorites(catalog, index);
+            }
+        },
     },
     mounted (){
         // 获取url的参数

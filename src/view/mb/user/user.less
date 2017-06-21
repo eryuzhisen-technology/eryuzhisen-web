@@ -21,11 +21,15 @@
 			.default_border-r-10;
 			.default_flex_middle;
 			& input {
-				width: 3.5rem;
+				width: 100%;
+				height: 100%;
 				.default_color_2;
 				.default_font_size_5;
 			}
 			& .icon {
+				position: absolute;
+				top: .33rem;
+				right: .3rem;
 				width: .44rem;
 				height: .44rem;
 				background-image: url(../../../common/images/mb/user-icon-1.png);
@@ -33,6 +37,11 @@
 				background-position: center;
 			}
 			& .code {
+				position: absolute;
+				right: .3rem;
+				top: 0;
+				height: 100%;
+				.default_flex_center;
 				.default_color_2;
 				.default_font_size_3;
 			}

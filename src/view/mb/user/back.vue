@@ -49,7 +49,6 @@ export default {
     	}
     },
     computed: mapState({
-        isCodeCan: state => state.user.isCodeCan,
         pic_vid: state => state.user.code.pic_vid,
         pic_vcode: state => state.user.code.pic_vcode,
         timeText: state => state.user.time ? '重新发送 ' + state.user.time : '发送验证码'
@@ -194,9 +193,16 @@ export default {
     	},
         goNext (){
             if (this.from) {
-                window.location.href = decodeURIComponent(this.from);
+                window.location.replace(decodeURIComponent(this.from));
             } else {
-                window.location.href = './index.html';
+                window.location.replace('./index.html');
+            }
+        }
+    },
+    watch: {
+        isLogin (newVal){
+            if (newVal) {
+                this.goNext();
             }
         }
     },

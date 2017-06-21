@@ -5,7 +5,7 @@
         width: 100%;
         padding: 0 .3rem;
         padding-top: .2rem;
-        .banner {
+        & .banner {
             overflow: hidden;
             .default_border-r-10;
             margin-bottom: .2rem;
@@ -14,6 +14,7 @@
                 width: 100%;
                 height: 2.75rem;
                 overflow: hidden;
+                border-radius: .1rem .1rem 0 0;
             }
             & .banner-list-item {
                 position: absolute;
@@ -21,6 +22,22 @@
                 left: 0;
                 width: 100%;
                 height: 100%;
+                transform: translate(0, 0);
+            }
+            & .banner-list-item.z-active {
+                transition: all .25s;
+            }
+            & .banner-list-item.z-left {
+                left: 100%;
+            }
+            & .banner-list-item.z-right {
+                left: -100%;
+            }
+            & .banner-list-item.z-moveleft {
+                transform: translate(-100%, 0);
+            }
+            & .banner-list-item.z-moveright {
+                transform: translate(100%, 0);
             }
             & .banner-index {
                 width: 100%;
@@ -42,9 +59,42 @@
                 opacity: 1;
             }
         }
-        .catalog {
+        & .catalog {
             width: 100%;
             height: 100%;
+        }
+        & .ft {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1rem;
+            .default_backgroud_3;
+            .default_flex_center;
+            .default_border_shadow_6;
+            & .ft-item {
+                flex: 1;
+                height: .6rem;
+                .default_color_1;
+                .default_font_size_6;
+                .default_flex_center;
+                &:first-child {
+                    .default_border-rr-5;
+                }
+                &.z-active {
+                    .default_color_2;
+                }
+            }   
+        }
+        & .top {
+            position: fixed;
+            bottom: .8rem;
+            right: .3rem;
+            width: 1.1rem;
+            height: 1.1rem;
+            .default_backgroud_16;
+            .default_border-r-50;
+            .skin_top;
         }
     }
 </style>
@@ -54,14 +104,17 @@
 <div class="app-body">
     <HeaderDom />
     <div class="m-index">
-        <div class="banner">
-            <div class="banner-list">
-                <a v-for="item in banner_images" class="banner-list-item" :href="item.url">
+        <div  class="banner">
+            <v-touch class="banner-list"
+                v-on:swipeleft="bannerSidler('left')"
+                v-on:swiperight="bannerSidler('right')"
+            >
+                <a v-for="(item, i) in banner_images" class="banner-list-item" :href="item.url" :class="{'cpm_hide': i != index}">
                     <img :src="item.image_url" />
                 </a>
-            </div>
+            </v-touch>
             <div class="banner-index">
-                <div v-for="item in banner_images" class="banner-index-item"></div>
+                <div v-for="(item, i) in banner_images" class="banner-index-item" :class="{'z-active': i == index}"></div>
             </div>
         </div>
         <div class="catalog">
@@ -72,6 +125,11 @@
                 isHideEmpty="true"
             />
         </div>
+        <div class="ft">
+            <a href="./register.html" class="ft-item">注册</a>
+            <a href="./login.html" class="ft-item">登陆</a>
+        </div>
+        <div v-if="hasScroll" class="top" @click="top"></div>
     </div>
     <Bubble />
 </div>
@@ -84,11 +142,9 @@ export default {
         return {
             // banner
             isCan: false,
-            big_index: 1,
-            small_index: 1,
+            index: 0,
             bannerTimer: null,
-
-            tagIndex: 0
+            hasScroll: false
         }
     },
     computed: mapState({
@@ -97,50 +153,52 @@ export default {
         article: state => state.opus.article
     }),
     methods: {
-        bannerSwitch (type){
+        bannerSidler (type){
             if (!this.isCan) {
                 return false;
             }
             this.isCan = false;
-            this.switch(type);
-        },
-        switch (type) {
+
             clearTimeout(this.bannerTimer);
 
-            var type = type || 'left';
-
-            var lists = $('.m-index-banner-wrap');
-            lists.removeClass('z-active');
-
-            if (type == 'left' && this.small_index == 0) {
-                this.small_index = this.banner_size;
-            } else if (type == 'right' && this.small_index == this.banner_size) {
-                this.small_index = 0;
+            var lens = this.banner_images.length;
+            var _index;
+            if (type == 'left') {
+                if (this.index == lens-1) {
+                    _index = 0;
+                } else {
+                    _index = this.index + 1;
+                }
+            } else {
+                if (this.index == 0) {
+                    _index = lens - 1;
+                } else {
+                    _index = this.index - 1;
+                }
             }
 
-            if (type == 'left' && this.big_index == 1) {
-                this.big_index = this.banner_size + 1;
-            } else if (type == 'right' && this.big_index == this.banner_size) {
-                this.big_index = 0;
-            }
-
+            var lists = $(".banner-list-item");
+            var nowList = lists.eq(this.index);
+            var nextList = lists.eq(_index);
+            nextList.removeClass('cpm_hide').addClass('z-'+type);
             setTimeout( res => {
                 lists.addClass('z-active');
-                if (type == 'left') {
-                    this.big_index--;
-                    this.small_index--;
-                } else {
-                    this.big_index++;
-                    this.small_index++;
-                }
+                nowList.addClass('z-move'+type);
+                nextList.addClass('z-move'+type);
                 setTimeout( res => {
+                    lists.removeClass('z-active');
+                    nowList.addClass('cpm_hide').removeClass('z-moveleft z-moveright z-left z-right');
+                    nextList.removeClass('z-moveleft z-moveright z-left z-right');
                     this.isCan = true;
+                    this.index = _index;
+
                     this.bannerTimer = setTimeout( res => {
-                        this.switch();
+                        this.bannerSidler('left');
                     }, 3000)
-                }, 500)
+                }, 250)
             }, 10)
         },
+
         // 获取banner数据
         getHomeBanner (){
             var cache_banner = this.$version.banner;
@@ -148,16 +206,20 @@ export default {
             
             if (banner) {
                 this.$store.dispatch('common_setBannerList', banner).then( res => {
-                    this.switch();
-                    this.isCan = true;    
+                    this.isCan = true;
+                    this.bannerTimer = setTimeout( res => {
+                        this.bannerSidler('left');
+                    }, 3000)
                 })
                 return false;
             }
             this.$store.dispatch('common_getHomeBanner', {
                 isMB: true
             }).then( res => {
-                this.switch();
                 this.isCan = true;
+                this.bannerTimer = setTimeout( res => {
+                    this.bannerSidler('left');
+                }, 3000)
 
                 this.$cache.setStore(cache_banner.key, res.list, cache_banner.version, cache_banner.time);
                 this.$store.dispatch('bubble_success', res);
@@ -169,10 +231,25 @@ export default {
             this.$eventHub.$emit('getLabelList', {
                 number: 10
             });
+        },
+        top (){
+            $(window).scrollTop(0);
         }
     },
+    updated (){
+
+    },  
     mounted (){
         var that = this;
+
+        $(window).scroll( e => {
+            var scrollTop = $(window).scrollTop();
+            if (scrollTop > $(window).height()/2) {
+                this.hasScroll = true;
+            } else {
+                this.hasScroll = false;
+            }
+        })
 
         // 获取banner信息
         this.getHomeBanner();

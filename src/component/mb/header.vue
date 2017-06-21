@@ -8,6 +8,7 @@
         z-index: 100;
 		width: 100%;
 		height: 1rem;
+        .default_border_shadow_6;
 		& .c-header-wrap {
 			width: 100%;
 			height: 100%;
@@ -40,10 +41,10 @@
 <!-- html代码 -->
 <template>
 <div class="c-header">
-	<div class="c-header-wrap">
-		<a href="./index.html" class="logo"></a>
+	<a href="./index.html" class="c-header-wrap">
+		<div class="logo"></div>
 		<a href="https://www.eryuzhisen.com" class="btn">切换电脑版</a>
-	</div>
+	</a>
 </div>
 </template>
 

@@ -20,10 +20,12 @@
 		top: 50%;
 		left: 50%;
 		z-index: 200;
-		width: 4rem;
+		width: 5rem;
 		height: 2rem;
+		padding: 0 .3rem;
 		margin: -1.5rem 0 0 -2rem;
-		background: rgba(0,0,0,1);
+		line-height: 1.5em;
+		background: rgba(0,0,0,.7);
 		.default_border-r-10;
 		.default_font_size_6;
 		.default_color_1;

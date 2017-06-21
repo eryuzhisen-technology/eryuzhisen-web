@@ -21,21 +21,23 @@
                 & .img {
                     width: 100%;
                     height: 100%;
-                    background-size: 100%;
                     filter: blur(.1rem);
+                    background-position: left center;
+                    background-size: cover;
                     .default_backgroud_6;
                 }
                 & .content {
                     position: absolute;
                     top: 0;
                     left: 0;
-                    width: 100%;
+                    width: 200%;
                     height: 3.8rem;
                     overflow: hidden;
+                    background-color: rgba(0,0,0,0.5);
+                    transition: all .25s;
+                    .default_flex_middle;
                     & .content-item {
-                        position: absolute;
-                        top: 0;
-                        left: 0;
+                        flex: 1;
                         width: 100%;
                         height: 100%;
                         &:last-child {
@@ -46,13 +48,16 @@
                         padding: 0 .3rem;
                         .default_flex_middle;
                         & .info-left {
+                            position: relative;
                             width: 3.5rem;
-                            height: 2.8rem;
+                            height: 100%;
+                            padding: .4rem 0;
                         }
                         & .info-right {
                             width: 2rem;
                             height: 3rem;
                             overflow: hidden;
+                            .default_border-r-10;
                         }
                         & .info-name {
                             margin-bottom: .3rem;
@@ -71,8 +76,9 @@
                         }
                         & .info-avatar {
                             position: absolute;
-                            left: .3rem;
+                            left: 0;
                             bottom: .4rem;
+                            margin-bottom: 0;
                             .default_flex_left;
                             & img {
                                 width: .4rem;
@@ -83,14 +89,22 @@
                         }
                     }
                     & .content-intro {
-                        padding: .6rem .5rem;
+                        padding: .5rem;
                         overflow: hidden;
                         .default_flex__v_middle;
                         & .text {
+                            text-align: justify;
                             line-height: 1.5em;
                             .default_color_1;
                             .default_font_size_3;
+                            .default_textOut_7;
                         }
+                    }
+                    &.z-0 {
+                        transform: translate(0, 0);
+                    }
+                    &.z-1 {
+                        transform: translate(-50%, 0);   
                     }
                 }
                 & .index {
@@ -159,6 +173,39 @@
                 }
             }
         }
+        & .article-ft {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1rem;
+            .default_backgroud_3;
+            .default_flex_center;
+            .default_border_shadow_6;
+            & .ft-item {
+                flex: 1;
+                height: .6rem;
+                .default_color_1;
+                .default_font_size_6;
+                .default_flex_center;
+                &:first-child {
+                    .default_border-rr-5;
+                }
+                &.z-active {
+                    .default_color_2;
+                }
+            }   
+        }
+        & .article-home {
+            position: fixed;
+            bottom: .8rem;
+            right: .3rem;
+            width: 1.1rem;
+            height: 1.1rem;
+            .default_backgroud_16;
+            .default_border-r-50;
+            .skin_home;
+        }
     }
 </style>
 
@@ -170,10 +217,15 @@
         <div class="article-hd">
             <div class="article-info">
                 <div class="img" :style="{'background-image': 'url('+ catalog.catalog_cover_url +')'}"></div>
-                <div class="content">
+                <v-touch class="content"
+                    v-on:swipeleft="silder('left')"
+                    v-on:swiperight="silder('right')"
+                    :class="'z-'+index"
+                >
                     <div class="content-item content-info">
                         <div class="info-left">
                             <div class="info-name">{{catalog.catalog_title}}</div>
+                            <div class="info-text info-status">{{catalog_status['catalog_status'+catalog.catalog_status]}}</div>
                             <div class="info-text info-words">字数：{{catalog.words_count}}</div>
                             <div class="info-text info-level">作品等级：{{level['level'+catalog.level]}}</div>
                             <div class="info-text info-number">
@@ -192,10 +244,10 @@
                     <div class="content-item content-intro">
                         <div v-html="textFormat(catalog.catalog_desc || '')" class="text"></div>
                     </div>
-                </div>
+                </v-touch>
                 <div class="index">
-                    <div class="index-item z-active"></div>
-                    <div class="index-item"></div>
+                    <div class="index-item" :class="{'z-active': index == 0}"></div>
+                    <div class="index-item" :class="{'z-active': index == 1}"></div>
                 </div>
             </div>
             <div class="article-tag">
@@ -210,6 +262,12 @@
                 <a v-for="item in chapter.lists" :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+ item.chapter_id" class="chapter-item">{{item.chapter_title}}</a>
             </div>
         </div>
+        <div class="article-ft">
+            <div class="ft-item" :class="{'z-active': catalog.is_collected == 1}" @click="mark(catalog.catalog_id)">{{catalog.is_collected == 1 ? '已收藏' : '加入收藏' }}</div>
+            <a v-if="chapter.lists[0]" :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+ chapter.lists[0].chapter_id" class="ft-item">立即阅读</a>
+            <div v-else class="ft-item">立即阅读</div>
+        </div>
+        <a href="./index.html" class="article-home"></a>
     </div>
     <Bubble />
 </div>
@@ -230,7 +288,10 @@ export default {
                 catalog_status0: '连载中',
                 catalog_status1: '已完结'
             },
-            catalog_id: ''
+            catalog_id: '',
+
+            isCan: true,
+            index: 0
         }
     },
     props: ['resType', 'isHideEmpty'],
@@ -240,6 +301,28 @@ export default {
         chapter: state => state.opus.chapter
     }),
     methods: {
+        silder (type){
+            if (!this.isCan) {
+                return false;
+            }
+            this.isCan = false;
+
+            if (type == 'left') {
+                if (this.index == 1) {
+                    return false;
+                }
+                this.index++;
+            } else {
+                if (this.index == 0) {
+                    return false;
+                }
+                this.index--;
+            }
+
+            setTimeout(res => {
+                this.isCan = true;
+            }, 250)
+        },
         getCatalogDetail (){
             this.$store.dispatch('opus_getCatalogDetail', {
                 catalogId: this.catalog_id
@@ -278,7 +361,53 @@ export default {
         },
         textFormat: function (value) {  
             return value.replace(/[\r\n]/g, '<br />');
-        }
+        },
+        delFavorites (catalogId){
+            this.$store.dispatch('opus_delFavorites', {
+                catalogId: catalogId
+            }).then( res => {
+                this.getCatalogDetail();
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        addFavorites (catalogId){
+            this.$store.dispatch('opus_addFavorites', {
+                catalogId: catalogId
+            }).then( res => {
+                this.$store.dispatch('bubble_showBubble', {
+                    show: true,
+                    type: 'top',
+                    top: {
+                        msg: '《'+ this.catalog.catalog_title +'》已加入收藏'
+                    }
+                })
+
+                this.getCatalogDetail();
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
+        mark (catalogId){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
+            if (this.catalog.is_collected == 1) {
+                this.delFavorites(catalogId);
+            } else {
+                this.addFavorites(catalogId);
+            }
+        },
     },
     created (){
         

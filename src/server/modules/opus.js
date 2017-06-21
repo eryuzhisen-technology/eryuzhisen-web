@@ -94,6 +94,10 @@ export default {
 			}
 			payload.lists && (state.article.dataInit = true);
 		},
+		// 设置文章列表 - 某一个文章
+		opus_setArticleDetail (state, payload){
+			state.article.lists[payload.index] = $.extend(true, state.article.lists[payload.index], payload.catalog);
+		},
 		// 设置分类：文章标签、文章分类标签...
 		opus_setCategory (state, payload){
 			for (var key in payload) {
@@ -147,6 +151,11 @@ export default {
 		// 设置文章列表
 		opus_setArticle (context, payload){
 			context.commit('opus_setArticle', payload);
+			return Promise.resolve(1);
+		},
+		// 设置文章列表详细
+		opus_setArticleDetail (context, payload) {
+			context.commit('opus_setArticleDetail', payload);
 			return Promise.resolve(1);
 		},
 		// 设置目录信息

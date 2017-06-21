@@ -17,7 +17,7 @@ var store = new Vuex.Store({
 		common: common,
 		message: message
 	},
-	strict: window.location.href.indexOf('isdebug=1') ? false : true
+	strict: true
 })
 
 export default store;

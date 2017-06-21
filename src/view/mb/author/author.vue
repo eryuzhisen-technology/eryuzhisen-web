@@ -16,13 +16,13 @@
                 position: absolute;
                 top: 0;
                 left: 0;
-                width: 100%;
+                width: 200%;
                 height: 100%;
                 overflow: hidden;
+                transition: all .25s;
+                .default_flex_middle;
                 & .content-item {
-                    position: absolute;
-                    top: 0;
-                    left: 0;
+                    flex: 1;
                     width: 100%;
                     height: 100%;
                     &:last-child {
@@ -33,7 +33,9 @@
                     padding: 0 .3rem;
                     .default_flex_middle;
                     & .info-left {
+                        position: relative;
                         width: 3.5rem;
+                        padding: .4rem 0;
                     }
                     & .info-name {
                         margin-bottom: .3rem;
@@ -68,6 +70,12 @@
                         .default_color_1;
                         .default_font_size_3;
                     }
+                }
+                &.z-0 {
+                    transform: translate(0, 0);
+                }
+                &.z-1 {
+                    transform: translate(-50%, 0);   
                 }
             }
             & .index {
@@ -105,6 +113,32 @@
                 .default_backgroud_2;
             }
         }
+        & .author-ft {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 1rem;
+            .default_backgroud_3;
+            .default_flex_center;
+            .default_border_shadow_6;
+            .default_color_1;
+            .default_font_size_6;
+            .default_flex_center;
+            &.z-active {
+                .default_color_2;
+            }
+        }
+        & .author-home {
+            position: fixed;
+            bottom: .8rem;
+            right: .3rem;
+            width: 1.1rem;
+            height: 1.1rem;
+            .default_backgroud_16;
+            .default_border-r-50;
+            .skin_home;
+        }
     }
 </style>
 
@@ -117,7 +151,11 @@
             <div class="img">
                 <img src="../../../common/images/mb/author-bg.png" />
             </div>
-            <div class="content">
+            <v-touch class="content"
+                v-on:swipeleft="silder('left')"
+                v-on:swiperight="silder('right')"
+                :class="'z-'+index"
+            >
                 <div class="content-item content-info">
                     <div class="info-left">
                         <div class="info-name">{{user.nick_name}}</div>
@@ -134,10 +172,10 @@
                 <div class="content-item content-intro">
                     <div v-html="textFormat(user.signature || '')" class="text"></div>
                 </div>
-            </div>
+            </v-touch>
             <div class="index">
-                <div class="index-item z-active"></div>
-                <div class="index-item"></div>
+                <div class="index-item" :class="{'z-active': index == 0}"></div>
+                <div class="index-item" :class="{'z-active': index == 1}"></div>
             </div>
         </div>
         <div class="author-bd">
@@ -151,6 +189,15 @@
                 userType="user_id"
             />
         </div>
+        <div class="author-ft"
+            :class="{'z-active': user.relation == 1 || user.relation == 3 || user.black == 1}"
+        >
+            <span v-if="user.relation == 0 || user.relation == 2" @click.stop.prevent="addFollow(user.uid)">添加关注</span>
+            <span v-if="user.relation == 1" @click.stop.prevent="delFollow(user.uid, index)">已关注</span>
+            <span v-if="user.relation == 3" @click.stop.prevent="addFollow(user.uid)">互相关注</span>
+            <span v-if="user.black == 1" @click.stop.prevent="delBlack(user.uid)">取消拉黑</span>
+        </div>
+        <a href="./index.html" class="author-home"></a>
     </div>
     <Bubble />
 </div>
@@ -164,6 +211,9 @@ export default {
             avatar: this.$defaultData.mbavatar,
             user_id: '',
             user: {},
+
+            isCan: true,
+            index: 0
         }
     },
     props: ['resType', 'isHideEmpty'],
@@ -171,11 +221,30 @@ export default {
         dataInit: state => state.auth.dataInit,
         count: state => state.auth.count,
         lists: state => state.auth.lists,
-        self: function(){
-            return this.resType == 'blacklist' || this.user_id == this.user.uid
-        }
     }),
     methods: {
+        silder (type){
+            if (!this.isCan) {
+                return false;
+            }
+            this.isCan = false;
+
+            if (type == 'left') {
+                if (this.index == 1) {
+                    return false;
+                }
+                this.index++;
+            } else {
+                if (this.index == 0) {
+                    return false;
+                }
+                this.index--;
+            }
+
+            setTimeout(res => {
+                this.isCan = true;
+            }, 250)
+        },
         getAuthorInfo (){
             if (!this.user_id) {
                 return false;
@@ -192,7 +261,46 @@ export default {
         },
         textFormat: function (value) {  
             return value.replace(/[\r\n]/g, '<br />');
-        }
+        },
+        delBlack (uid){
+            this.$store.dispatch('auth_delBlack', {
+                userId: uid
+            }).then( res => {
+                this.getAuthorInfo();
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            });
+        },
+        addFollow (uid){
+            this.$store.dispatch('auth_addFollow', {
+                userId: uid
+            }).then( res => {
+                this.getAuthorInfo();
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                tthis.$store.dispatch('bubble_fail', err);
+            });
+        },
+        delFollow (uid, index){
+            this.$store.dispatch('auth_delFollow', {
+                userId: uid
+            }).then( res => {
+                if (this.resType != 'fansList' && this.resType != 'followList') {
+                    this.getAuthorInfo();
+                } else {
+                    this.$store.dispatch('auth_setListFollow', {
+                        index: index
+                    })
+                }
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            });
+        },
     },
     created (){
         
