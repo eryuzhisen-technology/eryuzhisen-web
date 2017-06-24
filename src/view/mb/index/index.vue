@@ -23,6 +23,8 @@
                 width: 100%;
                 height: 100%;
                 transform: translate(0, 0);
+                border-radius: .1rem .1rem 0 0;
+                overflow: hidden;
             }
             & .banner-list-item.z-active {
                 transition: all .25s;
@@ -43,11 +45,12 @@
                 width: 100%;
                 height: .6rem;
                 padding-right: .3rem;
+                border-radius: 0 0 .1rem .1rem;
+                overflow: hidden;
                 .default_backgroud_3;
                 .default_flex_right;
             }
             & .banner-index-item {
-                float: left;
                 width: .1rem;
                 height: .1rem;
                 opacity: .3;
@@ -90,8 +93,8 @@
             position: fixed;
             bottom: .8rem;
             right: .3rem;
-            width: 1.1rem;
-            height: 1.1rem;
+            width: 1rem;
+            height: 1rem;
             .default_backgroud_3;
             .default_border-r-50;
             .skin_top;
@@ -122,6 +125,7 @@
             <ArticleList 
                 resType='index'
                 loadType="more"
+                isRand="true"
                 catalog_type="2"
                 isHideEmpty="true"
             />
@@ -235,6 +239,7 @@ export default {
         },
         top (){
             $(window).scrollTop(0);
+            this.$eventHub.$emit('index.getList');
         }
     },
     updated (){

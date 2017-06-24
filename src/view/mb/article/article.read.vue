@@ -17,6 +17,7 @@
             padding: .6rem .4rem;
             .default_border-b-4;
             & .content-title {
+                line-height: 1rem;
                 margin-bottom: .6rem;
                 .default_font_size_11;
                 .default_color_1;
@@ -28,6 +29,9 @@
                 & p {
                     min-height: 1em;
                     line-height: 1.75em;
+                    word-wrap: break-word;
+                    word-break: break-all;
+                    // text-align: justify;
                 }
                 & img {
                     max-width: 100%;

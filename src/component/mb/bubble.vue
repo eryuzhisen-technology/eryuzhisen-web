@@ -23,7 +23,7 @@
 		width: 5rem;
 		height: 2rem;
 		padding: 0 .3rem;
-		margin: -1.5rem 0 0 -2rem;
+		margin: -1rem 0 0 -2.5rem;
 		line-height: 1.5em;
 		background: rgba(0,0,0,.7);
 		.default_border-r-10;
@@ -89,9 +89,10 @@
 				.default_color_2;
 				.default_font_size_6;
 				.default_font_bolder;
-			}
-			& .warn-bottom-cancel {
 				.default_border-rr-4;
+				&:last-child {
+					.default_border-n;
+				}
 			}
 		}
 	}
@@ -113,7 +114,7 @@
     	<div v-else class="warn-content">{{data.warn.content}}</div>
     	<div class="warn-bottom">
     		<div class="warn-bottom-item warn-bottom-cancel" @click="close">{{data.warn.btnCancel || '取消'}}</div>
-    		<div class="warn-bottom-item warn-bottom-comfire" @click="comfire">{{data.warn.btnComfire || '确认'}}</div>
+    		<div v-if="data.warn.btnComfire" class="warn-bottom-item warn-bottom-comfire" @click="comfire">{{data.warn.btnComfire || '确认'}}</div>
     	</div>
     </div>
 </div>
@@ -136,13 +137,7 @@ export default {
     		this.$store.dispatch('bubble_closeBubble');
     	},
     	comfire (){
-    		this.data.warn.comfireFn();
-    		this.$store.dispatch('bubble_setState', {
-    			show: false
-    		})
-    	},
-    	comfireAll (){
-    		this.data.methods.comfire();
+    		this.data.methods.comfire && this.data.methods.comfire();
     		this.$store.dispatch('bubble_setState', {
     			show: false
     		})

@@ -716,5 +716,49 @@ export default {
 
 			return promise;
 		},
+		// 随机获取故事列表
+		opus_getRandCatalogList (context, payload){
+			if (context.state.article.load) {
+				return Promise.reject({
+					ret: -21,
+					msg: '加载中'
+				});
+			}
+			context.commit('opus_setArticle', {
+				load: 1
+			});
+
+			var promise = opus.getRandCatalogList(payload).then( res => {
+				var lists = context.state.article.lists;
+				if (payload.type == 'more') {
+					lists = lists.concat(res.list);
+				} else {
+					lists = res.list;
+				}
+				lists.map((item, index) => {
+					if (item.catalog_cover_url.indexOf('?') < 0) {
+						lists[index].catalog_cover_url += '?x-oss-process=image/resize,w_540,h_810,m_fixed/auto-orient,1/quality,q_100/format,jpg';
+					}
+					if (item.user.avatar_url.indexOf('?') < 0) {
+						item.user.avatar_url += '?x-oss-process=image/resize,w_180,h_180,m_fill/auto-orient,1/quality,q_80/format,jpg';
+					}
+				})
+				context.commit('opus_setArticle', {
+					count: lists.length,
+					lists: lists,
+					more: res.more,
+					load: 0,
+					dataInit: true
+				})
+				return Promise.resolve(res);
+			}).catch( err => {
+				context.commit('opus_setArticle', {
+					load: 0
+				});
+				return Promise.reject(err);
+			})
+
+			return promise;
+		},
 	}
 }

@@ -26,6 +26,7 @@
 			}
 		}
 		& .btn {
+            display: block;
 			height: .7rem;
 			line-height: .7rem;
 			padding: 0 .3rem;
@@ -43,12 +44,13 @@
 <div class="c-header">
 	<a href="./index.html" class="c-header-wrap">
 		<div class="logo"></div>
-		<a href="https://www.eryuzhisen.com" class="btn">切换电脑版</a>
+		<div @click.stop.prevent="goPC" class="btn">切换电脑版</div>
 	</a>
 </div>
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import {mapState} from 'vuex'
 export default {
 	name: 'header',
@@ -62,6 +64,15 @@ export default {
         user: state => state.user.info
     }),
     methods: {
+        goPC (){
+            // 登录成功后，讲token写入cookie
+            Cookies.set('mobile_request', 'full', {
+                domain: 'eryuzhisen.com',
+                path: '/',
+                expires: ''
+            });
+            window.location.replace('http://www.eryuzhisen.com');
+        },
     	// 获取用户信息
         getUserInfo () {
 			var cache_userInfo = this.$version.userInfo;

@@ -1061,6 +1061,73 @@ function pageviews(option){
 	return prosime;
 }
 
+/**
+ * 首页中的随机获取
+http://domain/eryuzhisen-server/opus/getRandCatalogList
+Method:GET 
+
+request:
+params:
+"count":"10",//每页数量 默认10
+"randId":"xxxxxx",//如果是刷新或者第一次首页获取，不用传值，翻页时必填项（服务端返回什么传什么）
+"catalogType":"1"//0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
+
+response:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现
+	"errinfo":"xxxx",
+	"more":"1",//是否还有更多 0 没有 1 还有更多,供没有页码的客户端使用
+	"rand_id":"xxxxxx",//返回的随机id
+	"list":[
+		{
+			"catalog_id":"xxx",//目录id
+			"category_id":"xx",//类别id
+			"category_title":"xxx",//类别文字 如:漫画
+			"praise_count":"300",//点赞总数
+			"comment_count":"222",//评论总数
+			"catalog_title":"xxxx",//目录标题 ******如果为空，则表示初次创建还在审核中，具体怎么显示，需要设计给出方案******
+			"catalog_audit_title":"xxxx",//待审核的目录标题 ******新增节点,新需求：audit_status 如果是 0 或者 2 在用户编辑更新时使用此处内容*******
+			"catalog_desc":"xxxxx",//目录简介 ******如果为空，则表示初次创建还在审核中，具体怎么显示，需要设计给出方案******
+			"catalog_audit_desc":"xxxxx",//待审核的目录简介 ******新增节点,新需求：audit_status 如果是 0 或者 2 在用户编辑更新时使用此处内容*******
+			"catalog_cover_url":"http://xxx",//目录封面 ******如果为空，则表示初次创建还在审核中，具体怎么显示，需要设计给出方案******
+			"catalog_audit_cover_url":"xxxxx",//待审核的目录封面 ******新增节点*******
+			"publish_time":"xxx",//发表时间,如:一小时前
+			"audit_status":"0",//0 审核中 1 审核通过 2 审核不通过(只有本人查看自己文章才有该节点)
+			"audit_remark":"xxxxx",//审核备注(只有本人查看自己文章才有该节点)
+			"level":"0",//等级 0 普通 1 首发 2 独家
+			"user":{"uid":"xxx","nick_name":"xxx","avatar_url":"xxx"},//作者信息
+			"labels":["xxxxx","xxxx"],//标签 ******如果为空，则表示初次创建还在审核中，具体怎么显示，需要设计给出方案******
+			"audit_labels":["xxxxx","xxxxx"],//待审核的标签 ******新增节点,新需求：audit_status 如果是 0 或者 2 在用户编辑更新时使用此处内容*******
+			"collected_count":"200"//目录被收藏数量
+		},
+		.....
+	]
+}
+ * @param  {[type]} option [description]
+ * @return {[type]}        [description]
+ */
+function getRandCatalogList(option){
+	var url = baseUrl + 'opus/getRandCatalogList'; 
+	var prosime = axios({
+		method: 'GET',
+		url: url,
+		params: option,
+		headers: {
+			token: token
+		}
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+            return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+		return _rejectObj(error);
+	});
+
+	return prosime;
+}
+
 export {
 	getLabelList,
 	getCategoryList,
@@ -1084,6 +1151,7 @@ export {
 	delCatalog,
 	getMyCatalogList,
 	pageviews,
+	getRandCatalogList,
 	_reject,
 	_rejectObj
 }

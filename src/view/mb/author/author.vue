@@ -120,22 +120,29 @@
             left: 0;
             width: 100%;
             height: 1rem;
+            padding: .2rem 0;
             .default_backgroud_3;
             .default_flex_center;
             .default_border_shadow_6;
             .default_color_1;
             .default_font_size_6;
-            .default_flex_center;
             &.z-active {
                 .default_color_2;
+            }
+            & span {
+                display: block;
+                width: 100%;
+                height: .6rem;
+                line-height: .6rem;
+                .default_center;
             }
         }
         & .author-home {
             position: fixed;
             bottom: 1.8rem;
             right: .3rem;
-            width: 1.1rem;
-            height: 1.1rem;
+            width: 1rem;
+            height: 1rem;
             .default_backgroud_3;
             .default_border-r-50;
             .skin_home;
@@ -220,6 +227,7 @@ export default {
     },
     props: ['resType', 'isHideEmpty'],
     computed: mapState({
+        userInfo: state => state.user.info,
         dataInit: state => state.auth.dataInit,
         count: state => state.auth.count,
         lists: state => state.auth.lists,
@@ -265,6 +273,15 @@ export default {
             return value.replace(/[\r\n]/g, '<br />');
         },
         delBlack (uid){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
             this.$store.dispatch('auth_delBlack', {
                 userId: uid
             }).then( res => {
@@ -276,9 +293,23 @@ export default {
             });
         },
         addFollow (uid){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
             this.$store.dispatch('auth_addFollow', {
                 userId: uid
             }).then( res => {
+                this.$store.dispatch('bubble_success', {
+                    ret: 0,
+                    type: 'top',
+                    msg: '关注成功'
+                });
                 this.getAuthorInfo();
 
                 this.$store.dispatch('bubble_success', res);
@@ -287,6 +318,15 @@ export default {
             });
         },
         delFollow (uid, index){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
             this.$store.dispatch('auth_delFollow', {
                 userId: uid
             }).then( res => {

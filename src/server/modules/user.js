@@ -176,6 +176,7 @@ export default {
 
 				// 登录成功后，讲token写入cookie
 				Cookies.set('token', res.token, {
+					domain: 'eryuzhisen.com',
 					path: '/',
 					expires: payload.isSave ? 7 : ''
 				});

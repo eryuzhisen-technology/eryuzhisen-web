@@ -23,7 +23,7 @@
             </div>
             <div class="form-item-input">
                 <input type="text" v-model="phone_vcode" placeholder="验证码" />
-                <span class="code" @click="getPhoneVerifyCode">获取验证码</span>
+                <span class="code" @click="getPhoneVerifyCode">{{timeText}}</span>
             </div>
             <div class="form-item-input">
                 <input type="password" v-model="password" placeholder="密码" />
@@ -66,10 +66,14 @@ export default {
                 show: true,
                 type: 'warn',
                 warn: {
-                    html: '<h3>邀请码</h3><p>因社区内测而采用定向邀请制</p><p>请加QQ群432769756</p><p>向管理员索取</p>',
-                    btnCancel: '拉倒',
-                    btnComfire: '索取'
-
+                    html: '<h3>邀请码</h3><p>因社区内测而采用定向邀请制</p><p>请加QQ群458501314</p><p>向管理员索取</p>',
+                    btnCancel: '确定',
+                    // btnComfire: '索取'
+                },
+                methods: {
+                    comfire: function (){
+                        window.open('//shang.qq.com/wpa/qunwpa?idkey=2b92d09f594ddf7412e6e8feba1244d4250f1bf2b65a952610fe1fe055b91c09');
+                    }
                 }
             })
         },
@@ -167,7 +171,6 @@ export default {
             } else if (vaid && ($.trim(this.password).length > 18 || $.trim(this.password).length < 6)) {
                 vaid = false;
                 msg = '密码应为6-18位数';
-                return false;
             }
 
             if (!vaid) {

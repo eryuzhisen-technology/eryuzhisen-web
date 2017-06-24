@@ -42,19 +42,37 @@
         & .list-bd {
             padding: .2rem;
             & .list-bd-img {
+                position: relative;
                 width: 100%;
                 height: 4.45rem;
                 margin-bottom: .22rem;
+                & span {
+                    position: absolute;
+                    top: .1rem;
+                    left: .1rem;
+                    width: .7rem;
+                    height: .7rem;
+                    line-height: .7rem;
+                    .default_center;
+                    .default_color_1;
+                    .default_font_size_1;
+                    .skin_fresh;
+                }
             }   
             & .list-bd-tit {
                 margin-bottom: .14rem;
                 .default_font_size_5;
                 .default_color_1;
+                .default_font_bolder;
             }
             & .list-bd-tag {
-                .default_flex_left;
+                // .default_flex_left;
+                width: 120%;
+                height: .2rem;
                 & .tag {
+                    float: left;
                     margin-right: .12rem;
+                    margin-bottom: .12rem;
                     .default_color_3;
                     .default_font_size_1;
                 }
@@ -121,10 +139,23 @@
             }
         }
         & .list-right {
+            position: relative;
             width: 1.8rem;
             height: 2.7rem;
             overflow: hidden;
             .default_border-r-10;
+            & span {
+                position: absolute;
+                top: .1rem;
+                left: .1rem;
+                width: .7rem;
+                height: .7rem;
+                line-height: .7rem;
+                .default_center;
+                .default_color_1;
+                .default_font_size_1;
+                .skin_fresh;
+            }
         }
         & .list-empty {
             width: 100%;
@@ -135,6 +166,25 @@
             .default_font_size_6;
             .default_font_bolder;
             .default_backgroud_3;
+        }
+        & .list-more {
+            width: 100%;
+            height: 1rem;
+            padding: .4rem;
+            .default_flex_center;
+            & img {
+                width: .6rem;
+                height: .6rem;
+                animation: load 1s linear infinite;
+            }
+        }
+        @keyframes load{
+            from {
+                transform: rotate(0);
+            }
+            to {
+                transform: rotate(359deg);
+            }
         }
     }
 </style>
@@ -157,6 +207,7 @@
             <div class="list-right">
                 <div class="list-right-img">
                     <img :src="item.catalog_cover_url" />
+                    <span v-if="item.updated == 1">更新</span>
                 </div>
             </div>
         </a>
@@ -164,6 +215,7 @@
             <div class="list-bd">
                 <div class="list-bd-img">
                     <img :src="item.catalog_cover_url" />
+                    <span v-if="item.updated == 1">更新</span>
                 </div>
                 <div class="list-bd-tit">{{item.catalog_title}}</div>
                 <div class="list-bd-tag">
@@ -182,10 +234,8 @@
     </div>
 
     <!-- page -->
-    <div v-if="loadType == 'more' && count != 0 && loadType != 'none'" v-show="false" class="list-more">
-        <div v-if="more == 1 && !load" class="btn-more-before">{{user.isLogin ? '加载更多' : '登录查看更多'}}</div>
-        <div v-else-if="more == 1" class="btn-more-loading"><em></em><span>加载中...</span></div>
-        <div v-else class="btn-more-end"><em></em><span>没有更多</span></div>
+    <div v-if="loadType == 'more' && count != 0 && more == 1" class="list-more">
+        <img src="../../common/images/mb/loading.png" />
     </div>
 </div>
 </template>
@@ -197,11 +247,14 @@ export default {
         return {
             avatar: this.$defaultData.avatar,
             user_id: '',
+
+            randId: '',
+            randConut: 10, // 随机获取列表-个数
             pageIndex: 1, //页数,默认不传查询第一页
             pageSize: 5 //每页数量 默认10
         }
     },
-    props: ['resType', 'loadType', 'userType', 'catalog_type', 'showType', 'isHideEmpty'],
+    props: ['resType', 'loadType', 'userType', 'catalog_type', 'showType', 'isHideEmpty', 'isRand'],
     computed: mapState({
         user: state => state.user.info,
         lists: state => state.opus.article.lists,
@@ -210,6 +263,21 @@ export default {
         load: state => state.opus.article.load
     }),
     methods: {
+        getRandCatalogList (type){
+            this.$store.dispatch('opus_getRandCatalogList', {
+                "type": type || this.loadType || '',
+                "count": this.randConut, //每页数量 默认10
+                "randId": this.randId, //如果是刷新或者第一次首页获取，不用传值，翻页时必填项（服务端返回什么传什么）
+                "catalogType": this.catalog_type //0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
+            }).then( res => {
+                this.randId = res.rand_id;
+                this.$emit('article_count', this.count);
+
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
         getCatalogList (type){
             // 未登录处理
             /*if (!this.user.isLogin && this.resType != 'index') {
@@ -217,7 +285,7 @@ export default {
                 return false;
             }*/
             this.$store.dispatch('opus_getCatalogList', {
-                "type": type || this.loadType || '',
+                "type": this.loadType || '',
                 "params": {
                     "pagination": "1",
                     "page": this.pageIndex, //页数,默认不传查询第一页
@@ -271,7 +339,9 @@ export default {
                 })
                 return false;
             }
-            if (this.user.uid && this.user.uid == this.user_id) {
+            if (this.isRand) {
+                this.getRandCatalogList(getMore ? 'more' : 'none');
+            } else if (this.user.uid && this.user.uid == this.user_id) {
                 if (getMore) {
                     this.pageIndex++;
                 }
@@ -342,6 +412,13 @@ export default {
             }
         },
     },
+    created (){
+        this.$eventHub.$on('index.getList', option => {
+            this.pageIndex = 1;
+            this.randId = '';
+            this.getList(false);
+        })
+    },
     mounted (){
         // 获取url的参数
         this.query = decodeURIComponent(this.$url.getUrlParam('query'));
@@ -350,12 +427,12 @@ export default {
         this.getList(); 
 
         $(window).on('scroll', e => {
-            if ($('.btn-more-before').length <= 0 || this.loadType == 'none') {
+            if (this.more == 0 || this.loadType == 'none') {
                 return false;
             }
             var top = $(window).scrollTop();
             var height = $(window).height();
-            var _top = $('.btn-more-before').offset().top;
+            var _top = $('.list-more').offset().top;
             if (_top + 20 <= top + height) {
                 this.getMore();    
             }

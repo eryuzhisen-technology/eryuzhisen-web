@@ -51,14 +51,28 @@
                         & .info-left {
                             position: relative;
                             width: 3.5rem;
+                            height: 3rem;
                             height: 100%;
                             padding: .4rem 0;
                         }
                         & .info-right {
+                            position: relative;
                             width: 2rem;
                             height: 3rem;
                             overflow: hidden;
                             .default_border-r-10;
+                            & span {
+                                position: absolute;
+                                top: .1rem;
+                                left: .1rem;
+                                width: .7rem;
+                                height: .7rem;
+                                line-height: .7rem;
+                                .default_center;
+                                .default_color_1;
+                                .default_font_size_1;
+                                .skin_fresh;
+                            }
                         }
                         & .info-name {
                             margin-bottom: .3rem;
@@ -76,16 +90,24 @@
                             margin-right: .3rem;
                         }
                         & .info-avatar {
+                            display: block;
                             position: absolute;
                             left: 0;
                             bottom: .4rem;
+                            height: .4rem;
+                            overflow: hidden;
                             margin-bottom: 0;
-                            .default_flex_left;
                             & img {
+                                float: left;
                                 width: .4rem;
                                 height: .4rem;
                                 margin-right: .2rem;
                                 .default_border-r-50;
+                            }
+                            & span {
+                                float: left;
+                                height: .4rem;
+                                line-height: .4rem;
                             }
                         }
                     }
@@ -150,12 +172,13 @@
             }
         }
         & .article-bd {
+            overflow: hidden;
+            .default_border-r-10;
             & .article-bd-tit {
                 width: 100%;
                 height: 1rem;
                 line-height: 1rem;
                 padding-left: .3rem;
-                border-radius: .1rem .1rem 0 0;
                 .default_color_3;
                 .default_font_size_4;
                 .default_backgroud_2;
@@ -171,6 +194,9 @@
                     .default_font_bolder;
                     .default_border-b-4;
                     .default_backgroud_3;
+                    &:last-child {
+                        .default_border-n;
+                    }
                 }
             }
         }
@@ -180,12 +206,15 @@
             left: 0;
             width: 100%;
             height: 1rem;
+            padding: .2rem 0;
             .default_backgroud_3;
-            .default_flex_center;
             .default_border_shadow_6;
             & .ft-item {
-                flex: 1;
+                display: block;
+                float: left;
+                width: 50%;
                 height: .6rem;
+                line-height: .6rem;
                 .default_color_1;
                 .default_font_size_6;
                 .default_flex_center;
@@ -201,8 +230,8 @@
             position: fixed;
             bottom: 1.8rem;
             right: .3rem;
-            width: 1.1rem;
-            height: 1.1rem;
+            width: 1rem;
+            height: 1rem;
             .default_backgroud_3;
             .default_border-r-50;
             .skin_home;
@@ -241,6 +270,7 @@
                         </div>
                         <div class="info-right info-images">
                             <img :src="catalog.catalog_cover_url" />
+                            <span v-if="catalog.updated == 1">更新</span>
                         </div>
                     </div>
                     <div class="content-item content-intro">
@@ -291,6 +321,8 @@ export default {
                 catalog_status1: '已完结'
             },
             catalog_id: '',
+            pageIndex: 1,
+            pageSize: 100,
 
             isCan: true,
             index: 0
