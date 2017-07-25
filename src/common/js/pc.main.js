@@ -2,7 +2,7 @@
 import css1 from '@css/normalize.less'
 import css2 from '@css/component.less'
 
-import 'es6-promise/auto'
+import "babel-polyfill"
 
 import {Vue} from './lib'
 import store from '@server/store'
