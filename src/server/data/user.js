@@ -1,6 +1,5 @@
-import {baseUrl, _reject, _rejectObj, axios} from '../config'
+import {baseUrl, _reject, _rejectObj, axios, token} from '../config'
 import Cookies from 'js-cookie';
-var token = Cookies.get('token');
 
 /**
  * 获取图形验证码
@@ -412,6 +411,40 @@ function getUserInfo(option){
 	});
 }
 
+/**
+ * 检查用户昵称是否存在
+ULR:http://domain/eryuzhisen-server/user/checkName
+Method:GET
+params:
+nickName:"xxxx",//昵称 必填
+response:
+body json:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现,详情请查看附录
+	"errinfo":"xxxx",
+	"exist":"0"// 0 不存在 1 存在
+}
+ * @param  {[type]} option [description]
+ * @return {[type]}        [description]
+ */
+function checkName(option){
+	var url = baseUrl + 'user/checkName';
+
+	return axios({
+		method: 'GET',
+		url: url,
+		params: option
+	}).then(function (response) {
+		if (response.data.ret != 0) {
+			return _reject(response.data);
+		}
+		return response.data;
+	}).catch(function (error) {
+	    return _rejectObj(error);
+	});
+}
+
 export {
 	getPicVerifyCode,
 	getPhoneVerifyCode,
@@ -422,6 +455,7 @@ export {
 	reBindPhone,
 	updateUserInfo,
 	getUserInfo,
+	checkName,
 	_reject
 }
 

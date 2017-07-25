@@ -64,6 +64,7 @@
                 width: 100%;
                 height: 100%;
                 overflow: hidden;
+                .default_backgroud_5;
                 & img {
                     max-width: 100%;
                     width: 100%;
@@ -161,6 +162,7 @@
                 overflow: hidden;
                 margin-right: 8px;
                 .default_border-r-50;
+                .default_backgroud_5;
             }
             & .item-ft-name {
                 float: left;
@@ -240,7 +242,8 @@
                 <!-- 头部 -->
                 <div class="item-hd">
                     <div class="item-hd-img">
-                        <img :src="data.catalog_cover_url" />
+                        <img v-lazy="data.catalog_cover_url" />
+                        <!-- <img :src="data.catalog_cover_url" /> -->
                     </div>
                     <!-- <div class="item-hd-tag">
                         <div class="item-hd-tag_text">{{data.category_title}}</div>
@@ -267,7 +270,8 @@
                 <div class="item-ft">
                     <a v-if="resType != 'author'" class="item-ft-btn"  :href="'author.work.html?user_id=' + data.user.uid">
                         <div class="item-ft-img">
-                            <img :src="data.user.avatar_url || avatar" />
+                            <img v-lazy="data.user.avatar_url || avatar" />
+                            <!-- <img :src="data.user.avatar_url || avatar" /> -->
                         </div>
                         <div class="item-ft-name">{{data.user.nick_name}}</div>
                     </a>
@@ -325,7 +329,7 @@ export default {
             subMoreShow: false,
             query: '', // 模糊查询文字
             pageIndex: 1, //页数,默认不传查询第一页
-            pageSize: 5, //每页数量 默认10
+            pageSize: 15, //每页数量 默认10
 
             pageHotIndex: 1,
             pageHotSize: 10

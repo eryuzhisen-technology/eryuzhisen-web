@@ -269,7 +269,7 @@
                         .default_font_size_2;
                         .default_color_2;
                     }
-                    & .c-dialog__tip {
+                    & .c-dialog__tip.z-top {
                         width: 60px;
                         top: -50px;
                         left: -20px;
@@ -303,6 +303,11 @@
                             display: block;
                         }
                     }
+                    &:nth-chld(1) {
+                        & .c-dialog__tip {
+
+                        }
+                    }
 
                     &.z-finish .chapter-menu_item-icon {
                         .skin_icon_edit-10;
@@ -333,6 +338,9 @@
                 }
                 & .edit-content_read-content {
                     text-align: justify;
+                    line-height: 1.75rem;
+                    .default_font_size_3;
+                    .default_color_10;
                     & p {
                         line-height: 1.75rem;
                         min-height: 1.75rem;
@@ -444,15 +452,14 @@
                     <div class="chapter-menu-wrap">
                         <div 
                             class="chapter-menu_item"
-                            v-for="item in lists" 
+                            v-for="(item, index) in lists" 
                             :class="{'z-active': chapter_id == item.chapter_id, 'z-finish': item.chapter_status == 0}"
                             @click="getChapterDetail(item.chapter_id)" 
                         >
                             <div class="chapter-menu_item-icon">
                                 <div 
-                                    class="c-dialog__tip z-top"
-                                    :class="{'z-publsh': item.chapter_status == 0}"
-
+                                    class="c-dialog__tip"
+                                    :class="{'z-publsh': item.chapter_status == 0, 'z-top': index != 0, 'z-bottom': index == 0}" 
                                 >
                                     <div class="tip-arrow"></div>
                                     <div class="tip-text">{{item.chapter_status == 0 ? '已发布不能修改' : '未发布'}}</div>
@@ -817,7 +824,7 @@ export default {
                         type: 'complete',
                         complete: {
                             title: _title,
-                            url: location.host + './article.read.html?catalog_id='+ that.catalog_id +'&chapter_id='+ that.chapter_id,
+                            url: location.protocol + '//' +location.host + '/article.read.html?catalog_id='+ that.catalog_id +'&chapter_id='+ that.chapter_id,
                             pic: catalog.catalog_cover_url.indexOf('http') > -1 ? catalog.catalog_cover_url : 'http://www.eryuzhisen.com' + catalog.catalog_cover_url,
                             desc: desc,
                             summary: desc
@@ -929,22 +936,22 @@ export default {
     watch: {
         isUpdata (isUpdata){
             if (isUpdata == 1) {
-                $('.j-save-btn').addClass('j-save-btn-update').find('a').text('保存中...');    
+                $('.j-save-btn').addClass('j-save-btn-update').find('span').text('保存中...');    
             } else if (isUpdata == 4) {
-                $('.j-save-btn').addClass('j-save-btn-update').find('a').text('自动保存中...');    
+                $('.j-save-btn').addClass('j-save-btn-update').find('span').text('自动保存中...');    
             } else if (isUpdata == 2) {
-                $('.j-save-btn').addClass('j-save-btn-update').find('a').text('已保存');
+                $('.j-save-btn').addClass('j-save-btn-update').find('span').text('已保存');
                 this.timeSave = setTimeout( res => {
-                    $('.j-save-btn').removeClass('j-save-btn-update').find('a').text('保存');
+                    $('.j-save-btn').removeClass('j-save-btn-update').find('span').text('保存');
                 }, 500)
             } else if (isUpdata == 3) {
-                $('.j-save-btn').addClass('j-save-btn-update').find('a').text('保存失败');
+                $('.j-save-btn').addClass('j-save-btn-update').find('span').text('保存失败');
                 this.timeSave = setTimeout( res => {
-                    $('.j-save-btn').removeClass('j-save-btn-update').find('a').text('保存');
+                    $('.j-save-btn').removeClass('j-save-btn-update').find('span').text('保存');
                 }, 500)
             } else if (isUpdata == 0) {
                 clearTimeout(this.timeSave);
-                $('.j-save-btn').removeClass('j-save-btn-update').find('a').text('保存');
+                $('.j-save-btn').removeClass('j-save-btn-update').find('span').text('保存');
             }
         },
 

@@ -6,8 +6,9 @@
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
-    <HeaderDom />
+<FrameDom
+    :data="frameData"
+>
     <div class="m-user">
         <div class="user-form">
             <div v-if="pwd_err_times >= 5" class="form-item-input">
@@ -27,8 +28,7 @@
         <div class="user-btn user-btn-default" @click="login">登录</div>
         <a href="./register.html" class="user-btn user-btn-weak">没有账号 立即注册</a>
     </div>	
-    <Bubble />
-</div>
+</FrameDom>
 </template>
 
 <script>
@@ -36,6 +36,15 @@ import {mapState} from 'vuex'
 export default {
     data () {
     	return {
+            frameData: {
+                title: {
+                    text: '登录'
+                },
+                side: {
+                    type: 'home'
+                }
+            },
+
             phone: '',
             password: '',
             pic_code: '',

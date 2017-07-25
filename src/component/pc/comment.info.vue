@@ -79,7 +79,8 @@
         <div class="c-comment-info__top">
             <a :href="'author.work.html?user_id=' + data.message.sender.user_id">
             <div class="top__img">
-                <img :src="data.message.sender.avatar_url || avatar" />
+                <img v-lazy="data.message.sender.avatar_url || avatar" />
+                <!-- <img :src="data.message.sender.avatar_url || avatar" /> -->
             </div>
             <div class="top__name">{{data.message.sender.nick_name}}</div>
             </a>

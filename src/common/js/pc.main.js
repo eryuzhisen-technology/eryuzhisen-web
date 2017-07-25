@@ -2,10 +2,16 @@
 import css1 from '@css/normalize.less'
 import css2 from '@css/component.less'
 
-import {Vue} from './lib'
+import 'es6-promise/auto'
 
+import {Vue} from './lib'
 import store from '@server/store'
 
+// 扩展引入
+import vue_iScroll from '@lib/vue.iScroll'
+Vue.use(vue_iScroll)
+
+// 组件引入
 import HeaderDom from '@component/pc/header.vue';
 import FooterDom from '@component/pc/footer.vue';
 import MenuLeft from '@component/pc/menu.left.vue';
@@ -17,6 +23,7 @@ import Page from '@component/pc/page.fenye.vue';
 import Empty from '@component/pc/content.empty.vue';
 import Edit from '@component/pc/chapter.edit.vue'
 import UploadImg from '@component/pc/uploadImg.vue'
+import Qrcode from '@component/pc/qrcode.vue'
 
 import ArticleHeaderDom from '@component/pc/article.header.vue';
 import ArticleCommentDom from '@component/pc/article.comment.vue';
@@ -41,6 +48,7 @@ Vue.component('Page', Page)
 Vue.component('Empty', Empty)
 Vue.component('Edit', Edit)
 Vue.component('UploadImg', UploadImg)
+Vue.component('Qrcode', Qrcode)
 
 Vue.component('ArticleHeaderDom', ArticleHeaderDom)
 Vue.component('ArticleCommentDom', ArticleCommentDom)

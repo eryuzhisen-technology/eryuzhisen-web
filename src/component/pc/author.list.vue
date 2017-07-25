@@ -42,7 +42,7 @@
             height: 100px;
             overflow: hidden;
             .default_border-r-50;
-            .default_backgroud_7;
+            .default_backgroud_5;
             .default_mar_auto;
             margin-bottom: 20px;
             & img {
@@ -98,7 +98,8 @@
 <div class="c-author-list-wrap" :style="{'height': Math.ceil(1)*360 + 'px', 'width': (lists.length == 0 ? 720 : lists.length <= 5 ? lists.length*240 : 1200) + 'px'}">
     <a class="list-author__item" v-for="(data, index) in lists" :href="'author.work.html?user_id=' + data.uid">
         <div class="list-author__avatar">
-            <img :src="data.avatar_url || avatar"  />
+            <img v-lazy="data.avatar_url || avatar"  />
+            <!-- <img :src="data.avatar_url || avatar"  /> -->
         </div>
         <div class="list-author__name">{{data.nick_name}}</div>
         <div class="list-author__desc">{{data.signature}}</div>

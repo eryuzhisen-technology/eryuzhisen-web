@@ -6,8 +6,9 @@
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
-    <HeaderDom />
+<FrameDom
+    :data="frameData"
+>
     <div class="m-user">
         <div class="user-form">
             <div class="form-item-input">
@@ -37,8 +38,7 @@
         <div class="user-btn user-btn-default" @click="register">注册</div>
         <a href="./login.html" class="user-btn user-btn-weak">已有账号 立即登录</a>
     </div>  
-    <Bubble />
-</div>
+</FrameDom>
 </template>
 
 <script>
@@ -47,6 +47,15 @@ export default {
     name: 'register',
     data () {
         return {
+            frameData: {
+                title: {
+                    text: '注册'
+                },
+                side: {
+                    type: 'home'
+                }
+            },
+            
             yao: '',
         	phone: '',
             password: '',

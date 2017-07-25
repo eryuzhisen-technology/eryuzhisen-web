@@ -3,8 +3,7 @@
 @import (less) url('../../../common/css/mb.common.less');
     .m-index {
         width: 100%;
-        padding: 0 .3rem;
-        padding-top: .2rem;
+        padding: 0 .3rem .2rem;
         & .banner {
             overflow: hidden;
             .default_border-r-10;
@@ -19,12 +18,15 @@
             & .banner-list-item {
                 position: absolute;
                 top: 0;
-                left: 0;
+                left: 0%;
                 width: 100%;
                 height: 100%;
                 transform: translate(0, 0);
                 border-radius: .1rem .1rem 0 0;
                 overflow: hidden;
+            }
+            & .banner-list-item.z-hide {
+                left: 100%;
             }
             & .banner-list-item.z-active {
                 transition: all .25s;
@@ -43,7 +45,7 @@
             }
             & .banner-index {
                 width: 100%;
-                height: .6rem;
+                height: .5rem;
                 padding-right: .3rem;
                 border-radius: 0 0 .1rem .1rem;
                 overflow: hidden;
@@ -51,10 +53,10 @@
                 .default_flex_right;
             }
             & .banner-index-item {
-                width: .1rem;
-                height: .1rem;
+                width: .14rem;
+                height: .14rem;
                 opacity: .3;
-                margin-left: .1rem;
+                margin-left: .18rem;
                 .default_backgroud_fff;
                 .default_border-r-50;
             }
@@ -62,65 +64,76 @@
                 opacity: 1;
             }
         }
+        & .enter {
+            margin-bottom: .2rem;
+            .default_flex_middle;
+
+            & .enter-item {
+                width: 3.35rem;
+                height: 1.5rem;
+                background-size: 3.35rem 1.5rem;
+                .default_backgroud_5;
+                .default_border-r-10;
+
+                &:last-child {
+                    margin-left: .2rem;
+                }
+            }
+        }
         & .catalog {
             width: 100%;
             height: 100%;
         }
         & .ft {
-            position: fixed;
-            bottom: 0;
-            left: 0;
             width: 100%;
             height: 1rem;
+            padding: 0 .2rem;
             .default_backgroud_3;
-            .default_flex_center;
-            .default_border_shadow_6;
+            .default_flex_left;
+            .default_border-r-10;
+
             & .ft-item {
-                flex: 1;
-                height: .6rem;
+                height: .7rem;
+                line-height: .7rem;
+                padding: 0 .3rem;
+                border-radius: .35rem;
+                .default_backgroud_5;
                 .default_color_1;
-                .default_font_size_6;
-                .default_flex_center;
-                &:first-child {
-                    .default_border-rr-5;
-                }
-                &.z-active {
-                    .default_color_2;
-                }
+                .default_font_size_3;
             }   
-        }
-        & .top {
-            position: fixed;
-            bottom: .8rem;
-            right: .3rem;
-            width: 1rem;
-            height: 1rem;
-            .default_backgroud_3;
-            .default_border-r-50;
-            .skin_top;
-            .default_border_shadow_6;
         }
     }
 </style>
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
-    <HeaderDom />
+<FrameDom
+    :data="frameData"
+>
     <div class="m-index">
         <div  class="banner">
             <v-touch class="banner-list"
                 v-on:swipeleft="bannerSidler('left')"
                 v-on:swiperight="bannerSidler('right')"
             >
-                <a v-for="(item, i) in banner_images" class="banner-list-item" :href="item.url" :class="{'cpm_hide': i != index}">
-                    <img :src="item.image_url" />
+                <a v-for="(item, i) in banner_images" class="banner-list-item" :href="item.url" :class="{'z-hide': i != index}">
+                    <img v-lazy="item.image_url"/>
+                    <!-- <img :src="item.image_url" /> -->
                 </a>
             </v-touch>
             <div class="banner-index">
                 <div v-for="(item, i) in banner_images" class="banner-index-item" :class="{'z-active': i == index}"></div>
             </div>
         </div>
+        <!-- <div class="enter">
+            <a 
+                class="enter-item" 
+                v-for="item in enter"
+                v-lazy:background-image="item.img"
+                :href="item.url"
+            >
+            </a>
+        </div> -->
         <div class="catalog">
             <ArticleList 
                 resType='index'
@@ -130,32 +143,44 @@
                 isHideEmpty="true"
             />
         </div>
-        <!-- <div class="ft">
-            <a href="./register.html" class="ft-item">注册</a>
-            <a href="./login.html" class="ft-item">登陆</a>
-        </div> -->
-        <div v-if="hasScroll" class="top" @click="top"></div>
+        <div class="ft">
+            <div class="ft-item" @click="goPC">切换电脑版</div>
+        </div>
     </div>
-    <Bubble />
-</div>
+</FrameDom>
 </template>
 
 <script>
+import Cookies from 'js-cookie';
 import {mapState} from 'vuex'
 export default {
     data () {
         return {
+            frameData: {
+                title: {
+                    text: '故事'
+                },
+                menus: {
+                    pageIndex: 'index'
+                },
+                side: {
+                    type: 'top'
+                }
+            },
+
             // banner
             isCan: false,
             index: 0,
             bannerTimer: null,
-            hasScroll: false
+            
+            enter: this.$defaultData.mbData.enter
         }
     },
     computed: mapState({
         isLogin: state => state.user.info.isLogin,
         banner_images: state => state.common.banner_images,
-        article: state => state.opus.article
+        article: state => state.opus.article,
+        menus: state => state.frame.menus
     }),
     methods: {
         bannerSidler (type){
@@ -185,14 +210,14 @@ export default {
             var lists = $(".banner-list-item");
             var nowList = lists.eq(this.index);
             var nextList = lists.eq(_index);
-            nextList.removeClass('cpm_hide').addClass('z-'+type);
+            nextList.removeClass('z-hide').addClass('z-'+type);
             setTimeout( res => {
                 lists.addClass('z-active');
                 nowList.addClass('z-move'+type);
                 nextList.addClass('z-move'+type);
                 setTimeout( res => {
                     lists.removeClass('z-active');
-                    nowList.addClass('cpm_hide').removeClass('z-moveleft z-moveright z-left z-right');
+                    nowList.addClass('z-hide').removeClass('z-moveleft z-moveright z-left z-right');
                     nextList.removeClass('z-moveleft z-moveright z-left z-right');
                     this.isCan = true;
                     this.index = _index;
@@ -237,25 +262,21 @@ export default {
                 number: 10
             });
         },
-        top (){
-            $(window).scrollTop(0);
-            this.$eventHub.$emit('index.getList');
-        }
+        goPC (){
+            // 登录成功后，讲token写入cookie
+            Cookies.set('mobile_request', 'full', {
+                domain: 'eryuzhisen.com',
+                path: '/',
+                expires: ''
+            });
+            window.location.replace('http://www.eryuzhisen.com');
+        },
     },
     updated (){
 
     },  
     mounted (){
         var that = this;
-
-        $(window).scroll( e => {
-            var scrollTop = $(window).scrollTop();
-            if (scrollTop > $(window).height()/2) {
-                this.hasScroll = true;
-            } else {
-                this.hasScroll = false;
-            }
-        })
 
         // 获取banner信息
         this.getHomeBanner();

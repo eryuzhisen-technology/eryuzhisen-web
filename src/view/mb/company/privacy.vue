@@ -7,7 +7,6 @@
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
 	<div class="m-company">
 		<div class="bd">
 	        <div class="title">
@@ -87,7 +86,6 @@
 			</p>
 	    </div>
     </div>
-</div>
 </template>
 
 <script>

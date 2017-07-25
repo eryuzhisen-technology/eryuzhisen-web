@@ -5,10 +5,11 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-        z-index: 100;
+        z-index: 110;
 		width: 100%;
 		height: 1rem;
         .default_border_shadow_6;
+        
 		& .c-header-wrap {
 			width: 100%;
 			height: 100%;
@@ -18,12 +19,10 @@
 		}
 		& .logo {
 			width: 3.62rem;
-			height: .72rem;
-			.skin_logo;
-			& img {
-				width: 100%;
-				height: 100%;
-			}
+			height: 100%;
+            background-repeat: no-repeat;
+            background-size: 2.72rem .84rem;
+            background-position: left center;
 		}
 		& .btn {
             display: block;
@@ -41,10 +40,11 @@
 
 <!-- html代码 -->
 <template>
-<div class="c-header">
+<div class="c-header" v-if="!isHide">
 	<a href="./index.html" class="c-header-wrap">
-		<div class="logo"></div>
-		<div @click.stop.prevent="goPC" class="btn">切换电脑版</div>
+		<div class="logo" v-lazy:background-image="$defaultData.mbData.logo"></div>
+        <a v-if="$defaultData.ua.isIOS" :href="$defaultData.mbData.downUrl" class="btn">立即打开</a>
+		<div v-else @click.stop.prevent="goTranslate" class="btn">立即打开</div>
 	</a>
 </div>
 </template>
@@ -56,14 +56,17 @@ export default {
 	name: 'header',
     data () {
     	return {
-    		avatar: this.$defaultData.avatar,
+    		
     	}
     },
-    props: ['pageIndex', 'resType'],
+    props: ['pageIndex', 'resType', 'isHide'],
     computed: mapState({
         user: state => state.user.info
     }),
     methods: {
+        goTranslate (){
+            window.location.href = './translate.html';
+        },
         goPC (){
             // 登录成功后，讲token写入cookie
             Cookies.set('mobile_request', 'full', {

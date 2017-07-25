@@ -1,10 +1,6 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (less) '../../../common/css/mb.common.less';
-	.app-body {
-		height: 100%;
-		padding-top: 0;
-	}
 	.m-invite {
 		position: relative;
 		width: 7.5rem;
@@ -32,24 +28,32 @@
 			background-image: url(../../../common/images/mb/invite-btn-1.png);
 			background-size: 4.9rem 1.4rem;
 			background-position: top center;
-			&:active {
+			&.z-active {
 				background-image: url(../../../common/images/mb/invite-btn-2.png);	
 			}
 		}
+	}
+	p {
+		    word-wrap: break-word;
+    		word-break: break-all;
+    		font-size: 24px;
+    		color: #fff;
 	}
 
 </style>
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
+<FrameDom
+    :data="frameData"
+>
 	<div class="m-invite">
 		<div class="bd">
 			<div class="text">{{code.invite_code}}</div>
-			<div class="btn"></div>
+			<div class="btn" @touchstart="start" @touchend="end" @click="share"></div>
 		</div>
 	</div>
-</div>
+</FrameDom>
 </template>
 
 <script>
@@ -57,19 +61,37 @@ import { mapState } from 'vuex'
 export default {
     data () {
     	return {
-			
+			frameData: {
+				isHide: true
+			}
     	}
     },
     computed: mapState({
+    	user: state => state.user.info,
         code: state => state.auth.code
     }),
     methods: {
+    	start (e){
+    		var node = $(e.currentTarget).addClass('z-active');
+    	},
+    	end (e){
+    		var node = $(e.currentTarget).removeClass('z-active');
+    	},
         getInviteCode (){
             this.$store.dispatch('auth_getInviteCode', {}).then( res =>{
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
                 this.$store.dispatch('bubble_fail', err);
             })
+        },
+        share (){
+        	var shareData = {
+				"title": (this.user.nick_name || '某某某') + "正邀请你踏上一段奇妙旅程~", //标题
+				"desc": "嘘~！这是只属于你的奇妙故事集！", //描述
+				"img": this.$defaultData.mbData.domain + this.$defaultData.mbData.shareImg, //图片
+				"link": location.protocol + '//' + location.host + '/share.invite.html?user_id=' + this.user.uid + '&invite_code=' + this.code.invite_code
+        	}       	
+        	this.$appJSBrige.executeFn('actionShare', shareData);
         }
     },
     mounted (){

@@ -176,7 +176,7 @@ export default {
 
 				// 登录成功后，讲token写入cookie
 				Cookies.set('token', res.token, {
-					domain: 'eryuzhisen.com',
+					domain:  process.env.NODE_ENV != 'development' ? 'eryuzhisen.com' : '',
 					path: '/',
 					expires: payload.isSave ? 7 : ''
 				});
@@ -401,7 +401,10 @@ export default {
 				isLogin: '',
 			});
 			// 登录成功后，讲token写入cookie
-			Cookies.remove('token', {});
+			Cookies.remove('token', {
+				domain:  process.env.NODE_ENV != 'development' ? 'eryuzhisen.com' : '',
+				path: '/',
+			});
 			return Promise.resolve(1);
 		},
 		// 接触手机绑定
@@ -477,6 +480,15 @@ export default {
 				return Promise.reject(err);
 			});
 			return promise;
-		}
+		},
+		// 接触手机绑定
+		user_checkName(context, payload) {
+			var promise = user.checkName(payload).then(res => {
+				return Promise.resolve(res);
+			}).catch((err) => {
+				return Promise.reject(err);
+			});
+			return promise;
+		},
 	}
 }

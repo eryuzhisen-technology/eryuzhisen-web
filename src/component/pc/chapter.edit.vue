@@ -55,6 +55,7 @@
                         height: 100%;
                         overflow: hidden;
                         .default_border-r-t-4;
+                        .default_backgroud_5;
                         & img {
                             position: absolute;
                             top: 0;
@@ -429,7 +430,8 @@
                         </div>
                         <div class="img">
                             <div class="mask" id="article_upload_image_select">添加封面</div>
-                            <img v-if="image" :src="image.indexOf('?') < 0 ? image + '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg' : image" />
+                            <img v-if="image" v-lazy="image" />
+                            <!-- <img v-if="image" :src="image.indexOf('?') < 0 ? image + '?x-oss-process=image/resize,w_540,h_810,m_mfit/auto-orient,1/quality,q_80/format,jpg' : image" /> -->
                         </div>
                         <UploadImg 
                             type="2" 
@@ -565,7 +567,16 @@
                             <div class="tag-list">
                                 <div class="tag-item" v-for="(item, index) in tags"><div class="tag-item-text">{{item}}</div><em @click.stop="deleteTag" :data-index="index"></em></div>
                             </div>
-                            <input class="tag-edit" @keyup.enter.stop.prevent="enter" @keyup.space.stop.prevent="enter" type="text" v-model="tagsVal" :placeholder="tags.length ? '' : '多个标签用空格区分'" />
+                            <input 
+                                class="tag-edit" 
+                                @compositionstart="compositionstart" 
+                                @compositionend="compositionend" 
+                                @keydown.enter="enter" 
+                                @keydown.space="enter" 
+                                @keydown.delete="deleteTagLast" 
+                                type="text" 
+                                v-model="tagsVal" :placeholder="tags.length ? '' : '多个标签用空格区分'" 
+                            />
                             <!-- <span>{{tags.length}}/3</span> -->
                         </div>
 
@@ -673,7 +684,9 @@ export default {
             reg_intro_con: '',
 
             // 随机标签
-            count: 16
+            count: 16,
+
+            iscomposition: false
         }
     },
     props: ['resType'],
@@ -682,6 +695,13 @@ export default {
         category: state => state.opus.category
     }),
     methods: {
+        compositionstart (e) {
+            this.iscomposition = true;
+        },
+        compositionend (e) {
+            this.iscomposition = false;
+            return false;
+        },
         focus (e){
             $(e.currentTarget).parents('.create-top-item').addClass('z-active');
         },
@@ -738,14 +758,16 @@ export default {
             this.tags.splice(index, 1);
             return false;
         },
+        deleteTagLast (e){
+            if (e.target.value == '' && this.tags.length) {
+                this.tags.splice(this.tags.length-1, 1);
+            }
+        },
         enter (e){
-            if (this.tags.length >= 3) {
+            if (this.tags.length >= 3 && this.iscomposition) {
                 return false;
             }
-            
-            this.tagsVal = $.trim(this.tagsVal);
-            var text = this.tagsVal;
-            if ($.trim(text) == '') {
+            if ($.trim(this.tagsVal) == '') {
                 this.$store.dispatch('bubble_showBubble', {
                     show: true,
                     type: 'top',
@@ -756,7 +778,7 @@ export default {
                 })
                 return false;
             }
-            if ($.trim(text).length > 5) {
+            if ($.trim(this.tagsVal).length > 5) {
                 this.$store.dispatch('bubble_showBubble', {
                     show: true,
                     type: 'top',
@@ -767,7 +789,7 @@ export default {
                 })
                 return false;
             }
-            this.tags.push(text);
+            this.tags.push(this.tagsVal);
             this.tagsVal = '';
         },
         tagsSelect (e){
@@ -1005,7 +1027,7 @@ export default {
                     // msg = '发布成功，作品重新进入审核中，请等待';
                     msg = '更新成功!';
                 } else {
-                    msg = '创建故事成功！块更新章节吧！';
+                    msg = '创建故事成功！快更新章节吧！';
                 }
                 this.$eventHub.$emit('updateCatalog_success');
                 this.show = false;
@@ -1070,11 +1092,7 @@ export default {
     },
     updated (){
         // 标签更新
-        var w = 0;
-        $(".tag-item").each(function(){
-            w += $(this).width() + 10;
-        })
-        $('.tag-edit').css('padding-left', w + 20);
+        $('.tag-edit').css('padding-left', $('.tag-list').width() + 20);
 
         // 高度扩展更新
         if (this.show) {
@@ -1120,9 +1138,9 @@ export default {
                 this.level_id = option.catalog.level;
                 this.intro = option.catalog.catalog_desc;
                 this.share_id = option.catalog.reprint;
-                this.share = option.catalog.reprint == 1 ? '是' : '否';
+                this.share = option.catalog.reprint == 1 ? '翻译授权：是' : '翻译授权：否';
                 this.control_id = option.catalog.translate;
-                this.control = option.catalog.translate == 1 ? '是' : '否';
+                this.control = option.catalog.translate == 1 ? '允许转载：是' : '允许转载：否';
                 if (option.catalog.authorize) {
                     this.oldname = option.catalog.authorize.original_title; 
                     this.oldauthor = option.catalog.authorize.original_author; 

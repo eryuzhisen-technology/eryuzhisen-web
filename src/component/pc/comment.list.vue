@@ -167,7 +167,8 @@
         <div class="c-comment-info__top">
             <a :href="'author.work.html?user_id=' + data.message.sender.user_id">
             <div class="top__img">
-                <img :src="data.message.sender.avatar_url || avatar" />
+                <img v-lazy="data.message.sender.avatar_url || avatar" />
+                <!-- <img :src="data.message.sender.avatar_url || avatar" /> -->
             </div>
             <div class="top__name">{{data.message.sender.nick_name}}</div>
             </a>
@@ -223,6 +224,7 @@ export default {
         }
     },
     computed: mapState({
+        userInfo: state => state.user.info,
         message: state => state.message.message
     }),
     methods: {
@@ -313,6 +315,28 @@ export default {
         },
         // 评论
         emitComment (option){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+            
+            // 检测是否有填写内容
+            if ($.trim(this.comment) == '') {
+                this.$store.dispatch('bubble_showBubble', {
+                    show: true,
+                    type: 'top',
+                    top: {
+                        status: 'z-warn',
+                        msg: '请输入内容后再评论'
+                    }
+                })
+                return false;
+            }
+
             if (!option) {
                 return false;
             }

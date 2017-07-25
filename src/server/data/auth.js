@@ -1,6 +1,5 @@
-import {baseUrl, _reject, _rejectObj, axios} from '../config'
+import {baseUrl, _reject, _rejectObj, axios, token} from '../config'
 import Cookies from 'js-cookie';
-var token = Cookies.get('token');
 
 /**
  * 获取黑名单用户列表
@@ -521,6 +520,22 @@ function getActiveUserList(option){
 	});
 }
 
+/**
+ * 获取邀请码
+ULR:http://domain/eryuzhisen-server/user/getInviteCode
+Method:GET
+response:
+body json:
+{
+	"ret":"1",//0 成功 1 失败
+	"errcode":"10001",//错误码 ret为1时出现,详情请查看附录
+	"errinfo":"xxxx",
+	"invite_code":"xxxxx",//邀请码
+	"remaining_times":"3"//剩余使用次数
+}
+ * @param  {[type]} option [description]
+ * @return {[type]}        [description]
+ */
 function getInviteCode(option){
 	var url = baseUrl + 'user/getInviteCode';
 

@@ -16,7 +16,7 @@
 		position: fixed;
 		top: 0;
 		left: 0;
-		z-index: 30;
+		z-index: 200;
 		width: 100%;
 		height: 60px;
 		line-height: 60px;
@@ -35,7 +35,7 @@
 		position: fixed;
 		top: 50%;
 		left: 50%;
-		z-index: 30;
+		z-index: 200;
 		width: 300px;
 		transform: translate(-50%, -50%);
 		overflow: hidden;
@@ -128,7 +128,7 @@
 		position: fixed;
 		top: 50%;
 		left: 50%;
-		z-index: 30;
+		z-index: 200;
 		width: 720px;
 		height: 540px;
 		margin: -270px 0 0 -360px;
@@ -175,7 +175,7 @@
 		position: fixed;
 		top: 50%;
 		left: 50%;
-		z-index: 30;
+		z-index: 200;
 		width: 300px;
 		transform: translate(-50%, -50%);
 		overflow: hidden;
@@ -235,10 +235,10 @@
 		position: fixed;
 		top: 50%;
 		left: 50%;
-		z-index: 30;
+		z-index: 200;
 		width: 460px;
 		transform: translate(-50%, -50%);
-		overflow: hidden;
+		// overflow: hidden;
 		.default_backgroud_3;
 		.default_border-r-4;
 		& .complete-title {
@@ -265,9 +265,9 @@
 			}
 		 	& .complete-share {
 		 		width: 100%;
-		 		overflow: hidden;
 		 		.default_center;
 		 		& .share-item {
+		 			position: relative;
 		 			display: inline-block;
 		 			width: 30px;
 		 			height: 30px;
@@ -279,6 +279,25 @@
 		 			&:last-child {
 		 				margin-right: 0;
 		 			}
+		 			& .share-item-sub {
+		 				display: none;
+		 				position: absolute;
+		 				top: 50%;
+		 				left: -150px;
+		 				transform: translate(0, -50%);
+		 				width: 140px;
+		 				height: 140px;
+		 				.default_border-r-4;
+		 			}
+		 			&:hover .share-item-sub {
+						display: block;
+		 			}
+		 		}
+		 		& .share-wx {
+		 			.skin_icon_share-1;
+					&:hover {
+						.skin_icon_share-1_on;
+					}
 		 		}
 		 		& .share-wb {
 					.skin_share_wb;
@@ -409,6 +428,11 @@
     		<p>发布成功</p>
     		<p>快把你的故事分享给好友吧</p>
     		<div class="complete-share">
+    			<div class="share-item share-wx">
+    				<div class="share-item-sub">
+                        <Qrcode :data="data.complete" />
+                    </div>
+    			</div>
     			<div class="share-item share-wb" @click="shareFn('wb', $event)"></div>
     			<div class="share-item share-tb" @click="shareFn('tb', $event)"></div>
     			<div class="share-item share-qq" @click="shareFn('qq', $event)"></div>
@@ -441,7 +465,7 @@ export default {
     	},
     	shareFn (app, e){
             $(e.currentTarget).parents('.j-close-1').removeClass('z-active');
-               
+             
             // 分享
             var option = {
                 app: app,

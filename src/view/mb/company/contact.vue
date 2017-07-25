@@ -2,18 +2,18 @@
 <style lang="less">
 @import (less) url('../../../common/css/mb.common.less');
 @import (less) './company.less';
-    .app-body {
+    .m-company {
         height: 100%;
     }
     .m-company .bd {
         padding-top: 0;
+        height: 100%;
         .default_flex__v_middle;
     }
 </style>
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
     <div class="m-company">
         <div class="bd">
             <div class="title">
@@ -36,7 +36,6 @@
             </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>

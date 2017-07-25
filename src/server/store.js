@@ -6,6 +6,7 @@ import auth from './modules/auth'
 import opus from './modules/opus'
 import common from './modules/common'
 import message from './modules/message'
+import frame from './modules/frame'
 
 Vue.use(Vuex);
 var store = new Vuex.Store({
@@ -14,6 +15,7 @@ var store = new Vuex.Store({
 		user: user,
 		auth: auth,
 		opus: opus,
+		frame: frame,
 		common: common,
 		message: message
 	},

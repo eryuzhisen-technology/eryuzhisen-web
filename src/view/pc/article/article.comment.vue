@@ -14,7 +14,8 @@
 		<div class="m-artice-content">
             <div class="content-left">
                 <div class="img">
-                    <img :src="catalog.catalog_cover_url" />
+                    <img v-lazy="catalog.catalog_cover_url" />
+                    <!-- <img :src="catalog.catalog_cover_url" /> -->
                 </div>
                 <!-- <div class="tag">
                     <div class="tag_text">{{catalog.category_title}}</div>

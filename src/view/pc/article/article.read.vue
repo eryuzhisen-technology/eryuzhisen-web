@@ -129,6 +129,9 @@
             & .content__read-text {
                 text-align: justify;
                 padding: 0 40px 50px;
+                line-height: 1.75rem;
+                .default_font_size_3;
+                .default_color_10;
                 & p {
                     width: 100%;
                     line-height: 1.75rem;
@@ -494,6 +497,13 @@
                     </div>
                     <div class="speak-form-icon speak-form-share j-close-1" @click="selctEnter">
                         <div class="cpm_sub_more z-left">
+                            <div class="item">
+                                <div class="item-icon z-wx"></div>
+                                <div class="item-text">微信</div>
+                                <div class="item-sub">
+                                    <Qrcode :data="qr" />
+                                </div>
+                            </div>
                             <div class="item" @click.stop="shareFn('wb', $event)">
                                 <div class="item-icon z-wb"></div>
                                 <div class="item-text">微博</div>
@@ -532,7 +542,11 @@ export default {
             comment_con: '',
 
             isScan: false,
-            chapter_bat: {}
+            chapter_bat: {},
+
+            qr: {
+                url: window.location.href
+            }
         }
     },
     computed: mapState({
@@ -652,6 +666,19 @@ export default {
                     ret: -11,
                     msg: '未登录，请登陆后操作'
                 });
+                return false;
+            }
+
+            // 检测是否有填写内容
+            if ($.trim(this.comment_con) == '') {
+                this.$store.dispatch('bubble_showBubble', {
+                    show: true,
+                    type: 'top',
+                    top: {
+                        status: 'z-warn',
+                        msg: '请输入内容后再评论'
+                    }
+                })
                 return false;
             }
 

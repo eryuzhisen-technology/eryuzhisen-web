@@ -7,7 +7,6 @@
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
 	<div class="m-company">
 		<div class="bd">
 			<p class="title">一、原创作品发布条例</p>
@@ -41,7 +40,6 @@
 			<p class="text">3、在耳语之森发布的作品，都有机会得到耳语之森的友好合作伙伴（包括但不限于合作方app、网页、微信微博等新媒体平台）的推荐。编辑部会根据作品的内容和合作方的需求安排。在推荐之前会告知作者并取得允许，请留意编辑部私信。</p>
 		</div>
 	</div>
-</div>
 </template>
 
 <script>

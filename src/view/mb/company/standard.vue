@@ -7,7 +7,6 @@
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
 	<div class="m-company">
 		<div class="bd">
 			<p class="title">一、评论管理规定</p>
@@ -61,7 +60,6 @@
 			<p class="text">构成抄袭的，作品会处于审核中状态，他人不可见，情节不严重的情况下，管理员通知作者要求清理，清理干净之前不得通过审核；情节严重的，管理员对该作品作者做删文封号处理。</p>
 		</div>
 	</div>
-</div>
 </template>
 
 <script>

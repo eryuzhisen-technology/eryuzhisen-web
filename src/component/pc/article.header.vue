@@ -100,6 +100,7 @@
                     .default_backgroud_4;
                     .default_border-r-50;
                     .default_middle;
+                    .default_backgroud_5;
                 }
                 & .text-author__name {
                     display: inline-block;
@@ -255,7 +256,8 @@
         <div class="text-author" v-if="catalog.user">
         <a :href="'author.work.html?user_id=' + catalog.user.uid">
             <div class="text-author__img">
-                <img :src="catalog.user.avatar_url" />
+                <img v-lazy="catalog.user.avatar_url" />
+                <!-- <img :src="catalog.user.avatar_url" /> -->
             </div>
             <div class="text-author__name">{{catalog.user.nick_name}}</div>
         </a></div>
@@ -273,6 +275,13 @@
         </div>
         <div class="btn-item btn-share j-close-1" @click="selctEnter">
             <div class="cpm_sub_more z-left">
+                <div class="item">
+                    <div class="item-icon z-wx"></div>
+                    <div class="item-text">微信</div>
+                    <div class="item-sub">
+                        <Qrcode :data="qr" />
+                    </div>
+                </div>
                 <div class="item" @click.stop="shareFn('wb', $event)">
                     <div class="item-icon z-wb"></div>
                     <div class="item-text">微博</div>
@@ -338,6 +347,10 @@ export default {
             },
             catalog_id: '',
             index: -1,
+
+            qr: {
+                url: window.location.href
+            }
         }
     },
     props: ['menu', 'menuIndex'],

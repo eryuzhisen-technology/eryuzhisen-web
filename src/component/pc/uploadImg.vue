@@ -79,13 +79,14 @@ export default {
         },
         send_request (filename){
             // 开始传输图片
-            var pos = filename.lastIndexOf('.')
-            var suffix = filename.substring(pos);
-            var uploadfilename = this.key + this.random_string(10) + suffix;
+            // var pos = filename.lastIndexOf('.')
+            // var suffix = filename.substring(pos);
+            var suffix = (new Date()).getTime();
+            var uploadfilename = this.key + this.random_string(5) + '_' + suffix;
             this.uploadfilename[filename] = {
                 src: this.host + '/' + uploadfilename,
                 load: 0,
-                name: this.random_string(10) + suffix
+                name: this.random_string(5) + '_' + suffix
             };
 
             this.uploader.setOption({

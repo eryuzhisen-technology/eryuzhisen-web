@@ -170,11 +170,12 @@ export default {
                     url: 'setting.backlist.html'
                 }
     		},
+
+            nick_name_exist: false
     	}
     },
     computed: mapState({
-        user: state => state.user.info,
-        code: state => state.auth.code
+        user: state => state.user.info
     }),
     methods: {
         uploadname (e){
@@ -198,6 +199,31 @@ export default {
                 signature: this.user.signature,
                 nick_name: this.user.nick_name
             }).then( filename => {
+                var msg = '';
+                var isError = false;
+                if (!$.trim(this.user.nick_name)) {
+                    msg = '请输入昵称！';
+                    isError = true;
+                } else if (this.nick_name_exist) {
+                    msg = '昵称已存在！';
+                    isError = true;
+                }
+                if (!$.trim(this.user.signature)) {
+                    msg = '请输入简介！';
+                    isError = true;
+                }
+                if (isError) {
+                    this.$store.dispatch('bubble_showBubble', {
+                        show: true,
+                        type: 'top',
+                        top: {
+                            status: 'z-warn',
+                            msg: msg
+                        }
+                    })
+                    return false;
+                }
+
                 this.$store.dispatch('user_updateUserInfo').then( res => {
                     this.$store.dispatch('bubble_success', {
                         ret: 0,
@@ -215,27 +241,34 @@ export default {
                 }); 
             })
         },
-        getInviteCode (){
-            this.$store.dispatch('auth_getInviteCode', {}).then( res =>{
+        checkName (){
+            this.$store.dispatch('user_checkName', {
+                nickName: this.user.nick_name
+            }).then( res => {
+                if (res.exist == 1) {
+                    this.$store.dispatch('bubble_showBubble', {
+                        show: true,
+                        type: 'top',
+                        top: {
+                            status: 'z-warn',
+                            msg: '昵称已存在，请重新输入!'
+                        }
+                    })
+                    this.nick_name_exist = true;
+                } else {
+                    this.nick_name_exist = false;
+                }
+
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
+                this.nick_name_exist = false;
+                
                 this.$store.dispatch('bubble_fail', err);
-            })
+            }); 
         }
     },
     mounted (){
-        // this.$watch('user.nick_name', value => {
-        //     this.$store.dispatch('user_setUserInfo', {
-        //         nick_name: String(value).substr(0, 15)
-        //     })
-        // })
-        // this.$watch('user.signature', value => {
-        //     this.$store.dispatch('user_setUserInfo', {
-        //         signature: String(value).substr(0, 1000)
-        //     })
-        // })
-
-        this.getInviteCode();
+        
     }
 }
 </script>

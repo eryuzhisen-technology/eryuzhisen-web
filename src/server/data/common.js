@@ -1,6 +1,5 @@
-import {baseUrl, _reject, _rejectObj, axios} from '../config'
+import {baseUrl, _reject, _rejectObj, axios, token} from '../config'
 import Cookies from 'js-cookie';
-var token = Cookies.get('token');
 
 /**
  * 获取首页banner

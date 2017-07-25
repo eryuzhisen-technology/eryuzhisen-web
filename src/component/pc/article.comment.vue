@@ -226,7 +226,8 @@
             <div class="content__top">
             <a :href="'author.work.html?user_id=' + data.user.uid">
                 <div class="top-img">
-                    <img :src="data.user.avatar_url || avatar" />
+                    <img v-lazy="data.user.avatar_url || avatar" />
+                    <!-- <img :src="data.user.avatar_url || avatar" /> -->
                 </div>
                 <div class="top-name">{{data.user.nick_name}}</div>
             </a></div>
@@ -433,6 +434,28 @@ export default {
         },
         // 一级评论添加评论
         sendComment (id){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
+            // 检测是否有填写内容
+            if ($.trim(this.comment_con) == '') {
+                this.$store.dispatch('bubble_showBubble', {
+                    show: true,
+                    type: 'top',
+                    top: {
+                        status: 'z-warn',
+                        msg: '请输入内容后再评论'
+                    }
+                })
+                return false;
+            }
+
             this.addComment({
                 comment: this.comment_con,
                 to_comment_id: id
@@ -440,6 +463,28 @@ export default {
         },
         // 子评论添加评论
         sendReplyComment (comment_id, reply_comment_id){
+            // 判断登陆
+            if (!this.userInfo.isLogin) {
+                return this.$store.dispatch('bubble_fail', {
+                    ret: -11,
+                    msg: '未登录，请登陆后操作'
+                });
+                return false;
+            }
+
+            // 检测是否有填写内容
+            if ($.trim(this.comment_con) == '') {
+                this.$store.dispatch('bubble_showBubble', {
+                    show: true,
+                    type: 'top',
+                    top: {
+                        status: 'z-warn',
+                        msg: '请输入内容后再评论'
+                    }
+                })
+                return false;
+            }
+
             this.addComment({
                 comment: this.comment_con,
                 to_comment_id: comment_id,

@@ -17,10 +17,10 @@
 		margin: 0 auto;
 		& .logo {
 			float: left;
-			width: 84px;
+			width: 54px;
 			height: 50px;
 			margin-top: 5px;
-			margin-right: 30px;
+			margin-right: 20px;
 			.skin_head_logo;
 			.default_pointer;
 			& a {
@@ -31,13 +31,13 @@
 		}
 		& .menu {
 			float: left;
-			margin-top: 10px;
+			// margin-top: 10px;
 			margin-right: 30px;
-			overflow-y: hidden;
 			& .item {
+				position: relative;
 				float: left;
-				height: 40px;
-				line-height: 40px;
+				height: 60px;
+				line-height: 60px;
 				margin-right: 20px;
 				.default_font_size_2;
 				.default_color_2;
@@ -50,6 +50,22 @@
 				}
 				:last-child {
 					margin-right: 0;
+				}
+				& .item-sub {
+					display: none;
+					position: absolute;
+					top: 100%;
+					left: 50%;
+					width: 140px;
+					height: 140px;
+					transform: translate(-50%, 0);
+					border-radius: 0 0 4px 4px;
+					overflow: hidden;
+				}
+				&:hover {
+					& .item-sub {
+						display: block;	
+					}
 				}
 			}
 		}
@@ -401,6 +417,12 @@
 		<div class="menu">
 			<a href="javascript:void(0);" class="item" :class="{'z-on': pageIndex == 'index'}" @click="gourl('index')">故事</a>
 			<a href="javascript:void(0);" class="item" :class="{'z-on': pageIndex == 'mark'}" @click="gourl('mark')">收藏</a>
+			<a href="javascript:void(0);" class="item" :class="{'z-on': pageIndex == 'mark'}" @click="gourl('mobile')">
+				下载APP
+				<div class="item-sub">
+					<Qrcode :data="qr" />
+				</div>
+			</a>
 		</div>
 		<div class="search">
 			<input type="text" placeholder="搜索" @keyup.enter="seachGo" v-model="search_value" spellcheck="false" />
@@ -446,7 +468,7 @@
 					</div>
 				</div>
 				<div class="member-show-item member-show-center">
-					<div class="member-show-center_img" :style="{'background-image': 'url('+ (!!user.avatar_url ? user.avatar_url : avatar) + ')'} "></div>
+					<div class="member-show-center_img" v-lazy:background-image="(!!user.avatar_url ? user.avatar_url : avatar)"></div>
 					<div class="member-show member-center">
 						<ul class="member-center-lists">
 							<li class="member-center-item"><a :href="url.invite">
@@ -487,7 +509,10 @@ export default {
     	return {
     		avatar: this.$defaultData.avatar,
     		hasMessage: false,
-    		search_value: ''
+    		search_value: '',
+    		qr: {
+    			url: 'https://m.eryuzhisen.com/translate.html'
+    		}
     	}
     },
     props: ['pageIndex', 'resType'],
@@ -567,6 +592,7 @@ export default {
         	var info = this.$cache.getStore(cache_userInfo.key, cache_userInfo.version);
         	if (info) {
         		this.$store.dispatch('user_setUserInfo', info).then( res => {
+        			this.$defaultData.pcDate.enter[2].url = './invite.html';
         			this.url.center = './author.work.html?user_id=' + this.user.uid;
         		})
         		return false;
@@ -574,6 +600,7 @@ export default {
             this.$store.dispatch('user_getUserInfo', {
             	
             }).then( res => {
+            	this.$defaultData.pcDate.enter[2].url = './invite.html';
                 this.url.center = './author.work.html?user_id=' + this.user.uid;
 
                 // 缓存用户信息 - 1h

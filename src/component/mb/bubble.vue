@@ -44,34 +44,32 @@
 		& .warn-title {
 			padding-top: 30px;
 			margin-bottom: 20px;
-			text-align: center;
 			.default_color_1;
-			.default_font_size_4;
+			.default_font_size_8;
+			.default_center;
 		}
 		& .warn-content {
 			padding: 0 .6rem;
-			line-height: 1.5rem;
+			line-height: 1.5em;
 			margin-bottom: 30px;
 			.default_color_2;
-			.default_font_size_3;
+			.default_font_size_5;
 			& h3 {
 				margin-bottom: .4rem;
 				.default_color_1;
 				.default_font_size_8;
 				.default_font_bolder;
-				.default_center;
 			}
 			& p {
 				line-height: 1.5em;
-				.default_center;
+			}
+			& span {
+				.default_font_size_4;
 			}
 		 	& a {
-		 		line-height: 1.5rem;
-				.default_font_size_1;
-				.default_color_3;
-				&:hover {
-					.default_color_1;
-				}
+		 		line-height: 1.5em;
+				.default_font_size_5;
+				.default_color_1;
 		 	}
 		}
 		& .warn-bottom {
@@ -95,6 +93,9 @@
 				}
 			}
 		}
+		&.z-center .warn-content {
+			.default_center;
+		}
 	}
 </style>
 
@@ -108,7 +109,7 @@
     </div>
 
     <!-- dialog提示 -->
-    <div v-if="data.type == 'warn'" class="c-bubble-warn">
+    <div v-if="data.type == 'warn'" class="c-bubble-warn" :class="data.warn.className">
     	<div class="warn-title">{{data.warn.title}}</div>
     	<div v-if="data.warn.html" class="warn-content" v-html="data.warn.html"></div>
     	<div v-else class="warn-content">{{data.warn.content}}</div>

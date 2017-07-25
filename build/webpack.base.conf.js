@@ -74,7 +74,8 @@ function getSource() {
         source.htmlFiles.push({
             filename: 'html/' + name + '.html',
             pageSource: pageSource,
-            jsChunkName: name
+            jsChunkName: name,
+            favicon: resolve('/src/common/images/favicon.png')
         });
         source.entry[name] = item;
     });

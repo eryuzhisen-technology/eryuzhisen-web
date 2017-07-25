@@ -1,6 +1,9 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (less) url('../../../common/css/mb.common.less');
+    .app-main {
+        padding-top: 2rem;
+    }
     .m-article-read {
         width: 100%;
         height: 100%;
@@ -15,7 +18,6 @@
         }
         & .content {
             padding: .6rem .4rem;
-            .default_border-b-4;
             & .content-title {
                 line-height: 1rem;
                 margin-bottom: .6rem;
@@ -31,16 +33,16 @@
                     line-height: 1.75em;
                     word-wrap: break-word;
                     word-break: break-all;
-                    // text-align: justify;
                 }
                 & img {
                     max-width: 100%;
                 }
-            }   
+            }  
         }
         & .switch {
             padding: .25rem 0;
             .default_flex_middle;
+            .default_border-t-4;
             & .switch-item {
                 flex: 1;
                 height: 1rem;
@@ -77,26 +79,28 @@
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
-    <HeaderDom />
+<FrameDom
+    :data="frameData"
+>
     <div class="m-article-read">
     <div class="m-article-read-wrap">
         <div class="content">
-            <div class="content-title">{{chapter.info.chapter_title}}</div>
-            <div class="content-read" v-html="chapter.info.chapter_content"></div>
+            <div class="content-title">{{isScan ? chapter_bat.chapter_title : chapter.info.chapter_title}}</div>
+            <div class="content-read" v-html="isScan ? chapter_bat.chapter_content : chapter.info.chapter_content"></div>
         </div>
-        <div class="switch">
-            <a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.pre_id" v-if="chapter.pre_id" class="switch-item">上一篇</a>
-            <a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.next_id" v-if="chapter.next_id" class="switch-item">下一篇</a>
+        <div v-if="!isScan" class="bottom">
+            <div v-if="chapter.pre_id || chapter.next_id" class="switch">
+                <a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.pre_id" v-if="chapter.pre_id" class="switch-item">上一篇</a>
+                <a :href="'./article.read.html?catalog_id='+ catalog_id +'&chapter_id='+chapter.next_id" v-if="chapter.next_id" class="switch-item">下一篇</a>
+            </div>
+            <a :href="'article.intro.html?catalog_id=' + catalog_id" class="chapter">查看全部章节</a>
+            <a v-if="catalog.user" class="author" target="_black" :href="'author.work.html?user_id=' + catalog.user.uid">
+                <img :src="catalog.user.avatar_url" />
+            </a>
         </div>
-        <a :href="'article.html?catalog_id=' + catalog_id" class="chapter">查看全部章节</a>
-        <a v-if="catalog.user" class="author" target="_black" :href="'author.html?user_id=' + catalog.user.uid">
-            <img :src="catalog.user.avatar_url" />
-        </a>   
     </div>
     </div>
-    <Bubble />
-</div>
+</FrameDom>
 </template>
 
 <script>
@@ -104,7 +108,18 @@ import {mapState} from 'vuex'
 export default {
     data (){
         return {
+            frameData: {
+                title: {
+                    text: ''
+                },
+                side: {
+                    type: 'home'
+                }
+            },
+            
             catalog_id: '',
+            isScan: false,
+            chapter_bat: {}
         }
     },
     props: ['resType', 'isHideEmpty'],
@@ -120,7 +135,8 @@ export default {
                 catalogId: this.catalog_id
             }).then( res => {
                 // todo
-                
+                this.frameData.title.text = res.info.catalog_title;
+
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
                 this.$store.dispatch('bubble_fail', err);
@@ -152,12 +168,20 @@ export default {
         // 获取url的参数
         this.catalog_id = this.$url.getUrlParam('catalog_id');
         this.chapter_id = this.$url.getUrlParam('chapter_id');
+        this.isScan = this.$url.getUrlParam('isScan') == 1;
+        this.frameData.title.text = '预览';
 
-        // 获取文章目录详情
-        this.getCatalogDetail();
+        if (this.isScan) {
+            var chapaterEdit_edit = this.$version.chapaterEdit_edit;
+            var key = chapaterEdit_edit.key + '_' + this.catalog_id + '_' + this.chapter_id;
+            this.chapter_bat = this.$cache.getStore(key, chapaterEdit_edit.version);
+        } else {
+            // 获取文章目录详情
+            this.getCatalogDetail();
 
-        // 获取文章详情
-        this.getChapterDetail();
+            // 获取文章详情
+            this.getChapterDetail();
+        }
     }
 }
 </script>

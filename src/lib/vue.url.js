@@ -320,6 +320,7 @@
 
     var index = {
         install: install,
+        url: new Url(),
         version: '1.0.0'
     };
 

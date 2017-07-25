@@ -36,6 +36,7 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat(function() {
                 hash: true,
                 cache: true,
                 showErrors: true,
+                favicon: htmlFile.favicon,
                 chunks: [htmlFile.jsChunkName, 'vendor-modules', 'vendor-business'],
                 minify: {
                     removeComments: true,
@@ -84,7 +85,7 @@ var webpackConfig = merge(baseWebpackConfig, {
         }),
         // css模块提取出来
         new ExtractTextPlugin({
-            filename: project_name + '/css/[name].[contenthash].css'
+            filename: '/css/[name].[contenthash].css'
         }),
         // Compress extracted CSS. We are using this plugin so that possible
         // duplicated CSS from different components can be deduped.

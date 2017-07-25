@@ -35,6 +35,7 @@ baseWebpackConfig.plugins = baseWebpackConfig.plugins.concat(function() {
                 filename: htmlFile.filename,
                 inject: 'body',
                 showErrors: true,
+                favicon: htmlFile.favicon,
                 chunks: [htmlFile.jsChunkName, 'vendor-modules', 'vendor-business'],
                 // chunks: [htmlFile.jsChunkName, 'vendor']
             })

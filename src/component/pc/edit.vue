@@ -1,89 +1,47 @@
 <!-- style样式代码 -->
 <style lang="less">
 @import (reference) '../../common/css/common';
-    // ---------- begin 全局颜色配置 ------------
-    /* 编辑器边框颜色 */
-    @border-color: #ccc;
-    /* 菜单颜色、上边框颜色 */
-    @fore-color: #666;
-    /* 菜单选中状态的颜色 */
-    @selected-color: #1e88e5;
-    /* input focus 时的颜色 */
-    @focus-input-color: #1e88e5;
-    /* 按钮颜色 */
-    @button-color: #1e88e5;
-    /* tab selected 状态下的颜色 */
-    @selected-tab-color: #1e88e5;
-    // ---------- end 全局颜色配置 ------------
-    
-    // ---------- begin 编辑器 ------------
-    .wangEditor-container {
+    .c-edit {
+        // min-height: 700px;
+        & .c-edit-content-wrap {
+            overflow-y: auto;
+        }
+        .w-e-toolbar,
+        .w-e-text-container,
+        .w-e-menu-panel {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .w-e-toolbar *,
+        .w-e-text-container *,
+        .w-e-menu-panel * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        .w-e-clear-fix:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+    }
+    .w-e-text-container {
         position: relative;
         z-index: 1;
         width: 100%;
         .default_backgroud_3;
-        .clearfix:after {
-            content: '';
-            display: table;
-            clear: both;
-        }
-        .clearfix {
-            *zoom: 1;
-        }
-        // 显示p head 高度的 tip
-        .height-tip {
-            position: absolute;
-            width: 3px;
-            background-color: #ccc;
-            left: 0;
-            transition: top .2s;
-        }
-        // 设置 img table 的 toolbar
-        .txt-toolbar {
-            position: absolute;
-            background-color: #fff;
-            padding: 3px 5px;
-            border-top: 2px solid @fore-color;
-            box-shadow: 1px 3px 3px #999;
-
-            // for IE8
-            border-left: 1px\9 solid\9 #ccc\9;
-            border-bottom: 1px\9 solid\9 #999\9;
-            border-right: 1px\9 solid\9 #999\9;
-
-            // 小三角
-            .tip-triangle {
-                display: block;
-                position: absolute;
-                width: 0;
-                height: 0;
-                border: 5px solid;
-                border-color: transparent transparent @fore-color transparent;
-                top: -12px;
-                left: 50%;
-                margin-left: -5px;
-            }
-
-            a {
-                color: @fore-color;
-                display: inline-block;
-                margin: 0 3px;
-                padding: 5px;
-                text-decoration: none;
-                border-radius: 3px;
-
-                &:hover {
-                    background-color: #f1f1f1;
-                }
-            }
-        }
-
-        & .wangEditor-txt{
+        & .w-e-text {
             width: 100%;
             padding: 40px;
-            text-align: left;
+            line-height: 1.75rem;
+            .default_color_10;
+            & b,
+            & i {
+                .default_color_10;
+                .default_font_size_3;
+            }
             & p {
-                // margin-bottom: 30px;
                 min-height: 1.75rem;
                 line-height: 1.75em;
                 word-wrap: break-word;
@@ -92,19 +50,9 @@
                 .default_color_10;
                 .default_font_size_3;
             }
-            & blockquote {
-                display: block; 
-                border-left: 8px solid #d0e5f2;
-                padding: 5px 10px;
-                margin: 10px 0; 
-                line-height: 1.4; 
-                font-size: 100%;
-                background-color: #f1f1f1;
-            }
             & img {
                 width: auto;
                 max-width: 100%;
-                // margin-bottom: 10px;
             }
         }
         & textarea {
@@ -117,95 +65,102 @@
             .default_font_size_3;
         }
     }
-    .wangEditor-menu-container {
+    .w-e-toolbar {
+        position: relative;
         width: 100%;
         height: 50px;
         .default_backgroud_2;
-        // 菜单组
-        .menu-group {
-            float: left;
-        }
-        // 单个菜单容器
-        .menu-item {
+        & .w-e-menu {
             float: left;
             position: relative;
             text-align: center;
             width: 40px;
             height: 50px;
-            line-height: 50px;
+            .default_pointer;
+
+            &.w-e-active,
             &:hover {
                 .default_backgroud_14;
             }
             // 菜单
-            & a {
+            &>span {
+                display: block;
+                width: 100%;
+                height: 100%;
+                line-height: 50px;
+                .default_font_size_2;
+                .default_color_2;
+            }
+            &>i {
                 display: block;
                 width: 100%;
                 height: 100%;
                 .default_font_size_2;
                 .default_color_2;
-                text-decoration: none;
                 &:hover {
                     .default_color_1;
                 }
-                & i {
-                    display: block;
-                    width: 100%;
-                    height: 100%;
+                &.w-e-icon-Indent {
+                    .skin_icon_edit-3;
+                    &:hover {
+                        .skin_icon_edit-3_on;
+                    }
+                }
+                &.w-e-icon-bold {
+                    .skin_icon_edit-2;
+                    &:hover {
+                        .skin_icon_edit-2_on;
+                    }
+                }
+                &.w-e-icon-justifyCenter {
+                    .skin_article_center;
+                    &:hover {
+                        .skin_article_center_on;
+                    }
+                }
+                &.w-e-icon-italic {
+                    .skin_icon_edit-4;
+                    &:hover {
+                        .skin_icon_edit-4_on;
+                    }
+                }
+                &.w-e-icon-strikethrough {
+                    .skin_icon_edit-5;
+                    &:hover {
+                        .skin_icon_edit-5_on;
+                    }
+                }
+                &.w-e-icon-image {
+                    .skin_icon_edit-6;
+                    &:hover {
+                        .skin_icon_edit-6_on;
+                    }
+                }
+                &.w-e-icon-scan {
+                    .skin_icon_edit-7;
+                    &:hover {
+                        .skin_icon_edit-7_on;
+                    }
                 }
             }
-            // 菜单选中状态
-            &.selected {
-                color: @selected-color;
-            }
-            // 激活状态
-            &.active {
-                background-color: #f1f1f1;
-            }
-            // 禁用状态
-            &.disable {
-                opacity: 0.5;
-                filter: Alpha(opacity=50);
-            }
-            & .wangeditor-menu-img-indent-left {
-                .skin_icon_edit-3;
-                &:hover {
+            &.w-e-active>i {
+                &.w-e-icon-Indent {
                     .skin_icon_edit-3_on;
                 }
-            }
-            & .wangeditor-menu-img-bold {
-                .skin_icon_edit-2;
-                &:hover {
+                &.w-e-icon-bold {
                     .skin_icon_edit-2_on;
                 }
-            }
-            & .wangeditor-menu-img-align-center {
-                .skin_article_center;
-                &:hover {
+                &.w-e-icon-justifyCenter {
                     .skin_article_center_on;
                 }
-            }
-            & .wangeditor-menu-img-italic {
-                .skin_icon_edit-4;
-                &:hover {
+                &.w-e-icon-italic {
                     .skin_icon_edit-4_on;
                 }
-            }
-            & .wangeditor-menu-img-strikethrough {
-                .skin_icon_edit-5;
-                &:hover {
+                &.w-e-icon-strikethrough {
                     .skin_icon_edit-5_on;
                 }
-            }
-            & .wangeditor-menu-img-picture {
-                .skin_icon_edit-6;
-                &:hover {
+                &.w-e-icon-image {
                     .skin_icon_edit-6_on;
-                }
-            }
-            &.menu-item-scan {
-                .skin_icon_edit-7;
-                &:hover {
-                    .skin_icon_edit-7_on;
                 }
             }
             &.j-save-btn-update {
@@ -218,9 +173,34 @@
                     }
                 }
             }
+            &:hover .menu-tip {
+                display: block!important;
+            }
+            &.w-e-menu-strikeThrough .menu-tip {
+                width: 50px;
+                margin-left: -25px;
+            }
+            &.j-publish-btn {
+                & .menu-tip {
+                    left: inherit;
+                    right: 0;
+                    transform: none;
+                    text-align: right;
+                }
+                & .tip-triangle {
+                    right: 15px;
+                    left: inherit;
+                    transform: translate(0%, 0px) rotate(45deg);
+                }
+            }
+        }
+        & .w-e-menu-save,
+        & .w-e-menu-scan,
+        & .w-e-menu-pubilsh {
+            float: right;
         }
         // tip提示
-        .menu-tip {
+        & .menu-tip {
             display: none;
             box-sizing: content-box;
 
@@ -228,7 +208,7 @@
             top: -36px;
             left: 50%;
             height: 36px;
-    
+
             width: 48px;
             height: 30px;
             line-height: 30px;
@@ -259,20 +239,12 @@
             margin-left: -25px;
         }
     }
-    // ---------- end 编辑器 ------------
-
-    .c-edit {
-        // min-height: 700px;
-        & .c-edit-content-wrap {
-            overflow-y: auto;
-        }
-    }
 </style>
 
 <!-- html代码 -->
 <template>
 <div class="c-edit">
-    <div class="c-edit-content" id="edit" @click="click"></div>
+    <div class="c-edit-content" id="edit_wangeditor" @click="click"></div>
     <keep-alive v-if="edit_init">
     <UploadImg 
         type="2" 
@@ -301,7 +273,7 @@ export default {
         },
         uploaded (filename){
             var imgHtml = '<p><img style="max-width:100%;" src="' + filename + '"/></p>';
-            this.editor.command(null, 'insertHtml', imgHtml);
+            this.editor.cmd.do('insertHtml', imgHtml);
         },
         error (err){
             if (err.code == -600) {
@@ -344,51 +316,69 @@ export default {
         },
         // 保存内容
         update (){
-            var value = this.editor.$txt.html();
+            var value = this.getContent();       
             this.$emit('update', value);
         },
         // 发布内容
         publish (){
-            var value = this.editor.$txt.html();
+            var value = this.getContent();
             this.$emit('publish', value);
         },
         // 预览内容
         scan (){
-            var value = this.editor.$txt.html();
+            var value = this.getContent();
             this.$emit('scan', value);
         },
         change (){
-            var value = this.editor.$txt.html();
+            var value = this.getContent();
             this.$emit('edit', value);
         },
         autoHeight (){
             var _height = $(window).height() - 120;
             $('.c-edit-content').css('min-height', _height);
             $('.c-edit-content-wrap').height(_height);
+        },
+        getContent (content){
+            var _value = content || this.editor.txt.html();            
+            if (content) {
+                this.editor.txt.html(_value);
+            }
+            return _value;
         }
     },
     watch: {
         content (){
-            this.editor.$txt.html(this.content);
+            this.editor.txt.html(this.content);
         }
     },
     mounted (){
-        this.editor = new this.$edit('edit');
         // 监听内容变化
-        this.editor.onchange = this.change;
-
         // 创建
-        this.editor.create();
-
         // 初始化编辑器的内容
-        this.editor.$txt.html(this.content);
+        this.editor = new this.$edit('#edit_wangeditor', null, {
+            xss: this.$filterXSS,
+            xssRule: this.$defaultData.xssRule
+        });
+        this.editor.customConfig.onchange = this.change;
+        this.editor.customConfig.zIndex = 1;
+        // 自定义菜单配置
+        this.editor.customConfig.menus = [
+            'indent',
+            'justifyCenter',
+            'bold',
+            'italic',
+            // 'strikeThrough',
+            'image'
+        ];
+        this.editor.create();
+        this.getContent(this.content);
 
         // 添加额外的菜单
-        var save = $('<div class="menu-item menu-item-save clearfix j-save-btn"><a href="javascript:void(0);">保存</a></div>');
-        var scan = $('<div class="menu-item menu-item-scan clearfix j-scan-btn"><a href="javascript:void(0);"></a></div>');
-        var publish = $('<div class="menu-item clearfix"><a href="javascript:void(0);">发布</a></div>');
-        var group = $('<div class="menu-group"></div>').css('float', 'right');
-        group.append(save).append(scan).append(publish);
+        var publish = $('<div class="w-e-menu w-e-menu-pubilsh j-btn j-publish-btn"><span>发布</span><div class="menu-tip" style="width: 100px; margin-left: 13.5px;"><i class="tip-triangle"></i>发布后不能修改</div></div>');
+        var scan = $('<div class="w-e-menu w-e-menu-scan j-btn j-scan-btn"><i class="w-e-icon-scan"></i><div class="menu-tip" style="width: 41px; margin-left: 13.5px;"><i class="tip-triangle"></i>预览</div></div>');
+        var save = $('<div class="w-e-menu w-e-menu-save j-btn j-save-btn"><span>保存</span><div class="menu-tip" style="width: 41px; margin-left: 13.5px;"><i class="tip-triangle"></i>保存</div></div>');
+        var group = $('.w-e-toolbar');
+        group.append(publish).append(scan).append(save);
         $('.wangEditor-menu-container').append(group);
 
         // 菜单事件
@@ -406,9 +396,7 @@ export default {
         this.edit_init = true;
         this.$emit('edit_init', this.editor);
 
-        // 设置iscroll
-        $('.c-edit-content').wrap($('<div id="c-edit-content-wrap" class="c-edit-content-wrap"></div>'));
-
+        $('.w-e-text-container').addClass('c-edit-content-wrap');
         // 设置高度
         $('.c-edit-content').css('height', 'auto');
         this.autoHeight();

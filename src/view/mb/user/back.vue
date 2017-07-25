@@ -6,8 +6,9 @@
 
 <!-- html代码 -->
 <template>
-<div class="app-body">
-    <HeaderDom />
+<FrameDom
+    :data="frameData"
+>
     <div class="m-user">
         <div class="user-form">
             <div class="form-item-input">
@@ -31,8 +32,7 @@
         <div class="user-btn user-btn-default" @click="resetPwd">保存并登录</div>
         <a href="./login.html" class="user-btn user-btn-weak">想起来了 立即登录</a>
     </div>  
-    <Bubble />
-</div>
+</FrameDom>
 </template>
 
 <script>
@@ -41,6 +41,14 @@ export default {
     name: 'back',
     data () {
     	return {
+            frameData: {
+                title: {
+                    text: '找回密码'
+                },
+                side: {
+                    type: 'home'
+                }
+            },
             phone: '',
             password: '',
             repassword: '',

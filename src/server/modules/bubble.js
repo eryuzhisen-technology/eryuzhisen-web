@@ -53,7 +53,9 @@ function _default(){
         methods: {
 
         },
-        outlogin: false
+        outlogin: false,
+
+        timer: null
 	}
 }
 
@@ -79,13 +81,15 @@ export default {
 			context.commit('bubble_setState', payload);
 		},
 		bubble_showBubble (context, payload){
-			context.commit('bubble_setState', payload);
-			setTimeout(() => {
+			clearTimeout(context.state.timer);
+			payload.timer = setTimeout(() => {
+				clearTimeout(context.state.timer);
 				if (context.state.type != 'top') {
 					return false;
 				}
 				context.dispatch('bubble_closeBubble');
 			}, context.state.top.timeClose)
+			context.commit('bubble_setState', payload);
 		},
 		bubble_closeBubble (context, payload){
 			context.commit('bubble_setState', _default());
@@ -115,12 +119,17 @@ export default {
 				});
 			}
 
-			setTimeout(() => {
+			clearTimeout(context.state.timer);
+			var timer = setTimeout(() => {
+				clearTimeout(context.state.timer);
 				if (context.state.type != 'top') {
 					return false;
 				}
 				context.dispatch('bubble_closeBubble');
 			}, context.state.top.timeClose)
+			context.commit('bubble_setState', {
+				timer: timer
+			});
 		},
 
 		// 错误统一处理
@@ -180,12 +189,17 @@ export default {
 				});
 			}
 
-			setTimeout(() => {
+			clearTimeout(context.state.timer);
+			var timer = setTimeout(() => {
+				clearTimeout(context.state.timer);
 				if (context.state.type != 'top') {
 					return false;
 				}
 				context.dispatch('bubble_closeBubble');
 			}, context.state.top.timeClose)
+			context.commit('bubble_setState', {
+				timer: timer
+			});
 		}
 	}
 }

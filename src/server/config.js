@@ -5,11 +5,27 @@
  * imgBaseUrl: 图片所在域名地址
  */
 import axios from 'axios'
+import Cookies from 'js-cookie';
+import {url} from '../lib/vue.url';
+import data from './defaultData';
+
+// 默认数据
+var defaultData = data.defaultData;
+
+// url-token
+var token = url.getUrlParam('token') || Cookies.get('token');
+
 //  统一设置请求头部
 axios.defaults.headers.get['Content-Type'] = 'application/x-www-form-urlencoded';
 axios.defaults.headers.get['X-Requested-With'] = 'XMLHttpRequest';
-axios.defaults.headers.common['client_type'] = '3';
+axios.defaults.headers.common['client_type'] = url.getUrlParam('client_type') || Cookies.get('client_type') || (Cookies.get('isAppIOS') == 1 ? 1 : 3);
 axios.defaults.headers.common['client_version'] = '1.0';
+
+// web端区分PC和H5
+// client_type为3时
+if (!defaultData.ua.isPC && axios.defaults.headers.common['client_type'] == 3) {
+	axios.defaults.headers.common['client_type'] = 4;
+}
 
 var baseUrl; 
 var imgBaseUrl = '';
@@ -52,5 +68,6 @@ export {
 	distUrl,
 	_reject,
 	_rejectObj,
-	axios
+	axios,
+	token
 }

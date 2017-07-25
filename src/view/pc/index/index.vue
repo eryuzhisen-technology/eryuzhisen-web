@@ -36,6 +36,7 @@
                     height: 100%;
                     .default_center;
                     .default_opacity_0;
+                    .default_backgroud_5;
                     &.z-on {
                         z-index: 2;
                         .default_opacity_100;
@@ -60,6 +61,7 @@
                 & .banner-item {
                     width: 100%;
                     height: 160px;
+                    .default_backgroud_5;
                     & img {
                         width: 100%;
                         height: 160px;
@@ -114,7 +116,7 @@
     .@{module}-enter {
         width: 100%;
         height: 170px;
-        margin-bottom: 20px;
+        // margin-bottom: 20px;
         .default_backgroud_6;
         & .m-index-enter-wrap {
             height: 150px;
@@ -128,6 +130,7 @@
                 margin-right: 20px;
                 overflow: hidden;
                 .default_border-r-4;
+                .default_backgroud_5;
                 & img {
                     width: 100%;
                     height: 100%;
@@ -142,6 +145,7 @@
         position: relative;
         width: 100%;
         height: 100%;
+        margin-top: 20px;
         margin-bottom: 40px;
         &:last-child {
             margin-bottom: 0;
@@ -180,13 +184,15 @@
             <div class="m-index-banner-wrap z-active">
                 <div class="banner-lists">
                     <div class="banner-item" v-for="(item, index) in banner_images" :class="{'z-on': index == big_index -1}"><a :href="item.url">
-                        <img :src="item.image_url" />
+                        <img v-lazy="item.image_url" />
+                        <!-- <img :src="item.image_url" /> -->
                     </a></div>
                 </div>
                 <div class="banner-index">
                 <div class="banner-index-wrap" :style="{transform: 'translate(0,-'+ small_index*160 +'px)'}">
                     <div class="banner-item" v-for="(item, index) in banner_images"><a :href="item.url">
-                        <img :src="item.image_url" />
+                        <img v-lazy="item.image_url" />
+                        <!-- <img :src="item.image_url" /> -->
                     </a></div>
                 </div>
                 </div>
@@ -194,14 +200,13 @@
                 <div class="banner-btn banner-right" @click="bannerSwitch('left')"></div>
             </div>
         </div>
-        <div class="m-index-enter">
+        <!-- <div class="m-index-enter">
             <div class="m-index-enter-wrap">
-                <a href="./about.html" class="enter-item"><img src="../../../common/images/index/enter-1.png" /></a>
-                <a href="./explain.html" class="enter-item"><img src="../../../common/images/index/enter-2.png" /></a>
-                <a :href=" isLogin ? './invite.html' : './login.html'" class="enter-item"><img src="../../../common/images/index/enter-3.png" /></a>
-                <a href="./mobile.html" class="enter-item"><img src="../../../common/images/index/enter-4.png" /></a>
+                <a :href="item.url" class="enter-item" v-for="item in enters">
+                    <img v-lazy="item.img" />
+                </a>
             </div>
-        </div>
+        </div> -->
         <!-- <div class="m-index-list">
             <div class="m-index-list-title">经典故事</div>
             <div class="m-index-list-wrap">
@@ -246,7 +251,8 @@ export default {
             small_index: 1,
             bannerTimer: null,
 
-            tagIndex: 0
+            tagIndex: 0,
+            enters: this.$defaultData.pcDate.enter
         }
     },
     computed: mapState({

@@ -46,6 +46,7 @@
                 width: 100%;
                 height: 4.45rem;
                 margin-bottom: .22rem;
+                .default_backgroud_5;
                 & span {
                     position: absolute;
                     top: .1rem;
@@ -85,9 +86,14 @@
             width: 100%;
             height: .8rem;
             padding-left: .2rem;
-            .default_flex_left;
-            .default_backgroud_4;
+            padding-right: .2rem;
             border-radius: 0 0 .1rem .1rem;
+            .default_backgroud_4;
+            .default_flex_middle;
+    
+            & .ft-avatar {
+                .default_flex_left;    
+            }
             & .ft-img {
                 width: .3rem;
                 height: .3rem;
@@ -96,10 +102,16 @@
                 background-size: .3rem .3rem;
                 margin-right: .08rem;
                 .default_border-r-50;
+                .default_backgroud_5;
             }
             & .ft-name {
                 .default_font_size_1;
                 .default_color_3;
+            }
+            & .ft-del {
+                width: .32rem;
+                height: .32rem;
+                .skin_delete;
             }
         }
         & .list-left {
@@ -144,6 +156,7 @@
             height: 2.7rem;
             overflow: hidden;
             .default_border-r-10;
+            .default_backgroud_5;
             & span {
                 position: absolute;
                 top: .1rem;
@@ -193,7 +206,7 @@
 <template>
 <div class="c-article">
     <div class="c-article-wrap">
-        <a v-if="showType == 1" v-for="(item, index) in lists" class="c-article-list" :class="{'z-lr': showType == 1}" :href="'article.html?catalog_id=' + item.catalog_id">
+        <a v-if="showType == 1" v-for="(item, index) in lists" class="c-article-list" :class="{'z-lr': showType == 1}" :href="'article.intro.html?catalog_id=' + item.catalog_id">
             <div class="list-left">
                 <div class="list-left-tit">{{item.catalog_title}}</div>
                 <div class="list-left-text">{{item.catalog_desc}}</div>
@@ -206,15 +219,17 @@
             </div>
             <div class="list-right">
                 <div class="list-right-img">
-                    <img :src="item.catalog_cover_url" />
+                    <img v-lazy="item.catalog_cover_url"/>
+                    <!-- <img :src="item.catalog_cover_url" /> -->
                     <span v-if="item.updated == 1">更新</span>
                 </div>
             </div>
         </a>
-        <a v-if="!showType" v-for="item in lists" class="c-article-list" :href="'article.html?catalog_id=' + item.catalog_id">
+        <a v-if="!showType" v-for="(item, index) in lists" class="c-article-list" :href="'article.intro.html?catalog_id=' + item.catalog_id">
             <div class="list-bd">
                 <div class="list-bd-img">
-                    <img :src="item.catalog_cover_url" />
+                    <img v-lazy="item.catalog_cover_url"/>
+                    <!-- <img :src="item.catalog_cover_url" /> -->
                     <span v-if="item.updated == 1">更新</span>
                 </div>
                 <div class="list-bd-tit">{{item.catalog_title}}</div>
@@ -222,11 +237,15 @@
                     <p v-for="tag in item.labels" class="tag">{{tag}}</p>
                 </div>
             </div>
-            <a v-if="item.user" :href="'author.html?user_id=' + item.user.uid" class="list-ft">
-                <div class="ft-img" :style="{'background-image': 'url('+item.user.avatar_url+')'}">
+            <div class="list-ft">
+                <a v-if="item.user" class="ft-avatar" :href="'author.work.html?user_id=' + item.user.uid">
+                    <div class="ft-img" v-lazy:background-image="item.user.avatar_url"></div>
+                    <div class="ft-name">{{item.user.nick_name}}</div>
+                </a>
+                <div class="ft-btn">
+                    <div v-if="resType == 'mark'" class="ft-del" @click.stop.prevent="delFavorites(item, index, true)"></div>    
                 </div>
-                <div class="ft-name">{{item.user.nick_name}}</div>
-            </a>
+            </div>
         </a>
         <div v-if="count == 0" class="list-empty">
             没有相关结果
@@ -248,6 +267,7 @@ export default {
             avatar: this.$defaultData.avatar,
             user_id: '',
 
+            isLoad: 0,
             randId: '',
             randConut: 10, // 随机获取列表-个数
             pageIndex: 1, //页数,默认不传查询第一页
@@ -263,6 +283,21 @@ export default {
         load: state => state.opus.article.load
     }),
     methods: {
+        getFavoritesList (){
+            this.$store.dispatch('opus_getFavoritesList', {
+                'type': this.loadType,
+                "pagination": "1",
+                "page": this.pageIndex, //页数,默认不传查询第一页
+                "pageSize": this.pageSize //每页数量 默认10
+            }).then( res => {
+                // todo
+                this.isLoad = 0;
+                this.$store.dispatch('bubble_success', res);
+            }).catch( err => {
+                this.isLoad = 0;
+                this.$store.dispatch('bubble_fail', err);
+            })
+        },
         getRandCatalogList (type){
             this.$store.dispatch('opus_getRandCatalogList', {
                 "type": type || this.loadType || '',
@@ -270,11 +305,13 @@ export default {
                 "randId": this.randId, //如果是刷新或者第一次首页获取，不用传值，翻页时必填项（服务端返回什么传什么）
                 "catalogType": this.catalog_type //0 普通（默认） 1 热门 2 优秀 如果没有此参数则查询所有
             }).then( res => {
+                this.isLoad = 0;
                 this.randId = res.rand_id;
                 this.$emit('article_count', this.count);
 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
+                this.isLoad = 0;
                 this.$store.dispatch('bubble_fail', err);
             })
         },
@@ -298,10 +335,12 @@ export default {
                     "fuzzy_query": this.query || '' // 模糊查询文字
                 }
             }).then( res => {
+                this.isLoad = 0;
                 this.$emit('article_count', this.count);
 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
+                this.isLoad = 0;
                 this.$store.dispatch('bubble_fail', err);
             })
         },
@@ -316,15 +355,20 @@ export default {
                 "page": this.pageIndex, //页数,默认不传查询第一页
                 "pageSize": this.pageSize //每页数量 默认10
             }).then( res => {
+                this.isLoad = 0;
                 this.$emit('article_count', this.count);
 
                 this.$store.dispatch('bubble_success', res);
             }).catch( err => {
+                this.isLoad = 0;
                 this.$store.dispatch('bubble_fail', err);
-            }
-            )
+            })
         },
         getMore (){
+            if (this.isLoad == 1) {
+                return false;
+            }
+            this.isLoad = 1;
             this.getList(true);
         },
         getList (getMore){
@@ -337,9 +381,15 @@ export default {
                         msg: '系统繁忙'
                     }
                 })
+                this.load = 0;
                 return false;
             }
-            if (this.isRand) {
+            if (this.resType == 'mark') {
+                if (getMore) {
+                    this.pageIndex++;
+                }
+                this.getFavoritesList();
+            } else if (this.isRand) {
                 this.getRandCatalogList(getMore ? 'more' : 'none');
             } else if (this.user.uid && this.user.uid == this.user_id) {
                 if (getMore) {
@@ -353,16 +403,16 @@ export default {
                 this.getCatalogList();
             }
         },
-        delFavorites (catalog, index){
+        delFavorites (catalog, index, isDelete){
             this.$store.dispatch('opus_delFavorites', {
                 catalogId: catalog.catalog_id
             }).then( res => {
                 var _catalog = $.extend(true, {}, catalog);
                     _catalog.is_collected = 0;
-                console.log('------',_catalog.is_collected)
                 this.$store.dispatch('opus_setArticleDetail', {
                     index: index,
-                    catalog: _catalog
+                    catalog: _catalog,
+                    isDelete: isDelete
                 })
 
                 this.$store.dispatch('bubble_success', res);
