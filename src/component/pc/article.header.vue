@@ -16,7 +16,7 @@
             .default_mar_auto;
         }
         & .name {
-            overflow: hidden;
+            /*overflow: hidden;*/
             margin-bottom: 20px;
             .default_center;
             & .name-text {
@@ -42,7 +42,7 @@
                     .default_color_2;
                 }
                 &.z-level1 {
-                    .default_color_6;   
+                    .default_color_6;
                 }
                 &.z-level2 {
                     .default_color_8;
@@ -203,7 +203,7 @@
                     padding-bottom: 16px;
                     text-decoration: none;
                     .default_color_1;
-                    .default_font_size_2; 
+                    .default_font_size_2;
                 }
                 &:hover a,
                 &:hover span {
@@ -238,7 +238,7 @@
     <div class="text">
         <div class="text-tag">
             <a
-                :href="'./page.html?labelTag='+ label" 
+                :href="'./page.html?labelTag='+ label"
                 v-for="label in catalog.labels"
             >{{label}}</a>
         </div>
@@ -263,12 +263,12 @@
         </a></div>
     </div>
     <div class="btn">
-        <div class="btn-item btn-mark" 
+        <div class="btn-item btn-mark"
             :data-catalog_id="catalog.catalog_id"
             :class="{'z-unactive': catalog.is_collected == 1}"
         >
-            <span 
-                v-if="catalog.owner != 1" 
+            <span
+                v-if="catalog.owner != 1"
                 @click="mark(catalog.catalog_id)"
             >{{ catalog.is_collected == 1 ? '取消收藏' : '加入收藏' }}</span>
             <span v-else @click="updateCatalog">修改目录信息</span>
@@ -314,8 +314,8 @@
         </div>
     </div>
     <div class="menu">
-        <div 
-            class="menu-item" 
+        <div
+            class="menu-item"
             v-for="(item, index) in menu"
             @mouseover="enter(index)"
             @mouseout="out(index)"
@@ -529,7 +529,7 @@ export default {
     mounted () {
         this.$eventHub.$on('updateCatalog_success', res => {
             // 刷新目录
-            // this.getCatalogDetail();    
+            // this.getCatalogDetail();
         })
 
         // 获取url参数
